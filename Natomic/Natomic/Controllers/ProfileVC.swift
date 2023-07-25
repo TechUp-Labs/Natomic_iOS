@@ -8,31 +8,54 @@
 import UIKit
 
 class ProfileVC: UIViewController {
-
+    
+    @IBOutlet weak var DOBTextField: UITextField!
+    
+    private lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker(frame: .zero)
+        datePicker.datePickerMode = .time
+        datePicker.timeZone = TimeZone.current
+        return datePicker
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        DOBTextField.inputView = datePicker
+        //        datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
+        if #available(iOS 14, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        addDoneButtonToPicker()
     }
     
     @IBAction func tap(_ sender: Any) {
-        let picker : UIDatePicker = UIDatePicker()
-        picker.datePickerMode = .time
-        picker.preferredDatePickerStyle = .wheels // Set the picker style to wheels
-        picker.addTarget(self, action: #selector(dueDateChanged(sender:)), for: UIControl.Event.valueChanged)
-        let pickerSize : CGSize = picker.sizeThatFits(CGSize.zero)
-        picker.frame = CGRect(x: 0.0, y: 0, width: pickerSize.width, height: 460)
-        self.view.addSubview(picker)
+        
     }
     
-    @objc func dueDateChanged(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .none
-        dateFormatter.timeStyle = .short
-        
-        let selectedTime = dateFormatter.string(from: sender.date)
-        print("Selected time: \(selectedTime)")
+    func addDoneButtonToPicker() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDatePickeraa))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        toolBar.setItems([spaceButton, doneButton], animated: true)
+        DOBTextField.inputAccessoryView = toolBar
     }
 
+    @objc func handleDatePickeraa() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        DOBTextField.text = dateFormatter.string(from: datePicker.date)
+        DOBTextField.resignFirstResponder() // Dismiss the picker
+    }
 
+    func handleDatePicker(sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        DOBTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    
 }
 

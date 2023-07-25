@@ -23,8 +23,31 @@ class HistoryTableCell: UITableViewCell {
     
     func displayData(data:UserEntity){
         usersTextLBL.text = data.userThoughts ?? ""
-        dateLBL.text = data.date ?? ""
-        timeLBL.text = data.time ?? ""
+        dateLBL.text = convertDateFormat(data.date ?? "")
+        timeLBL.text = convertTo12HourFormat(data.time ?? "")
+    }
+        
+    func convertDateFormat(_ dateString: String) -> String? {
+        let dateFormatterInput = DateFormatter()
+        dateFormatterInput.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatterInput.date(from: dateString) {
+            let dateFormatterOutput = DateFormatter()
+            dateFormatterOutput.dateFormat = "dd/MM/yyyy"
+            return dateFormatterOutput.string(from: date)
+        }
+        return nil // Return nil if the input string is not in the expected format
     }
     
+    func convertTo12HourFormat(_ timeString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        
+        if let date = dateFormatter.date(from: timeString) {
+            dateFormatter.dateFormat = "h.mm a"
+            return dateFormatter.string(from: date)
+        }
+        
+        return nil // Return nil if the input string is not in the expected format
+    }
+
 }

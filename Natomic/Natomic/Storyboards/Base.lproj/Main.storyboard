@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6WJ-BW-gdC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t7y-ik-NQX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -515,7 +515,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ExY-CX-a05">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YLI-Sh-fUf">
+                                <rect key="frame" x="346.5" y="64" width="47.5" height="31"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ExY-CX-a05">
                                 <rect key="frame" x="346.5" y="64" width="47.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Tap"/>
@@ -527,10 +535,17 @@
                         <viewLayoutGuide key="safeArea" id="tz4-aH-TBh"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="YLI-Sh-fUf" firstAttribute="trailing" secondItem="ExY-CX-a05" secondAttribute="trailing" id="4BH-e5-YCR"/>
+                            <constraint firstItem="YLI-Sh-fUf" firstAttribute="leading" secondItem="ExY-CX-a05" secondAttribute="leading" id="K33-LN-UbA"/>
+                            <constraint firstItem="YLI-Sh-fUf" firstAttribute="bottom" secondItem="ExY-CX-a05" secondAttribute="bottom" id="Wqi-94-zXb"/>
                             <constraint firstItem="tz4-aH-TBh" firstAttribute="trailing" secondItem="ExY-CX-a05" secondAttribute="trailing" constant="20" id="lPf-uX-2oF"/>
                             <constraint firstItem="ExY-CX-a05" firstAttribute="top" secondItem="tz4-aH-TBh" secondAttribute="top" constant="20" id="n2r-9q-KOG"/>
+                            <constraint firstItem="YLI-Sh-fUf" firstAttribute="top" secondItem="ExY-CX-a05" secondAttribute="top" id="tGQ-51-fHY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="DOBTextField" destination="YLI-Sh-fUf" id="5LA-h6-xbf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6Y-zw-apF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
