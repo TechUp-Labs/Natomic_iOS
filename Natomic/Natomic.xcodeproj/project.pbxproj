@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041FF0C42A70CFD300E98018 /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041FF0C32A70CFD300E98018 /* TestView.xib */; };
+		041FF0C62A70CFDC00E98018 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF0C52A70CFDC00E98018 /* TestView.swift */; };
+		041FF0C82A70EFE400E98018 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF0C72A70EFE400E98018 /* SignUpVC.swift */; };
+		041FF0CA2A711CF300E98018 /* SubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF0C92A711CF300E98018 /* SubscriptionVC.swift */; };
 		0436AEDA2A6FBE3B00459DD8 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0436AED92A6FBE3B00459DD8 /* TimePickerView.swift */; };
 		0436AEDC2A6FBE4C00459DD8 /* TimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0436AEDB2A6FBE4C00459DD8 /* TimePickerView.xib */; };
 		04644FF22A69225B00ABC01F /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04644FF12A69225B00ABC01F /* IntroVC.swift */; };
@@ -45,6 +49,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041FF0C32A70CFD300E98018 /* TestView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
+		041FF0C52A70CFDC00E98018 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		041FF0C72A70EFE400E98018 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		041FF0C92A711CF300E98018 /* SubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionVC.swift; sourceTree = "<group>"; };
 		0436AED92A6FBE3B00459DD8 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		0436AEDB2A6FBE4C00459DD8 /* TimePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimePickerView.xib; sourceTree = "<group>"; };
 		04644FF12A69225B00ABC01F /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
@@ -176,6 +184,8 @@
 				04644FF12A69225B00ABC01F /* IntroVC.swift */,
 				04BEBAB62A67ECF00050A013 /* HomeVC.swift */,
 				04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */,
+				041FF0C72A70EFE400E98018 /* SignUpVC.swift */,
+				041FF0C92A711CF300E98018 /* SubscriptionVC.swift */,
 				04BEBAB82A67F1B30050A013 /* ProfileVC.swift */,
 			);
 			path = Controllers;
@@ -195,6 +205,8 @@
 			children = (
 				0436AED92A6FBE3B00459DD8 /* TimePickerView.swift */,
 				0436AEDB2A6FBE4C00459DD8 /* TimePickerView.xib */,
+				041FF0C52A70CFDC00E98018 /* TestView.swift */,
+				041FF0C32A70CFD300E98018 /* TestView.xib */,
 				04666A3D2A6E6E63003BC9CB /* TableviewCells */,
 			);
 			path = Views;
@@ -315,6 +327,7 @@
 				04BEBAD42A67F3360050A013 /* Rubik-Italic.ttf in Resources */,
 				04BEBAD12A67F3360050A013 /* Rubik-LightItalic.ttf in Resources */,
 				04AE06AB2A45798300FC4BA1 /* Main.storyboard in Resources */,
+				041FF0C42A70CFD300E98018 /* TestView.xib in Resources */,
 				04BEBACA2A67F3360050A013 /* Rubik-SemiBoldItalic.ttf in Resources */,
 				04BEBACB2A67F3360050A013 /* Rubik-Medium.ttf in Resources */,
 				04BEBACF2A67F3360050A013 /* Rubik-Black.ttf in Resources */,
@@ -381,7 +394,9 @@
 				04666A3C2A6E3C9C003BC9CB /* WritingVC.swift in Sources */,
 				04AE06A82A45798300FC4BA1 /* SplashVC.swift in Sources */,
 				04BEBAB72A67ECF00050A013 /* HomeVC.swift in Sources */,
+				041FF0CA2A711CF300E98018 /* SubscriptionVC.swift in Sources */,
 				04AE06A42A45798300FC4BA1 /* AppDelegate.swift in Sources */,
+				041FF0C62A70CFDC00E98018 /* TestView.swift in Sources */,
 				04BEBAB92A67F1B30050A013 /* ProfileVC.swift in Sources */,
 				04AE06A62A45798300FC4BA1 /* SceneDelegate.swift in Sources */,
 				04644FF22A69225B00ABC01F /* IntroVC.swift in Sources */,
@@ -393,6 +408,7 @@
 				04AE06AE2A45798300FC4BA1 /* Natomic.xcdatamodeld in Sources */,
 				0436AEDA2A6FBE3B00459DD8 /* TimePickerView.swift in Sources */,
 				04F4B5FC2A497E910085D4A8 /* Global.swift in Sources */,
+				041FF0C82A70EFE400E98018 /* SignUpVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

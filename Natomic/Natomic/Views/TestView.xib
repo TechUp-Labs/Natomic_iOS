@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="TestView" id="iN0-l3-epB" customClass="TestView" customModule="Natomic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="469-dt-cst">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxX-cn-L3I">
+                            <rect key="frame" x="10" y="10" width="220" height="180"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="triangle" translatesAutoresizingMaskIntoConstraints="NO" id="YQ2-CZ-azg">
+                                    <rect key="frame" x="185" y="-18" width="25" height="25"/>
+                                    <color key="tintColor" name="WhiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="05j-S8-c3J"/>
+                                        <constraint firstAttribute="height" constant="25" id="Qe5-EA-aLP"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                            <real key="value" value="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                            <real key="value" value="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                            <size key="value" width="0.0" height="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </imageView>
+                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-rn-VxF">
+                                    <rect key="frame" x="0.0" y="0.0" width="220" height="180"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="712037068.60646999">
+                                        <!--2023-07-26 04:04:28 +0000-->
+                                    </date>
+                                </datePicker>
+                            </subviews>
+                            <color key="backgroundColor" name="WhiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="h0R-rn-VxF" secondAttribute="trailing" id="2VV-Ht-J2O"/>
+                                <constraint firstItem="h0R-rn-VxF" firstAttribute="top" secondItem="bxX-cn-L3I" secondAttribute="top" id="58e-6h-bUV"/>
+                                <constraint firstAttribute="bottom" secondItem="h0R-rn-VxF" secondAttribute="bottom" id="Agx-Yj-XuP"/>
+                                <constraint firstItem="h0R-rn-VxF" firstAttribute="leading" secondItem="bxX-cn-L3I" secondAttribute="leading" id="V6r-le-jVX"/>
+                                <constraint firstAttribute="trailing" secondItem="YQ2-CZ-azg" secondAttribute="trailing" constant="10" id="cKg-6p-pyd"/>
+                                <constraint firstItem="YQ2-CZ-azg" firstAttribute="top" secondItem="bxX-cn-L3I" secondAttribute="top" constant="-18" id="lSU-Mc-Pob"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" name="BodyColor"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                    <real key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                    <size key="value" width="0.0" height="0.0"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="bxX-cn-L3I" firstAttribute="top" secondItem="469-dt-cst" secondAttribute="top" constant="10" id="4sB-FT-LvG"/>
+                        <constraint firstAttribute="bottom" secondItem="bxX-cn-L3I" secondAttribute="bottom" constant="10" id="8G7-qk-RXZ"/>
+                        <constraint firstAttribute="trailing" secondItem="bxX-cn-L3I" secondAttribute="trailing" constant="10" id="p3x-je-ozc"/>
+                        <constraint firstItem="bxX-cn-L3I" firstAttribute="leading" secondItem="469-dt-cst" secondAttribute="leading" constant="10" id="pRj-33-EAn"/>
+                        <constraint firstAttribute="width" constant="240" id="upl-8J-pyJ"/>
+                        <constraint firstAttribute="height" constant="200" id="zOP-iq-2Lg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="469-dt-cst" secondAttribute="bottom" id="14C-pf-yGc"/>
+                <constraint firstItem="469-dt-cst" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="1Rh-lj-pnb"/>
+                <constraint firstItem="469-dt-cst" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Kc3-uR-8br"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="469-dt-cst" secondAttribute="trailing" id="kJ7-Hz-k45"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="timePicker" destination="h0R-rn-VxF" id="rBZ-aW-kos"/>
+                <outlet property="triImg" destination="YQ2-CZ-azg" id="7zs-Ir-ws8"/>
+            </connections>
+            <point key="canvasLocation" x="257.97101449275362" y="-157.36607142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="triangle" width="512" height="512"/>
+        <namedColor name="BodyColor">
+            <color red="0.25099998712539673" green="0.24300000071525574" blue="0.22400000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="WhiteColor">
+            <color red="1" green="0.98400002717971802" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

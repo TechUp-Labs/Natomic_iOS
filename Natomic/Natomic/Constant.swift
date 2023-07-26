@@ -56,6 +56,17 @@ var INTRO_VC : IntroVC {
    }
 }
 
+var SIGNUP_VC : SignUpVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
+   }
+}
+
+var SUBSCRIPTION_VC : SubscriptionVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SubscriptionVC") as! SubscriptionVC
+   }
+}
 
 //var HOME_NAV : UINavigationController {
 //   get{

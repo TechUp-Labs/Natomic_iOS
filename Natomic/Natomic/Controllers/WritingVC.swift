@@ -23,41 +23,35 @@ class WritingVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.enable = false
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handle(keyboardShowNotification:)),
+                                               name: UIResponder.keyboardDidShowNotification,
+                                               object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        IQKeyboardManager.shared.enableAutoToolbar = true
-        IQKeyboardManager.shared.enable = true
     }
     
-    
-    @objc internal func keyboardWillShow(_ notification : Notification?) -> Void {
+    @objc
+    private func handle(keyboardShowNotification notification: Notification) {
+        // 1
+        print("Keyboard show notification")
         
-        var _kbSize:CGSize!
-        
-        if let info = notification?.userInfo {
-            let frameEndUserInfoKey = UIResponder.keyboardFrameEndUserInfoKey
-            if let kbFrame = info[frameEndUserInfoKey] as? CGRect {
-                let screenSize = UIScreen.main.bounds
-                let intersectRect = kbFrame.intersection(screenSize)
-                
-                if intersectRect.isNull {
-                    _kbSize = CGSize(width: screenSize.size.width, height: 0)
+        // 2
+        if let userInfo = notification.userInfo,
+            // 3
+            let keyboardRectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            print(keyboardRectangle.height)
+            UIView.animate(withDuration: 0.5) {
+                if hasNotch() {
+                    self.bottomPostBTNbottomCon.constant = keyboardRectangle.height-20
                 } else {
-                    _kbSize = intersectRect.size
+                    self.bottomPostBTNbottomCon.constant = keyboardRectangle.height+20
                 }
-                UIView.animate(withDuration: 0.5) {
-                    self.bottomPostBTNbottomCon.constant = _kbSize.height
-                }
-                print("Your Keyboard Size \(_kbSize)")
             }
+
         }
     }
-
     
     @IBAction func postBTNtapped(_ sender: Any) {
         if textView.text.isEmpty {

@@ -60,3 +60,11 @@ struct UsersNotification {
         return value >= 12 ? "PM" : "AM"
     }
 }
+
+func hasNotch() -> Bool {
+    if #available(iOS 11.0, *) {
+        let window = UIApplication.shared.windows.first
+        return window?.safeAreaInsets.top ?? 0 > 20
+    }
+    return false
+}

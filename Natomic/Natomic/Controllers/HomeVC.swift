@@ -21,7 +21,8 @@ class HomeVC: UIViewController {
     
     var notificationTrigger : UsersNotification?
     var userData : [UserEntity]?
-    
+    let testView : TestView = .fromNib()
+
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
@@ -52,11 +53,45 @@ class HomeVC: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     @IBAction func notificationBTNtapped(_ sender: Any) {
-        let myCustomView: TimePickerView = UIView.fromNib()
-        myCustomView.frame = self.view.frame
-        self.view.addSubview(myCustomView)
+        
+        // Add the transparent overlay view
+        let overlayView = UIView(frame: self.view.bounds)
+        overlayView.backgroundColor = UIColor.clear
+        self.view.addSubview(overlayView)
+
+        // Add tap gesture recognizer to the overlay view
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        overlayView.addGestureRecognizer(tapGesture)
+
+        
+        let trailing = (self.view.frame.width - testView.frame.width - 8)
+        let topSafeAreaHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0.0
+        let bottomSafeAreaHeight = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0
+        print(topSafeAreaHeight, bottomSafeAreaHeight)
+        testView.frame = CGRect(x: trailing, y: topSafeAreaHeight+55, width: testView.frame.width, height: testView.frame.height)
+        self.view.addSubview(testView)
+        testView.alpha = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.testView.alpha = 1.0
+        }
+
+//        let myCustomView: TimePickerView = UIView.fromNib()
+//        myCustomView.frame = self.view.frame
+//        self.view.addSubview(myCustomView)
     }
     
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        UIView.animate(withDuration: 0.3) {
+            self.testView.alpha = 0.0
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+            self.testView.removeFromSuperview()
+            sender.view?.removeFromSuperview()
+        }
+        
+    }
+
     func convertTo12HourFormat(hour: Int) ->  Int {
         if hour >= 0 && hour <= 23 {
             let convertedHour = hour % 12 == 0 ? 12 : hour % 12
@@ -85,6 +120,11 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(SIGNUP_VC, animated: true)
     }
     
 }

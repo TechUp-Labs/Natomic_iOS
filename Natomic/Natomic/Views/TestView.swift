@@ -1,16 +1,17 @@
 //
-//  TimePickerView.swift
+//  TestView.swift
 //  Natomic
 //
-//  Created by Archit's Mac on 25/07/23.
+//  Created by Archit's Mac on 26/07/23.
 //
 
 import UIKit
 
-class TimePickerView: UIView {
+class TestView: UIView {
 
-    @IBOutlet weak var timePicker: UIDatePicker!
+    @IBOutlet weak var triImg: UIImageView!
     
+    @IBOutlet weak var timePicker: UIDatePicker!
     
     override public func awakeFromNib() {
         super.awakeFromNib();
@@ -21,18 +22,6 @@ class TimePickerView: UIView {
         timePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        // Handle touch began event
-        if let touch = touches.first {
-            let location = touch.location(in: self)
-            // Do something with the touch location
-            print("Touch began at: \(location)")
-            self.removeFromSuperview()
-        }
-    }
-
 
     @IBAction func closeBTNtapped(_ sender: Any) {
         self.removeFromSuperview()
@@ -66,7 +55,7 @@ class TimePickerView: UIView {
 
 }
 
-extension TimePickerView{
+extension TestView{
     // MARK: - Function For Set Notification:-
     
     func setUpNotification(Hour:Int,Minute:Int) {
