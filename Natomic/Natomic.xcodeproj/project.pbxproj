@@ -13,6 +13,7 @@
 		041FF0CA2A711CF300E98018 /* SubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF0C92A711CF300E98018 /* SubscriptionVC.swift */; };
 		0436AEDA2A6FBE3B00459DD8 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0436AED92A6FBE3B00459DD8 /* TimePickerView.swift */; };
 		0436AEDC2A6FBE4C00459DD8 /* TimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0436AEDB2A6FBE4C00459DD8 /* TimePickerView.xib */; };
+		0438C0A32A77B5EC009F9902 /* NotificationTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438C0A22A77B5EC009F9902 /* NotificationTimeVC.swift */; };
 		04644FF22A69225B00ABC01F /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04644FF12A69225B00ABC01F /* IntroVC.swift */; };
 		04644FF42A69240500ABC01F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04644FF32A69240500ABC01F /* Constant.swift */; };
 		04666A3C2A6E3C9C003BC9CB /* WritingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */; };
@@ -55,6 +56,7 @@
 		041FF0C92A711CF300E98018 /* SubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionVC.swift; sourceTree = "<group>"; };
 		0436AED92A6FBE3B00459DD8 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		0436AEDB2A6FBE4C00459DD8 /* TimePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimePickerView.xib; sourceTree = "<group>"; };
+		0438C0A22A77B5EC009F9902 /* NotificationTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTimeVC.swift; sourceTree = "<group>"; };
 		04644FF12A69225B00ABC01F /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		04644FF32A69240500ABC01F /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingVC.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				04644FF12A69225B00ABC01F /* IntroVC.swift */,
 				04BEBAB62A67ECF00050A013 /* HomeVC.swift */,
 				04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */,
+				0438C0A22A77B5EC009F9902 /* NotificationTimeVC.swift */,
 				041FF0C72A70EFE400E98018 /* SignUpVC.swift */,
 				041FF0C92A711CF300E98018 /* SubscriptionVC.swift */,
 				04BEBAB82A67F1B30050A013 /* ProfileVC.swift */,
@@ -409,6 +412,7 @@
 				0436AEDA2A6FBE3B00459DD8 /* TimePickerView.swift in Sources */,
 				04F4B5FC2A497E910085D4A8 /* Global.swift in Sources */,
 				041FF0C82A70EFE400E98018 /* SignUpVC.swift in Sources */,
+				0438C0A32A77B5EC009F9902 /* NotificationTimeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

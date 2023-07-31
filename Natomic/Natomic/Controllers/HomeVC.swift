@@ -7,7 +7,7 @@
 
 import UIKit
 import UserNotifications
-
+import FittedSheets
 
 class HomeVC: UIViewController {
     
@@ -29,12 +29,6 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadUsersData(notification:)), name: .saveUserData, object: nil)
         historyTBV.registerCell(identifire: "HistoryTableCell")
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "hh:mm a"
-//        let defaultTime = dateFormatter.date(from: "\(convertTo12HourFormat(hour: notificationHour)):\(notificationMinutes) \(notificationMeridiem)")
-//        timePicker.date = defaultTime ?? Date()
-////        timePicker.isHidden = true
-//        timePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
         self.userData = DatabaseMabager.Shared.getUserContext().reversed()
         if IS_FROME_NOTIFICATION ?? false {
             let vc = WRITING_VC
@@ -54,30 +48,39 @@ class HomeVC: UIViewController {
     }
     @IBAction func notificationBTNtapped(_ sender: Any) {
         
-        // Add the transparent overlay view
-        let overlayView = UIView(frame: self.view.bounds)
-        overlayView.backgroundColor = UIColor.clear
-        self.view.addSubview(overlayView)
-
-        // Add tap gesture recognizer to the overlay view
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        overlayView.addGestureRecognizer(tapGesture)
+        let controller = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationTimeVC") as! NotificationTimeVC
+        var options = SheetOptions()
+        options.pullBarHeight = 0
+        var controllerHeight : CGFloat = 480
+        if hasNotch(){controllerHeight = 480+40}
+        let sheet = SheetViewController(controller: controller, sizes: [.fixed(controllerHeight)],options: options)
+        sheet.cornerRadius = 15
+        sheet.allowPullingPastMaxHeight = false
+        self.present(sheet, animated: true, completion: nil)
 
         
-        let trailing = (self.view.frame.width - testView.frame.width - 8)
-        let topSafeAreaHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0.0
-        let bottomSafeAreaHeight = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0
-        print(topSafeAreaHeight, bottomSafeAreaHeight)
-        testView.frame = CGRect(x: trailing, y: topSafeAreaHeight+55, width: testView.frame.width, height: testView.frame.height)
-        self.view.addSubview(testView)
-        testView.alpha = 0.0
-        UIView.animate(withDuration: 0.3) {
-            self.testView.alpha = 1.0
-        }
+        
+//        // Add the transparent overlay view
+//        let overlayView = UIView(frame: self.view.bounds)
+//        overlayView.backgroundColor = UIColor.clear
+//        self.view.addSubview(overlayView)
+//
+//        // Add tap gesture recognizer to the overlay view
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+//        overlayView.addGestureRecognizer(tapGesture)
+//
+//
+//        let trailing = (self.view.frame.width - testView.frame.width - 8)
+//        let topSafeAreaHeight = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0.0
+//        let bottomSafeAreaHeight = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0
+//        print(topSafeAreaHeight, bottomSafeAreaHeight)
+//        testView.frame = CGRect(x: trailing, y: topSafeAreaHeight+55, width: testView.frame.width, height: testView.frame.height)
+//        self.view.addSubview(testView)
+//        testView.alpha = 0.0
+//        UIView.animate(withDuration: 0.3) {
+//            self.testView.alpha = 1.0
+//        }
 
-//        let myCustomView: TimePickerView = UIView.fromNib()
-//        myCustomView.frame = self.view.frame
-//        self.view.addSubview(myCustomView)
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {

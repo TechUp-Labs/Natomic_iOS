@@ -6,6 +6,7 @@ target 'Natomic' do
   use_frameworks!
   pod 'CHIPageControl'
   pod 'IQKeyboardManagerSwift'
+  pod 'FittedSheets'
   # Pods for Natomic
 
 end

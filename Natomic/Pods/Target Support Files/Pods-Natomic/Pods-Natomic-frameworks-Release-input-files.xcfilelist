@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-Natomic/Pods-Natomic-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework
+${BUILT_PRODUCTS_DIR}/FittedSheets/FittedSheets.framework
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework

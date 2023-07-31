@@ -39,7 +39,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
-                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-rn-VxF">
+                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-rn-VxF">
                                     <rect key="frame" x="0.0" y="0.0" width="220" height="180"/>
                                     <date key="date" timeIntervalSinceReferenceDate="712037068.60646999">
                                         <!--2023-07-26 04:04:28 +0000-->

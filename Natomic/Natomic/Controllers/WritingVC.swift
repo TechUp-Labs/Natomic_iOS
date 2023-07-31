@@ -16,7 +16,7 @@ class WritingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.delegate = self
-//        addDoneButtonOnKeyboard()
+        addDoneButtonOnKeyboard()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
             self.textView.becomeFirstResponder()
         }
