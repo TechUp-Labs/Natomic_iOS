@@ -13,6 +13,9 @@
 		041FF0CA2A711CF300E98018 /* SubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FF0C92A711CF300E98018 /* SubscriptionVC.swift */; };
 		0436AEDA2A6FBE3B00459DD8 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0436AED92A6FBE3B00459DD8 /* TimePickerView.swift */; };
 		0436AEDC2A6FBE4C00459DD8 /* TimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0436AEDB2A6FBE4C00459DD8 /* TimePickerView.xib */; };
+		043810152A7A369D00102547 /* TextDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043810142A7A369D00102547 /* TextDetailVC.swift */; };
+		043810172A7A3A5000102547 /* SpringAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043810162A7A3A5000102547 /* SpringAnimator.swift */; };
+		043810192A7A3C0500102547 /* AlertBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043810182A7A3C0500102547 /* AlertBase.swift */; };
 		0438C0A32A77B5EC009F9902 /* NotificationTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438C0A22A77B5EC009F9902 /* NotificationTimeVC.swift */; };
 		04644FF22A69225B00ABC01F /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04644FF12A69225B00ABC01F /* IntroVC.swift */; };
 		04644FF42A69240500ABC01F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04644FF32A69240500ABC01F /* Constant.swift */; };
@@ -56,6 +59,9 @@
 		041FF0C92A711CF300E98018 /* SubscriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionVC.swift; sourceTree = "<group>"; };
 		0436AED92A6FBE3B00459DD8 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		0436AEDB2A6FBE4C00459DD8 /* TimePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimePickerView.xib; sourceTree = "<group>"; };
+		043810142A7A369D00102547 /* TextDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDetailVC.swift; sourceTree = "<group>"; };
+		043810162A7A3A5000102547 /* SpringAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringAnimator.swift; sourceTree = "<group>"; };
+		043810182A7A3C0500102547 /* AlertBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBase.swift; sourceTree = "<group>"; };
 		0438C0A22A77B5EC009F9902 /* NotificationTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTimeVC.swift; sourceTree = "<group>"; };
 		04644FF12A69225B00ABC01F /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		04644FF32A69240500ABC01F /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 				04F4B5FB2A497E910085D4A8 /* Global.swift */,
 				04AE06BA2A457C2E00FC4BA1 /* DatabaseMabager.swift */,
 				04AFFCCD2A6935C100FCCCAD /* UIViewExtension.swift */,
+				043810162A7A3A5000102547 /* SpringAnimator.swift */,
 			);
 			name = HelperFiles;
 			sourceTree = "<group>";
@@ -183,11 +190,13 @@
 			isa = PBXGroup;
 			children = (
 				04AE06A72A45798300FC4BA1 /* SplashVC.swift */,
+				043810182A7A3C0500102547 /* AlertBase.swift */,
 				04644FF12A69225B00ABC01F /* IntroVC.swift */,
+				041FF0C72A70EFE400E98018 /* SignUpVC.swift */,
 				04BEBAB62A67ECF00050A013 /* HomeVC.swift */,
+				043810142A7A369D00102547 /* TextDetailVC.swift */,
 				04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */,
 				0438C0A22A77B5EC009F9902 /* NotificationTimeVC.swift */,
-				041FF0C72A70EFE400E98018 /* SignUpVC.swift */,
 				041FF0C92A711CF300E98018 /* SubscriptionVC.swift */,
 				04BEBAB82A67F1B30050A013 /* ProfileVC.swift */,
 			);
@@ -396,6 +405,7 @@
 			files = (
 				04666A3C2A6E3C9C003BC9CB /* WritingVC.swift in Sources */,
 				04AE06A82A45798300FC4BA1 /* SplashVC.swift in Sources */,
+				043810172A7A3A5000102547 /* SpringAnimator.swift in Sources */,
 				04BEBAB72A67ECF00050A013 /* HomeVC.swift in Sources */,
 				041FF0CA2A711CF300E98018 /* SubscriptionVC.swift in Sources */,
 				04AE06A42A45798300FC4BA1 /* AppDelegate.swift in Sources */,
@@ -404,11 +414,13 @@
 				04AE06A62A45798300FC4BA1 /* SceneDelegate.swift in Sources */,
 				04644FF22A69225B00ABC01F /* IntroVC.swift in Sources */,
 				04AFFCCE2A6935C100FCCCAD /* UIViewExtension.swift in Sources */,
+				043810152A7A369D00102547 /* TextDetailVC.swift in Sources */,
 				04AE06BB2A457C2E00FC4BA1 /* DatabaseMabager.swift in Sources */,
 				04666A402A6E6E92003BC9CB /* HistoryTableCell.swift in Sources */,
 				04AE06BD2A457C7500FC4BA1 /* UserModel.swift in Sources */,
 				04644FF42A69240500ABC01F /* Constant.swift in Sources */,
 				04AE06AE2A45798300FC4BA1 /* Natomic.xcdatamodeld in Sources */,
+				043810192A7A3C0500102547 /* AlertBase.swift in Sources */,
 				0436AEDA2A6FBE3B00459DD8 /* TimePickerView.swift in Sources */,
 				04F4B5FC2A497E910085D4A8 /* Global.swift in Sources */,
 				041FF0C82A70EFE400E98018 /* SignUpVC.swift in Sources */,

@@ -13,5 +13,6 @@ struct User {
     var userThoughts : String?
     var date         : String?
     var time         : String?
+    var day          : String?
 }
 

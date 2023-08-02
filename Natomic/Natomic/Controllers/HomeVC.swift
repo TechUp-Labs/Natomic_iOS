@@ -22,7 +22,7 @@ class HomeVC: UIViewController {
     var notificationTrigger : UsersNotification?
     var userData : [UserEntity]?
     let testView : TestView = .fromNib()
-
+    var selectedCell = -1
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class HomeVC: UIViewController {
         options.pullBarHeight = 0
         var controllerHeight : CGFloat = 480
         if hasNotch(){controllerHeight = 480+40}
-        let sheet = SheetViewController(controller: controller, sizes: [.fixed(controllerHeight)],options: options)
+        let sheet = SheetViewController(controller: controller, sizes: [.fixed(controllerHeight), .fullscreen],options: options)
         sheet.cornerRadius = 15
         sheet.allowPullingPastMaxHeight = false
         self.present(sheet, animated: true, completion: nil)
@@ -115,6 +115,11 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableCell", for: indexPath) as! HistoryTableCell
+        if selectedCell == indexPath.row {
+            cell.contentView.backgroundColor = #colorLiteral(red: 0.9137254902, green: 0.8941176471, blue: 0.8196078431, alpha: 1)
+        }else{
+            cell.contentView.backgroundColor = .clear
+        }
         if let data = userData?[indexPath.row]{
             cell.displayData(data: data)
         }
@@ -127,7 +132,13 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(SIGNUP_VC, animated: true)
+        selectedCell = indexPath.row
+        self.historyTBV.reloadData()
+        
+        let viewControllerToPresent = TEXT_DETAIL_VC
+        viewControllerToPresent.selectedData = userData?[indexPath.row]
+        viewControllerToPresent.modalPresentationStyle = .overCurrentContext
+        self.present(viewControllerToPresent, animated: false, completion: nil)
     }
     
 }

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 var HEIGHT = UIScreen.main.bounds.height
 
 var WIDTH = UIScreen.main.bounds.width
@@ -68,12 +67,6 @@ var SUBSCRIPTION_VC : SubscriptionVC {
    }
 }
 
-//var HOME_NAV : UINavigationController {
-//   get{
-//       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeNav") as! UINavigationController
-//   }
-//}
-
 var HOME_VC : HomeVC {
    get{
        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
@@ -86,24 +79,23 @@ var WRITING_VC : WritingVC {
    }
 }
 
-
-//var LEFTMENU_VC : LeftMenuVC {
-//   get{
-//       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LeftMenuVC") as! LeftMenuVC
-//   }
-//}
-
 var PROFILE_VC : ProfileVC {
    get{
        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
    }
 }
 
-//var DETAIL_OF_HISTORY_VC : DetailOfHistoryVC {
-//   get{
-//       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailOfHistoryVC") as! DetailOfHistoryVC
-//   }
-//}
+var NOTIFICATION_TIME_VC : NotificationTimeVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationTimeVC") as! NotificationTimeVC
+   }
+}
+
+var TEXT_DETAIL_VC : TextDetailVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TextDetailVC") as! TextDetailVC
+   }
+}
 
 func saveDataInUserDefault(value:Any?, key: String){
     let Default = UserDefaults.standard

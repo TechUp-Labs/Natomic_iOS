@@ -11,12 +11,18 @@ import IQKeyboardManagerSwift
 class WritingVC: UIViewController {
     
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var postBTN: UIButton!
     @IBOutlet weak var bottomPostBTNbottomCon: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.delegate = self
-        addDoneButtonOnKeyboard()
+        self.postBTN.layer.opacity = 0.5
+        self.postBTN.isUserInteractionEnabled = false
+
+//        addDoneButtonOnKeyboard()
+//        postBTN.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
             self.textView.becomeFirstResponder()
         }
@@ -54,17 +60,34 @@ class WritingVC: UIViewController {
     }
     
     @IBAction func postBTNtapped(_ sender: Any) {
-        if textView.text.isEmpty {
-            
-        }else{
-            textView.resignFirstResponder()
-            DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: textView.text, date: CurrentDate, time: CurrentTime))
-            NotificationCenter.default.post(name: .saveUserData, object: nil)
-            self.dismiss(animated: true, completion: nil)
-        }
+        animateButtonTap()
+//        if textView.text.isEmpty {
+//
+//        }else{
+//            textView.resignFirstResponder()
+//            DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseMabager.Shared.getUserContext().reversed().count+1)"))
+//            NotificationCenter.default.post(name: .saveUserData, object: nil)
+//            self.dismiss(animated: true, completion: nil)
+//        }
 
     }
     
+    func animateButtonTap() {
+        UIView.animate(withDuration: 0.1,
+                       delay: 0,
+                       usingSpringWithDamping: 0.1,
+                       initialSpringVelocity: 0.1,
+                       options: .curveEaseInOut,
+                       animations: {
+                           self.postBTN.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                       },
+                       completion: { _ in
+                           UIView.animate(withDuration: 0.1) {
+                               self.postBTN.transform = .identity
+                           }
+                       })
+    }
+
     func addDoneButtonOnKeyboard(){
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
@@ -84,7 +107,7 @@ class WritingVC: UIViewController {
             
         }else{
             textView.resignFirstResponder()
-            DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: textView.text, date: CurrentDate, time: CurrentTime))
+            DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseMabager.Shared.getUserContext().reversed().count)"))
             NotificationCenter.default.post(name: .saveUserData, object: nil)
             self.dismiss(animated: true, completion: nil)
         }
@@ -95,4 +118,20 @@ class WritingVC: UIViewController {
 
 extension WritingVC : UITextViewDelegate {
     
+    func textViewDidChange(_ textView: UITextView) {
+        
+        let trimmedText = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedText.count != 0 {
+            if textView.text.isEmpty {
+                self.postBTN.layer.opacity = 0.5
+                self.postBTN.isUserInteractionEnabled = false
+            }else{
+                self.postBTN.layer.opacity = 1
+                self.postBTN.isUserInteractionEnabled = true
+            }
+        }else{
+            self.postBTN.layer.opacity = 0.5
+            self.postBTN.isUserInteractionEnabled = false
+        }
+    }
 }

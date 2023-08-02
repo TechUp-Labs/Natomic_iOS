@@ -23,6 +23,7 @@ class DatabaseMabager {
         userEntity.userThoughts = userContext.userThoughts
         userEntity.date = userContext.date
         userEntity.time = userContext.time
+        userEntity.day = userContext.day
         do{
             try context.save()
             print("User Data Save Successfully...😍")
@@ -44,5 +45,30 @@ class DatabaseMabager {
         
         return userData
     }
+    
+    
+    func convertDateFormat(_ dateString: String) -> String? {
+        let dateFormatterInput = DateFormatter()
+        dateFormatterInput.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatterInput.date(from: dateString) {
+            let dateFormatterOutput = DateFormatter()
+            dateFormatterOutput.dateFormat = "dd/MM/yyyy"
+            return dateFormatterOutput.string(from: date)
+        }
+        return nil // Return nil if the input string is not in the expected format
+    }
+    
+    func convertTo12HourFormat(_ timeString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        
+        if let date = dateFormatter.date(from: timeString) {
+            dateFormatter.dateFormat = "h.mm a"
+            return dateFormatter.string(from: date)
+        }
+        
+        return nil // Return nil if the input string is not in the expected format
+    }
+
     
 }
