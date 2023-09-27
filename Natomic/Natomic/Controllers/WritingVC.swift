@@ -10,22 +10,23 @@ import IQKeyboardManagerSwift
 
 class WritingVC: UIViewController {
     
+    // MARK: - Outlet's :-
+    
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var placeholderLBL: UILabel!
     @IBOutlet weak var postBTN: UIButton!
     @IBOutlet weak var bottomPostBTNbottomCon: NSLayoutConstraint!
+    @IBOutlet weak var textCountLBL: UILabel!
+    
+    // MARK: - Variable's : -
+    
+    var writingDelegate : CheckWriting?
+    
+    // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.delegate = self
-        self.postBTN.layer.opacity = 0.5
-        self.postBTN.isUserInteractionEnabled = false
-
-//        addDoneButtonOnKeyboard()
-//        postBTN.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
-            self.textView.becomeFirstResponder()
-        }
+        setUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,9 +34,33 @@ class WritingVC: UIViewController {
                                                selector: #selector(handle(keyboardShowNotification:)),
                                                name: UIResponder.keyboardDidShowNotification,
                                                object: nil)
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.enable = false
+        
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.writingDelegate?.checkUserData()
+        self.writingDelegate?.checkNotificationState()
+        IQKeyboardManager.shared.enableAutoToolbar = true
+        IQKeyboardManager.shared.enable = true
+    }
+    
+    // MARK: - All Fuction's : -
+    
+    func setUI(){
+        textView.delegate = self
+        self.postBTN.layer.opacity = 0.5
+        self.postBTN.isUserInteractionEnabled = false
+        
+        //        addDoneButtonOnKeyboard()
+        //        postBTN.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
+            self.textView.becomeFirstResponder()
+        }
+        
     }
     
     @objc
@@ -45,31 +70,18 @@ class WritingVC: UIViewController {
         
         // 2
         if let userInfo = notification.userInfo,
-            // 3
-            let keyboardRectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+           // 3
+           let keyboardRectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             print(keyboardRectangle.height)
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.2) {
                 if hasNotch() {
                     self.bottomPostBTNbottomCon.constant = keyboardRectangle.height-20
                 } else {
                     self.bottomPostBTNbottomCon.constant = keyboardRectangle.height+20
                 }
             }
-
+            
         }
-    }
-    
-    @IBAction func postBTNtapped(_ sender: Any) {
-        animateButtonTap()
-//        if textView.text.isEmpty {
-//
-//        }else{
-//            textView.resignFirstResponder()
-//            DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseMabager.Shared.getUserContext().reversed().count+1)"))
-//            NotificationCenter.default.post(name: .saveUserData, object: nil)
-//            self.dismiss(animated: true, completion: nil)
-//        }
-
     }
     
     func animateButtonTap() {
@@ -79,15 +91,15 @@ class WritingVC: UIViewController {
                        initialSpringVelocity: 0.1,
                        options: .curveEaseInOut,
                        animations: {
-                           self.postBTN.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-                       },
+            self.postBTN.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        },
                        completion: { _ in
-                           UIView.animate(withDuration: 0.1) {
-                               self.postBTN.transform = .identity
-                           }
-                       })
+            UIView.animate(withDuration: 0.1) {
+                self.postBTN.transform = .identity
+            }
+        })
     }
-
+    
     func addDoneButtonOnKeyboard(){
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
@@ -113,6 +125,22 @@ class WritingVC: UIViewController {
         }
     }
     
+    // MARK: - Button Action's : -
+    
+    @IBAction func postBTNtapped(_ sender: Any) {
+        animateButtonTap()
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
+            if self.textView.text.isEmpty {
+                
+            }else{
+                self.textView.resignFirstResponder()
+                DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseMabager.Shared.getUserContext().reversed().count+1)"))
+                NotificationCenter.default.post(name: .saveUserData, object: nil)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
     
 }
 
@@ -124,14 +152,26 @@ extension WritingVC : UITextViewDelegate {
         if trimmedText.count != 0 {
             if textView.text.isEmpty {
                 self.postBTN.layer.opacity = 0.5
+                self.placeholderLBL.isHidden = false
                 self.postBTN.isUserInteractionEnabled = false
             }else{
                 self.postBTN.layer.opacity = 1
+                self.placeholderLBL.isHidden = true
                 self.postBTN.isUserInteractionEnabled = true
             }
         }else{
             self.postBTN.layer.opacity = 0.5
+            self.placeholderLBL.isHidden = false
             self.postBTN.isUserInteractionEnabled = false
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // Calculate the new text after the replacement
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        self.textCountLBL.text = "\(newText.count)/250"
+        // Limit the text to 250 characters
+        return newText.count < 250
+    }
+    
 }

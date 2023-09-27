@@ -22,19 +22,22 @@ class SplashVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.increaseLogoSize()
-            self.startRotationAnimation()
+        
+        if IS_STARTED {
+            self.navigationController?.pushViewController(HOME_VC, animated: true)
+        }else{
+            self.navigationController?.pushViewController(WELCOME_VC, animated: true)
         }
-
-//        let t = DatabaseMabager.Shared.getUserContext()
-//        print(t)
-//        if t.last?.date != CurrentDate {
-//            DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: "Hello..!", date: CurrentDate, time: CurrentTime))
-//        }else{
-//            print("Your Limit Is Over")
-//        }
+        
+        
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        //            self.increaseLogoSize()
+        //            self.startRotationAnimation()
+        //        }
+        
     }
+    
+    // MARK: - All Fuction's : -
     
     func startRotationAnimation() {
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
@@ -44,18 +47,18 @@ class SplashVC: UIViewController {
         imgLogo.layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
     
-     func increaseLogoSize() {
-         UIView.animate(withDuration: 1.0) {
-             self.logoWidth.constant = 154
-             self.logoHeight.constant = 154
-             self.view.layoutIfNeeded()
-         }completion: { _ in
-             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                 self.navigationController!.pushViewController(HOME_VC, animated: false)
-             }
-         }
+    func increaseLogoSize() {
+        UIView.animate(withDuration: 1.0) {
+            self.logoWidth.constant = 154
+            self.logoHeight.constant = 154
+            self.view.layoutIfNeeded()
+        }completion: { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.navigationController!.pushViewController(HOME_VC, animated: false)
+            }
+        }
     }
-
+    
     
 }
 

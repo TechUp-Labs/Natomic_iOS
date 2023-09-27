@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>191330761004-jbsctf8nkmgsv0t8nmko7u5du9ddbh02.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.191330761004-jbsctf8nkmgsv0t8nmko7u5du9ddbh02</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCG0OY4mQDvuVkJZDyWXtM2LxkYzPfD9BU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>191330761004</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.techuplabs.natomic</string>
+	<key>PROJECT_ID</key>
+	<string>natomic-5c311</string>
+	<key>STORAGE_BUCKET</key>
+	<string>natomic-5c311.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:191330761004:ios:d34f6c57c100faecb39489</string>
+</dict>
+</plist>

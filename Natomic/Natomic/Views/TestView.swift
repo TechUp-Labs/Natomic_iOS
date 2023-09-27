@@ -8,10 +8,13 @@
 import UIKit
 
 class TestView: UIView {
-
-    @IBOutlet weak var triImg: UIImageView!
     
+    // MARK: - Outlet's :-
+    
+    @IBOutlet weak var triImg: UIImageView!
     @IBOutlet weak var timePicker: UIDatePicker!
+    
+    // MARK: - UIView Life Cycle:-
     
     override public func awakeFromNib() {
         super.awakeFromNib();
@@ -22,7 +25,9 @@ class TestView: UIView {
         timePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
     }
     
-
+    
+    // MARK: - Button Action's : -
+    
     @IBAction func closeBTNtapped(_ sender: Any) {
         self.removeFromSuperview()
     }
@@ -52,7 +57,7 @@ class TestView: UIView {
             fatalError("Invalid hour value. Hour should be between 0 and 23.")
         }
     }
-
+    
 }
 
 extension TestView{
@@ -92,5 +97,5 @@ extension TestView{
         completionHandler([.alert, .sound, .badge])
     }
     
-
+    
 }

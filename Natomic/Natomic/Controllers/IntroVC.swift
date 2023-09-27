@@ -9,19 +9,37 @@ import UIKit
 import CHIPageControl
 
 class IntroVC: UIViewController, UIScrollViewDelegate {
-    internal let numberOfPages = 3
-
+    
+    // MARK: - Outlet's :-
+    
     @IBOutlet weak var introScrollView: UIScrollView!
     @IBOutlet weak var pageControls: CHIPageControlJalapeno!
+    
+    // MARK: - Variable's : -
+    
     var selectedIndex = 0
+    internal let numberOfPages = 3
+    
+    // MARK: - ViewController Life Cycle:-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         introScrollView.delegate = self
         pageControls.numberOfPages = self.numberOfPages
-
-       
     }
-
+    
+    // MARK: - All Fuction's : -
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset
+        let boundsWidth = scrollView.bounds.width
+        let pageIndex = round(contentOffset.x / boundsWidth)
+        selectedIndex = Int(pageIndex)
+        
+    }
+    
+    // MARK: - Button Action's : -
+    
     @IBAction func skipBTNtapped(_ sender: Any) {
         print("Skip")
     }
@@ -40,7 +58,7 @@ class IntroVC: UIViewController, UIScrollViewDelegate {
             selectedIndex = 0
         }
         pageControls.progress = Double(Int(selectedIndex))
-
+        
     }
     
     @IBAction func leftBTNtapped(_ sender: Any) {
@@ -48,13 +66,13 @@ class IntroVC: UIViewController, UIScrollViewDelegate {
         introScrollView.setContentOffset(rightOffset, animated: true)
         selectedIndex = 0
         pageControls.progress = Double(Int(selectedIndex))
-
+        
     }
     
     @IBAction func getStartedBTNtapped(_ sender: Any) {
         self.navigationController?.pushViewController(HOME_VC, animated: true)
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let total = scrollView.contentSize.width - scrollView.bounds.width
         let offset = scrollView.contentOffset.x
@@ -64,16 +82,5 @@ class IntroVC: UIViewController, UIScrollViewDelegate {
         pageControls.progress = progress
         print(progress)
     }
-
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let contentOffset = scrollView.contentOffset
-        let boundsWidth = scrollView.bounds.width
-        let pageIndex = round(contentOffset.x / boundsWidth)
-        selectedIndex = Int(pageIndex)
-
-    }
-
-
-
 }

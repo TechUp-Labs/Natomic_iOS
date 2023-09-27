@@ -12,6 +12,18 @@ var HEIGHT = UIScreen.main.bounds.height
 
 var WIDTH = UIScreen.main.bounds.width
 
+var NOTIFICATION_ENABLE : Bool {
+    return getDataFromUserDefaults(forKey: "NOTIFICATION_ENABLE") as? Bool ?? false
+}
+
+var IS_LOGIN : Bool {
+    return getDataFromUserDefaults(forKey: "IS_LOGIN") as? Bool ?? false
+}
+
+var IS_STARTED : Bool {
+    return getDataFromUserDefaults(forKey: "IS_STARTED") as? Bool ?? false
+}
+
 typealias SetCollectionViewDelegateAndDataSorce = UICollectionViewDelegate & UICollectionViewDataSource & UICollectionViewDelegateFlowLayout
 
 typealias SetTableViewDelegateAndDataSorce = UITableViewDelegate & UITableViewDataSource
@@ -31,11 +43,25 @@ var notificationMeridiem : String {
 
 // MARK: - All ViewControllers SetUP:-
 
+var WELCOME_VC : WelcomeVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeVC") as! WelcomeVC
+   }
+}
+
+
 var HOME_NAV : UINavigationController {
    get{
        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeNav") as! UINavigationController
    }
 }
+
+var WRITING_ALERT_VC : WrirtingAlertVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WrirtingAlertVC") as! WrirtingAlertVC
+   }
+}
+
 
 var SPLASH_VC : SplashVC {
    get{
@@ -79,9 +105,15 @@ var WRITING_VC : WritingVC {
    }
 }
 
-var PROFILE_VC : ProfileVC {
+var TEXT_OPEN_VC : TextOpenVC {
    get{
-       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TextOpenVC") as! TextOpenVC
+   }
+}
+
+var MENU_VC : MenuVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuVC") as! MenuVC
    }
 }
 
@@ -94,6 +126,24 @@ var NOTIFICATION_TIME_VC : NotificationTimeVC {
 var TEXT_DETAIL_VC : TextDetailVC {
    get{
        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TextDetailVC") as! TextDetailVC
+   }
+}
+
+var SET_REMINDER_ALERT_VC : SetReminderAlertVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SetReminderAlertVC") as! SetReminderAlertVC
+   }
+}
+
+var FEEDBACK_VC : FeedbackVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedbackVC") as! FeedbackVC
+   }
+}
+
+var SUCCESS_FEEDBACK_VC : SuccessFeedbackVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SuccessFeedbackVC") as! SuccessFeedbackVC
    }
 }
 

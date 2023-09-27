@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4E9B0E76-B94C-4839-86DF-AB718F9C8AF1"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7682875A-752E-4FED-AEB0-671298A05DA5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Natomic/Controllers/SignUpVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "SignUpBTNtapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7682875A-752E-4FED-AEB0-671298A05DA5 - 7081e986cf557593"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Natomic.SignUpVC.SignUpBTNtapped(Any) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Documents/Natomic_iOS/Natomic/Natomic/Controllers/SignUpVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "488">
+               </Location>
+               <Location
+                  uuid = "7682875A-752E-4FED-AEB0-671298A05DA5 - 7081e986cf557593"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Natomic.SignUpVC.SignUpBTNtapped(Any) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Documents/Natomic_iOS/Natomic/Natomic/Controllers/SignUpVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "700">
+               </Location>
+               <Location
+                  uuid = "7682875A-752E-4FED-AEB0-671298A05DA5 - 7081e986cf557593"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Natomic.SignUpVC.SignUpBTNtapped(Any) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Documents/Natomic_iOS/Natomic/Natomic/Controllers/SignUpVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "736">
+               </Location>
+               <Location
+                  uuid = "7682875A-752E-4FED-AEB0-671298A05DA5 - 7081e986cf557593"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__C.GIDSignInResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Natomic.SignUpVC.SignUpBTNtapped(Any) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Documents/Natomic_iOS/Natomic/Natomic/Controllers/SignUpVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "676">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

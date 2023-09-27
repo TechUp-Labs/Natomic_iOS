@@ -7,6 +7,24 @@ target 'Natomic' do
   pod 'CHIPageControl'
   pod 'IQKeyboardManagerSwift'
   pod 'FittedSheets'
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseAnalytics'
+  pod 'GoogleSignIn'
   # Pods for Natomic
 
+  # Set the deployment target for your target
+  platform :ios, '13.0'
+
+  # You can also set build settings here if needed for your own target
+  # For example:
+  # build_settings['SWIFT_VERSION'] = '5.0'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+    end
+  end
 end

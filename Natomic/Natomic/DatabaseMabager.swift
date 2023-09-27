@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 // MARK: - Class For Save Data In Core Database:-
 
@@ -46,7 +47,22 @@ class DatabaseMabager {
         return userData
     }
     
+    // MARK: - Function For Remove All User Data from Core Database:-
+
     
+    func removeAllData() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = UserEntity.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try context.execute(deleteRequest)
+            print("All User Data Removed Successfully...🗑️")
+        } catch {
+            print("Data Removal Error: 😞", error)
+        }
+    }
+
+
     func convertDateFormat(_ dateString: String) -> String? {
         let dateFormatterInput = DateFormatter()
         dateFormatterInput.dateFormat = "yyyy-MM-dd"

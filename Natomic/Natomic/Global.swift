@@ -8,11 +8,9 @@
 import Foundation
 import UIKit
 
-
-
-
 var IS_FROME_NOTIFICATION : Bool?
 
+var homeVC : UIViewController!
 
 // MARK: - Globale Functions.
 
@@ -67,4 +65,36 @@ func hasNotch() -> Bool {
         return window?.safeAreaInsets.top ?? 0 > 20
     }
     return false
+}
+
+    func showAlert(title: String, message: String, okActionHandler: ((UIAlertAction) -> Void)? = nil, cancelActionHandler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // Add "Ok" action
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: okActionHandler)
+        alertController.addAction(okAction)
+        
+        // Add "Cancel" action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: cancelActionHandler)
+        alertController.addAction(cancelAction)
+        
+        // Get the top-most view controller
+        if let topController = UIApplication.shared.keyWindow?.rootViewController?.topMostViewController() {
+            topController.present(alertController, animated: true, completion: nil)
+        }
+    }
+
+extension UIViewController {
+    func topMostViewController() -> UIViewController {
+        if let presentedViewController = presentedViewController {
+            return presentedViewController.topMostViewController()
+        }
+        if let navigationController = self as? UINavigationController {
+            return navigationController.visibleViewController?.topMostViewController() ?? self
+        }
+        if let tabBarController = self as? UITabBarController {
+            return tabBarController.selectedViewController?.topMostViewController() ?? self
+        }
+        return self
+    }
 }

@@ -8,9 +8,13 @@
 import UIKit
 
 class TimePickerView: UIView {
-
+    
+    // MARK: - Outlet's :-
+    
     @IBOutlet weak var timePicker: UIDatePicker!
     
+    
+    // MARK: - UIView Life Cycle:-
     
     override public func awakeFromNib() {
         super.awakeFromNib();
@@ -32,12 +36,8 @@ class TimePickerView: UIView {
             self.removeFromSuperview()
         }
     }
-
-
-    @IBAction func closeBTNtapped(_ sender: Any) {
-        self.removeFromSuperview()
-    }
     
+    // MARK: - All Fuction's : -
     
     // MARK: - Function For Notification Time Picker:-
     
@@ -63,7 +63,14 @@ class TimePickerView: UIView {
             fatalError("Invalid hour value. Hour should be between 0 and 23.")
         }
     }
-
+    
+    
+    // MARK: - Button Action's : -
+    
+    @IBAction func closeBTNtapped(_ sender: Any) {
+        self.removeFromSuperview()
+    }
+    
 }
 
 extension TimePickerView{
@@ -72,8 +79,8 @@ extension TimePickerView{
     func setUpNotification(Hour:Int,Minute:Int) {
         // Create a notification content
         let content = UNMutableNotificationContent()
-        content.title = "Hello Dear,"
-        content.body = "Please write a line...!"
+        content.title = "Capture Your Thoughts: Write It Down!"
+        content.body = "📝 Don't let those brilliant ideas slip away! Set aside some time today to jot down your thoughts, whether it's a new project, a creative spark, or just something you don't want to forget. Writing it down is the first step towards making it a reality. 🚀 #StayProductive"
         content.sound = UNNotificationSound.default
         
         // Create a date components object for the desired time
@@ -103,5 +110,5 @@ extension TimePickerView{
         completionHandler([.alert, .sound, .badge])
     }
     
-
+    
 }
