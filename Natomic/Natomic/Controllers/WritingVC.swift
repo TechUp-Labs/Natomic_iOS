@@ -21,7 +21,8 @@ class WritingVC: UIViewController {
     // MARK: - Variable's : -
     
     var writingDelegate : CheckWriting?
-    
+    let reachability = try! Reachability()
+    var pendingDataArray = [PendingData]()
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
@@ -60,7 +61,6 @@ class WritingVC: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
             self.textView.becomeFirstResponder()
         }
-        
     }
     
     @objc
@@ -119,7 +119,7 @@ class WritingVC: UIViewController {
             
         }else{
             textView.resignFirstResponder()
-            DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseMabager.Shared.getUserContext().reversed().count)"))
+            DatabaseManager.Shared.addUserContext(userContext: User.init(userThoughts: textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().reversed().count)"))
             NotificationCenter.default.post(name: .saveUserData, object: nil)
             self.dismiss(animated: true, completion: nil)
         }
@@ -128,19 +128,76 @@ class WritingVC: UIViewController {
     // MARK: - Button Action's : -
     
     @IBAction func postBTNtapped(_ sender: Any) {
+        if IS_LOGIN {
+            checkInternet()
+        }else{
+            self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+            pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
+            savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
+        }
         animateButtonTap()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
-            if self.textView.text.isEmpty {
-                
-            }else{
                 self.textView.resignFirstResponder()
-                DatabaseMabager.Shared.addUserContext(userContext: User.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseMabager.Shared.getUserContext().reversed().count+1)"))
+            DatabaseManager.Shared.addUserContext(userContext: User.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
                 NotificationCenter.default.post(name: .saveUserData, object: nil)
                 self.dismiss(animated: true, completion: nil)
-            }
         }
     }
     
+    func checkInternet(){
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            print("Wifi Connection 😃")
+            postUserData(uid: UID, note: self.textView.text, date: CurrentDate, time: CurrentTime)
+        case .cellular:
+            print("Cellular Connection 😒")
+            self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+            pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
+            savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
+        case .unavailable:
+            print("No Connection ☹️")
+            self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+            pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
+            savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
+
+        }
+    }
+    
+    func postUserData(uid:String, note:String, date:String, time:String){
+        DatabaseHelper.shared.postUserNote(uid: uid, note: note, date: date, time: time) { result in
+            switch result {
+            case .success(let data):
+                if let responseData = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let response = try decoder.decode(ResponseModel.self, from: responseData)
+                        // Now you have your response object
+                        print("Successfully posted data:", response)
+                    } catch let error {
+                        print("Error decoding response:", error.localizedDescription)
+                        // Handle the decoding error if necessary
+                    }
+                }
+                self.dismiss(animated: true)
+
+            case .failure(let error):
+                // Handle error
+                print("Error: \(error.localizedDescription)")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
     
 }
 

@@ -10,12 +10,11 @@ import CoreData
 import UserNotifications
 import IQKeyboardManagerSwift
 import FirebaseCore
+import FirebaseAnalytics
 import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
@@ -30,11 +29,102 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done"
         IQKeyboardManager.shared.toolbarTintColor = #colorLiteral(red: 0.06300000101, green: 0.05900000036, blue: 0.05099999905, alpha: 1)
-        
+        Analytics.setUserProperty(UIDevice.current.name, forName: "user_device")
+        NotificationCenter.default.addObserver(self, selector: #selector(getUserData(notification:)), name: .setUserData, object: nil)
+        NotificationCenter.default.post(name: .setUserData, object: nil)
 
         return true
     }
     
+    
+    @objc func getUserData(notification:Notification){
+        if IS_LOGIN {
+            DatabaseHelper.shared.fetchUserData { result in
+                switch result {
+                case .success(let NoteModel):
+                    let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+                    if pendingData.count != 0 {
+                        
+                            let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+                            for data in pendingData {
+                                DatabaseHelper.shared.postUserNote(uid: UID, note: data.userThoughts ?? "", date: data.date ?? "", time: data.time ?? "") { result in
+                                    switch result {
+                                    case .success(let data):
+                                        if let responseData = data {
+                                            do {
+                                                let decoder = JSONDecoder()
+                                                let response = try decoder.decode(ResponseModel.self, from: responseData)
+                                                // Now you have your response object
+                                                 print("Successfully posted data:", response)
+                                                NotificationCenter.default.post(name: .saveUserData, object: nil)
+                                            } catch let error {
+                                                print("Error decoding response:", error.localizedDescription)
+                                                // Handle the decoding error if necessary
+                                            }
+                                        }
+                                        
+                                    case .failure(let error):
+                                        // Handle error
+                                        print("Error: \(error.localizedDescription)")
+                                    }
+                                }
+                            }
+                            UserDefaults.standard.removeObject(forKey: "PENDING_DATA_ARRAY")
+                        
+                    }
+                if DatabaseManager.Shared.getUserContext().count == NoteModel.response?.count ?? 0 {
+                        print("All good")
+                    }else{
+                        
+                        if DatabaseManager.Shared.getUserContext().count > NoteModel.response?.count ?? 0 {
+                            let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+                            for data in pendingData {
+                                DatabaseHelper.shared.postUserNote(uid: UID, note: data.userThoughts ?? "", date: data.date ?? "", time: data.time ?? "") { result in
+                                    switch result {
+                                    case .success(let data):
+                                        if let responseData = data {
+                                            do {
+                                                let decoder = JSONDecoder()
+                                                let response = try decoder.decode(ResponseModel.self, from: responseData)
+                                                // Now you have your response object
+                                                print("Successfully posted data:", response)
+                                            } catch let error {
+                                                print("Error decoding response:", error.localizedDescription)
+                                                // Handle the decoding error if necessary
+                                            }
+                                        }
+                                        
+                                    case .failure(let error):
+                                        // Handle error
+                                        print("Error: \(error.localizedDescription)")
+                                    }
+                                }
+                            }
+                            UserDefaults.standard.removeObject(forKey: "PENDING_DATA_ARRAY")
+                        }else{
+                            
+                            var dataCount = (NoteModel.response?.count ?? 0) - DatabaseManager.Shared.getUserContext().count
+                            
+                            if let response = NoteModel.response {
+                                let dataCount = min(dataCount, response.count) // Ensure dataCount is within the bounds of the array
+                                
+                                for data in response.prefix(dataCount) {
+                                    let userContext = User(userThoughts: data.note ?? "", date: data.notedate ?? "", time: data.notetime ?? "", day: "\(DatabaseManager.Shared.getUserContext().count + 1)")
+                                    
+                                    DatabaseManager.Shared.addUserContext(userContext: userContext)
+                                    NotificationCenter.default.post(name: .saveUserData, object: nil)
+                                }
+                            }
+                            
+                        }
+                    }
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
@@ -83,7 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The persistent store is not accessible, due to permissions or data  protection when the device is locked.
                  * The device is out of space.
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
@@ -93,7 +183,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         })
         return container
     }()
-
+   
     // MARK: - Core Data Saving support
 
     func saveContext () {
@@ -112,3 +202,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 }
 
+extension Notification.Name {
+    static let setUserData = Notification.Name("SetUserData")
+}

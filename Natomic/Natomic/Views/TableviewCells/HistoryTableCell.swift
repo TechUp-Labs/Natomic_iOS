@@ -32,8 +32,8 @@ class HistoryTableCell: UITableViewCell {
     
     func displayData(data:UserEntity){
         usersTextLBL.text = data.userThoughts ?? ""
-        dateLBL.text = DatabaseMabager.Shared.convertDateFormat(data.date ?? "")
-        timeLBL.text = DatabaseMabager.Shared.convertTo12HourFormat(data.time ?? "")
+        dateLBL.text = DatabaseManager.Shared.convertDateFormat(data.date ?? "")
+        timeLBL.text = DatabaseManager.Shared.convertTo12HourFormat(data.time ?? "")
     }
     
     

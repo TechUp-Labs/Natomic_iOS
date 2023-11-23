@@ -1,5 +1,5 @@
 //
-//  DatabaseMabager.swift
+//  DatabaseManager.swift
 //  Natomic
 //
 //  Created by Archit's Mac on 23/06/23.
@@ -11,9 +11,9 @@ import CoreData
 
 // MARK: - Class For Save Data In Core Database:-
 
-class DatabaseMabager {
+class DatabaseManager {
     
-    static let Shared = DatabaseMabager()
+    static let Shared = DatabaseManager()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     

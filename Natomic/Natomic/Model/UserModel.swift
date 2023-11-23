@@ -16,3 +16,19 @@ struct User {
     var day          : String?
 }
 
+// MARK: - PendingData Data Model:-
+
+struct PendingData : Codable {
+    var userThoughts : String?
+    var date         : String?
+    var time         : String?
+    var day          : String?
+    
+    init(userThoughts: String? = nil, date: String? = nil, time: String? = nil, day: String? = nil) {
+        self.userThoughts = userThoughts
+        self.date = date
+        self.time = time
+        self.day = day
+    }
+}
+

@@ -33,6 +33,8 @@ class HomeVC: UIViewController {
     let testView : TestView = .fromNib()
     var selectedCell = -1
     var writingDelegate : CheckWriting?
+    var userNotes : [Response]?
+
     
     // MARK: - ViewController Life Cycle:-
     
@@ -57,7 +59,23 @@ class HomeVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadUsersData(notification:)), name: .saveUserData, object: nil)
         homeVC = self
         historyTBV.registerCell(identifire: "HistoryTableCell")
-        self.userData = DatabaseMabager.Shared.getUserContext().reversed()
+        self.userData = DatabaseManager.Shared.getUserContext()
+        
+        
+  
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+
+        self.userData?.sort { (entity1, entity2) in
+            if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+               let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                return dateTime1 > dateTime2
+            }
+            return false // Return false as a fallback
+        }
+
+        
         if IS_FROME_NOTIFICATION ?? false {
             let vc = WRITING_VC
             self.present(vc, animated: true, completion: nil)
@@ -72,8 +90,32 @@ class HomeVC: UIViewController {
         
     }
     
+    func getUserData(){
+        DatabaseHelper.shared.fetchUserData { result in
+            switch result {
+            case .success(let NoteModel):
+                self.userNotes = NoteModel.response?.reversed()
+//                self.noteTBLView.reloadData()
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    
     @objc func reloadUsersData(notification:Notification) {
-        self.userData = DatabaseMabager.Shared.getUserContext().reversed()
+        self.userData = DatabaseManager.Shared.getUserContext()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+
+        self.userData?.sort { (entity1, entity2) in
+            if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+               let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                return dateTime1 > dateTime2
+            } 
+            return false // Return false as a fallback
+        }
+
         self.historyTBV.reloadData()
     }
     
@@ -119,18 +161,6 @@ class HomeVC: UIViewController {
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false, completion: nil)
         
-        
-        /*
-         let controller = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationTimeVC") as! NotificationTimeVC
-         var options = SheetOptions()
-         options.pullBarHeight = 0
-         var controllerHeight : CGFloat = 480
-         if hasNotch(){controllerHeight = 480+40}
-         let sheet = SheetViewController(controller: controller, sizes: [.fixed(controllerHeight), .fullscreen],options: options)
-         sheet.cornerRadius = 15
-         sheet.allowPullingPastMaxHeight = false
-         self.present(sheet, animated: true, completion: nil)
-         */
     }
     
 }
@@ -197,7 +227,7 @@ extension HomeVC : CheckWriting {
     }
     
     func checkUserData() {
-        if DatabaseMabager.Shared.getUserContext().reversed().count == 0 {
+        if DatabaseManager.Shared.getUserContext().reversed().count == 0 {
             let vc = WRITING_ALERT_VC
             vc.writingDelegate = self
             vc.modalPresentationStyle = .overCurrentContext

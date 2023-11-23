@@ -26,8 +26,8 @@ class TextDetailVC: AlertBase {
         super.viewDidLoad()
         textLBL.text = selectedData?.userThoughts ?? ""
         dayLBL.text = "Day \(selectedData?.day ?? "")"
-        dateLBL.text = DatabaseMabager.Shared.convertDateFormat(selectedData?.date ?? "")
-        timeLBL.text = "-    " + DatabaseMabager.Shared.convertTo12HourFormat(selectedData?.time ?? "")!
+        dateLBL.text = DatabaseManager.Shared.convertDateFormat(selectedData?.date ?? "")
+        timeLBL.text = "-    " + DatabaseManager.Shared.convertTo12HourFormat(selectedData?.time ?? "")!
     }
     
     // MARK: - Button Action's : -

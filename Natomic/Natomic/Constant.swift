@@ -8,6 +8,16 @@
 import Foundation
 import UIKit
 
+
+var UID: String {
+    return getDataFromUserDefaults(forKey: "UID") as? String ?? ""
+}
+
+//var UID = 1234567899 // Archit
+//var UID = 1234567890 // Smit
+
+let CURRENT_DEVICE_NAME = UIDevice.current.name
+
 var HEIGHT = UIScreen.main.bounds.height
 
 var WIDTH = UIScreen.main.bounds.width
@@ -157,6 +167,24 @@ func getDataFromUserDefaults(forKey key: String) -> Any? {
     let defaults = UserDefaults.standard
     return defaults.object(forKey: key)
 }
+
+func savePendingDataModelArray(_ modelArray: [PendingData], forKey key: String) {
+    let encoder = JSONEncoder()
+    if let data = try? encoder.encode(modelArray) {
+        UserDefaults.standard.set(data, forKey: key)
+    }
+}
+
+func getPendingDataModelArray(forKey key: String) -> [PendingData]? {
+    if let data = UserDefaults.standard.data(forKey: key) {
+        let decoder = JSONDecoder()
+        if let modelArray = try? decoder.decode([PendingData].self, from: data) {
+            return modelArray
+        }
+    }
+    return nil
+}
+
 
 extension UICollectionView {
    func registerCell(identifire:String){

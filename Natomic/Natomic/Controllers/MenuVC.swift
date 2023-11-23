@@ -86,7 +86,7 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
 //            UserDefaults.standard.removeObject(forKey: "IS_STARTED")
 //            UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
 //            UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
-//            DatabaseMabager.Shared.removeAllData()
+//            DatabaseManager.Shared.removeAllData()
 //            self.navigationController?.pushViewController(SPLASH_VC, animated: true)
 
         default:
