@@ -16,7 +16,7 @@ class DatabaseHelper {
 
     
     func registerUser(uid: String, name: String, email: String, completion: @escaping (Result<String, Error>) -> Void) {
-        let url = "http://localhost/natomic/addUser.php"
+        let url = "http://52.13.22.47/Natomic-API/addUser.php"
         
         let parameters: [String: Any] = [
             "uid": uid,
@@ -24,15 +24,13 @@ class DatabaseHelper {
             "email": email
         ]
         
-        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)
-            .validate()
-            .responseJSON { response in
+        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     if let json = value as? [String: Any],
-                       let status = json["status"] as? Int,
+                       let status = json["code"] as? Int,
                        let message = json["message"] as? String {
-                        if status == 200 {
+                        if status == 200 || status == 422 {
                             completion(.success(message))
                         } else {
                             // Handle other status codes or error scenarios here
@@ -53,7 +51,7 @@ class DatabaseHelper {
     // MARK: - Get User Notes API : -
     
     func fetchUserData(completion: @escaping (Result<UserNoteModel, Error>) -> Void) {
-        let url = "http://localhost/natomic/fetchUserData.php?uid=\(UID)"
+        let url = "http://52.13.22.47/Natomic-API/fetchUserData.php?uid=\(UID)"
         
         AF.request(url, method: .get).responseDecodable(of: UserNoteModel.self) { response in
             switch response.result {
@@ -81,7 +79,7 @@ class DatabaseHelper {
     // MARK: - Post User Notes API : -
 
     func postUserNote(uid: String, note: String, date:String, time:String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        let url = "http://localhost/natomic/addUserNotes.php"
+        let url = "http://52.13.22.47/Natomic-API/addUserNotes.php"
         
         let parameters: [String: Any] = [
             "uid": uid,
@@ -92,6 +90,33 @@ class DatabaseHelper {
         ]
         
         AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)
+            .validate() // Optional: You can add validation if needed
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+
+
+    func postFeedback(response: Int, comment: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        let url = "https://api.feedspace.io/api/v1/open/features/OduZWpYrGLpIYi5V/feedback"
+        
+        let parameters: [String: Any] = [
+            "response": response,
+            "comment": comment,
+            "app_URL": "https://feedspace.io/c/OduZWpYrGLpIYi5V",
+            "extra_details": [
+                "name": USER_NAME,
+                "email": USER_EMAIL,
+                "uid":UID
+            ]
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate() // Optional: You can add validation if needed
             .responseData { response in
                 switch response.result {

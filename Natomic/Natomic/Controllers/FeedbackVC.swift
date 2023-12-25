@@ -39,8 +39,21 @@ class FeedbackVC: UIViewController {
     }
     
     @IBAction func submitBTNtapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
-        self.dismissDelegate?.dismissScreen()
+        
+        DatabaseHelper.shared.postFeedback(response: 1, comment: textView.text) { result in
+            switch result {
+            case .success(let data):
+                // Handle success, e.g., parse the response data
+                print("Success: \(data)")
+                
+                self.navigationController?.popViewController(animated: false)
+                self.dismissDelegate?.dismissScreen()
+            case .failure(let error):
+
+                print("Error: \(error)")
+                showAlert(title: "Error", message: error.localizedDescription)
+            }
+        }
     }
     
 }
@@ -49,7 +62,6 @@ class FeedbackVC: UIViewController {
 extension FeedbackVC : UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        
         let trimmedText = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedText.count != 0 {
             if textView.text.isEmpty {

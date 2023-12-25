@@ -13,8 +13,14 @@ var UID: String {
     return getDataFromUserDefaults(forKey: "UID") as? String ?? ""
 }
 
-//var UID = 1234567899 // Archit
-//var UID = 1234567890 // Smit
+var USER_NAME: String {
+    return getDataFromUserDefaults(forKey: "USER_NAME") as? String ?? ""
+}
+
+var USER_EMAIL: String {
+    return getDataFromUserDefaults(forKey: "USER_EMAIL") as? String ?? ""
+}
+
 
 let CURRENT_DEVICE_NAME = UIDevice.current.name
 

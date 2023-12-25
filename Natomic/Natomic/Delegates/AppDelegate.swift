@@ -12,7 +12,7 @@ import IQKeyboardManagerSwift
 import FirebaseCore
 import FirebaseAnalytics
 import GoogleSignIn
-
+import Foundation
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Analytics.setUserProperty(UIDevice.current.name, forName: "user_device")
         NotificationCenter.default.addObserver(self, selector: #selector(getUserData(notification:)), name: .setUserData, object: nil)
         NotificationCenter.default.post(name: .setUserData, object: nil)
-
         return true
     }
     
@@ -42,65 +41,110 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             DatabaseHelper.shared.fetchUserData { result in
                 switch result {
                 case .success(let NoteModel):
-                    let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+                    var pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+
                     if pendingData.count != 0 {
-                        
-                            let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
-                            for data in pendingData {
-                                DatabaseHelper.shared.postUserNote(uid: UID, note: data.userThoughts ?? "", date: data.date ?? "", time: data.time ?? "") { result in
-                                    switch result {
-                                    case .success(let data):
-                                        if let responseData = data {
-                                            do {
-                                                let decoder = JSONDecoder()
-                                                let response = try decoder.decode(ResponseModel.self, from: responseData)
-                                                // Now you have your response object
-                                                 print("Successfully posted data:", response)
-                                                NotificationCenter.default.post(name: .saveUserData, object: nil)
-                                            } catch let error {
-                                                print("Error decoding response:", error.localizedDescription)
-                                                // Handle the decoding error if necessary
-                                            }
-                                        }
-                                        
-                                    case .failure(let error):
-                                        // Handle error
-                                        print("Error: \(error.localizedDescription)")
+                        let dispatchGroup = DispatchGroup()
+                        var indicesToRemove: [Int] = []
+
+                        for (index, data) in pendingData.enumerated() {
+                            dispatchGroup.enter()
+
+                            DatabaseHelper.shared.postUserNote(uid: UID, note: data.userThoughts ?? "", date: data.date ?? "", time: data.time ?? "") { result in
+                                defer {
+                                    dispatchGroup.leave()
+                                }
+
+                                switch result {
+                                case .success(let responseData):
+                                    do {
+                                        let decoder = JSONDecoder()
+                                        let response = try decoder.decode(ResponseModel.self, from: responseData ?? Data())
+
+                                        // Now you have your response object
+                                        print("Successfully posted data:", response)
+                                        NotificationCenter.default.post(name: .saveUserData, object: nil)
+
+                                        // Add the index to the list of indices to remove
+                                        indicesToRemove.append(index)
+                                    } catch let error {
+                                        print("Error decoding response:", error.localizedDescription)
+                                        // Handle the decoding error if necessary
                                     }
+
+                                case .failure(let error):
+                                    // Handle error
+                                    print("Error: \(error.localizedDescription)")
                                 }
                             }
-                            UserDefaults.standard.removeObject(forKey: "PENDING_DATA_ARRAY")
-                        
+                        }
+
+                        dispatchGroup.notify(queue: .main) {
+                            // Remove the processed elements from the array in a safe way
+                            let indexesToRemoveSet = Set(indicesToRemove)
+                            pendingData = pendingData.enumerated().filter { !indexesToRemoveSet.contains($0.offset) }.map { $0.element }
+
+                            // Update UserDefaults with the updated array
+                            savePendingDataModelArray(pendingData, forKey: "PENDING_DATA_ARRAY")
+                        }
                     }
+
+
+                    self.dataCheck()
+
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    
+    func dataCheck(){
+        DatabaseHelper.shared.fetchUserData { result in
+            switch result{
+            case.success(let NoteModel):
+                
                 if DatabaseManager.Shared.getUserContext().count == NoteModel.response?.count ?? 0 {
                         print("All good")
                     }else{
                         
-                        if DatabaseManager.Shared.getUserContext().count > NoteModel.response?.count ?? 0 {
-                            let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
-                            for data in pendingData {
-                                DatabaseHelper.shared.postUserNote(uid: UID, note: data.userThoughts ?? "", date: data.date ?? "", time: data.time ?? "") { result in
-                                    switch result {
-                                    case .success(let data):
-                                        if let responseData = data {
-                                            do {
-                                                let decoder = JSONDecoder()
-                                                let response = try decoder.decode(ResponseModel.self, from: responseData)
-                                                // Now you have your response object
-                                                print("Successfully posted data:", response)
-                                            } catch let error {
-                                                print("Error decoding response:", error.localizedDescription)
+                        let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+
+                        if DatabaseManager.Shared.getUserContext().count > NoteModel.response?.count ?? 0 && !pendingData.isEmpty {
+//                            var indicesToRemove: [Int] = []
+//
+//                            for (index, data) in pendingData.enumerated() {
+//                                DatabaseHelper.shared.postUserNote(uid: UID, note: data.userThoughts ?? "", date: data.date ?? "", time: data.time ?? "") { result in
+//                                    switch result {
+//                                    case .success(let data):
+//                                        if let responseData = data {
+//                                            do {
+//                                                let decoder = JSONDecoder()
+//                                                let response = try decoder.decode(ResponseModel.self, from: responseData)
+//                                                // Now you have your response object
+//                                                print("Successfully posted data:", response)
+//                                                
+//                                                // Add the index to the list of indices to be removed
+//                                                indicesToRemove.append(index)
+//                                            } catch let error {
+//                                                print("Error decoding response:", error.localizedDescription)
                                                 // Handle the decoding error if necessary
-                                            }
-                                        }
-                                        
-                                    case .failure(let error):
-                                        // Handle error
-                                        print("Error: \(error.localizedDescription)")
-                                    }
-                                }
-                            }
-                            UserDefaults.standard.removeObject(forKey: "PENDING_DATA_ARRAY")
+//                                            }
+//                                        }
+//
+//                                    case .failure(let error):
+//                                        // Handle error
+//                                        print("Error: \(error.localizedDescription)")
+//                                    }
+//                                }
+//                            }
+//
+//                            // Remove the successfully processed elements from pendingData
+//                            let updatedPendingData = pendingData.enumerated().compactMap { indicesToRemove.contains($0.offset) ? nil : $0.element }
+//
+//                            // Update UserDefaults with the updated array
+//                            savePendingDataModelArray(updatedPendingData, forKey: "PENDING_DATA_ARRAY")
                         }else{
                             
                             var dataCount = (NoteModel.response?.count ?? 0) - DatabaseManager.Shared.getUserContext().count
@@ -118,9 +162,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             
                         }
                     }
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                }
+            case.failure(let error):
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
@@ -205,3 +248,206 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension Notification.Name {
     static let setUserData = Notification.Name("SetUserData")
 }
+
+class CustomURLSessionDelegate: NSObject, URLSessionDelegate {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust else {
+            completionHandler(.performDefaultHandling, nil)
+            return
+        }
+        
+        if let serverTrust = challenge.protectionSpace.serverTrust {
+            let credential = URLCredential(trust: serverTrust)
+            completionHandler(.useCredential, credential)
+        } else {
+            completionHandler(.performDefaultHandling, nil)
+        }
+    }
+}
+
+//func test(){
+//
+//    let url = URL(string: "https://natomic.test/addUser.php")!
+//    var request = URLRequest(url: url)
+//    request.httpMethod = "POST"
+//
+//    let parameters = ["uid": "oFbu4T6X0aNBWPYyrGMlvHe2EiE3", "name": "Archit Navadiya", "email": "navadiyaarchit@gmail.com"]
+//    request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+//
+//    let config = URLSessionConfiguration.default
+//    let delegate = CustomURLSessionDelegate()
+//    let session = URLSession(configuration: config, delegate: delegate, delegateQueue: nil)
+//
+//    let task = session.dataTask(with: request) { data, response, error in
+//                    if let error = error {
+//                        print(error.localizedDescription)
+//                        return
+//                    }
+//        
+//                    guard let data = data else {
+//                        print("No data received")
+//                        return
+//                    }
+//        
+//                    do {
+//                        let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                        print(json)
+//                    } catch {
+//                        print(error.localizedDescription)
+//                    }
+//    }
+//
+//    task.resume()
+//
+//    
+////        let url = URL(string: "https://natomic.test/addUser.php")!
+////        var request = URLRequest(url: url)
+////        request.httpMethod = "POST"
+////
+////        let parameters = ["uid": "oFbu4T6X0aNBWPYyrGMlvHe2EiE3", "name": "Archit Navadiya", "email": "navadiyaarchit@gmail.com"]
+////        request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+////
+////        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+////            if let error = error {
+////                print(error.localizedDescription)
+////                return
+////            }
+////
+////            guard let data = data else {
+////                print("No data received")
+////                return
+////            }
+////
+////            do {
+////                let json = try JSONSerialization.jsonObject(with: data, options: [])
+////                print(json)
+////            } catch {
+////                print(error.localizedDescription)
+////            }
+////        }
+////
+////        task.resume()
+//
+////        DatabaseHelper.shared.registerUser(uid: "oFbu4T6X0aNBWPYyrGMlvHe2EiE3", name:  "Archit Navadiya", email: "navadiyaarchit@gmail.com") { result in
+////            switch result {
+////            case .success(let message):
+////                // Registration was successful, and you can handle the success message
+////                print("Success: \(message)")
+////            case .failure(let error):
+////                // Registration failed, and you can handle the error
+////                print("Error: \(error.localizedDescription)")
+////            }
+////        }
+//}
+
+
+
+
+
+
+
+
+//@objc func getUserData(notification:Notification){
+//    if IS_LOGIN {
+//        DatabaseHelper.shared.fetchUserData { result in
+//            switch result {
+//            case .success(let NoteModel):
+//                let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+//
+//                if pendingData.count != 0 {
+//                    var updatedPendingData = pendingData // Create a mutable copy
+//
+//                    for (index, data) in pendingData.enumerated() {
+//                        DatabaseHelper.shared.postUserNote(uid: UID, note: data.userThoughts ?? "", date: data.date ?? "", time: data.time ?? "") { result in
+//                            switch result {
+//                            case .success(let data):
+//                                if let responseData = data {
+//                                    do {
+//                                        let decoder = JSONDecoder()
+//                                        let response = try decoder.decode(ResponseModel.self, from: responseData)
+//                                        // Now you have your response object
+//                                        print("Successfully posted data:", response)
+//                                        NotificationCenter.default.post(name: .saveUserData, object: nil)
+//                                        
+//                                        // Remove the successfully processed element from the updated array
+//                                        updatedPendingData.remove(at: index)
+//                                        
+//                                        // Update UserDefaults with the updated array
+//                                        savePendingDataModelArray(updatedPendingData, forKey: "PENDING_DATA_ARRAY")
+//                                    } catch let error {
+//                                        print("Error decoding response:", error.localizedDescription)
+//                                        // Handle the decoding error if necessary
+//                                    }
+//                                }
+//
+//                            case .failure(let error):
+//                                // Handle error
+//                                print("Error: \(error.localizedDescription)")
+//                            }
+//                        }
+//                    }
+//                }
+//
+//            if DatabaseManager.Shared.getUserContext().count == NoteModel.response?.count ?? 0 {
+//                    print("All good")
+//                }else{
+//                    
+//                    let pendingData = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+//
+//                    if DatabaseManager.Shared.getUserContext().count > NoteModel.response?.count ?? 0 && !pendingData.isEmpty {
+//                        var indicesToRemove: [Int] = []
+//
+//                        for (index, data) in pendingData.enumerated() {
+//                            DatabaseHelper.shared.postUserNote(uid: UID, note: data.userThoughts ?? "", date: data.date ?? "", time: data.time ?? "") { result in
+//                                switch result {
+//                                case .success(let data):
+//                                    if let responseData = data {
+//                                        do {
+//                                            let decoder = JSONDecoder()
+//                                            let response = try decoder.decode(ResponseModel.self, from: responseData)
+//                                            // Now you have your response object
+//                                            print("Successfully posted data:", response)
+//                                            
+//                                            // Add the index to the list of indices to be removed
+//                                            indicesToRemove.append(index)
+//                                        } catch let error {
+//                                            print("Error decoding response:", error.localizedDescription)
+//                                            // Handle the decoding error if necessary
+//                                        }
+//                                    }
+//
+//                                case .failure(let error):
+//                                    // Handle error
+//                                    print("Error: \(error.localizedDescription)")
+//                                }
+//                            }
+//                        }
+//
+//                        // Remove the successfully processed elements from pendingData
+//                        let updatedPendingData = pendingData.enumerated().compactMap { indicesToRemove.contains($0.offset) ? nil : $0.element }
+//
+//                        // Update UserDefaults with the updated array
+//                        savePendingDataModelArray(updatedPendingData, forKey: "PENDING_DATA_ARRAY")
+//                    }else{
+//                        
+//                        var dataCount = (NoteModel.response?.count ?? 0) - DatabaseManager.Shared.getUserContext().count
+//                        
+//                        if let response = NoteModel.response {
+//                            let dataCount = min(dataCount, response.count) // Ensure dataCount is within the bounds of the array
+//                            
+//                            for data in response.prefix(dataCount) {
+//                                let userContext = User(userThoughts: data.note ?? "", date: data.notedate ?? "", time: data.notetime ?? "", day: "\(DatabaseManager.Shared.getUserContext().count + 1)")
+//                                
+//                                DatabaseManager.Shared.addUserContext(userContext: userContext)
+//                                NotificationCenter.default.post(name: .saveUserData, object: nil)
+//                            }
+//                        }
+//                        
+//                    }
+//                }
+//            case .failure(let error):
+//                print("Error: \(error.localizedDescription)")
+//            }
+//        }
+//    }
+//}

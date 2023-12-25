@@ -34,7 +34,7 @@ class MenuVC: UIViewController {
     func setUI(){
         dismissDelegate = self
         menuTableView.registerCell(identifire: "MenuTableViewCell")
-        menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Subscription"))
+//        menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Subscription"))
         menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Share"))
         menuArray.append(Menu(menuImage: "feedbackIcon", menuTitle: "Feedback"))
         menuArray.append(Menu(menuImage: "logoutIcon", menuTitle: "Log out"))
@@ -46,6 +46,31 @@ class MenuVC: UIViewController {
     @IBAction func backBTNtapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func showAlertOnLogout() {
+        let alert = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
+            self.handleLogout()
+        }
+        
+        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func handleLogout() {
+        UserDefaults.standard.removeObject(forKey: "IS_STARTED")
+        UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
+        UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
+        DatabaseManager.Shared.removeAllData()
+        self.navigationController?.pushViewController(SPLASH_VC, animated: true)
+    }
+
+
     
 }
 
@@ -82,13 +107,7 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
             vc.dismissDelegate = self
             self.navigationController?.pushViewController(vc, animated: true)
         case "Log out":
-            showAlert(title: "Alert", message: "Are you sure,\nYou want to logout?")
-//            UserDefaults.standard.removeObject(forKey: "IS_STARTED")
-//            UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
-//            UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
-//            DatabaseManager.Shared.removeAllData()
-//            self.navigationController?.pushViewController(SPLASH_VC, animated: true)
-
+            showAlertOnLogout()
         default:
             break
         }

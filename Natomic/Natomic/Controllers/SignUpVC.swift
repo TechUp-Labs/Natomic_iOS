@@ -75,8 +75,23 @@ class SignUpVC: UIViewController {
                 print(user.uid)
                 saveDataInUserDefault(value: user.uid, key: "UID")
                 print(user.displayName as Any)
+                saveDataInUserDefault(value: user.displayName, key: "USER_NAME")
+                saveDataInUserDefault(value: user.email, key: "USER_EMAIL")
                 print(user.photoURL as Any)
                 saveDataInUserDefault(value:true, key: "IS_LOGIN")
+                DatabaseHelper.shared.registerUser(uid: user.uid, name: user.displayName ?? "", email: user.email ?? "") { result in
+                    switch result {
+                    case .success(let message):
+                        // Registration was successful, and you can handle the success message
+                        print("Success: \(message)")
+                        self.navigationController?.popViewController(animated: true)
+                    case .failure(let error):
+                        // Registration failed, and you can handle the error
+                        print("Error: \(error.localizedDescription)")
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                
                 DatabaseHelper.shared.fetchUserData { result in
                     switch result {
                     case .success(let NoteModel):
@@ -94,18 +109,9 @@ class SignUpVC: UIViewController {
                     }
                 
                 }
-                DatabaseHelper.shared.registerUser(uid: user.uid, name: user.displayName ?? "", email: user.email ?? "") { result in
-                    switch result {
-                    case .success(let message):
-                        // Registration was successful, and you can handle the success message
-                        print("Success: \(message)")
-                        self.navigationController?.popViewController(animated: true)
-                    case .failure(let error):
-                        // Registration failed, and you can handle the error
-                        print("Error: \(error.localizedDescription)")
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
+
+                
+                
             }
             //                handleAuthorization()
         }

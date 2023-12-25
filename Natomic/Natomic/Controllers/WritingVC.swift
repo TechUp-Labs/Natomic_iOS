@@ -192,8 +192,10 @@ class WritingVC: UIViewController {
                 self.dismiss(animated: true)
 
             case .failure(let error):
-                // Handle error
                 print("Error: \(error.localizedDescription)")
+                self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+                self.pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
+                savePendingDataModelArray(self.pendingDataArray, forKey: "PENDING_DATA_ARRAY")
                 self.navigationController?.popViewController(animated: true)
             }
         }
