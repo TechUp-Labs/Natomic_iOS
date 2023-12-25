@@ -161,10 +161,8 @@ class WritingVC: UIViewController {
             print("Wifi Connection 😃")
             postUserData(uid: UID, note: self.textView.text, date: CurrentDate, time: CurrentTime)
         case .cellular:
-            print("Cellular Connection 😒")
-            self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
-            pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
-            savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
+            print("Cellular Connection 😃")
+            postUserData(uid: UID, note: self.textView.text, date: CurrentDate, time: CurrentTime)
         case .unavailable:
             print("No Connection ☹️")
             self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []

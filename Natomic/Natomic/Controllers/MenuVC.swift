@@ -96,7 +96,7 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
         case "Subscription":
             self.navigationController?.pushViewController(SUBSCRIPTION_VC, animated: true)
         case "Share":
-            let url = URL(string: "https://www.techuplabs.com/")
+            let url = URL(string: "https://www.techuplabs.com/products/natomic")
             let textToShare = [ url ]
             let activityViewController = UIActivityViewController(activityItems: textToShare as [Any], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view

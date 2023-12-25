@@ -19,7 +19,8 @@ class SignUpVC: UIViewController {
     
     // MARK: - Variable's : -
     
-    
+    let reachability = try! Reachability()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,44 @@ class SignUpVC: UIViewController {
     
     @IBAction func SignUpBTNtapped(_ sender: Any) {
         
+        checkInternet()
+    }
+    
+    func checkInternet(){
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+    }
+
+    
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            print("Wifi Connection 😃")
+            loginWithGoogle()
+        case .cellular:
+            print("Cellular Connection 😃")
+            loginWithGoogle()
+        case .unavailable:
+            print("No Connection ☹️")
+            showAlert(title: "No Internet Connection", message: "Please check your internet connection.")
+        }
+    }
+    
+    @IBAction func backBTNtapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func tryFreeBTNtapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func loginWithGoogle(){
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
         // Create Google Sign In configuration object.
@@ -115,14 +154,9 @@ class SignUpVC: UIViewController {
             }
             //                handleAuthorization()
         }
-    }
-    @IBAction func backBTNtapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+
     }
     
-    @IBAction func tryFreeBTNtapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
 
     
 }
