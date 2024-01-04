@@ -23,7 +23,8 @@ class DatabaseHelper {
             "name": name,
             "email": email
         ]
-        
+        Loader.shared.startAnimating()
+
         AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default).responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -41,8 +42,10 @@ class DatabaseHelper {
                         let error = NSError(domain: "YourErrorDomain", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid response format"])
                         completion(.failure(error))
                     }
+                    Loader.shared.stopAnimating()
                 case .failure(let error):
                     completion(.failure(error))
+                    Loader.shared.stopAnimating()
                 }
             }
     }
@@ -52,11 +55,12 @@ class DatabaseHelper {
     
     func fetchUserData(completion: @escaping (Result<UserNoteModel, Error>) -> Void) {
         let url = "http://52.13.22.47/Natomic-API/fetchUserData.php?uid=\(UID)"
-        
+        Loader.shared.startAnimating()
         AF.request(url, method: .get).responseDecodable(of: UserNoteModel.self) { response in
             switch response.result {
             case .success(let userNoteModel):
                 completion(.success(userNoteModel))
+                Loader.shared.stopAnimating()
             case .failure(let error):
                 // Check if the response contains data
                 if let data = response.data {
@@ -72,6 +76,7 @@ class DatabaseHelper {
                 
 
                 completion(.failure(error))
+                Loader.shared.stopAnimating()
             }
         }
     }
@@ -101,6 +106,28 @@ class DatabaseHelper {
             }
     }
 
+    // MARK: - Delete User Notes API : -
+
+    func deleteUserNote(uid: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        let url = "http://52.13.22.47/Natomic-API/deleteUser.php"
+        
+        let parameters: [String: Any] = [
+            "uid": uid,
+        ]
+        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)
+            .validate() // Optional: You can add validation if needed
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+
+    
+    // MARK: - Post User Feedback API : -
 
     func postFeedback(response: Int, comment: String, completion: @escaping (Result<Data?, Error>) -> Void) {
         let url = "https://api.feedspace.io/api/v1/open/features/OduZWpYrGLpIYi5V/feedback"
@@ -115,15 +142,17 @@ class DatabaseHelper {
                 "uid":UID
             ]
         ]
-        
+        Loader.shared.startAnimating()
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .validate() // Optional: You can add validation if needed
             .responseData { response in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
+                    Loader.shared.stopAnimating()
                 case .failure(let error):
                     completion(.failure(error))
+                    Loader.shared.stopAnimating()
                 }
             }
     }

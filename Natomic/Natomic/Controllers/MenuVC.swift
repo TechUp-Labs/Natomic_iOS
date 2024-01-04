@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol DismissFeedbackScreen {
     func dismissScreen()
+}
+
+protocol DismissDeleteScreen {
+    func dismissDeleteVC()
 }
 
 class MenuVC: UIViewController {
@@ -16,11 +21,14 @@ class MenuVC: UIViewController {
     // MARK: - Outlet's :-
     
     @IBOutlet weak var menuTableView: UITableView!
+    @IBOutlet weak var usernameLBL: UILabel!
+    @IBOutlet weak var userEmailLBL: UILabel!
     
     // MARK: - Variable's : -
     
     var menuArray = [Menu]()
     var dismissDelegate : DismissFeedbackScreen?
+    var dismissDeleteScreen : DismissDeleteScreen?
     
     // MARK: - ViewController Life Cycle:-
     
@@ -33,10 +41,14 @@ class MenuVC: UIViewController {
     
     func setUI(){
         dismissDelegate = self
+        dismissDeleteScreen = self
+        usernameLBL.text = USER_NAME
+        userEmailLBL.text = USER_EMAIL
         menuTableView.registerCell(identifire: "MenuTableViewCell")
 //        menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Subscription"))
         menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Share"))
         menuArray.append(Menu(menuImage: "feedbackIcon", menuTitle: "Feedback"))
+        menuArray.append(Menu(menuImage: "deleteIcone", menuTitle: "Delete Account"))
         menuArray.append(Menu(menuImage: "logoutIcon", menuTitle: "Log out"))
         self.menuTableView.reloadData()
     }
@@ -63,11 +75,20 @@ class MenuVC: UIViewController {
     }
     
     func handleLogout() {
-        UserDefaults.standard.removeObject(forKey: "IS_STARTED")
-        UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
-        UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
-        DatabaseManager.Shared.removeAllData()
-        self.navigationController?.pushViewController(SPLASH_VC, animated: true)
+        Loader.shared.startAnimating()
+        do {
+            try Auth.auth().signOut()
+            UserDefaults.standard.removeObject(forKey: "IS_STARTED")
+            UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
+            UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
+            DatabaseManager.Shared.removeAllData()
+            Loader.shared.stopAnimating()
+            self.navigationController?.pushViewController(SPLASH_VC, animated: true)
+        } catch let signOutError as NSError {
+            print("Error signing out: \(signOutError.localizedDescription)")
+            Loader.shared.stopAnimating()
+            showAlert(title: "Error", message: "\(signOutError.localizedDescription)")
+        }
     }
 
 
@@ -96,7 +117,7 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
         case "Subscription":
             self.navigationController?.pushViewController(SUBSCRIPTION_VC, animated: true)
         case "Share":
-            let url = URL(string: "https://www.techuplabs.com/products/natomic")
+            let url = URL(string: "https://apps.apple.com/us/app/natomic/id6474652222")
             let textToShare = [ url ]
             let activityViewController = UIActivityViewController(activityItems: textToShare as [Any], applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
@@ -106,6 +127,11 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
             let vc = FEEDBACK_VC
             vc.dismissDelegate = self
             self.navigationController?.pushViewController(vc, animated: true)
+        case "Delete Account":
+            let vc = DELETE_ACCOUNT_ALERT_VC
+            vc.dismissDeleteScreen = self
+            vc.modalPresentationStyle = .overCurrentContext
+            self.present(vc, animated: false)
         case "Log out":
             showAlertOnLogout()
         default:
@@ -118,4 +144,24 @@ extension MenuVC : DismissFeedbackScreen {
     func dismissScreen() {
         self.navigationController?.pushViewController(SUCCESS_FEEDBACK_VC, animated: true)
     }
+}
+extension MenuVC : DismissDeleteScreen {
+    func dismissDeleteVC(){
+        Loader.shared.startAnimating()
+        do {
+            try Auth.auth().signOut()
+            UserDefaults.standard.removeObject(forKey: "IS_STARTED")
+            UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
+            UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
+            DatabaseManager.Shared.removeAllData()
+            Loader.shared.stopAnimating()
+            self.navigationController?.pushViewController(SPLASH_VC, animated: true)
+        } catch let signOutError as NSError {
+            print("Error signing out: \(signOutError.localizedDescription)")
+            Loader.shared.stopAnimating()
+            showAlert(title: "Error", message: "\(signOutError.localizedDescription)")
+        }
+    }
+    
+
 }

@@ -18,6 +18,53 @@
             endingLineNumber = "186"
             landmarkName = "postUserData(uid:note:date:time:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B1462987-2202-4CFD-B7A9-8AC083C44E96 - 319431c54037c6bd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; () in Natomic.WritingVC.postUserData(uid: Swift.String, note: Swift.String, date: Swift.String, time: Swift.String) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/Controllers/WritingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "188"
+                  endingLineNumber = "188"
+                  offsetFromSymbolStart = "2652">
+               </Location>
+               <Location
+                  uuid = "B1462987-2202-4CFD-B7A9-8AC083C44E96 - 319431c54037c6ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; () in Natomic.WritingVC.postUserData(uid: Swift.String, note: Swift.String, date: Swift.String, time: Swift.String) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/Controllers/WritingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "2652">
+               </Location>
+               <Location
+                  uuid = "B1462987-2202-4CFD-B7A9-8AC083C44E96 - 319431c54037c6ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; () in Natomic.WritingVC.postUserData(uid: Swift.String, note: Swift.String, date: Swift.String, time: Swift.String) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/Controllers/WritingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "2672">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -34,6 +81,134 @@
             endingLineNumber = "184"
             landmarkName = "postUserData(uid:note:date:time:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "86BCCB80-A7B9-497D-90AF-60183F200C51 - 319431c54037c6ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; () in Natomic.WritingVC.postUserData(uid: Swift.String, note: Swift.String, date: Swift.String, time: Swift.String) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/Controllers/WritingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "536">
+               </Location>
+               <Location
+                  uuid = "86BCCB80-A7B9-497D-90AF-60183F200C51 - 319431c54037c139"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; () in Natomic.WritingVC.postUserData(uid: Swift.String, note: Swift.String, date: Swift.String, time: Swift.String) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/Controllers/WritingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "536">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "24164E0C-6F07-477D-BA01-67FA0332C66B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Natomic/DatabaseHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "deleteUserNote(uid:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "24164E0C-6F07-477D-BA01-67FA0332C66B - 204f22a009d3f2fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Foundation.Data, Alamofire.AFError&gt;) -&gt; () in Natomic.DatabaseHelper.deleteUserNote(uid: Swift.String, completion: (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/DatabaseHelper.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "324">
+               </Location>
+               <Location
+                  uuid = "24164E0C-6F07-477D-BA01-67FA0332C66B - 204f22a009d3f2db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Foundation.Data, Alamofire.AFError&gt;) -&gt; () in Natomic.DatabaseHelper.deleteUserNote(uid: Swift.String, completion: (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/DatabaseHelper.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "324">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "048BFEFD-8551-49D6-928B-7805DE70C1F4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Natomic/DatabaseHelper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "deleteUserNote(uid:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "048BFEFD-8551-49D6-928B-7805DE70C1F4 - 204f22a009d3fd38"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Foundation.Data, Alamofire.AFError&gt;) -&gt; () in Natomic.DatabaseHelper.deleteUserNote(uid: Swift.String, completion: (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/DatabaseHelper.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "436">
+               </Location>
+               <Location
+                  uuid = "048BFEFD-8551-49D6-928B-7805DE70C1F4 - 204f22a009d3fd19"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Foundation.Data, Alamofire.AFError&gt;) -&gt; () in Natomic.DatabaseHelper.deleteUserNote(uid: Swift.String, completion: (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Natomic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/architnavadiya/Projects/Natomic_iOS/Natomic/Natomic/DatabaseHelper.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "436">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

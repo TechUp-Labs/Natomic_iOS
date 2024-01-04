@@ -28,56 +28,29 @@ class SignUpVC: UIViewController {
     }
     
     // MARK: - All Fuction's : -
-    
-    func handleAuthorization() {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.fullName, .email] // Request additional user information if needed
-        
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()
-    }
+
     
     // MARK: - Button Action's : -
     
-    @IBAction func SignUpBTNtapped(_ sender: Any) {
-        
-        checkInternet()
+    @IBAction func googleLoginBTNtapped(_ sender: Any) {
+        loginWithGoogle()
     }
     
-    func checkInternet(){
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
-    }
-
-    
-    @objc func reachabilityChanged(note: Notification) {
-        let reachability = note.object as! Reachability
-        
-        switch reachability.connection {
-        case .wifi:
-            print("Wifi Connection 😃")
-            loginWithGoogle()
-        case .cellular:
-            print("Cellular Connection 😃")
-            loginWithGoogle()
-        case .unavailable:
-            print("No Connection ☹️")
-            showAlert(title: "No Internet Connection", message: "Please check your internet connection.")
-        }
-    }
     
     @IBAction func backBTNtapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func tryFreeBTNtapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    @IBAction func appleLoginBTNtapped(_ sender: Any) {
+//        self.navigationController?.popViewController(animated: true)
+
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
     }
     
     func loginWithGoogle(){
@@ -98,43 +71,108 @@ class SignUpVC: UIViewController {
             else {
                 return print("")
             }
-            
+            Loader.shared.startAnimating()
             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                            accessToken: user.accessToken.tokenString)
             Auth.auth().signIn(with: credential) { result, error in
                 guard error == nil else {
                     print(error?.localizedDescription ?? "")
+                    Loader.shared.stopAnimating()
                     return
                 }
                 
                 guard let user = result?.user else {
                     print("Failed to get user info from Google Sign-In")
+                    Loader.shared.stopAnimating()
                     return
                 }
                 print(user.uid)
+            
                 saveDataInUserDefault(value: user.uid, key: "UID")
                 print(user.displayName as Any)
                 saveDataInUserDefault(value: user.displayName, key: "USER_NAME")
                 saveDataInUserDefault(value: user.email, key: "USER_EMAIL")
                 print(user.photoURL as Any)
                 saveDataInUserDefault(value:true, key: "IS_LOGIN")
-                DatabaseHelper.shared.registerUser(uid: user.uid, name: user.displayName ?? "", email: user.email ?? "") { result in
-                    switch result {
-                    case .success(let message):
-                        // Registration was successful, and you can handle the success message
-                        print("Success: \(message)")
-                        self.navigationController?.popViewController(animated: true)
-                    case .failure(let error):
-                        // Registration failed, and you can handle the error
-                        print("Error: \(error.localizedDescription)")
-                        self.navigationController?.popViewController(animated: true)
+                Loader.shared.stopAnimating()
+                self.registerUser(uid: user.uid, name: user.displayName ?? "", email: user.email ?? "")
+            }
+        }
+
+    }
+}
+
+extension SignUpVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            guard let identityTokenData = appleIDCredential.identityToken else {
+                print("Apple Sign In Error: Identity token is nil.")
+                return
+            }
+
+            // Convert the identity token to a string
+            let identityToken = String(data: identityTokenData, encoding: .utf8)
+
+            // Send the identityToken to Firebase for verification and sign in
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: identityToken!, rawNonce: "")
+
+            Auth.auth().signIn(with: credential) { (authResult, error) in
+                // Handle the sign-in result
+                if let error = error {
+                    print("Error signing in with Apple: \(error.localizedDescription)")
+                } else {
+                    // Access user information from authResult
+                    guard let user = authResult?.user else {
+                        // Handle the case where the user is nil
+                        return
                     }
+
+                    // Access user information from the Apple ID credential
+                    let uid = user.uid
+                    let displayName = appleIDCredential.fullName?.givenName ?? "Natomic"
+                    let email = appleIDCredential.email ?? "@User"
+
+                    print("Successfully signed in with Apple!")
+                    print("UID: \(uid)")
+                    print("Display Name: \(displayName)")
+                    print("Email: \(email)")
+                    
+                    saveDataInUserDefault(value: uid, key: "UID")
+                    print(user.displayName as Any)
+                    saveDataInUserDefault(value: displayName, key: "USER_NAME")
+                    saveDataInUserDefault(value: email, key: "USER_EMAIL")
+                    print(user.photoURL as Any)
+                    saveDataInUserDefault(value:true, key: "IS_LOGIN")
+                    self.registerUser(uid: uid, name: displayName, email: email)
+
                 }
+            }
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle errors
+        print("Apple Sign In Error: \(error.localizedDescription)")
+    }
+}
+extension SignUpVC {
+    func registerUser(uid:String,name:String,email:String){
+        DatabaseHelper.shared.registerUser(uid: uid, name: name, email: email) { result in
+            switch result {
+            case .success(let message):
+                // Registration was successful, and you can handle the success message
+                print("Success: \(message)")
                 
                 DatabaseHelper.shared.fetchUserData { result in
                     switch result {
                     case .success(let NoteModel):
                         guard let data = NoteModel.response else {
+                            NotificationCenter.default.post(name: .setUserData, object: nil)
+                            self.navigationController?.popViewController(animated: true)
                             return
                         }
                         for i in data {
@@ -143,41 +181,18 @@ class SignUpVC: UIViewController {
                             DatabaseManager.Shared.addUserContext(userContext: userContext)
                         }
                         NotificationCenter.default.post(name: .setUserData, object: nil)
+                        self.navigationController?.popViewController(animated: true)
                     case .failure(let error):
                         print("Error: \(error.localizedDescription)")
+                        self.navigationController?.popViewController(animated: true)
                     }
                 
                 }
-
-                
-                
-            }
-            //                handleAuthorization()
-        }
-
-    }
-    
-
-    
-}
-
-
-extension SignUpVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            // Use the credential for further actions (e.g., user identification, sign-up, etc.)
-            let userIdentifier = appleIDCredential.user
-            // Access user data if needed
-            if let email = appleIDCredential.email, let fullName = appleIDCredential.fullName {
-                // Handle user data
-                print("Email:", email)
-                print("Full Name:", fullName)
+            case .failure(let error):
+                // Registration failed, and you can handle the error
+                print("Error: \(error.localizedDescription)")
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
-    
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return self.view.window!
-    }
-    
 }

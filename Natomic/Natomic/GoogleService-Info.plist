@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>191330761004-jbsctf8nkmgsv0t8nmko7u5du9ddbh02.apps.googleusercontent.com</string>
+	<string>191330761004-gm7ltv478sqq18qteho96sc0tprcmq3u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.191330761004-jbsctf8nkmgsv0t8nmko7u5du9ddbh02</string>
+	<string>com.googleusercontent.apps.191330761004-gm7ltv478sqq18qteho96sc0tprcmq3u</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCG0OY4mQDvuVkJZDyWXtM2LxkYzPfD9BU</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.techuplabs.natomic</string>
+	<string>natomic.com.techuplabs</string>
 	<key>PROJECT_ID</key>
 	<string>natomic-5c311</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:191330761004:ios:d34f6c57c100faecb39489</string>
+	<string>1:191330761004:ios:c38f2e64974cdc4eb39489</string>
 </dict>
 </plist>

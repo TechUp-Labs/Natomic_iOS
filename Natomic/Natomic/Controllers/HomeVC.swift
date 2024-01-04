@@ -49,6 +49,18 @@ class HomeVC: UIViewController {
         profileBTN.setImage(IS_LOGIN ? UIImage(named: "ProfileDisableIcon") : UIImage(named: "ProfileEnableIcon"), for: .normal)
         
         selectedCell = -1
+        self.userData = DatabaseManager.Shared.getUserContext()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+
+        self.userData?.sort { (entity1, entity2) in
+            if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+               let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                return dateTime1 > dateTime2
+            }
+            return false // Return false as a fallback
+        }
+
         self.historyTBV.reloadData()
     }
     
@@ -86,7 +98,7 @@ class HomeVC: UIViewController {
             vc.writingDelegate = self
             self.present(vc, animated: true, completion: nil)
         }
-        
+        self.historyTBV.reloadData()
         
     }
     

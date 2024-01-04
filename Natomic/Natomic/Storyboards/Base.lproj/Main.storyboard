@@ -487,14 +487,23 @@ and build a habit!</string>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Google_Icon" translatesAutoresizingMaskIntoConstraints="NO" id="x7x-z2-8XV">
                                                                         <rect key="frame" x="10" y="2.5" width="35" height="35"/>
+                                                                        <color key="tintColor" name="BackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="35" id="2KH-ox-7hh"/>
                                                                             <constraint firstAttribute="width" constant="35" id="mTY-fD-trn"/>
                                                                         </constraints>
                                                                     </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up with Google" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CgP-0F-XKu">
+                                                                        <rect key="frame" x="62" y="7" width="210" height="26.5"/>
+                                                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="22"/>
+                                                                        <color key="textColor" name="BackgroundColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
+                                                                    <constraint firstItem="CgP-0F-XKu" firstAttribute="centerY" secondItem="FIs-7a-gxM" secondAttribute="centerY" id="Xvf-NC-dgR"/>
+                                                                    <constraint firstItem="CgP-0F-XKu" firstAttribute="centerX" secondItem="FIs-7a-gxM" secondAttribute="centerX" constant="17" id="d2h-0l-0aF"/>
                                                                     <constraint firstItem="x7x-z2-8XV" firstAttribute="centerY" secondItem="FIs-7a-gxM" secondAttribute="centerY" id="i6T-Q6-jbo"/>
                                                                     <constraint firstAttribute="width" constant="300" id="rW1-4P-3V6"/>
                                                                     <constraint firstAttribute="height" constant="40" id="sKE-Co-NTM"/>
@@ -509,7 +518,7 @@ and build a habit!</string>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="22"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                <state key="normal" title="Sign up with Apple">
+                                                                <state key="normal">
                                                                     <color key="titleColor" name="WhiteColor"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
@@ -518,7 +527,7 @@ and build a habit!</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="SignUpBTNtapped:" destination="GUg-Db-CAN" eventType="touchUpInside" id="WAm-4L-Des"/>
+                                                                    <action selector="googleLoginBTNtapped:" destination="GUg-Db-CAN" eventType="touchUpInside" id="Jew-qP-wN2"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -538,26 +547,74 @@ and build a habit!</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmo-qL-20b">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yUh-kg-0aM">
                                                         <rect key="frame" x="20" y="88" width="374" height="48"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pph-Oa-V1g">
+                                                                <rect key="frame" x="37" y="4" width="300" height="40"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Mow-9x-Yln">
+                                                                        <rect key="frame" x="10" y="0.0" width="40" height="40"/>
+                                                                        <color key="tintColor" name="BackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="40" id="hcN-Nc-ExP"/>
+                                                                            <constraint firstAttribute="width" constant="40" id="oo2-ut-in1"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up with Apple" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNo-nZ-PI4">
+                                                                        <rect key="frame" x="69" y="7" width="196.5" height="26.5"/>
+                                                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="22"/>
+                                                                        <color key="textColor" name="BackgroundColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="Mow-9x-Yln" firstAttribute="centerY" secondItem="pph-Oa-V1g" secondAttribute="centerY" id="Fbe-YJ-HhU"/>
+                                                                    <constraint firstItem="TNo-nZ-PI4" firstAttribute="centerY" secondItem="pph-Oa-V1g" secondAttribute="centerY" id="OWV-Ex-IMS"/>
+                                                                    <constraint firstItem="TNo-nZ-PI4" firstAttribute="centerX" secondItem="pph-Oa-V1g" secondAttribute="centerX" constant="17" id="RXN-nP-Hfx"/>
+                                                                    <constraint firstItem="Mow-9x-Yln" firstAttribute="leading" secondItem="pph-Oa-V1g" secondAttribute="leading" constant="10" id="o73-0Y-Sz9"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="qnN-lq-zsm"/>
+                                                                    <constraint firstAttribute="width" constant="300" id="ygr-Yp-SfK"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLo-zp-pLs">
+                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="48"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="48" id="zNo-5t-70w"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="22"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal">
+                                                                    <color key="titleColor" name="WhiteColor"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="12"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="appleLoginBTNtapped:" destination="GUg-Db-CAN" eventType="touchUpInside" id="cuX-yY-Y6C"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
                                                         <color key="backgroundColor" name="TitlesColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="48" id="a6x-4a-NZ0"/>
+                                                            <constraint firstAttribute="height" constant="48" id="DMV-ry-cUH"/>
+                                                            <constraint firstItem="pph-Oa-V1g" firstAttribute="centerY" secondItem="yUh-kg-0aM" secondAttribute="centerY" id="F7X-i7-lkp"/>
+                                                            <constraint firstItem="dLo-zp-pLs" firstAttribute="top" secondItem="yUh-kg-0aM" secondAttribute="top" id="FO7-Go-Mmm"/>
+                                                            <constraint firstItem="pph-Oa-V1g" firstAttribute="centerX" secondItem="yUh-kg-0aM" secondAttribute="centerX" id="hPI-wH-qcc"/>
+                                                            <constraint firstAttribute="bottom" secondItem="dLo-zp-pLs" secondAttribute="bottom" id="mw8-aZ-yn8"/>
+                                                            <constraint firstAttribute="trailing" secondItem="dLo-zp-pLs" secondAttribute="trailing" id="rke-Y9-VVE"/>
+                                                            <constraint firstItem="dLo-zp-pLs" firstAttribute="leading" secondItem="yUh-kg-0aM" secondAttribute="leading" id="tRS-rM-6T9"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="22"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Try free and continue">
-                                                            <color key="titleColor" name="WhiteColor"/>
-                                                        </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="12"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="tryFreeBTNtapped:" destination="GUg-Db-CAN" eventType="touchUpInside" id="cJ5-7A-UPj"/>
-                                                        </connections>
-                                                    </button>
+                                                    </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="08X-oa-ZXf">
                                                         <rect key="frame" x="54.5" y="176" width="305" height="30"/>
                                                         <subviews>
@@ -594,11 +651,11 @@ and build a habit!</string>
                                                     <constraint firstItem="08X-oa-ZXf" firstAttribute="centerX" secondItem="fOk-Co-Uog" secondAttribute="centerX" id="1MC-SV-caG"/>
                                                     <constraint firstItem="op8-Gt-zvi" firstAttribute="top" secondItem="fOk-Co-Uog" secondAttribute="top" constant="20" id="8Co-CH-0ED"/>
                                                     <constraint firstItem="op8-Gt-zvi" firstAttribute="leading" secondItem="fOk-Co-Uog" secondAttribute="leading" constant="20" id="8dT-tP-igl"/>
-                                                    <constraint firstItem="dmo-qL-20b" firstAttribute="top" secondItem="op8-Gt-zvi" secondAttribute="bottom" constant="20" id="EX0-8j-P0V"/>
-                                                    <constraint firstItem="dmo-qL-20b" firstAttribute="leading" secondItem="fOk-Co-Uog" secondAttribute="leading" constant="20" id="N8t-He-Cb9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="yUh-kg-0aM" secondAttribute="trailing" constant="20" id="Ayz-PU-n27"/>
+                                                    <constraint firstItem="08X-oa-ZXf" firstAttribute="top" secondItem="yUh-kg-0aM" secondAttribute="bottom" constant="40" id="BDW-4G-z0H"/>
+                                                    <constraint firstItem="yUh-kg-0aM" firstAttribute="top" secondItem="op8-Gt-zvi" secondAttribute="bottom" constant="20" id="O4o-ut-3jN"/>
                                                     <constraint firstAttribute="trailing" secondItem="op8-Gt-zvi" secondAttribute="trailing" constant="20" id="Q3X-Tj-SqP"/>
-                                                    <constraint firstItem="08X-oa-ZXf" firstAttribute="top" secondItem="dmo-qL-20b" secondAttribute="bottom" constant="40" id="c0r-ZR-nf2"/>
-                                                    <constraint firstAttribute="trailing" secondItem="dmo-qL-20b" secondAttribute="trailing" constant="20" id="qdn-cb-Pnp"/>
+                                                    <constraint firstItem="yUh-kg-0aM" firstAttribute="leading" secondItem="fOk-Co-Uog" secondAttribute="leading" constant="20" id="Zww-li-u9g"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -1420,7 +1477,7 @@ and build a habit!</string>
                                         <color key="textColor" name="BodyColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWW-EK-VFf">
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="15" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWW-EK-VFf">
                                         <rect key="frame" x="10" y="112" width="344" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="P6x-lb-MNu"/>
@@ -1605,6 +1662,8 @@ and build a habit!</string>
                     </view>
                     <connections>
                         <outlet property="menuTableView" destination="ULH-MK-LTH" id="HNj-fU-wqv"/>
+                        <outlet property="userEmailLBL" destination="z3T-Mw-QVG" id="h1e-Lz-Oq6"/>
+                        <outlet property="usernameLBL" destination="fGW-mA-OSb" id="sYn-N3-uJV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6Y-zw-apF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2397,6 +2456,112 @@ and build a habit!</string>
             </objects>
             <point key="canvasLocation" x="3186" y="783"/>
         </scene>
+        <!--Delete Account AlertVC-->
+        <scene sceneID="Yuh-dk-CIg">
+            <objects>
+                <viewController storyboardIdentifier="DeleteAccountAlertVC" id="t3X-0j-bxI" customClass="DeleteAccountAlertVC" customModule="Natomic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Nf-kG-G6G">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pyq-us-MV2">
+                                <rect key="frame" x="25" y="269" width="364" height="358"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deleting this account will delete all data from the phone!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgk-hJ-JZj">
+                                        <rect key="frame" x="40" y="212.5" width="284" height="47.5"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="20"/>
+                                        <color key="textColor" name="BodyColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TXi-9B-vLJ">
+                                        <rect key="frame" x="15" y="290" width="334" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orR-Db-2sX">
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="48"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" name="TitlesColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" name="TitlesColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cancelBTNtapped:" destination="t3X-0j-bxI" eventType="touchUpInside" id="pKu-rB-fMW"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hN-rD-I1W">
+                                                <rect key="frame" x="172" y="0.0" width="162" height="48"/>
+                                                <color key="backgroundColor" name="TitlesColor"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Delete">
+                                                    <color key="titleColor" name="WhiteColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="deleteBTNtapped:" destination="t3X-0j-bxI" eventType="touchUpInside" id="Wjm-Vd-gLu"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="LuT-hW-U9O"/>
+                                        </constraints>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete_Image" translatesAutoresizingMaskIntoConstraints="NO" id="zBX-fn-dCy">
+                                        <rect key="frame" x="107" y="30" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="X5K-ca-ODL"/>
+                                            <constraint firstAttribute="width" constant="150" id="zMh-cO-f0b"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="zBX-fn-dCy" firstAttribute="top" secondItem="pyq-us-MV2" secondAttribute="top" constant="30" id="59M-zl-yvF"/>
+                                    <constraint firstItem="zBX-fn-dCy" firstAttribute="centerX" secondItem="pyq-us-MV2" secondAttribute="centerX" id="5wE-0d-tDP"/>
+                                    <constraint firstItem="TXi-9B-vLJ" firstAttribute="top" secondItem="Vgk-hJ-JZj" secondAttribute="bottom" constant="30" id="DNV-i6-Sbf"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vgk-hJ-JZj" secondAttribute="trailing" constant="40" id="MdU-zy-SiZ"/>
+                                    <constraint firstItem="TXi-9B-vLJ" firstAttribute="leading" secondItem="pyq-us-MV2" secondAttribute="leading" constant="15" id="Pcv-QW-qd1"/>
+                                    <constraint firstAttribute="height" constant="358" id="UC1-6D-JDg"/>
+                                    <constraint firstItem="Vgk-hJ-JZj" firstAttribute="leading" secondItem="pyq-us-MV2" secondAttribute="leading" constant="40" id="ZMP-Sg-Hpg"/>
+                                    <constraint firstAttribute="trailing" secondItem="TXi-9B-vLJ" secondAttribute="trailing" constant="15" id="k8e-ZQ-HMj"/>
+                                    <constraint firstAttribute="bottom" secondItem="TXi-9B-vLJ" secondAttribute="bottom" constant="20" id="ssT-E7-5YI"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ICu-kv-WWP"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pyq-us-MV2" firstAttribute="centerX" secondItem="1Nf-kG-G6G" secondAttribute="centerX" id="HNs-YN-9dE"/>
+                            <constraint firstItem="ICu-kv-WWP" firstAttribute="trailing" secondItem="pyq-us-MV2" secondAttribute="trailing" constant="25" id="PnZ-Eh-gCs"/>
+                            <constraint firstItem="pyq-us-MV2" firstAttribute="leading" secondItem="ICu-kv-WWP" secondAttribute="leading" constant="25" id="npg-Pa-LEB"/>
+                            <constraint firstItem="pyq-us-MV2" firstAttribute="centerY" secondItem="1Nf-kG-G6G" secondAttribute="centerY" id="ojf-6L-oHP"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c7J-R9-dQB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7051" y="751"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AddIcon" width="25" height="25"/>
@@ -2408,11 +2573,13 @@ and build a habit!</string>
         <image name="WelcomeIMG" width="299" height="280"/>
         <image name="WritingIMG" width="299" height="280"/>
         <image name="addIconplus" width="32" height="32"/>
+        <image name="appleLogo" width="24" height="24"/>
         <image name="arrow_left" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>
         <image name="back_icon" width="24" height="24"/>
         <image name="check_icon" width="12" height="12"/>
         <image name="closeIcone" width="36.5" height="36.5"/>
+        <image name="delete_Image" width="135" height="135.5"/>
         <image name="feedbackImage" width="200.5" height="200"/>
         <image name="notificationEnable" width="32" height="32"/>
         <image name="subscriptionImg" width="200" height="200"/>

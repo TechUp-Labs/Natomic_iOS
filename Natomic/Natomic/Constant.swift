@@ -14,11 +14,11 @@ var UID: String {
 }
 
 var USER_NAME: String {
-    return getDataFromUserDefaults(forKey: "USER_NAME") as? String ?? ""
+    return getDataFromUserDefaults(forKey: "USER_NAME") as? String ?? "Natomic"
 }
 
 var USER_EMAIL: String {
-    return getDataFromUserDefaults(forKey: "USER_EMAIL") as? String ?? ""
+    return getDataFromUserDefaults(forKey: "USER_EMAIL") as? String ?? "User"
 }
 
 
@@ -150,6 +150,13 @@ var SET_REMINDER_ALERT_VC : SetReminderAlertVC {
        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SetReminderAlertVC") as! SetReminderAlertVC
    }
 }
+
+var DELETE_ACCOUNT_ALERT_VC : DeleteAccountAlertVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DeleteAccountAlertVC") as! DeleteAccountAlertVC
+   }
+}
+
 
 var FEEDBACK_VC : FeedbackVC {
    get{

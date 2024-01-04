@@ -201,34 +201,39 @@ class WritingVC: UIViewController {
     
 }
 
-extension WritingVC : UITextViewDelegate {
-    
+extension WritingVC: UITextViewDelegate {
+
     func textViewDidChange(_ textView: UITextView) {
-        
         let trimmedText = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmedText.count != 0 {
-            if textView.text.isEmpty {
+        
+        if trimmedText.count <= 250 {
+            self.textCountLBL.text = "\(trimmedText.count)/250"
+            
+            if trimmedText.isEmpty {
                 self.postBTN.layer.opacity = 0.5
                 self.placeholderLBL.isHidden = false
                 self.postBTN.isUserInteractionEnabled = false
-            }else{
+            } else {
                 self.postBTN.layer.opacity = 1
                 self.placeholderLBL.isHidden = true
                 self.postBTN.isUserInteractionEnabled = true
             }
-        }else{
-            self.postBTN.layer.opacity = 0.5
-            self.placeholderLBL.isHidden = false
-            self.postBTN.isUserInteractionEnabled = false
+        } else {
+            // Update the character count label for the first 250 characters
+            self.textCountLBL.text = "250/250"
+            
+            // Limit the text to 250 characters
+            textView.text = String(trimmedText.prefix(250))
         }
     }
-    
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         // Calculate the new text after the replacement
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        self.textCountLBL.text = "\(newText.count)/250"
-        // Limit the text to 250 characters
-        return newText.count < 250
+        
+        // Allow pasting text if the total length (current text + pasted text) is less than or equal to 250 characters
+        return newText.count <= 250
     }
     
 }
+

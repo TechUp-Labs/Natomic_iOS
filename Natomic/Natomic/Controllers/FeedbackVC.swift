@@ -18,6 +18,7 @@ class FeedbackVC: UIViewController {
     // MARK: - Variable's : -
     
     var dismissDelegate : DismissFeedbackScreen?
+    let reachability = try! Reachability()
     
     // MARK: - ViewController Life Cycle:-
     
@@ -39,7 +40,40 @@ class FeedbackVC: UIViewController {
     }
     
     @IBAction func submitBTNtapped(_ sender: Any) {
+        if !textView.text.isEmpty {
+            checkInternet()
+        }else{
+            showAlert(title: "Error", message: "Please enter your feedback.")
+        }
+    }
+    
+    func checkInternet(){
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+    }
+
+    
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
         
+        switch reachability.connection {
+        case .wifi:
+            print("Wifi Connection 😃")
+            postFeedback()
+        case .cellular:
+            print("Cellular Connection 😃")
+            postFeedback()
+        case .unavailable:
+            print("No Connection ☹️")
+            showAlert(title: "No Internet Connection", message: "Please check your internet connection.")
+        }
+    }
+    
+    func postFeedback(){
         DatabaseHelper.shared.postFeedback(response: 1, comment: textView.text) { result in
             switch result {
             case .success(let data):
@@ -55,6 +89,7 @@ class FeedbackVC: UIViewController {
             }
         }
     }
+
     
 }
 

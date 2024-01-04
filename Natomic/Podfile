@@ -12,6 +12,7 @@ target 'Natomic' do
   pod 'FirebaseAnalytics'
   pod 'GoogleSignIn'
   pod 'Alamofire'
+  pod 'NVActivityIndicatorView'
   # Pods for Natomic
 
   # Set the deployment target for your target
