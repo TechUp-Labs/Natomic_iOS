@@ -178,6 +178,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         guard let window = UIApplication.shared.keyWindow else {return}
         IS_FROME_NOTIFICATION = true
         let navController = UINavigationController(rootViewController: HOME_VC)
+        navController.isNavigationBarHidden = true
         navController.modalPresentationStyle = .fullScreen
         window.rootViewController = navController
         window.makeKeyAndVisible()

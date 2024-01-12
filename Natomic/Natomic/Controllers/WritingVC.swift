@@ -27,14 +27,43 @@ class WritingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         setUI()
     }
+    deinit {
+        // Unregister the keyboard notifications when the view controller is deallocated
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWillChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+
+        // Extract the height of the keyboard
+        let keyboardHeight = keyboardFrame.height
+
+        // Now you can use the keyboardHeight variable as needed
+        print("Keyboard Height: \(keyboardHeight)")
+        bottomPostBTNbottomCon.constant = keyboardHeight
+        
+        if hasNotch() {
+            self.bottomPostBTNbottomCon.constant = keyboardHeight-20
+        } else {
+            self.bottomPostBTNbottomCon.constant = keyboardHeight+20
+        }
+
+        
+    }
+
     
     override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handle(keyboardShowNotification:)),
-                                               name: UIResponder.keyboardDidShowNotification,
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(handle(keyboardShowNotification:)),
+//                                               name: UIResponder.keyboardDidShowNotification,
+//                                               object: nil)
+        
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.enable = false
         

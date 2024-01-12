@@ -170,6 +170,12 @@ var SUCCESS_FEEDBACK_VC : SuccessFeedbackVC {
    }
 }
 
+var FRIENDS_NOTE_VC : FriendsNoteVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsNoteVC") as! FriendsNoteVC
+   }
+}
+
 func saveDataInUserDefault(value:Any?, key: String){
     let Default = UserDefaults.standard
     Default.set(value, forKey: key)

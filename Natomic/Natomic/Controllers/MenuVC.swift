@@ -16,10 +16,11 @@ protocol DismissDeleteScreen {
     func dismissDeleteVC()
 }
 
-class MenuVC: UIViewController {
+class MenuVC: UIViewController,UIGestureRecognizerDelegate {
     
     // MARK: - Outlet's :-
     
+    @IBOutlet weak var qrCodeImageView: UIImageView!
     @IBOutlet weak var menuTableView: UITableView!
     @IBOutlet weak var usernameLBL: UILabel!
     @IBOutlet weak var userEmailLBL: UILabel!
@@ -51,7 +52,43 @@ class MenuVC: UIViewController {
         menuArray.append(Menu(menuImage: "deleteIcone", menuTitle: "Delete Account"))
         menuArray.append(Menu(menuImage: "logoutIcon", menuTitle: "Log out"))
         self.menuTableView.reloadData()
+        if let navigationController = self.navigationController {
+            let leftSwipeGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
+            leftSwipeGestureRecognizer.edges = .left
+            leftSwipeGestureRecognizer.delegate = self
+            navigationController.view.addGestureRecognizer(leftSwipeGestureRecognizer)
+
+            let rightSwipeGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleRightSwipe(_:)))
+            rightSwipeGestureRecognizer.edges = .right
+            rightSwipeGestureRecognizer.delegate = self
+            navigationController.view.addGestureRecognizer(rightSwipeGestureRecognizer)
+        }
+
     }
+    
+    // MARK: - Gesture Handlers
+
+    @objc func handleLeftSwipe(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+        if gestureRecognizer.state == .recognized {
+            // Handle left swipe (pop or perform custom action)
+            navigationController?.popViewController(animated: true)
+        }
+    }
+
+    @objc func handleRightSwipe(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+        if gestureRecognizer.state == .recognized {
+            // Handle right swipe (perform custom action if needed)
+            navigationController?.popViewController(animated: true)
+        }
+    }
+
+    // MARK: - UIGestureRecognizerDelegate
+
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Ensure that swipe-to-go-back is only enabled when there is more than one view controller on the navigation stack
+        return navigationController?.viewControllers.count ?? 0 > 1
+    }
+
     
     // MARK: - Button Action's : -
     
@@ -78,6 +115,7 @@ class MenuVC: UIViewController {
         Loader.shared.startAnimating()
         do {
             try Auth.auth().signOut()
+            cancelNotification()
             UserDefaults.standard.removeObject(forKey: "IS_STARTED")
             UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
             UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
@@ -90,6 +128,20 @@ class MenuVC: UIViewController {
             showAlert(title: "Error", message: "\(signOutError.localizedDescription)")
         }
     }
+    
+    func cancelNotification() {
+        // Specify the identifier of the notification you want to cancel
+        let notificationIdentifier = "LocalNotification"
+        
+        // Remove the scheduled notification with the specified identifier
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [notificationIdentifier])
+        
+        // Optionally, you can also remove delivered notifications with the specified identifier
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [notificationIdentifier])
+        
+        print("Notification canceled successfully")
+    }
+
 
 
     
@@ -118,10 +170,10 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
             self.navigationController?.pushViewController(SUBSCRIPTION_VC, animated: true)
         case "Share":
             let url = URL(string: "https://apps.apple.com/us/app/natomic/id6474652222")
-            let textToShare = [ url ]
-            let activityViewController = UIActivityViewController(activityItems: textToShare as [Any], applicationActivities: nil)
+            let textToShare = ["Unleash your creativity with Natomic! 🚀📚 Explore the art of writing and track your habits seamlessly. Elevate your writing experience with Natomic app – where ideas flow effortlessly! ✨🖋️ #Natomic #WritingJourney", url] as [Any]
+            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
-            activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
+            activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook]
             self.present(activityViewController, animated: true, completion: nil)
         case "Feedback":
             let vc = FEEDBACK_VC
@@ -150,6 +202,7 @@ extension MenuVC : DismissDeleteScreen {
         Loader.shared.startAnimating()
         do {
             try Auth.auth().signOut()
+            cancelNotification()
             UserDefaults.standard.removeObject(forKey: "IS_STARTED")
             UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
             UserDefaults.standard.removeObject(forKey: "IS_LOGIN")

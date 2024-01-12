@@ -7,11 +7,12 @@
 
 import UIKit
 
-class NotificationTimeVC: AlertBase {
+class NotificationTimeVC: UIViewController {
     
     // MARK: - Outlet's :-
     
     @IBOutlet weak var timePicker: UIDatePicker!
+    @IBOutlet weak var alertView: UIView!
     
     // MARK: - Variable's : -
     
@@ -26,12 +27,60 @@ class NotificationTimeVC: AlertBase {
         let defaultTime = dateFormatter.date(from: "\(convertTo12HourFormat(hour: notificationHour)):\(notificationMinutes) \(notificationMeridiem)")
         timePicker.date = defaultTime ?? Date()
         timePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
+        
+        // Add a gesture recognizer to dismiss the alert on tap
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissAlert))
+//        view.addGestureRecognizer(tapGestureRecognizer)
+
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        animateAlert()
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.writingDelegate?.changeNotificationBTNicon()
     }
+    
+    func animateAlert() {
+        // Initial scale of 0.01
+        alertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+
+        // Animation duration
+        let duration: TimeInterval = 0.5
+        
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: [.curveEaseInOut], animations: {
+            
+            // Scale up to 1.0
+            self.alertView.transform = .identity
+            
+        }, completion: { (finished) in
+            // Animation completion logic
+        })
+    }
+    
+    func dismissAlert() {
+        // Increase the size to 1.1 times the original size
+        let initialScale: CGFloat = 1.05
+        
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: [.curveEaseInOut], animations: {
+            // Scale up to initialScale
+            self.alertView.transform = CGAffineTransform(scaleX: initialScale, y: initialScale)
+        }) { (finished) in
+            // Now, scale down to 0.01 for dismissal
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.1, options: [.curveEaseInOut], animations: {
+                self.alertView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            }) { (finished) in
+                // Dismiss the view controller or perform any other dismissal logic here
+                self.dismiss(animated: false, completion: nil)
+            }
+        }
+    }
+
+
+
     
     // MARK: - Function For Notification Time Picker:-
     
@@ -56,7 +105,9 @@ class NotificationTimeVC: AlertBase {
     // MARK: - Button Action's : -
     
     @IBAction func cancelBTNtapped(_ sender: Any) {
-        dismiss()
+//        dismiss()
+//        dismissAlert()
+        self.dismiss(animated: false, completion: nil)
     }
     
     @IBAction func saveBTNtapped(_ sender: Any) {
@@ -70,7 +121,9 @@ class NotificationTimeVC: AlertBase {
         saveDataInUserDefault(value: hour >= 12 ? "PM" : "AM", key: "Notification_Meridiem")
         setUpNotification(Hour: hour, Minute: minutes)
         DispatchQueue.main.asyncAfter(wallDeadline: .now()+0.2) {
-            self.dismiss()
+//            self.dismiss()
+//            self.dismissAlert()
+            self.dismiss(animated: false, completion: nil)
         }
     }
     
@@ -85,8 +138,8 @@ extension NotificationTimeVC {
     func setUpNotification(Hour:Int,Minute:Int) {
         // Create a notification content
         let content = UNMutableNotificationContent()
-        content.title = "Don't forget to write today!"
-        content.body = "Even if it's just for a few minutes, make time to write your thoughts."
+        content.title = "It's time to write one line today!"
+        content.body = "Writing improves your thinking & ultimately your Life"
         content.sound = UNNotificationSound.default
         
         // Create a date components object for the desired time

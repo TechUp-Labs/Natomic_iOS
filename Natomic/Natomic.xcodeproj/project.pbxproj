@@ -63,6 +63,7 @@
 		D0AEAB962A937469002D24A6 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB842A9372AE002D24A6 /* Rubik-Regular.ttf */; };
 		D0AEAB972A937469002D24A6 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB882A9372AE002D24A6 /* Rubik-SemiBold.ttf */; };
 		D0AEAB982A937469002D24A6 /* Rubik-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB8A2A9372AE002D24A6 /* Rubik-SemiBoldItalic.ttf */; };
+		D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */; };
 		D0F843892AD7B8F400288F19 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F843882AD7B8F400288F19 /* DatabaseHelper.swift */; };
 		D0F8438B2AD7B9A300288F19 /* UserNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8438A2AD7B9A300288F19 /* UserNoteModel.swift */; };
 /* End PBXBuildFile section */
@@ -128,6 +129,7 @@
 		D0AEAB882A9372AE002D24A6 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
 		D0AEAB892A9372AE002D24A6 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
 		D0AEAB8A2A9372AE002D24A6 /* Rubik-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNoteVC.swift; sourceTree = "<group>"; };
 		D0F843882AD7B8F400288F19 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		D0F8438A2AD7B9A300288F19 /* UserNoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNoteModel.swift; sourceTree = "<group>"; };
 		FDAF64CC20DBDFA96CB7FCFF /* Pods_Natomic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Natomic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +241,7 @@
 				04BEBAB62A67ECF00050A013 /* HomeVC.swift */,
 				04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */,
 				D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */,
+				D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */,
 				04BEBAB82A67F1B30050A013 /* MenuVC.swift */,
 				041FF0C92A711CF300E98018 /* SubscriptionVC.swift */,
 				D0A06EFF2A98CD4300DA36E8 /* FeedbackVC.swift */,
@@ -456,6 +459,7 @@
 				04666A3C2A6E3C9C003BC9CB /* WritingVC.swift in Sources */,
 				D0A06F022A98D25600DA36E8 /* SuccessFeedbackVC.swift in Sources */,
 				04AE06A82A45798300FC4BA1 /* SplashVC.swift in Sources */,
+				D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */,
 				D03FAA112A989B5600615426 /* MenuTableViewCell.swift in Sources */,
 				043810172A7A3A5000102547 /* SpringAnimator.swift in Sources */,
 				04BEBAB72A67ECF00050A013 /* HomeVC.swift in Sources */,
@@ -637,7 +641,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Natomic/Natomic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 63ND4Y3UZ8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Natomic/Info.plist;
@@ -658,12 +662,13 @@
 					/usr/lib/swift,
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = natomic.com.techuplabs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -679,7 +684,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Natomic/Natomic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 63ND4Y3UZ8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Natomic/Info.plist;
@@ -700,12 +705,13 @@
 					/usr/lib/swift,
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = natomic.com.techuplabs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

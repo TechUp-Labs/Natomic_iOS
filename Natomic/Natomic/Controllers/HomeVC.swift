@@ -60,7 +60,7 @@ class HomeVC: UIViewController {
             }
             return false // Return false as a fallback
         }
-
+        self.historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
         self.historyTBV.reloadData()
     }
     

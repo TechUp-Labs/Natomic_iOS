@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WrirtingAlertVC: AlertBase {
+class WrirtingAlertVC: UIViewController {
 
     // MARK: - Variable's : -
     
@@ -34,12 +34,16 @@ class WrirtingAlertVC: AlertBase {
     
     @IBAction func closeBTNtapped(_ sender: Any) {
         is_letsWrite = false
-        dismiss()
+//        dismiss()
+        self.dismiss(animated: false, completion: nil)
+
     }
     
     @IBAction func letsWriteBTNtapped(_ sender: Any) {
         is_letsWrite = true
-        dismiss()
+//        dismiss()
+        self.dismiss(animated: false, completion: nil)
+
     }
     
 }

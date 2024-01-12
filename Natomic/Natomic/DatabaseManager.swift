@@ -68,7 +68,9 @@ class DatabaseManager {
         dateFormatterInput.dateFormat = "yyyy-MM-dd"
         if let date = dateFormatterInput.date(from: dateString) {
             let dateFormatterOutput = DateFormatter()
-            dateFormatterOutput.dateFormat = "dd/MM/yyyy"
+//            dateFormatterOutput.dateFormat = "dd/MM/yyyy"
+            dateFormatterOutput.dateFormat = "dd MMM, yyyy"
+            dateFormatterOutput.locale = Locale(identifier: "en_US_POSIX")
             return dateFormatterOutput.string(from: date)
         }
         return nil // Return nil if the input string is not in the expected format
@@ -79,7 +81,7 @@ class DatabaseManager {
         dateFormatter.dateFormat = "HH:mm:ss"
         
         if let date = dateFormatter.date(from: timeString) {
-            dateFormatter.dateFormat = "h.mm a"
+            dateFormatter.dateFormat = "h:mm a"
             return dateFormatter.string(from: date)
         }
         

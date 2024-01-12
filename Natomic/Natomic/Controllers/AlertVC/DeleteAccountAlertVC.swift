@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DeleteAccountAlertVC: AlertBase {
+class DeleteAccountAlertVC: UIViewController {
     
     var dismissDeleteScreen : DismissDeleteScreen?
 
@@ -17,7 +17,8 @@ class DeleteAccountAlertVC: AlertBase {
     }
     
     @IBAction func cancelBTNtapped(_ sender: Any) {
-        dismiss()
+//        dismiss()
+        self.dismiss(animated: false, completion: nil)
     }
     
     @IBAction func deleteBTNtapped(_ sender: Any) {
@@ -36,7 +37,8 @@ class DeleteAccountAlertVC: AlertBase {
                         // Now you have your response object
                         print("Successfully Delete data:", response)
                         Loader.shared.stopAnimating()
-                        self.dismiss()
+//                        self.dismiss()
+                        self.dismiss(animated: false, completion: nil)
                         self.dismissDeleteScreen?.dismissDeleteVC()
                     } catch let error {
                         print("Error decoding response:", error.localizedDescription)

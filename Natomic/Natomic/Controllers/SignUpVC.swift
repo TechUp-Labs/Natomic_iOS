@@ -58,6 +58,7 @@ class SignUpVC: UIViewController {
         
         // Create Google Sign In configuration object.
         let config = GIDConfiguration(clientID: clientID)
+        
         GIDSignIn.sharedInstance.configuration = config
         
         // Start the sign in flow!
@@ -134,7 +135,7 @@ extension SignUpVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                     // Access user information from the Apple ID credential
                     let uid = user.uid
                     let displayName = appleIDCredential.fullName?.givenName ?? "Natomic"
-                    let email = appleIDCredential.email ?? "@User"
+                    let email = appleIDCredential.email ?? "User"
 
                     print("Successfully signed in with Apple!")
                     print("UID: \(uid)")

@@ -8,7 +8,7 @@
 import UIKit
 import FittedSheets
 
-class SetReminderAlertVC: AlertBase {
+class SetReminderAlertVC: UIViewController {
     
     // MARK: - Variable's : -
     
@@ -28,15 +28,21 @@ class SetReminderAlertVC: AlertBase {
     // MARK: - Button Action's : -
     
     @IBAction func closeBTNtapped(_ sender: Any) {
-        dismiss {
-            print("dismiss")
-        }
+//        dismiss {
+//            print("dismiss")
+//        }
+        self.dismiss(animated: false, completion: nil)
     }
     
     @IBAction func setNowBTNtapped(_ sender: Any) {
-        dismiss {
+        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: false) {
             self.writingDelegate?.checkNotificationState()
+
         }
+//        dismiss {
+//            self.writingDelegate?.checkNotificationState()
+//        }
     }
     
 }
