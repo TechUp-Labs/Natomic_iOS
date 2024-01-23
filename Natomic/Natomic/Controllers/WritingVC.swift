@@ -156,6 +156,24 @@ class WritingVC: UIViewController {
     
     // MARK: - Button Action's : -
     
+    @IBAction func closeBTNtapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+//        let tweetText = "This is the text I want to share on Twitter!"
+//        let escapedTweetText = tweetText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+//        
+//        let urlString = "https://twitter.com/intent/tweet?text=\(escapedTweetText)"
+//        guard let url = URL(string: urlString) else { return }
+//        
+//        if UIApplication.shared.canOpenURL(url) {
+//            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//        } else {
+//            showAlert(title: "Error", message: "Twitter app is not installed")
+//        }
+        
+//        if let url = URL(string: "instagram://sharesheet?text=Hello%20DixitHello%20DixitHello%20DixitHello%20DixitHello%20Dixit") {
+//          UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//        }
+    }
     @IBAction func postBTNtapped(_ sender: Any) {
         if IS_LOGIN {
             checkInternet()
@@ -266,3 +284,27 @@ extension WritingVC: UITextViewDelegate {
     
 }
 
+
+// MARK: - Twitter share code :-
+
+//let tweetText = "This is the text I want to share on Twitter!"
+//let escapedTweetText = tweetText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+//
+//let urlString = "https://twitter.com/intent/tweet?text=\(escapedTweetText)"
+//guard let url = URL(string: urlString) else { return }
+//
+//if UIApplication.shared.canOpenURL(url) {
+//    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//} else {
+//    showAlert(title: "Error", message: "Twitter app is not installed")
+//}
+
+// MARK: - Twitter share code :-
+
+//guard let url = URL(string: "instagram://sharesheet?text=\("This is the text I want to share on Instagram!")") else { return }
+//if UIApplication.shared.canOpenURL(url) {
+//    UIApplication.shared.open(url, options: [])
+//} else {
+//    // Show some error message or suggest installing Instagram
+//    showAlert(title: "Error", message: "Something went wrong")
+//}

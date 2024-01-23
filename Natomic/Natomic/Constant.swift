@@ -170,6 +170,13 @@ var SUCCESS_FEEDBACK_VC : SuccessFeedbackVC {
    }
 }
 
+var IMAGE_CONVERT_VC : ImageConvertVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ImageConvertVC") as! ImageConvertVC
+   }
+}
+
+
 var FRIENDS_NOTE_VC : FriendsNoteVC {
    get{
        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsNoteVC") as! FriendsNoteVC

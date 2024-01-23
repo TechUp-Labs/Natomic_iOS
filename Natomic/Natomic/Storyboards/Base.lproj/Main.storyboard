@@ -1005,7 +1005,7 @@ build like a boss</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Natomic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiE-LG-EvZ">
-                                        <rect key="frame" x="170.5" y="9.5" width="73" height="21.5"/>
+                                        <rect key="frame" x="170.5" y="9.5" width="73" height="21"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
                                         <color key="textColor" name="TitlesColor"/>
                                         <nil key="highlightedColor"/>
@@ -1108,6 +1108,13 @@ build like a boss</string>
                                     <outlet property="delegate" destination="IdB-lQ-ynC" id="v2b-Rk-yg8"/>
                                 </connections>
                             </tableView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-ix-Gz5">
+                                <rect key="frame" x="0.0" y="746" width="414" height="150"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="2KZ-0P-USb"/>
+                                </constraints>
+                            </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SX-SZ-xoj">
                                 <rect key="frame" x="172" y="792" width="70" height="70"/>
                                 <color key="backgroundColor" name="TitlesColor"/>
@@ -1224,6 +1231,7 @@ build like a boss</string>
                             <constraint firstItem="674-uw-KfH" firstAttribute="leading" secondItem="8S7-81-2GH" secondAttribute="leading" id="Aj9-fc-24d"/>
                             <constraint firstItem="2SX-SZ-xoj" firstAttribute="centerX" secondItem="4l2-bY-3KU" secondAttribute="centerX" id="E2k-QU-nny"/>
                             <constraint firstItem="4l2-bY-3KU" firstAttribute="bottom" secondItem="2SX-SZ-xoj" secondAttribute="bottom" id="Ijm-Zi-1Di"/>
+                            <constraint firstItem="sdE-ix-Gz5" firstAttribute="trailing" secondItem="4l2-bY-3KU" secondAttribute="trailing" id="MCA-zb-2lH"/>
                             <constraint firstItem="g33-A3-VPl" firstAttribute="leading" secondItem="4l2-bY-3KU" secondAttribute="leading" id="T8a-ia-DLq"/>
                             <constraint firstItem="Fzn-J2-2Wa" firstAttribute="leading" secondItem="4l2-bY-3KU" secondAttribute="leading" id="U2p-Ub-oky"/>
                             <constraint firstItem="8Eq-9p-8cm" firstAttribute="trailing" secondItem="4l2-bY-3KU" secondAttribute="trailing" id="XDv-N6-NqL"/>
@@ -1233,12 +1241,15 @@ build like a boss</string>
                             <constraint firstItem="4l2-bY-3KU" firstAttribute="bottom" secondItem="8Eq-9p-8cm" secondAttribute="bottom" id="nL9-7J-gyi"/>
                             <constraint firstItem="8Eq-9p-8cm" firstAttribute="leading" secondItem="4l2-bY-3KU" secondAttribute="leading" id="rlp-zf-sLa"/>
                             <constraint firstItem="4l2-bY-3KU" firstAttribute="trailing" secondItem="g33-A3-VPl" secondAttribute="trailing" id="t1x-R1-vV5"/>
+                            <constraint firstItem="sdE-ix-Gz5" firstAttribute="leading" secondItem="4l2-bY-3KU" secondAttribute="leading" id="uxd-Wl-SQU"/>
                             <constraint firstAttribute="bottom" secondItem="g33-A3-VPl" secondAttribute="bottom" id="wBA-5b-xr8"/>
+                            <constraint firstAttribute="bottom" secondItem="sdE-ix-Gz5" secondAttribute="bottom" id="xU9-nP-U9L"/>
                             <constraint firstItem="4l2-bY-3KU" firstAttribute="trailing" secondItem="Fzn-J2-2Wa" secondAttribute="trailing" id="yti-LU-g0D"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Uhh-Xa-euU"/>
                     <connections>
+                        <outlet property="blureView" destination="sdE-ix-Gz5" id="ItZ-XZ-JUA"/>
                         <outlet property="historyTBV" destination="g33-A3-VPl" id="oLx-GO-28Q"/>
                         <outlet property="notificationBTN" destination="9ZS-wb-84A" id="yR2-CX-S7b"/>
                         <outlet property="profileBTN" destination="3mi-gD-gWf" id="Je4-U2-ECg"/>
@@ -1815,28 +1826,36 @@ and build a habit!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's in your mind?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNH-77-cHy">
-                                <rect key="frame" x="121" y="68" width="172" height="21"/>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                <rect key="frame" x="118" y="68" width="178" height="21"/>
+                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
                                 <color key="textColor" name="TitlesColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQD-H2-bxk">
-                                <rect key="frame" x="328" y="62.5" width="66" height="32"/>
-                                <color key="backgroundColor" name="TitlesColor"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srD-Il-8d5">
+                                <rect key="frame" x="0.0" y="53.5" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="CJu-bf-L1a"/>
-                                    <constraint firstAttribute="width" constant="66" id="WaT-uI-xLj"/>
+                                    <constraint firstAttribute="height" constant="50" id="LHS-VU-sDR"/>
+                                    <constraint firstAttribute="width" constant="50" id="YX4-WO-TS6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="12"/>
+                                <color key="tintColor" name="TitlesColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Post">
-                                    <color key="titleColor" name="WhiteColor"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="closeBTNtapped:" destination="E7A-iF-kA4" eventType="touchUpInside" id="aNU-2D-Qsp"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVR-NL-nDe">
+                                <rect key="frame" x="350" y="58.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="SwI-Mf-rO8"/>
+                                    <constraint firstAttribute="width" constant="40" id="url-rM-qve"/>
+                                </constraints>
+                                <color key="tintColor" name="TitlesColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="closeBTNtapped:" destination="E7A-iF-kA4" eventType="touchUpInside" id="Tqk-Wd-fAW"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiV-RF-aU6">
                                 <rect key="frame" x="0.0" y="109" width="414" height="2"/>
@@ -1851,7 +1870,7 @@ and build a habit!</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="2Tk-Cx-aim"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Post">
                                     <color key="titleColor" name="WhiteColor"/>
@@ -1859,6 +1878,18 @@ and build a habit!</string>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" name="BodyColor"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -1869,13 +1900,13 @@ and build a habit!</string>
                                 <rect key="frame" x="10" y="121" width="394" height="632"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndu-eP-YhK">
-                                <rect key="frame" x="14" y="129" width="386" height="50"/>
+                                <rect key="frame" x="14" y="129" width="386" height="85.5"/>
                                 <string key="text">Write down what's going on in your mind now. An event that occurred? A happy moment? Did you help someone? Do you feel great now? Whatever it is. Just pen down.</string>
-                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
                                 <color key="textColor" red="0.063000001013278961" green="0.059000000357627869" blue="0.050999999046325684" alpha="0.20394876700680273" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1889,12 +1920,12 @@ and build a habit!</string>
                         <viewLayoutGuide key="safeArea" id="OMI-pN-S53"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="OMI-pN-S53" firstAttribute="trailing" secondItem="XQD-H2-bxk" secondAttribute="trailing" constant="20" id="08I-zW-Klo"/>
+                            <constraint firstItem="srD-Il-8d5" firstAttribute="leading" secondItem="OMI-pN-S53" secondAttribute="leading" id="2Al-xe-R1F"/>
                             <constraint firstItem="wiV-RF-aU6" firstAttribute="top" secondItem="lNH-77-cHy" secondAttribute="bottom" constant="20" id="39B-hn-NNm"/>
+                            <constraint firstItem="BVR-NL-nDe" firstAttribute="centerY" secondItem="lNH-77-cHy" secondAttribute="centerY" id="3ai-fv-dae"/>
                             <constraint firstItem="jIm-fs-X6S" firstAttribute="top" secondItem="7HV-cq-5JQ" secondAttribute="bottom" constant="10" id="4mE-lt-cQ1"/>
                             <constraint firstItem="OMI-pN-S53" firstAttribute="trailing" secondItem="7HV-cq-5JQ" secondAttribute="trailing" constant="10" id="CbB-7X-9IG"/>
                             <constraint firstItem="xee-e5-Udn" firstAttribute="top" secondItem="jIm-fs-X6S" secondAttribute="bottom" constant="10" id="Gdj-6H-k53"/>
-                            <constraint firstItem="XQD-H2-bxk" firstAttribute="centerY" secondItem="lNH-77-cHy" secondAttribute="centerY" id="I4K-4C-r9L"/>
                             <constraint firstItem="wiV-RF-aU6" firstAttribute="leading" secondItem="OMI-pN-S53" secondAttribute="leading" id="IS1-up-4aY"/>
                             <constraint firstItem="lNH-77-cHy" firstAttribute="centerX" secondItem="OMI-pN-S53" secondAttribute="centerX" id="V9H-j7-Cj2"/>
                             <constraint firstItem="OMI-pN-S53" firstAttribute="trailing" secondItem="wiV-RF-aU6" secondAttribute="trailing" id="Xt3-ro-Jyh"/>
@@ -1907,6 +1938,8 @@ and build a habit!</string>
                             <constraint firstItem="OMI-pN-S53" firstAttribute="trailing" secondItem="jIm-fs-X6S" secondAttribute="trailing" constant="20" id="lTg-g4-Myr"/>
                             <constraint firstItem="Ndu-eP-YhK" firstAttribute="leading" secondItem="7HV-cq-5JQ" secondAttribute="leading" constant="4" id="ljL-Am-ux4"/>
                             <constraint firstItem="OMI-pN-S53" firstAttribute="bottom" secondItem="xee-e5-Udn" secondAttribute="bottom" constant="20" id="paK-yC-Xz3"/>
+                            <constraint firstItem="OMI-pN-S53" firstAttribute="trailing" secondItem="BVR-NL-nDe" secondAttribute="trailing" constant="24" id="qMl-n9-hKO"/>
+                            <constraint firstItem="srD-Il-8d5" firstAttribute="centerY" secondItem="lNH-77-cHy" secondAttribute="centerY" id="uQu-mr-a7d"/>
                             <constraint firstItem="Ndu-eP-YhK" firstAttribute="trailing" secondItem="7HV-cq-5JQ" secondAttribute="trailing" constant="-4" id="wVO-F3-8K6"/>
                         </constraints>
                     </view>
@@ -2050,7 +2083,7 @@ and build a habit!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ml1-rz-MbB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7811.594202898551" y="92.410714285714278"/>
+            <point key="canvasLocation" x="7804" y="69"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jp8-mk-3Am">
@@ -2713,12 +2746,37 @@ and build a habit!</string>
             </objects>
             <point key="canvasLocation" x="7051" y="751"/>
         </scene>
+        <!--Image ConvertVC-->
+        <scene sceneID="u77-1y-VuD">
+            <objects>
+                <viewController storyboardIdentifier="ImageConvertVC" id="oSw-xY-kOY" customClass="ImageConvertVC" customModule="Natomic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hmO-tu-bLM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FB0-ZB-YNu">
+                                <rect key="frame" x="20" y="276" width="374" height="358"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="358" id="V78-e8-sG6"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tRN-2f-ihA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FB0-ZB-YNu" firstAttribute="centerY" secondItem="tRN-2f-ihA" secondAttribute="centerY" id="8eC-8J-c8f"/>
+                            <constraint firstItem="FB0-ZB-YNu" firstAttribute="centerX" secondItem="tRN-2f-ihA" secondAttribute="centerX" id="XaM-lC-P6m"/>
+                            <constraint firstItem="FB0-ZB-YNu" firstAttribute="leading" secondItem="tRN-2f-ihA" secondAttribute="leading" constant="20" id="euj-7a-GBX"/>
+                            <constraint firstItem="tRN-2f-ihA" firstAttribute="trailing" secondItem="FB0-ZB-YNu" secondAttribute="trailing" constant="20" id="kNj-3E-rLh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PZb-cL-Gbv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7803" y="751"/>
+        </scene>
     </scenes>
-    <designables>
-        <designable name="iYg-yY-iR2">
-            <size key="intrinsicContentSize" width="46" height="12"/>
-        </designable>
-    </designables>
     <resources>
         <image name="AppLogo" width="155" height="155"/>
         <image name="Google_Icon" width="30" height="30"/>
@@ -2740,6 +2798,7 @@ and build a habit!</string>
         <image name="subscriptionImg" width="200" height="200"/>
         <image name="writingBGImage" width="351" height="376"/>
         <image name="writingImage" width="130.5" height="122.5"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="BackgroundColor">
             <color red="0.94900000095367432" green="0.93699997663497925" blue="0.89399999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

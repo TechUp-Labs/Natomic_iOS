@@ -25,6 +25,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var historyTBV: UITableView!
     @IBOutlet weak var notificationBTN: UIButton!
     @IBOutlet weak var profileBTN: UIButton!
+    @IBOutlet weak var blureView: UIView!
     
     // MARK: - Variable's :-
     
@@ -34,7 +35,8 @@ class HomeVC: UIViewController {
     var selectedCell = -1
     var writingDelegate : CheckWriting?
     var userNotes : [Response]?
-
+    var blurView: UIVisualEffectView!
+    var gradientLayer: CAGradientLayer!
     
     // MARK: - ViewController Life Cycle:-
     
@@ -73,9 +75,6 @@ class HomeVC: UIViewController {
         historyTBV.registerCell(identifire: "HistoryTableCell")
         self.userData = DatabaseManager.Shared.getUserContext()
         
-        
-  
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
 
@@ -98,6 +97,27 @@ class HomeVC: UIViewController {
             vc.writingDelegate = self
             self.present(vc, animated: true, completion: nil)
         }
+        
+        gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = blureView.bounds
+
+        // Create a blur effect
+        let blurEffect = UIBlurEffect(style: .light)
+
+        // Create a blur effect view with the blur effect
+        blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = blureView.bounds
+
+        // Add the gradient layer as a mask to the blur effect view
+        blurView.layer.mask = gradientLayer
+
+        // Add the blur effect view to your existing blurView
+        blureView.addSubview(blurView)
+        blureView.layoutIfNeeded()
+
+        
         self.historyTBV.reloadData()
         
     }

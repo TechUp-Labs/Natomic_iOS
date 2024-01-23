@@ -11,12 +11,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        handleQuickAction(shortcutItem, completionHandler: completionHandler)
+    }
+
+
+    func handleQuickAction(_ shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+            guard let shortcutItemType = ShortcutItemType(rawValue: shortcutItem.type) else {
+                completionHandler(false)
+                return
+            }
+
+            switch shortcutItemType {
+            case .writeNow:
+                IS_FROME_NOTIFICATION = true
+                showHomeViewController()
+                break
+            }
+
+            // Call the completion handler to indicate that you've handled the action
+            completionHandler(true)
+        }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+           guard let windowScene = (scene as? UIWindowScene) else { return }
+
+           // Check for quick actions during app launch
+           if let shortcutItem = connectionOptions.shortcutItem {
+               handleQuickAction(shortcutItem, completionHandler: { _ in })
+           }
+
+//           // Other setup code for your app
+//           window = UIWindow(windowScene: windowScene)
+//           // Set up your root view controller here if needed
+//           window?.makeKeyAndVisible()
+       }
+    
+    private func showHomeViewController() {
+        print("showHomeViewController called")
+        let homeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+        let navController = UINavigationController(rootViewController: homeVC)
+        navController.navigationBar.isHidden = true
+        navController.modalPresentationStyle = .fullScreen
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -53,3 +91,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+enum ShortcutItemType: String {
+    case writeNow = "com.yourapp.writenow"
+    // Remove the "newItem" case if not needed
+}

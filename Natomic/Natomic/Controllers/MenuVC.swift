@@ -78,7 +78,7 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
     @objc func handleRightSwipe(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
         if gestureRecognizer.state == .recognized {
             // Handle right swipe (perform custom action if needed)
-            navigationController?.popViewController(animated: true)
+//            navigationController?.popViewController(animated: true)
         }
     }
 
@@ -119,6 +119,10 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
             UserDefaults.standard.removeObject(forKey: "IS_STARTED")
             UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
             UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
+            UserDefaults.standard.removeObject(forKey: "Notification_Hour")
+            UserDefaults.standard.removeObject(forKey: "Notification_Minutes")
+            UserDefaults.standard.removeObject(forKey: "Notification_Meridiem")
+
             DatabaseManager.Shared.removeAllData()
             Loader.shared.stopAnimating()
             self.navigationController?.pushViewController(SPLASH_VC, animated: true)
@@ -206,6 +210,9 @@ extension MenuVC : DismissDeleteScreen {
             UserDefaults.standard.removeObject(forKey: "IS_STARTED")
             UserDefaults.standard.removeObject(forKey: "NOTIFICATION_ENABLE")
             UserDefaults.standard.removeObject(forKey: "IS_LOGIN")
+            UserDefaults.standard.removeObject(forKey: "Notification_Hour")
+            UserDefaults.standard.removeObject(forKey: "Notification_Minutes")
+            UserDefaults.standard.removeObject(forKey: "Notification_Meridiem")
             DatabaseManager.Shared.removeAllData()
             Loader.shared.stopAnimating()
             self.navigationController?.pushViewController(SPLASH_VC, animated: true)
