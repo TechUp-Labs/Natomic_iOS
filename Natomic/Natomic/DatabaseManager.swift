@@ -25,6 +25,7 @@ class DatabaseManager {
         userEntity.date = userContext.date
         userEntity.time = userContext.time
         userEntity.day = userContext.day
+        userEntity.noteID = userContext.noteID
         do{
             try context.save()
             print("User Data Save Successfully...😍")
@@ -46,6 +47,55 @@ class DatabaseManager {
         
         return userData
     }
+    
+    // MARK: - Function For Edit User Data in Core Database:-
+
+    func editUserContext(oldUserContext: UserEntity, newUserContext: User) {
+        oldUserContext.userThoughts = newUserContext.userThoughts
+        oldUserContext.date = newUserContext.date
+        oldUserContext.time = newUserContext.time
+        oldUserContext.day = newUserContext.day
+        oldUserContext.noteID = newUserContext.noteID
+        do {
+            try context.save()
+            print("User Data Edited Successfully...😍")
+        } catch {
+            print("User Context Editing Error: 😞", error)
+        }
+    }
+
+    // MARK: - Function For Delete User Data from Core Database:-
+
+    func deleteUserContext(userContext: UserEntity) {
+        context.delete(userContext)
+        
+        do {
+            try context.save()
+            print("User Data Deleted Successfully...🗑️")
+        } catch {
+            print("User Context Deletion Error: 😞", error)
+        }
+    }
+    
+    
+    // MARK: - Function For get User Data from Core Database based on day:-
+
+    func getUserContext(forDay day: String) -> [UserEntity] {
+        var userData: [UserEntity] = []
+        
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "day == %@", day)
+        
+        do {
+            userData = try context.fetch(fetchRequest)
+        } catch {
+            print("Fetch Data Error: 😞", error)
+        }
+        
+        return userData
+    }
+
+
     
     // MARK: - Function For Remove All User Data from Core Database:-
 

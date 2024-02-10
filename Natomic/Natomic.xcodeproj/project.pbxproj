@@ -44,9 +44,16 @@
 		D03FAA122A989B5600615426 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03FAA102A989B5600615426 /* MenuTableViewCell.xib */; };
 		D03FAA142A989DF400615426 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FAA132A989DF400615426 /* Menu.swift */; };
 		D03FAA162A98A98E00615426 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FAA152A98A98E00615426 /* WelcomeVC.swift */; };
+		D0403D3C2B7213EC00C2DE67 /* ShareImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0403D3B2B7213EC00C2DE67 /* ShareImageVC.swift */; };
+		D0403D402B7216BD00C2DE67 /* ImageThemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0403D3E2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.swift */; };
+		D0403D412B7216BD00C2DE67 /* ImageThemeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0403D3F2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.xib */; };
+		D0403D432B721E2C00C2DE67 /* ImageTheameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0403D422B721E2C00C2DE67 /* ImageTheameModel.swift */; };
 		D05DEBAE2AA071B100792DB6 /* TextOpenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */; };
 		D06A938E2AE65EF900DF166F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06A938D2AE65EF900DF166F /* Reachability.swift */; };
 		D07F85862B51431200409130 /* ImageConvertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F85852B51431200409130 /* ImageConvertVC.swift */; };
+		D08548C22B5FEEBD00B5377D /* EditDeleteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08548C02B5FEEBC00B5377D /* EditDeleteTableView.swift */; };
+		D08548C32B5FEEBD00B5377D /* EditDeleteTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D08548C12B5FEEBD00B5377D /* EditDeleteTableView.xib */; };
+		D09F2C602B60DB8200F6073D /* EditNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09F2C5F2B60DB8200F6073D /* EditNoteVC.swift */; };
 		D0A06F002A98CD4300DA36E8 /* FeedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A06EFF2A98CD4300DA36E8 /* FeedbackVC.swift */; };
 		D0A06F022A98D25600DA36E8 /* SuccessFeedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A06F012A98D25600DA36E8 /* SuccessFeedbackVC.swift */; };
 		D0AEAB772A9356D1002D24A6 /* SetReminderAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEAB762A9356D1002D24A6 /* SetReminderAlertVC.swift */; };
@@ -64,6 +71,7 @@
 		D0AEAB962A937469002D24A6 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB842A9372AE002D24A6 /* Rubik-Regular.ttf */; };
 		D0AEAB972A937469002D24A6 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB882A9372AE002D24A6 /* Rubik-SemiBold.ttf */; };
 		D0AEAB982A937469002D24A6 /* Rubik-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB8A2A9372AE002D24A6 /* Rubik-SemiBoldItalic.ttf */; };
+		D0D1339D2B71148500B780AF /* ShareNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1339C2B71148500B780AF /* ShareNoteVC.swift */; };
 		D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */; };
 		D0F843892AD7B8F400288F19 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F843882AD7B8F400288F19 /* DatabaseHelper.swift */; };
 		D0F8438B2AD7B9A300288F19 /* UserNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8438A2AD7B9A300288F19 /* UserNoteModel.swift */; };
@@ -111,9 +119,16 @@
 		D03FAA102A989B5600615426 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		D03FAA132A989DF400615426 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		D03FAA152A98A98E00615426 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		D0403D3B2B7213EC00C2DE67 /* ShareImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageVC.swift; sourceTree = "<group>"; };
+		D0403D3E2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageThemeCollectionViewCell.swift; sourceTree = "<group>"; };
+		D0403D3F2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageThemeCollectionViewCell.xib; sourceTree = "<group>"; };
+		D0403D422B721E2C00C2DE67 /* ImageTheameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTheameModel.swift; sourceTree = "<group>"; };
 		D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOpenVC.swift; sourceTree = "<group>"; };
 		D06A938D2AE65EF900DF166F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D07F85852B51431200409130 /* ImageConvertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConvertVC.swift; sourceTree = "<group>"; };
+		D08548C02B5FEEBC00B5377D /* EditDeleteTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDeleteTableView.swift; sourceTree = "<group>"; };
+		D08548C12B5FEEBD00B5377D /* EditDeleteTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditDeleteTableView.xib; sourceTree = "<group>"; };
+		D09F2C5F2B60DB8200F6073D /* EditNoteVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNoteVC.swift; sourceTree = "<group>"; };
 		D0A06EFF2A98CD4300DA36E8 /* FeedbackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackVC.swift; sourceTree = "<group>"; };
 		D0A06F012A98D25600DA36E8 /* SuccessFeedbackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessFeedbackVC.swift; sourceTree = "<group>"; };
 		D0AEAB762A9356D1002D24A6 /* SetReminderAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetReminderAlertVC.swift; sourceTree = "<group>"; };
@@ -131,6 +146,7 @@
 		D0AEAB882A9372AE002D24A6 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
 		D0AEAB892A9372AE002D24A6 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
 		D0AEAB8A2A9372AE002D24A6 /* Rubik-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		D0D1339C2B71148500B780AF /* ShareNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNoteVC.swift; sourceTree = "<group>"; };
 		D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNoteVC.swift; sourceTree = "<group>"; };
 		D0F843882AD7B8F400288F19 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		D0F8438A2AD7B9A300288F19 /* UserNoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNoteModel.swift; sourceTree = "<group>"; };
@@ -149,7 +165,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04666A3D2A6E6E63003BC9CB /* TableviewCells */ = {
+		04666A3D2A6E6E63003BC9CB /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
 				04666A3E2A6E6E92003BC9CB /* HistoryTableCell.swift */,
@@ -157,7 +173,7 @@
 				D03FAA0F2A989B5600615426 /* MenuTableViewCell.swift */,
 				D03FAA102A989B5600615426 /* MenuTableViewCell.xib */,
 			);
-			path = TableviewCells;
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		04AE06972A45798200FC4BA1 = {
@@ -228,6 +244,7 @@
 			children = (
 				04AE06BC2A457C7500FC4BA1 /* UserModel.swift */,
 				D03FAA132A989DF400615426 /* Menu.swift */,
+				D0403D422B721E2C00C2DE67 /* ImageTheameModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +259,7 @@
 				041FF0C72A70EFE400E98018 /* SignUpVC.swift */,
 				04BEBAB62A67ECF00050A013 /* HomeVC.swift */,
 				04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */,
+				D09F2C5F2B60DB8200F6073D /* EditNoteVC.swift */,
 				D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */,
 				D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */,
 				04BEBAB82A67F1B30050A013 /* MenuVC.swift */,
@@ -249,6 +267,8 @@
 				D0A06EFF2A98CD4300DA36E8 /* FeedbackVC.swift */,
 				D0A06F012A98D25600DA36E8 /* SuccessFeedbackVC.swift */,
 				D07F85852B51431200409130 /* ImageConvertVC.swift */,
+				D0D1339C2B71148500B780AF /* ShareNoteVC.swift */,
+				D0403D3B2B7213EC00C2DE67 /* ShareImageVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -265,11 +285,14 @@
 		04B9991A2A54056F00C4BC6B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D08548C02B5FEEBC00B5377D /* EditDeleteTableView.swift */,
+				D08548C12B5FEEBD00B5377D /* EditDeleteTableView.xib */,
 				0436AED92A6FBE3B00459DD8 /* TimePickerView.swift */,
 				0436AEDB2A6FBE4C00459DD8 /* TimePickerView.xib */,
 				041FF0C52A70CFDC00E98018 /* TestView.swift */,
 				041FF0C32A70CFD300E98018 /* TestView.xib */,
-				04666A3D2A6E6E63003BC9CB /* TableviewCells */,
+				D0403D3D2B72168F00C2DE67 /* CollectionViewCells */,
+				04666A3D2A6E6E63003BC9CB /* TableViewCells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -310,6 +333,15 @@
 				FDAF64CC20DBDFA96CB7FCFF /* Pods_Natomic.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0403D3D2B72168F00C2DE67 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				D0403D3E2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.swift */,
+				D0403D3F2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.xib */,
+			);
+			path = CollectionViewCells;
 			sourceTree = "<group>";
 		};
 		D0AEAB752A935460002D24A6 /* AlertVC */ = {
@@ -394,6 +426,7 @@
 				D0AEAB922A937469002D24A6 /* Rubik-Light.ttf in Resources */,
 				D01ED9FB2B401C5E00CD7A11 /* GoogleService-Info.plist in Resources */,
 				D0AEAB932A937469002D24A6 /* Rubik-LightItalic.ttf in Resources */,
+				D08548C32B5FEEBD00B5377D /* EditDeleteTableView.xib in Resources */,
 				D0AEAB942A937469002D24A6 /* Rubik-Medium.ttf in Resources */,
 				D0AEAB952A937469002D24A6 /* Rubik-MediumItalic.ttf in Resources */,
 				D0AEAB962A937469002D24A6 /* Rubik-Regular.ttf in Resources */,
@@ -403,6 +436,7 @@
 				D03FAA122A989B5600615426 /* MenuTableViewCell.xib in Resources */,
 				04AE06B02A45798300FC4BA1 /* Assets.xcassets in Resources */,
 				04AE06AB2A45798300FC4BA1 /* Main.storyboard in Resources */,
+				D0403D412B7216BD00C2DE67 /* ImageThemeCollectionViewCell.xib in Resources */,
 				041FF0C42A70CFD300E98018 /* TestView.xib in Resources */,
 				04666A412A6E6E92003BC9CB /* HistoryTableCell.xib in Resources */,
 				0436AEDC2A6FBE4C00459DD8 /* TimePickerView.xib in Resources */,
@@ -459,9 +493,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D07F85862B51431200409130 /* ImageConvertVC.swift in Sources */,
+				D08548C22B5FEEBD00B5377D /* EditDeleteTableView.swift in Sources */,
 				D0F843892AD7B8F400288F19 /* DatabaseHelper.swift in Sources */,
 				04666A3C2A6E3C9C003BC9CB /* WritingVC.swift in Sources */,
 				D0A06F022A98D25600DA36E8 /* SuccessFeedbackVC.swift in Sources */,
+				D0403D3C2B7213EC00C2DE67 /* ShareImageVC.swift in Sources */,
+				D0403D432B721E2C00C2DE67 /* ImageTheameModel.swift in Sources */,
 				04AE06A82A45798300FC4BA1 /* SplashVC.swift in Sources */,
 				D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */,
 				D03FAA112A989B5600615426 /* MenuTableViewCell.swift in Sources */,
@@ -474,6 +511,7 @@
 				041FF0C62A70CFDC00E98018 /* TestView.swift in Sources */,
 				04BEBAB92A67F1B30050A013 /* MenuVC.swift in Sources */,
 				04AE06A62A45798300FC4BA1 /* SceneDelegate.swift in Sources */,
+				D09F2C602B60DB8200F6073D /* EditNoteVC.swift in Sources */,
 				D01981782A98B20B003E45B8 /* WrirtingAlertVC.swift in Sources */,
 				04644FF22A69225B00ABC01F /* IntroVC.swift in Sources */,
 				04AFFCCE2A6935C100FCCCAD /* UIViewExtension.swift in Sources */,
@@ -485,7 +523,9 @@
 				D03FAA162A98A98E00615426 /* WelcomeVC.swift in Sources */,
 				04AE06BD2A457C7500FC4BA1 /* UserModel.swift in Sources */,
 				04644FF42A69240500ABC01F /* Constant.swift in Sources */,
+				D0403D402B7216BD00C2DE67 /* ImageThemeCollectionViewCell.swift in Sources */,
 				04AE06AE2A45798300FC4BA1 /* Natomic.xcdatamodeld in Sources */,
+				D0D1339D2B71148500B780AF /* ShareNoteVC.swift in Sources */,
 				043810192A7A3C0500102547 /* AlertBase.swift in Sources */,
 				0436AEDA2A6FBE3B00459DD8 /* TimePickerView.swift in Sources */,
 				04F4B5FC2A497E910085D4A8 /* Global.swift in Sources */,
@@ -645,7 +685,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Natomic/Natomic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 63ND4Y3UZ8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Natomic/Info.plist;
@@ -666,7 +706,7 @@
 					/usr/lib/swift,
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = natomic.com.techuplabs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -688,7 +728,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Natomic/Natomic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 63ND4Y3UZ8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Natomic/Info.plist;
@@ -709,7 +749,7 @@
 					/usr/lib/swift,
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = natomic.com.techuplabs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

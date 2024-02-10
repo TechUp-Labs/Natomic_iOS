@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ShowShareImageScreen {
+    func showShareImageScreen()
+}
+
+
 class TextOpenVC : UIViewController {
     
     // MARK: - Outlet's :-
@@ -18,7 +23,7 @@ class TextOpenVC : UIViewController {
     // MARK: - Variable's : -
     
     var selectedData : UserEntity?
-    
+    var delegate: ShowShareImageScreen?
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
@@ -29,6 +34,7 @@ class TextOpenVC : UIViewController {
     // MARK: - All Fuction's : -
     
     func setUI(){
+        delegate = self
         let swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(handleSwipeGesture(_:)))
         view.addGestureRecognizer(swipeGesture)
         textLBL.text = selectedData?.userThoughts ?? ""
@@ -53,6 +59,22 @@ class TextOpenVC : UIViewController {
     @IBAction func backBTNtapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func shareBTNtapped(_ sender: Any) {
+        let vc = SHARE_NOTE_VC
+        vc.noteText = textLBL.text ?? ""
+        vc.delegate = self
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: false)
+    }
     
-    
+}
+
+
+extension TextOpenVC : ShowShareImageScreen{
+    func showShareImageScreen() {
+        let vc = SHARE_IMAGE_VC
+        vc.noreText = textLBL.text ?? ""
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true)
+    }
 }

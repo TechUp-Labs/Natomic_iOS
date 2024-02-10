@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="EditDeleteTableView" id="iN0-l3-epB" customClass="EditDeleteTableView" customModule="Natomic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tuk-eV-zom">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hgg-93-WIM">
+                            <rect key="frame" x="15" y="15" width="50" height="50"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="editTableIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6Kq-cF-f4q">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="04Z-Qg-XlB"/>
+                                <constraint firstItem="6Kq-cF-f4q" firstAttribute="top" secondItem="Hgg-93-WIM" secondAttribute="top" id="4u1-en-wfR"/>
+                                <constraint firstItem="6Kq-cF-f4q" firstAttribute="leading" secondItem="Hgg-93-WIM" secondAttribute="leading" id="5BK-mo-L9Q"/>
+                                <constraint firstAttribute="bottom" secondItem="6Kq-cF-f4q" secondAttribute="bottom" id="McW-vL-rAd"/>
+                                <constraint firstAttribute="trailing" secondItem="6Kq-cF-f4q" secondAttribute="trailing" id="tkO-yO-xzC"/>
+                                <constraint firstAttribute="width" constant="50" id="vjb-cU-vF8"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I22-NJ-keX">
+                            <rect key="frame" x="0.0" y="78" width="80" height="2"/>
+                            <color key="backgroundColor" name="BorderColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="9mv-ZE-V1w"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" name="BackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="I22-NJ-keX" firstAttribute="leading" secondItem="tuk-eV-zom" secondAttribute="leading" id="JCj-or-Teq"/>
+                        <constraint firstAttribute="bottom" secondItem="I22-NJ-keX" secondAttribute="bottom" id="Tar-B3-EqR"/>
+                        <constraint firstItem="Hgg-93-WIM" firstAttribute="centerY" secondItem="tuk-eV-zom" secondAttribute="centerY" id="gI2-BJ-ZUT"/>
+                        <constraint firstAttribute="trailing" secondItem="I22-NJ-keX" secondAttribute="trailing" id="hDj-db-98q"/>
+                        <constraint firstItem="Hgg-93-WIM" firstAttribute="centerX" secondItem="tuk-eV-zom" secondAttribute="centerX" id="ozG-fC-lc7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="tuk-eV-zom" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BNh-XC-M95"/>
+                <constraint firstItem="tuk-eV-zom" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="T9L-xb-XA1"/>
+                <constraint firstAttribute="trailing" secondItem="tuk-eV-zom" secondAttribute="trailing" id="cNz-UX-Gbi"/>
+                <constraint firstAttribute="bottom" secondItem="tuk-eV-zom" secondAttribute="bottom" id="lKJ-kZ-UZd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="BGView" destination="Hgg-93-WIM" id="p8R-cn-qI2"/>
+                <outlet property="iconeIMGView" destination="6Kq-cF-f4q" id="OgN-2g-jND"/>
+            </connections>
+            <point key="canvasLocation" x="131.29770992366412" y="-32.394366197183103"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="editTableIcon" width="32" height="32"/>
+        <namedColor name="BackgroundColor">
+            <color red="0.94900000095367432" green="0.93699997663497925" blue="0.89399999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BorderColor">
+            <color red="0.91399997472763062" green="0.89399999380111694" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

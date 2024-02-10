@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 import FittedSheets
-
+import Alamofire
 
 protocol CheckWriting {
     func checkUserData()
@@ -29,6 +29,8 @@ class HomeVC: UIViewController {
     
     // MARK: - Variable's :-
     
+    let reachability = try! Reachability()
+    var pendingDeleteDataArray = [DeletePendingData]()
     var notificationTrigger : UsersNotification?
     var userData : [UserEntity]?
     let testView : TestView = .fromNib()
@@ -37,7 +39,7 @@ class HomeVC: UIViewController {
     var userNotes : [Response]?
     var blurView: UIVisualEffectView!
     var gradientLayer: CAGradientLayer!
-    
+    var deleteNoteID = "0"
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
@@ -62,7 +64,7 @@ class HomeVC: UIViewController {
             }
             return false // Return false as a fallback
         }
-        self.historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
+        self.historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
         self.historyTBV.reloadData()
     }
     
@@ -220,6 +222,101 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
         return UITableView.automaticDimension
     }
     
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (_, _, completionHandler) in
+            // Handle edit action
+            self.editItemAt(indexPath)
+            completionHandler(true)
+        }
+
+        editAction.backgroundColor = UIColor.init(named: "BackgroundColor")!
+        editAction.title = ""
+        
+        let cellHeight = tableView.rectForRow(at: indexPath).height
+
+        // Load custom view from XIB for editAction
+        if let editCustomView = Bundle.main.loadNibNamed("EditDeleteTableView", owner: nil, options: nil)?.first as? EditDeleteTableView {
+            editCustomView.iconeIMGView.image = UIImage.init(named: "editTableIcon")
+
+            let desiredWidth: CGFloat = 80 // Set your desired width
+            let desiredHeight: CGFloat = cellHeight // Set your desired height
+
+
+            editCustomView.frame = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredHeight) // Set your custom view's frame
+            editAction.backgroundColor = UIColor(patternImage: UIImage.imageWithView(view: editCustomView)) // Use a pattern image with your custom view
+        }
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, completionHandler) in
+            // Handle delete action
+            self.deleteItemAt(indexPath)
+            completionHandler(true)
+        }
+
+        deleteAction.backgroundColor = UIColor.init(named: "BackgroundColor")!
+        deleteAction.title = ""
+
+        // Load custom view from XIB for deleteAction
+        if let deleteCustomView = Bundle.main.loadNibNamed("EditDeleteTableView", owner: nil, options: nil)?.first as? EditDeleteTableView {
+            deleteCustomView.iconeIMGView.image =  UIImage.init(named: "deleteTableIcon")
+            let desiredWidth: CGFloat = 80 // Set your desired width
+            let desiredHeight: CGFloat = cellHeight // Set your desired height
+
+            // Set the frame of deleteCustomView based on the calculated width and height
+            deleteCustomView.frame = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredHeight)
+            deleteAction.backgroundColor = UIColor(patternImage: UIImage.imageWithView(view: deleteCustomView)) // Use a pattern image with your custom view
+        }
+
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
+    
+    func editItemAt(_ indexPath: IndexPath) {
+        let vc = EDIT_NOTE_VC
+        vc.userData = userData?[indexPath.row]
+        self.present(vc, animated:true)
+    }   
+
+    func deleteItemAt(_ indexPath: IndexPath) {
+        
+        
+            
+            let alertController = UIAlertController(title: "Delete Note", message: "Are you sure you want to delete this note?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+                if IS_LOGIN {
+                    guard let noteID = self.userData?[indexPath.row].noteID  else {return}
+                    self.deleteNoteID = noteID
+                    self.checkInternet()
+                }
+                
+                DatabaseManager.Shared.deleteUserContext(userContext: self.userData!.remove(at: indexPath.row))
+                        
+                self.userData = DatabaseManager.Shared.getUserContext()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+
+                self.userData?.sort { (entity1, entity2) in
+                    if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+                       let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                        return dateTime1 > dateTime2
+                    }
+                    return false // Return false as a fallback
+                }
+
+                self.historyTBV.reloadData()
+            }
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            
+            present(alertController, animated: true, completion: nil)
+        
+
+        
+    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedCell = indexPath.row
@@ -228,13 +325,49 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
         let vc = TEXT_OPEN_VC
         vc.selectedData = userData?[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
-        
-        //        let viewControllerToPresent = TEXT_DETAIL_VC
-        //        viewControllerToPresent.selectedData = userData?[indexPath.row]
-        //        viewControllerToPresent.modalPresentationStyle = .overCurrentContext
-        //        self.present(viewControllerToPresent, animated: false, completion: nil)
     }
     
+}
+
+extension HomeVC {
+    func checkInternet(){
+        guard let isInternetAvailable = NetworkReachabilityManager()?.isReachable, isInternetAvailable else {
+            print("No internet connection")
+            self.pendingDeleteDataArray = getDeletePendingDataModelArray(forKey: "DELETE_PENDING_DATA_ARRAY") ?? []
+            self.pendingDeleteDataArray.append(DeletePendingData.init(noteID: self.deleteNoteID))
+            saveDeletePendingDataModelArray(self.pendingDeleteDataArray, forKey: "DELETE_PENDING_DATA_ARRAY")
+            return
+        }
+        self.deleteUserNoteByID(noteID: self.deleteNoteID)
+    }
+
+    
+    func deleteUserNoteByID(noteID:String){
+        DatabaseHelper.shared.deleteUserNoteByID(noteId: noteID) { result in
+            switch result {
+            case .success(let data):
+                if let responseData = data {
+                    do {
+                        let decoder = JSONDecoder()
+                        let response = try decoder.decode(ResponseModel.self, from: responseData)
+                        // Now you have your response object
+                        print("Successfully posted data:", response)
+
+                    } catch let error {
+                        print("Error decoding response:", error.localizedDescription)
+                        // Handle the decoding error if necessary
+                    }
+                }
+
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                self.pendingDeleteDataArray = getDeletePendingDataModelArray(forKey: "DELETE_PENDING_DATA_ARRAY") ?? []
+                self.pendingDeleteDataArray.append(DeletePendingData.init(noteID: self.deleteNoteID))
+                saveDeletePendingDataModelArray(self.pendingDeleteDataArray, forKey: "DELETE_PENDING_DATA_ARRAY")
+            }
+        }
+
+    }
 }
 
 extension HomeVC : CheckWriting {
@@ -276,6 +409,17 @@ extension HomeVC : CheckWriting {
     }
     
 }
+
+extension UIImage {
+    static func imageWithView(view: UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return snapshotImage!
+    }
+}
+
 
 extension Notification.Name {
     static let saveUserData = Notification.Name("SaveUserData")

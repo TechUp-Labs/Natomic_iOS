@@ -177,7 +177,7 @@ extension SignUpVC {
                             return
                         }
                         for i in data {
-                            let userContext = User(userThoughts: i.note ?? "", date: i.notedate ?? "", time: i.notetime ?? "", day: "\(DatabaseManager.Shared.getUserContext().count + 1)")
+                            let userContext = User(userThoughts: i.note ?? "", date: i.notedate ?? "", time: i.notetime ?? "", day: "\(DatabaseManager.Shared.getUserContext().count + 1)", noteID: i.noteID ?? "")
                             
                             DatabaseManager.Shared.addUserContext(userContext: userContext)
                         }

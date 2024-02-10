@@ -105,8 +105,51 @@ class DatabaseHelper {
                 }
             }
     }
+    
+    // MARK: - Edit User Notes By ID API : -
 
-    // MARK: - Delete User Notes API : -
+    func editUserNoteByID(noteId: String,newNote:String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        let url = "http://52.13.22.47/Natomic-API/editUserNote.php"
+        
+        let parameters: [String: Any] = [
+            "id": noteId,
+            "newNote":newNote
+        ]
+        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)
+            .validate() // Optional: You can add validation if needed
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+
+
+
+    // MARK: - Delete User Notes By ID API : -
+
+    func deleteUserNoteByID(noteId: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        let url = "http://52.13.22.47/Natomic-API/deleteUserNoteById.php"
+        
+        let parameters: [String: Any] = [
+            "noteId": noteId,
+        ]
+        AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)
+            .validate() // Optional: You can add validation if needed
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+
+    // MARK: - Delete All User Notes API : -
 
     func deleteUserNote(uid: String, completion: @escaping (Result<Data?, Error>) -> Void) {
         let url = "http://52.13.22.47/Natomic-API/deleteUser.php"
@@ -126,6 +169,7 @@ class DatabaseHelper {
             }
     }
 
+    
     
     // MARK: - Post User Feedback API : -
 

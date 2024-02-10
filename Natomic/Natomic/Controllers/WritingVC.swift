@@ -175,19 +175,19 @@ class WritingVC: UIViewController {
 //        }
     }
     @IBAction func postBTNtapped(_ sender: Any) {
-        if IS_LOGIN {
-            checkInternet()
-        }else{
-            self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
-            pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
-            savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
-        }
         animateButtonTap()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
                 self.textView.resignFirstResponder()
             DatabaseManager.Shared.addUserContext(userContext: User.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
                 NotificationCenter.default.post(name: .saveUserData, object: nil)
                 self.dismiss(animated: true, completion: nil)
+        }
+        if IS_LOGIN {
+            checkInternet()
+        }else{
+            self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+            pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
+            savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
         }
     }
     
@@ -226,22 +226,26 @@ class WritingVC: UIViewController {
                 if let responseData = data {
                     do {
                         let decoder = JSONDecoder()
-                        let response = try decoder.decode(ResponseModel.self, from: responseData)
+                        let response = try decoder.decode(ResponseModelNotes.self, from: responseData)
                         // Now you have your response object
                         print("Successfully posted data:", response)
+
+                        guard let oldUserContext = DatabaseManager.Shared.getUserContext().last else {return}
+                        DatabaseManager.Shared.editUserContext(oldUserContext: oldUserContext, newUserContext: User.init(userThoughts: oldUserContext.userThoughts ?? "", date: oldUserContext.date ?? "", time: oldUserContext.time ?? "", day: oldUserContext.day ?? "", noteID: String(response.noteID)))
+
                     } catch let error {
                         print("Error decoding response:", error.localizedDescription)
                         // Handle the decoding error if necessary
                     }
                 }
-                self.dismiss(animated: true)
+//                self.dismiss(animated: true)
 
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
                 self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
                 self.pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
                 savePendingDataModelArray(self.pendingDataArray, forKey: "PENDING_DATA_ARRAY")
-                self.navigationController?.popViewController(animated: true)
+//                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -253,22 +257,25 @@ extension WritingVC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let trimmedText = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if trimmedText.count <= 250 {
-            self.textCountLBL.text = "\(trimmedText.count)/250"
-            
-            if trimmedText.isEmpty {
-                self.postBTN.layer.opacity = 0.5
-                self.placeholderLBL.isHidden = false
-                self.postBTN.isUserInteractionEnabled = false
-            } else {
-                self.postBTN.layer.opacity = 1
-                self.placeholderLBL.isHidden = true
-                self.postBTN.isUserInteractionEnabled = true
-            }
+        // Count characters
+        let characterCount = trimmedText.count
+        
+        // Count blank spaces
+        let blankSpaceCount = textView.text.components(separatedBy: .whitespaces).count - 1
+        
+        self.textCountLBL.text = "\(characterCount+blankSpaceCount)/250"
+        
+        if characterCount+blankSpaceCount <= 250 {
+            self.postBTN.layer.opacity = characterCount > 0 ? 1 : 0.5
+            self.placeholderLBL.isHidden = characterCount > 0
+            self.postBTN.isUserInteractionEnabled = characterCount > 0
         } else {
             // Update the character count label for the first 250 characters
             self.textCountLBL.text = "250/250"
-            
+            self.placeholderLBL.isHidden = characterCount > 0
+            self.postBTN.isUserInteractionEnabled = characterCount > 0
+            self.postBTN.layer.opacity = characterCount > 0 ? 1 : 0.5
+
             // Limit the text to 250 characters
             textView.text = String(trimmedText.prefix(250))
         }
@@ -277,14 +284,14 @@ extension WritingVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         // Calculate the new text after the replacement
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        
+        let blankSpaceCount = textView.text.components(separatedBy: .whitespaces).count - 1
+
         // Allow pasting text if the total length (current text + pasted text) is less than or equal to 250 characters
-        return newText.count <= 250
+        return newText.count+blankSpaceCount <= 250
     }
     
 }
-
-
+//The               Only Thing That I.       Love.      💕 Love 💕 is my love 😍 Love 💕 to all the girls 👧 out in my world 🌍 that love 💕 and to everyone.     The world has a lot to do fort1
 // MARK: - Twitter share code :-
 
 //let tweetText = "This is the text I want to share on Twitter!"

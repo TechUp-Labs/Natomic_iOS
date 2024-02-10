@@ -32,14 +32,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="T5N-eh-1nM">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newAppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="T5N-eh-1nM">
                                 <rect key="frame" x="187" y="428" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="M0o-KU-jjR"/>
                                     <constraint firstAttribute="height" constant="40" id="unC-OQ-k19"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="D0d-aX-w1O">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newAppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="D0d-aX-w1O">
                                 <rect key="frame" x="129" y="370" width="156" height="156"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="156" id="9dv-Lh-xPT"/>
@@ -430,7 +430,7 @@ and build a habit!</string>
                                                         <color key="textColor" name="BodyColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="KDd-Ee-NC7">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newAppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="KDd-Ee-NC7">
                                                         <rect key="frame" x="158" y="166.5" width="98" height="98"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="98" id="96I-nK-N86"/>
@@ -545,6 +545,18 @@ and build a habit!</string>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="12"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                <color key="value" name="BodyColor"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                <size key="value" width="0.0" height="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yUh-kg-0aM">
@@ -612,6 +624,18 @@ and build a habit!</string>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                <size key="value" width="0.0" height="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                <color key="value" name="BodyColor"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
@@ -1109,10 +1133,10 @@ build like a boss</string>
                                 </connections>
                             </tableView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-ix-Gz5">
-                                <rect key="frame" x="0.0" y="746" width="414" height="150"/>
+                                <rect key="frame" x="0.0" y="776" width="414" height="120"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="2KZ-0P-USb"/>
+                                    <constraint firstAttribute="height" constant="120" id="2KZ-0P-USb"/>
                                 </constraints>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SX-SZ-xoj">
@@ -1146,22 +1170,22 @@ build like a boss</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Eq-9p-8cm">
-                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="794" width="414" height="68"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMN-xu-Elo">
-                                        <rect key="frame" x="118.5" y="8" width="177" height="44"/>
+                                        <rect key="frame" x="133.5" y="10" width="147" height="48"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addIconplus" translatesAutoresizingMaskIntoConstraints="NO" id="GXI-6P-AfC">
-                                                <rect key="frame" x="20" y="6" width="32" height="32"/>
+                                                <rect key="frame" x="10" y="8" width="32" height="32"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74O-tK-JhR">
-                                                <rect key="frame" x="61.5" y="11.5" width="84" height="21"/>
+                                                <rect key="frame" x="46.5" y="13.5" width="84" height="21"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftt-Xj-l7M">
-                                                <rect key="frame" x="0.0" y="0.0" width="177" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="147" height="48"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1176,15 +1200,15 @@ build like a boss</string>
                                         <color key="backgroundColor" name="TitlesColor"/>
                                         <constraints>
                                             <constraint firstItem="Ftt-Xj-l7M" firstAttribute="leading" secondItem="cMN-xu-Elo" secondAttribute="leading" id="3rt-rq-bFc"/>
-                                            <constraint firstItem="GXI-6P-AfC" firstAttribute="leading" secondItem="cMN-xu-Elo" secondAttribute="leading" constant="20" id="FgQ-iF-KMS"/>
+                                            <constraint firstItem="GXI-6P-AfC" firstAttribute="leading" secondItem="cMN-xu-Elo" secondAttribute="leading" constant="10" id="FgQ-iF-KMS"/>
                                             <constraint firstAttribute="trailing" secondItem="Ftt-Xj-l7M" secondAttribute="trailing" id="H4I-fx-K5o"/>
                                             <constraint firstItem="Ftt-Xj-l7M" firstAttribute="top" secondItem="cMN-xu-Elo" secondAttribute="top" id="PSW-sa-3eD"/>
                                             <constraint firstItem="74O-tK-JhR" firstAttribute="centerY" secondItem="cMN-xu-Elo" secondAttribute="centerY" id="h8E-0j-BPW"/>
                                             <constraint firstItem="GXI-6P-AfC" firstAttribute="centerY" secondItem="cMN-xu-Elo" secondAttribute="centerY" id="itM-bD-ffB"/>
-                                            <constraint firstAttribute="height" constant="44" id="mu4-Vi-X3K"/>
+                                            <constraint firstAttribute="height" constant="48" id="mu4-Vi-X3K"/>
                                             <constraint firstAttribute="bottom" secondItem="Ftt-Xj-l7M" secondAttribute="bottom" id="q1g-LY-vO4"/>
                                             <constraint firstItem="74O-tK-JhR" firstAttribute="centerX" secondItem="cMN-xu-Elo" secondAttribute="centerX" constant="15" id="rus-0J-cPx"/>
-                                            <constraint firstAttribute="width" constant="177" id="wnr-KQ-s71"/>
+                                            <constraint firstAttribute="width" constant="147" id="wnr-KQ-s71"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1205,7 +1229,7 @@ build like a boss</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5TV-Bj-z41">
-                                        <rect key="frame" x="0.0" y="58" width="414" height="2"/>
+                                        <rect key="frame" x="0.0" y="66" width="414" height="2"/>
                                         <color key="backgroundColor" name="BorderColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="PKL-Pw-jQu"/>
@@ -1219,7 +1243,7 @@ build like a boss</string>
                                     <constraint firstItem="5TV-Bj-z41" firstAttribute="leading" secondItem="8Eq-9p-8cm" secondAttribute="leading" id="Q0C-zC-Bf9"/>
                                     <constraint firstItem="5TV-Bj-z41" firstAttribute="centerX" secondItem="cMN-xu-Elo" secondAttribute="centerX" id="WRE-Rt-gZ1"/>
                                     <constraint firstAttribute="trailing" secondItem="5TV-Bj-z41" secondAttribute="trailing" id="azz-Fq-gYT"/>
-                                    <constraint firstAttribute="height" constant="60" id="icU-PA-sq5"/>
+                                    <constraint firstAttribute="height" constant="68" id="icU-PA-sq5"/>
                                     <constraint firstAttribute="bottom" secondItem="5TV-Bj-z41" secondAttribute="bottom" id="yPU-ak-u8I"/>
                                 </constraints>
                             </view>
@@ -1442,6 +1466,15 @@ and build a habit!</string>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                         <color key="value" name="TitlesColor"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="closeBTNtapped:" destination="Lle-va-P8g" eventType="touchUpInside" id="f61-Ec-5wD"/>
@@ -1458,6 +1491,18 @@ and build a habit!</string>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" name="BodyColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -1570,6 +1615,18 @@ and build a habit!</string>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" name="BodyColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="0.0"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="saveBTNtapped:" destination="1r5-PC-PhI" eventType="touchUpInside" id="T6d-Gg-91f"/>
@@ -1673,7 +1730,7 @@ and build a habit!</string>
                                             <constraint firstItem="lal-zZ-aEw" firstAttribute="leading" secondItem="Mwx-mN-Ydw" secondAttribute="leading" constant="8" id="iNa-Fv-3fB"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="zow-Eg-6nM">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newAppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="zow-Eg-6nM">
                                         <rect key="frame" x="147" y="75" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="GYU-oC-8Xx"/>
@@ -1982,8 +2039,8 @@ and build a habit!</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65w-o2-LVX">
-                                        <rect key="frame" x="162" y="14.5" width="90" height="21"/>
-                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                        <rect key="frame" x="160.5" y="14.5" width="93" height="21"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
                                         <color key="textColor" name="TitlesColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1994,13 +2051,27 @@ and build a habit!</string>
                                             <constraint firstAttribute="height" constant="1.5" id="Mmx-P9-7QL"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pa0-Cq-Cic">
+                                        <rect key="frame" x="366" y="5" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="yi7-0r-OhT"/>
+                                            <constraint firstAttribute="height" constant="40" id="zej-MG-qC9"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="sharefillicon"/>
+                                        <connections>
+                                            <action selector="shareBTNtapped:" destination="DRy-r1-agS" eventType="touchUpInside" id="c5f-5N-adS"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="Pa0-Cq-Cic" firstAttribute="centerY" secondItem="65w-o2-LVX" secondAttribute="centerY" id="1Rl-Gj-PDO"/>
                                     <constraint firstItem="iHu-zV-k6H" firstAttribute="centerY" secondItem="rf2-GF-Vsy" secondAttribute="centerY" id="2Ab-f8-WyX"/>
                                     <constraint firstAttribute="trailing" secondItem="OdA-P7-SPy" secondAttribute="trailing" id="CwL-nG-Xld"/>
                                     <constraint firstItem="OdA-P7-SPy" firstAttribute="leading" secondItem="rf2-GF-Vsy" secondAttribute="leading" id="CxZ-9B-ITp"/>
                                     <constraint firstItem="65w-o2-LVX" firstAttribute="centerY" secondItem="rf2-GF-Vsy" secondAttribute="centerY" id="KAU-0y-K69"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pa0-Cq-Cic" secondAttribute="trailing" constant="8" id="KMr-YE-t8v"/>
                                     <constraint firstAttribute="bottom" secondItem="OdA-P7-SPy" secondAttribute="bottom" id="NUv-F1-3bb"/>
                                     <constraint firstAttribute="height" constant="50" id="P6k-4s-LnO"/>
                                     <constraint firstItem="65w-o2-LVX" firstAttribute="centerX" secondItem="rf2-GF-Vsy" secondAttribute="centerX" id="SU0-vq-7Ok"/>
@@ -2142,7 +2213,7 @@ and build a habit!</string>
                                                         <color key="textColor" name="TitlesColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="pPN-8x-WoK">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newAppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="pPN-8x-WoK">
                                                         <rect key="frame" x="119.5" y="157" width="175" height="175"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="175" id="2GF-9H-Th4"/>
@@ -2186,6 +2257,18 @@ and build a habit!</string>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                <color key="value" name="BodyColor"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                <size key="value" width="0.0" height="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -2275,6 +2358,18 @@ and build a habit!</string>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" name="BodyColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -2381,8 +2476,8 @@ and build a habit!</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEx-5m-wpy">
-                                                <rect key="frame" x="166.5" y="14.5" width="81.5" height="21.5"/>
-                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                                <rect key="frame" x="165" y="14.5" width="84" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
                                                 <color key="textColor" name="TitlesColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -2442,6 +2537,18 @@ and build a habit!</string>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                <color key="value" name="BodyColor"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                <size key="value" width="0.0" height="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -2558,8 +2665,8 @@ and build a habit!</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usf-gW-RAh">
-                                                <rect key="frame" x="166.5" y="14.5" width="81.5" height="21"/>
-                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                                <rect key="frame" x="165" y="14.5" width="84" height="21"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
                                                 <color key="textColor" name="TitlesColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -2678,6 +2785,15 @@ and build a habit!</string>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                         <color key="value" name="TitlesColor"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="cancelBTNtapped:" destination="t3X-0j-bxI" eventType="touchUpInside" id="pKu-rB-fMW"/>
@@ -2694,6 +2810,18 @@ and build a habit!</string>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" name="BodyColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -2774,14 +2902,446 @@ and build a habit!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZb-cL-Gbv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7803" y="751"/>
+            <point key="canvasLocation" x="9503" y="751"/>
+        </scene>
+        <!--Edit NoteVC-->
+        <scene sceneID="lv6-2m-lPH">
+            <objects>
+                <viewController storyboardIdentifier="EditNoteVC" id="M4O-AN-S2V" customClass="EditNoteVC" customModule="Natomic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6tF-ha-SK2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Your Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3Y-Ix-HZi">
+                                <rect key="frame" x="145.5" y="68" width="123.5" height="21"/>
+                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
+                                <color key="textColor" name="TitlesColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z0m-BG-LH4">
+                                <rect key="frame" x="0.0" y="109" width="414" height="2"/>
+                                <color key="backgroundColor" name="BorderColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="6Ll-J3-WVV"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2QF-hJ-aZr">
+                                <rect key="frame" x="20" y="794" width="374" height="48"/>
+                                <color key="backgroundColor" name="TitlesColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="wlE-E5-oua"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" name="WhiteColor"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" name="BodyColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="postBTNtapped:" destination="M4O-AN-S2V" eventType="touchUpInside" id="PPM-Yo-18K"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jpj-Np-cZ7">
+                                <rect key="frame" x="10" y="121" width="394" height="632"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Everyday has something good hidden in it. Write down something good that happened today." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8P-sc-JG3">
+                                <rect key="frame" x="14" y="129" width="398" height="64"/>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                <color key="textColor" red="0.063000001010000001" green="0.059000000359999999" blue="0.050999999050000001" alpha="0.203948767" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/250" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MmM-sg-JTU">
+                                <rect key="frame" x="341.5" y="763" width="52.5" height="21"/>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                <color key="textColor" name="TitlesColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tsh-CS-5GP">
+                                <rect key="frame" x="0.0" y="53.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Jri-7z-Tp7"/>
+                                    <constraint firstAttribute="width" constant="50" id="qm7-iz-e7s"/>
+                                </constraints>
+                                <color key="tintColor" name="TitlesColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="closeBTNtapped:" destination="M4O-AN-S2V" eventType="touchUpInside" id="dXb-ZN-Tdf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ebc-uI-0sC"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2QF-hJ-aZr" firstAttribute="top" secondItem="MmM-sg-JTU" secondAttribute="bottom" constant="10" id="0XP-yU-UVj"/>
+                            <constraint firstItem="ebc-uI-0sC" firstAttribute="trailing" secondItem="jpj-Np-cZ7" secondAttribute="trailing" constant="10" id="0aX-ui-f39"/>
+                            <constraint firstItem="A3Y-Ix-HZi" firstAttribute="centerX" secondItem="ebc-uI-0sC" secondAttribute="centerX" id="3W8-Si-Qoo"/>
+                            <constraint firstItem="ebc-uI-0sC" firstAttribute="trailing" secondItem="MmM-sg-JTU" secondAttribute="trailing" constant="20" id="OFJ-VB-OWM"/>
+                            <constraint firstItem="ebc-uI-0sC" firstAttribute="trailing" secondItem="2QF-hJ-aZr" secondAttribute="trailing" constant="20" id="Ooh-D0-Azc"/>
+                            <constraint firstItem="Tsh-CS-5GP" firstAttribute="centerY" secondItem="A3Y-Ix-HZi" secondAttribute="centerY" id="QDw-hG-0bU"/>
+                            <constraint firstItem="Z0m-BG-LH4" firstAttribute="top" secondItem="A3Y-Ix-HZi" secondAttribute="bottom" constant="20" id="Wsw-xW-NAi"/>
+                            <constraint firstItem="jpj-Np-cZ7" firstAttribute="leading" secondItem="ebc-uI-0sC" secondAttribute="leading" constant="10" id="YnJ-7L-YA5"/>
+                            <constraint firstItem="ebc-uI-0sC" firstAttribute="bottom" secondItem="2QF-hJ-aZr" secondAttribute="bottom" constant="20" id="YpX-sG-zyj"/>
+                            <constraint firstItem="L8P-sc-JG3" firstAttribute="trailing" secondItem="jpj-Np-cZ7" secondAttribute="trailing" constant="8" id="baw-65-zAR"/>
+                            <constraint firstItem="ebc-uI-0sC" firstAttribute="trailing" secondItem="Z0m-BG-LH4" secondAttribute="trailing" id="dlT-iy-3ql"/>
+                            <constraint firstItem="L8P-sc-JG3" firstAttribute="top" secondItem="jpj-Np-cZ7" secondAttribute="top" constant="8" id="iEb-dt-jls"/>
+                            <constraint firstItem="MmM-sg-JTU" firstAttribute="top" secondItem="jpj-Np-cZ7" secondAttribute="bottom" constant="10" id="k8A-xG-1mB"/>
+                            <constraint firstItem="L8P-sc-JG3" firstAttribute="leading" secondItem="jpj-Np-cZ7" secondAttribute="leading" constant="4" id="kES-rG-t3E"/>
+                            <constraint firstItem="Tsh-CS-5GP" firstAttribute="leading" secondItem="ebc-uI-0sC" secondAttribute="leading" id="ngd-E9-ISP"/>
+                            <constraint firstItem="Z0m-BG-LH4" firstAttribute="leading" secondItem="ebc-uI-0sC" secondAttribute="leading" id="oit-hs-TSB"/>
+                            <constraint firstItem="A3Y-Ix-HZi" firstAttribute="top" secondItem="ebc-uI-0sC" secondAttribute="top" constant="20" id="rWG-29-0rf"/>
+                            <constraint firstItem="jpj-Np-cZ7" firstAttribute="top" secondItem="Z0m-BG-LH4" secondAttribute="bottom" constant="10" id="s7q-nF-g5i"/>
+                            <constraint firstItem="2QF-hJ-aZr" firstAttribute="leading" secondItem="ebc-uI-0sC" secondAttribute="leading" constant="20" id="ymA-lF-GPH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomPostBTNbottomCon" destination="YpX-sG-zyj" id="NWq-vk-crC"/>
+                        <outlet property="placeholderLBL" destination="L8P-sc-JG3" id="pcb-X2-Ci2"/>
+                        <outlet property="postBTN" destination="2QF-hJ-aZr" id="E4s-0z-ZOB"/>
+                        <outlet property="textCountLBL" destination="MmM-sg-JTU" id="1lO-MS-rjH"/>
+                        <outlet property="textView" destination="jpj-Np-cZ7" id="6VH-KG-tYw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1mm-s9-LXz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10225" y="751"/>
+        </scene>
+        <!--Share NoteVC-->
+        <scene sceneID="hrh-tu-14g">
+            <objects>
+                <viewController storyboardIdentifier="ShareNoteVC" id="mlK-85-MHZ" customClass="ShareNoteVC" customModule="Natomic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LLe-6Q-ybo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="56R-NM-xYJ">
+                                <rect key="frame" x="25" y="288" width="364" height="320"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let’s share your thought" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWL-iB-9Vr">
+                                        <rect key="frame" x="40" y="198" width="284" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="rns-Pu-Sba"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="20"/>
+                                        <color key="textColor" name="BodyColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MJi-J4-Jo3">
+                                        <rect key="frame" x="15" y="252" width="334" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Lp-og-r2A">
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="48"/>
+                                                <color key="backgroundColor" name="TitlesColor"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Share Text">
+                                                    <color key="titleColor" name="BackgroundColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" name="BodyColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="shareTextBNTtapped:" destination="mlK-85-MHZ" eventType="touchUpInside" id="Qfb-RC-9vL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="533-H5-c3w">
+                                                <rect key="frame" x="172" y="0.0" width="162" height="48"/>
+                                                <color key="backgroundColor" name="TitlesColor"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="20"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Share Image">
+                                                    <color key="titleColor" name="WhiteColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                        <color key="value" name="BodyColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="shareIMGBTNtapped:" destination="mlK-85-MHZ" eventType="touchUpInside" id="zVq-SM-ThV"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="64G-Mf-56Y"/>
+                                        </constraints>
+                                    </stackView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shareImage" translatesAutoresizingMaskIntoConstraints="NO" id="cni-OG-npm">
+                                        <rect key="frame" x="114.5" y="30" width="135" height="135.5"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTs-Oo-a7p">
+                                        <rect key="frame" x="319" y="15" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="dfp-M3-qN2"/>
+                                            <constraint firstAttribute="height" constant="30" id="fa6-Tz-HxT"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="closeIcone"/>
+                                        <connections>
+                                            <action selector="closeBTNtapped:" destination="mlK-85-MHZ" eventType="touchUpInside" id="Hx2-pc-gyG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="YTs-Oo-a7p" secondAttribute="trailing" constant="15" id="27D-Dv-Ufm"/>
+                                    <constraint firstItem="cni-OG-npm" firstAttribute="centerX" secondItem="56R-NM-xYJ" secondAttribute="centerX" id="8C5-Pu-9TW"/>
+                                    <constraint firstAttribute="trailing" secondItem="NWL-iB-9Vr" secondAttribute="trailing" constant="40" id="9b2-8T-7f9"/>
+                                    <constraint firstItem="MJi-J4-Jo3" firstAttribute="top" secondItem="NWL-iB-9Vr" secondAttribute="bottom" constant="30" id="CXs-Me-JQb"/>
+                                    <constraint firstItem="cni-OG-npm" firstAttribute="top" secondItem="56R-NM-xYJ" secondAttribute="top" constant="30" id="EIF-Ft-4rR"/>
+                                    <constraint firstAttribute="bottom" secondItem="MJi-J4-Jo3" secondAttribute="bottom" constant="20" id="GT7-qN-63G"/>
+                                    <constraint firstItem="YTs-Oo-a7p" firstAttribute="top" secondItem="56R-NM-xYJ" secondAttribute="top" constant="15" id="VDy-ZB-8RO"/>
+                                    <constraint firstAttribute="trailing" secondItem="MJi-J4-Jo3" secondAttribute="trailing" constant="15" id="guV-WJ-qgk"/>
+                                    <constraint firstItem="NWL-iB-9Vr" firstAttribute="leading" secondItem="56R-NM-xYJ" secondAttribute="leading" constant="40" id="k1Q-bn-ksT"/>
+                                    <constraint firstItem="MJi-J4-Jo3" firstAttribute="leading" secondItem="56R-NM-xYJ" secondAttribute="leading" constant="15" id="uOg-jW-VXR"/>
+                                    <constraint firstAttribute="height" constant="320" id="uWe-CB-9Nt"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7BN-T4-TdD"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.69889987239999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="56R-NM-xYJ" firstAttribute="centerY" secondItem="LLe-6Q-ybo" secondAttribute="centerY" id="9ct-M2-YYj"/>
+                            <constraint firstItem="56R-NM-xYJ" firstAttribute="centerX" secondItem="LLe-6Q-ybo" secondAttribute="centerX" id="ERr-6G-dxn"/>
+                            <constraint firstItem="56R-NM-xYJ" firstAttribute="leading" secondItem="7BN-T4-TdD" secondAttribute="leading" constant="25" id="SeQ-gg-e9P"/>
+                            <constraint firstItem="7BN-T4-TdD" firstAttribute="trailing" secondItem="56R-NM-xYJ" secondAttribute="trailing" constant="25" id="pLf-Ce-JRq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="shareImgButton" destination="533-H5-c3w" id="ttU-nD-u55"/>
+                        <outlet property="shareTxtButton" destination="9Lp-og-r2A" id="A5J-tU-uyd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Qb-E4-2Qh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7778" y="751"/>
+        </scene>
+        <!--Share ImageVC-->
+        <scene sceneID="CIZ-na-GvR">
+            <objects>
+                <viewController storyboardIdentifier="ShareImageVC" id="4Si-Q7-ULa" customClass="ShareImageVC" customModule="Natomic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Du1-Lv-nM6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EhB-65-rG7">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Op5-7N-NkN">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9Q-Ya-xjK">
+                                                <rect key="frame" x="158.5" y="14.5" width="97" height="21"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="18"/>
+                                                <color key="textColor" name="TitlesColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRa-dS-95z">
+                                                <rect key="frame" x="8" y="5" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="6ov-yt-CTg"/>
+                                                    <constraint firstAttribute="height" constant="40" id="jop-Lm-8PR"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="back_icon"/>
+                                                <connections>
+                                                    <action selector="backBTNtapped:" destination="4Si-Q7-ULa" eventType="touchUpInside" id="GE7-yY-YiF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="QRa-dS-95z" firstAttribute="centerY" secondItem="Op5-7N-NkN" secondAttribute="centerY" id="Lgo-8D-rwF"/>
+                                            <constraint firstAttribute="height" constant="50" id="Srl-YV-KTy"/>
+                                            <constraint firstItem="QRa-dS-95z" firstAttribute="leading" secondItem="Op5-7N-NkN" secondAttribute="leading" constant="8" id="VEq-9U-TRM"/>
+                                            <constraint firstItem="p9Q-Ya-xjK" firstAttribute="centerY" secondItem="Op5-7N-NkN" secondAttribute="centerY" id="ixr-Sm-Cca"/>
+                                            <constraint firstItem="p9Q-Ya-xjK" firstAttribute="centerX" secondItem="Op5-7N-NkN" secondAttribute="centerX" id="utK-oD-j97"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GL3-EV-59P">
+                                        <rect key="frame" x="20" y="70" width="374" height="260"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="theam_1" translatesAutoresizingMaskIntoConstraints="NO" id="FsN-Fe-FFC">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="260"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Notes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOE-IP-muQ">
+                                                <rect key="frame" x="20" y="20" width="334" height="220"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="20"/>
+                                                <color key="textColor" name="BodyColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="QOE-IP-muQ" secondAttribute="bottom" constant="20" id="1Iy-Ox-8Ow"/>
+                                            <constraint firstAttribute="trailing" secondItem="FsN-Fe-FFC" secondAttribute="trailing" id="Js1-DP-dSU"/>
+                                            <constraint firstAttribute="trailing" secondItem="QOE-IP-muQ" secondAttribute="trailing" constant="20" id="K8k-jF-pfD"/>
+                                            <constraint firstItem="FsN-Fe-FFC" firstAttribute="leading" secondItem="GL3-EV-59P" secondAttribute="leading" id="QC7-47-S5c"/>
+                                            <constraint firstItem="QOE-IP-muQ" firstAttribute="leading" secondItem="GL3-EV-59P" secondAttribute="leading" constant="20" id="cVq-PO-31B"/>
+                                            <constraint firstItem="FsN-Fe-FFC" firstAttribute="top" secondItem="GL3-EV-59P" secondAttribute="top" id="fv3-7k-fWg"/>
+                                            <constraint firstAttribute="bottom" secondItem="FsN-Fe-FFC" secondAttribute="bottom" id="l2f-NM-J58"/>
+                                            <constraint firstItem="QOE-IP-muQ" firstAttribute="centerX" secondItem="GL3-EV-59P" secondAttribute="centerX" id="lRd-mW-D4r"/>
+                                            <constraint firstAttribute="height" constant="260" id="lzO-q3-hXC"/>
+                                            <constraint firstItem="QOE-IP-muQ" firstAttribute="centerY" secondItem="GL3-EV-59P" secondAttribute="centerY" id="uaN-Yl-gfX"/>
+                                            <constraint firstItem="QOE-IP-muQ" firstAttribute="top" secondItem="GL3-EV-59P" secondAttribute="top" constant="20" id="zwV-uy-OZz"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iue-5d-97h">
+                                        <rect key="frame" x="20" y="746" width="374" height="48"/>
+                                        <color key="backgroundColor" name="TitlesColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="nCy-dC-x6e"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Share Image">
+                                            <color key="titleColor" name="WhiteColor"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" name="BodyColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="shareImgBTNTapped:" destination="4Si-Q7-ULa" eventType="touchUpInside" id="Y9t-y2-MYj"/>
+                                        </connections>
+                                    </button>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RnZ-aw-Uc0">
+                                        <rect key="frame" x="18" y="350" width="378" height="376"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Xdy-9Y-csF">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Iue-5d-97h" secondAttribute="bottom" constant="20" id="3y6-O3-mA1"/>
+                                    <constraint firstItem="Iue-5d-97h" firstAttribute="top" secondItem="RnZ-aw-Uc0" secondAttribute="bottom" constant="20" id="489-u4-x7D"/>
+                                    <constraint firstItem="GL3-EV-59P" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" constant="20" id="4Wc-ay-eak"/>
+                                    <constraint firstAttribute="trailing" secondItem="GL3-EV-59P" secondAttribute="trailing" constant="20" id="FlN-6Y-s2Z"/>
+                                    <constraint firstItem="Iue-5d-97h" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" constant="20" id="Rfd-H9-mB0"/>
+                                    <constraint firstAttribute="trailing" secondItem="Iue-5d-97h" secondAttribute="trailing" constant="20" id="Sea-ky-nOQ"/>
+                                    <constraint firstItem="RnZ-aw-Uc0" firstAttribute="top" secondItem="GL3-EV-59P" secondAttribute="bottom" constant="20" id="VX8-nO-J6n"/>
+                                    <constraint firstItem="RnZ-aw-Uc0" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" constant="18" id="VaN-j7-RKo"/>
+                                    <constraint firstItem="GL3-EV-59P" firstAttribute="top" secondItem="Op5-7N-NkN" secondAttribute="bottom" constant="20" id="apw-lo-Kcc"/>
+                                    <constraint firstItem="Op5-7N-NkN" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" id="bQM-cY-5aM"/>
+                                    <constraint firstAttribute="trailing" secondItem="Op5-7N-NkN" secondAttribute="trailing" id="hi5-uv-4G9"/>
+                                    <constraint firstItem="Op5-7N-NkN" firstAttribute="top" secondItem="EhB-65-rG7" secondAttribute="top" id="lQB-Ok-cOL"/>
+                                    <constraint firstAttribute="trailing" secondItem="RnZ-aw-Uc0" secondAttribute="trailing" constant="18" id="zUZ-nA-241"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="831-Uj-9EE"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EhB-65-rG7" firstAttribute="leading" secondItem="831-Uj-9EE" secondAttribute="leading" id="JOC-eF-FDj"/>
+                            <constraint firstItem="831-Uj-9EE" firstAttribute="trailing" secondItem="EhB-65-rG7" secondAttribute="trailing" id="NYl-6q-QoJ"/>
+                            <constraint firstItem="EhB-65-rG7" firstAttribute="top" secondItem="831-Uj-9EE" secondAttribute="top" id="Wr2-aP-aup"/>
+                            <constraint firstItem="831-Uj-9EE" firstAttribute="bottom" secondItem="EhB-65-rG7" secondAttribute="bottom" id="cxH-zz-aBh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageThemeCollectionView" destination="RnZ-aw-Uc0" id="4ID-HQ-DfW"/>
+                        <outlet property="noteLBL" destination="QOE-IP-muQ" id="Huh-Qn-TB3"/>
+                        <outlet property="shareImageView" destination="GL3-EV-59P" id="FNl-OV-c4c"/>
+                        <outlet property="thameBGIMG" destination="FsN-Fe-FFC" id="nUi-Hk-Ldr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xba-Xn-RXn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8799" y="751"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="iYg-yY-iR2">
+            <size key="intrinsicContentSize" width="46" height="12"/>
+        </designable>
+    </designables>
     <resources>
-        <image name="AppLogo" width="155" height="155"/>
         <image name="Google_Icon" width="30" height="30"/>
         <image name="ProfileEnableIcon" width="32" height="32"/>
-        <image name="ReminderAlertIMG" width="130.5" height="122"/>
+        <image name="ReminderAlertIMG" width="130.5" height="122.5"/>
         <image name="ReminderIMG" width="299" height="280"/>
         <image name="WelcomeIMG" width="299" height="280"/>
         <image name="WritingIMG" width="299" height="280"/>
@@ -2794,11 +3354,15 @@ and build a habit!</string>
         <image name="closeIcone" width="36.5" height="36.5"/>
         <image name="delete_Image" width="135" height="135.5"/>
         <image name="feedbackImage" width="200.5" height="200"/>
+        <image name="newAppLogo" width="270" height="270"/>
         <image name="notificationEnable" width="32" height="32"/>
+        <image name="shareImage" width="135" height="135.5"/>
+        <image name="sharefillicon" width="32" height="32"/>
         <image name="subscriptionImg" width="200" height="200"/>
+        <image name="theam_1" width="252" height="159"/>
         <image name="writingBGImage" width="351" height="376"/>
         <image name="writingImage" width="130.5" height="122.5"/>
-        <image name="xmark" catalog="system" width="128" height="113"/>
+        <image name="xmark" catalog="system" width="32" height="32"/>
         <namedColor name="BackgroundColor">
             <color red="0.94900000095367432" green="0.93699997663497925" blue="0.89399999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

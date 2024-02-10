@@ -121,6 +121,12 @@ var WRITING_VC : WritingVC {
    }
 }
 
+var EDIT_NOTE_VC : EditNoteVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditNoteVC") as! EditNoteVC
+   }
+}
+
 var TEXT_OPEN_VC : TextOpenVC {
    get{
        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TextOpenVC") as! TextOpenVC
@@ -183,6 +189,21 @@ var FRIENDS_NOTE_VC : FriendsNoteVC {
    }
 }
 
+
+var SHARE_NOTE_VC : ShareNoteVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareNoteVC") as! ShareNoteVC
+   }
+}
+
+
+var SHARE_IMAGE_VC : ShareImageVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareImageVC") as! ShareImageVC
+   }
+}
+
+
 func saveDataInUserDefault(value:Any?, key: String){
     let Default = UserDefaults.standard
     Default.set(value, forKey: key)
@@ -210,6 +231,41 @@ func getPendingDataModelArray(forKey key: String) -> [PendingData]? {
     }
     return nil
 }
+
+func saveEditPendingDataModelArray(_ modelArray: [EditPendingData], forKey key: String) {
+    let encoder = JSONEncoder()
+    if let data = try? encoder.encode(modelArray) {
+        UserDefaults.standard.set(data, forKey: key)
+    }
+}
+
+func getEditPendingDataModelArray(forKey key: String) -> [EditPendingData]? {
+    if let data = UserDefaults.standard.data(forKey: key) {
+        let decoder = JSONDecoder()
+        if let modelArray = try? decoder.decode([EditPendingData].self, from: data) {
+            return modelArray
+        }
+    }
+    return nil
+}
+
+func saveDeletePendingDataModelArray(_ modelArray: [DeletePendingData], forKey key: String) {
+    let encoder = JSONEncoder()
+    if let data = try? encoder.encode(modelArray) {
+        UserDefaults.standard.set(data, forKey: key)
+    }
+}
+
+func getDeletePendingDataModelArray(forKey key: String) -> [DeletePendingData]? {
+    if let data = UserDefaults.standard.data(forKey: key) {
+        let decoder = JSONDecoder()
+        if let modelArray = try? decoder.decode([DeletePendingData].self, from: data) {
+            return modelArray
+        }
+    }
+    return nil
+}
+
 
 
 extension UICollectionView {
