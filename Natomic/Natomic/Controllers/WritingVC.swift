@@ -23,6 +23,9 @@ class WritingVC: UIViewController {
     var writingDelegate : CheckWriting?
     let reachability = try! Reachability()
     var pendingDataArray = [PendingData]()
+    let feedbackGenerator = UISelectionFeedbackGenerator()
+    
+    
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
@@ -80,6 +83,12 @@ class WritingVC: UIViewController {
     // MARK: - All Fuction's : -
     
     func setUI(){
+        feedbackGenerator.prepare()
+        
+        // Add long press gesture recognizer to the button
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        postBTN.addGestureRecognizer(longPressGesture)
+
         textView.delegate = self
         self.postBTN.layer.opacity = 0.5
         self.postBTN.isUserInteractionEnabled = false
@@ -91,6 +100,19 @@ class WritingVC: UIViewController {
             self.textView.becomeFirstResponder()
         }
     }
+    
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            // Start haptic feedback when button is pressed
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            generator.impactOccurred()
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            // Reset the feedback generator when button is released
+            feedbackGenerator.prepare()
+        }
+    }
+
     
     @objc
     private func handle(keyboardShowNotification notification: Notification) {
@@ -175,6 +197,9 @@ class WritingVC: UIViewController {
 //        }
     }
     @IBAction func postBTNtapped(_ sender: Any) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.prepare()
+        generator.notificationOccurred(.success)
         animateButtonTap()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
                 self.textView.resignFirstResponder()
@@ -184,7 +209,9 @@ class WritingVC: UIViewController {
         }
         if IS_LOGIN {
             checkInternet()
-        }else{
+        }
+        else{
+            
             self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
             pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
             savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
@@ -206,16 +233,19 @@ class WritingVC: UIViewController {
         switch reachability.connection {
         case .wifi:
             print("Wifi Connection 😃")
-            postUserData(uid: UID, note: self.textView.text, date: CurrentDate, time: CurrentTime)
+            if UID != "" {
+                postUserData(uid: UID, note: self.textView.text, date: CurrentDate, time: CurrentTime)
+            }
         case .cellular:
             print("Cellular Connection 😃")
-            postUserData(uid: UID, note: self.textView.text, date: CurrentDate, time: CurrentTime)
+            if UID != "" {
+                postUserData(uid: UID, note: self.textView.text, date: CurrentDate, time: CurrentTime)
+            }
         case .unavailable:
             print("No Connection ☹️")
             self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
             pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
             savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
-
         }
     }
     

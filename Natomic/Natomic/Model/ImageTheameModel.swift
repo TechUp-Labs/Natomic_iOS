@@ -11,12 +11,20 @@ import UIKit
 
 struct ImageTheameModel {
     
-    var imageName: String
-    var textColor: UIColor
+    var imageName       : String
+    var backgroundColor : String
+    var textColor       : UIColor
     
-    init(imageName: String, textColor: UIColor) {
+    init(imageName: String, textColor: UIColor, backgroundColor: String) {
         self.imageName = imageName
         self.textColor = textColor
+        self.backgroundColor = backgroundColor
     }
     
+}
+
+
+struct ThemeTableData {
+    var themeTitle:String?
+    var themes : [ImageTheameModel]?
 }

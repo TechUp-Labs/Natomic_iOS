@@ -177,10 +177,43 @@ class HomeVC: UIViewController {
     // MARK: - Button Action's : -
     
     @IBAction func profileBTNtapped(_ sender: Any) {
-        if IS_LOGIN {
-            self.navigationController?.pushViewController(MENU_VC, animated: true)
-        }else{
-            self.navigationController?.pushViewController(SIGNUP_VC, animated: true)
+        
+//        let MENU_VC = MENU_VC // Replace ProfileViewController with your actual profile view controller class
+//             navigationController?.pushViewController(MENU_VC, animated: false)
+//
+//             // Animate the transition
+//             UIView.animate(withDuration: 0.3, animations: {
+//                 let transition = CATransition()
+//                 transition.duration = 0.3
+//                 transition.type = CATransitionType.push
+//                 transition.subtype = CATransitionSubtype.fromLeft
+//                 self.navigationController?.view.layer.add(transition, forKey: nil)
+//             })
+        
+        
+        
+        
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        
+        // Disable user interaction during the transition
+        navigationController?.view.isUserInteractionEnabled = false
+        
+        // Perform the transition animation within a UIView animation block
+        UIView.animate(withDuration: 0.3, animations: {
+            self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+        }) { (_) in
+            // Re-enable user interaction after the transition completes
+            self.navigationController?.view.isUserInteractionEnabled = true
+            
+            // Push the appropriate view controller
+            if IS_LOGIN {
+                self.navigationController?.pushViewController(MENU_VC, animated: false)
+            } else {
+                self.navigationController?.pushViewController(SIGNUP_VC, animated: false)
+            }
         }
     }
     @IBAction func addNewLineBTNtapped(_ sender: Any) {
@@ -290,6 +323,22 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
                     self.deleteNoteID = noteID
                     self.checkInternet()
                 }
+                
+                
+                var pendingDataArray : [PendingData] = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+
+                if let index = pendingDataArray.firstIndex(where: { $0.day ==  self.userData![indexPath.row].day ?? ""}) {
+                   pendingDataArray.remove(at: index)
+                    savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
+                } else {
+                    print("Item not found in array")
+                }
+
+//                else{
+//                    var pendingDataArray : [PendingData] = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+//                    pendingDataArray.removeAll { $0.userThoughts == self.userData![indexPath.row].userThoughts ?? "" && $0.time == self.userData![indexPath.row].time ?? ""}
+//                    savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
+//                }
                 
                 DatabaseManager.Shared.deleteUserContext(userContext: self.userData!.remove(at: indexPath.row))
                         

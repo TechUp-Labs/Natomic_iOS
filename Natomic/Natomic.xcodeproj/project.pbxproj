@@ -39,6 +39,10 @@
 		D01981782A98B20B003E45B8 /* WrirtingAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01981772A98B20B003E45B8 /* WrirtingAlertVC.swift */; };
 		D01ED9FB2B401C5E00CD7A11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D01ED9FA2B401C5E00CD7A11 /* GoogleService-Info.plist */; };
 		D02003252B3A969F00A34693 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02003242B3A969F00A34693 /* Loader.swift */; };
+		D02F2EE72B91DF7C008036C8 /* ThemeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F2EE52B91DF7C008036C8 /* ThemeHeaderCell.swift */; };
+		D02F2EE82B91DF7C008036C8 /* ThemeHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D02F2EE62B91DF7C008036C8 /* ThemeHeaderCell.xib */; };
+		D02F2EEB2B91EA29008036C8 /* ThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02F2EE92B91EA29008036C8 /* ThemeTableViewCell.swift */; };
+		D02F2EEC2B91EA29008036C8 /* ThemeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D02F2EEA2B91EA29008036C8 /* ThemeTableViewCell.xib */; };
 		D0340C992B43FED200C9EDC7 /* DeleteAccountAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0340C982B43FED200C9EDC7 /* DeleteAccountAlertVC.swift */; };
 		D03FAA112A989B5600615426 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FAA0F2A989B5600615426 /* MenuTableViewCell.swift */; };
 		D03FAA122A989B5600615426 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03FAA102A989B5600615426 /* MenuTableViewCell.xib */; };
@@ -114,6 +118,10 @@
 		D01ED9F92B4016D500CD7A11 /* Natomic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Natomic.entitlements; sourceTree = "<group>"; };
 		D01ED9FA2B401C5E00CD7A11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D02003242B3A969F00A34693 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		D02F2EE52B91DF7C008036C8 /* ThemeHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeHeaderCell.swift; sourceTree = "<group>"; };
+		D02F2EE62B91DF7C008036C8 /* ThemeHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeHeaderCell.xib; sourceTree = "<group>"; };
+		D02F2EE92B91EA29008036C8 /* ThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTableViewCell.swift; sourceTree = "<group>"; };
+		D02F2EEA2B91EA29008036C8 /* ThemeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeTableViewCell.xib; sourceTree = "<group>"; };
 		D0340C982B43FED200C9EDC7 /* DeleteAccountAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountAlertVC.swift; sourceTree = "<group>"; };
 		D03FAA0F2A989B5600615426 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		D03FAA102A989B5600615426 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -172,6 +180,8 @@
 				04666A3F2A6E6E92003BC9CB /* HistoryTableCell.xib */,
 				D03FAA0F2A989B5600615426 /* MenuTableViewCell.swift */,
 				D03FAA102A989B5600615426 /* MenuTableViewCell.xib */,
+				D02F2EE92B91EA29008036C8 /* ThemeTableViewCell.swift */,
+				D02F2EEA2B91EA29008036C8 /* ThemeTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -253,22 +263,22 @@
 			isa = PBXGroup;
 			children = (
 				D0AEAB752A935460002D24A6 /* AlertVC */,
-				04AE06A72A45798300FC4BA1 /* SplashVC.swift */,
-				D03FAA152A98A98E00615426 /* WelcomeVC.swift */,
-				04644FF12A69225B00ABC01F /* IntroVC.swift */,
-				041FF0C72A70EFE400E98018 /* SignUpVC.swift */,
-				04BEBAB62A67ECF00050A013 /* HomeVC.swift */,
-				04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */,
 				D09F2C5F2B60DB8200F6073D /* EditNoteVC.swift */,
-				D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */,
-				D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */,
-				04BEBAB82A67F1B30050A013 /* MenuVC.swift */,
-				041FF0C92A711CF300E98018 /* SubscriptionVC.swift */,
 				D0A06EFF2A98CD4300DA36E8 /* FeedbackVC.swift */,
-				D0A06F012A98D25600DA36E8 /* SuccessFeedbackVC.swift */,
+				D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */,
+				04BEBAB62A67ECF00050A013 /* HomeVC.swift */,
 				D07F85852B51431200409130 /* ImageConvertVC.swift */,
-				D0D1339C2B71148500B780AF /* ShareNoteVC.swift */,
+				04644FF12A69225B00ABC01F /* IntroVC.swift */,
+				04BEBAB82A67F1B30050A013 /* MenuVC.swift */,
 				D0403D3B2B7213EC00C2DE67 /* ShareImageVC.swift */,
+				D0D1339C2B71148500B780AF /* ShareNoteVC.swift */,
+				041FF0C72A70EFE400E98018 /* SignUpVC.swift */,
+				04AE06A72A45798300FC4BA1 /* SplashVC.swift */,
+				041FF0C92A711CF300E98018 /* SubscriptionVC.swift */,
+				D0A06F012A98D25600DA36E8 /* SuccessFeedbackVC.swift */,
+				D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */,
+				D03FAA152A98A98E00615426 /* WelcomeVC.swift */,
+				04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -340,6 +350,8 @@
 			children = (
 				D0403D3E2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.swift */,
 				D0403D3F2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.xib */,
+				D02F2EE52B91DF7C008036C8 /* ThemeHeaderCell.swift */,
+				D02F2EE62B91DF7C008036C8 /* ThemeHeaderCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -347,11 +359,11 @@
 		D0AEAB752A935460002D24A6 /* AlertVC */ = {
 			isa = PBXGroup;
 			children = (
-				043810142A7A369D00102547 /* TextDetailVC.swift */,
-				D0AEAB762A9356D1002D24A6 /* SetReminderAlertVC.swift */,
-				D01981772A98B20B003E45B8 /* WrirtingAlertVC.swift */,
-				0438C0A22A77B5EC009F9902 /* NotificationTimeVC.swift */,
 				D0340C982B43FED200C9EDC7 /* DeleteAccountAlertVC.swift */,
+				0438C0A22A77B5EC009F9902 /* NotificationTimeVC.swift */,
+				D0AEAB762A9356D1002D24A6 /* SetReminderAlertVC.swift */,
+				043810142A7A369D00102547 /* TextDetailVC.swift */,
+				D01981772A98B20B003E45B8 /* WrirtingAlertVC.swift */,
 			);
 			path = AlertVC;
 			sourceTree = "<group>";
@@ -420,8 +432,10 @@
 				D0AEAB8C2A937469002D24A6 /* Rubik-BlackItalic.ttf in Resources */,
 				D0AEAB8D2A937469002D24A6 /* Rubik-Bold.ttf in Resources */,
 				D0AEAB8E2A937469002D24A6 /* Rubik-BoldItalic.ttf in Resources */,
+				D02F2EE82B91DF7C008036C8 /* ThemeHeaderCell.xib in Resources */,
 				D0AEAB8F2A937469002D24A6 /* Rubik-ExtraBold.ttf in Resources */,
 				D0AEAB902A937469002D24A6 /* Rubik-ExtraBoldItalic.ttf in Resources */,
+				D02F2EEC2B91EA29008036C8 /* ThemeTableViewCell.xib in Resources */,
 				D0AEAB912A937469002D24A6 /* Rubik-Italic.ttf in Resources */,
 				D0AEAB922A937469002D24A6 /* Rubik-Light.ttf in Resources */,
 				D01ED9FB2B401C5E00CD7A11 /* GoogleService-Info.plist in Resources */,
@@ -504,11 +518,13 @@
 				D03FAA112A989B5600615426 /* MenuTableViewCell.swift in Sources */,
 				043810172A7A3A5000102547 /* SpringAnimator.swift in Sources */,
 				04BEBAB72A67ECF00050A013 /* HomeVC.swift in Sources */,
+				D02F2EE72B91DF7C008036C8 /* ThemeHeaderCell.swift in Sources */,
 				041FF0CA2A711CF300E98018 /* SubscriptionVC.swift in Sources */,
 				D02003252B3A969F00A34693 /* Loader.swift in Sources */,
 				04AE06A42A45798300FC4BA1 /* AppDelegate.swift in Sources */,
 				D0AEAB772A9356D1002D24A6 /* SetReminderAlertVC.swift in Sources */,
 				041FF0C62A70CFDC00E98018 /* TestView.swift in Sources */,
+				D02F2EEB2B91EA29008036C8 /* ThemeTableViewCell.swift in Sources */,
 				04BEBAB92A67F1B30050A013 /* MenuVC.swift in Sources */,
 				04AE06A62A45798300FC4BA1 /* SceneDelegate.swift in Sources */,
 				D09F2C602B60DB8200F6073D /* EditNoteVC.swift in Sources */,
@@ -685,7 +701,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Natomic/Natomic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 63ND4Y3UZ8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Natomic/Info.plist;
@@ -706,7 +722,7 @@
 					/usr/lib/swift,
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = natomic.com.techuplabs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -728,7 +744,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Natomic/Natomic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 63ND4Y3UZ8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Natomic/Info.plist;
@@ -749,7 +765,7 @@
 					/usr/lib/swift,
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = natomic.com.techuplabs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

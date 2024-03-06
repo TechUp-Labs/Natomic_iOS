@@ -70,15 +70,23 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
 
     @objc func handleLeftSwipe(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
         if gestureRecognizer.state == .recognized {
-            // Handle left swipe (pop or perform custom action)
-            navigationController?.popViewController(animated: true)
+//            let transition = CATransition()
+//            transition.duration = 0.3
+//            transition.type = CATransitionType.push
+//            transition.subtype = CATransitionSubtype.fromRight
+//            navigationController?.view.layer.add(transition, forKey: kCATransition)
+//            self.navigationController?.popViewController(animated: true)
         }
     }
 
     @objc func handleRightSwipe(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
         if gestureRecognizer.state == .recognized {
-            // Handle right swipe (perform custom action if needed)
-//            navigationController?.popViewController(animated: true)
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromRight
+            navigationController?.view.layer.add(transition, forKey: kCATransition)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
@@ -93,7 +101,15 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
     // MARK: - Button Action's : -
     
     @IBAction func backBTNtapped(_ sender: Any) {
+        
+//        self.dismiss(animated: true)
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        navigationController?.view.layer.add(transition, forKey: kCATransition)
         self.navigationController?.popViewController(animated: true)
+        
     }
     
     func showAlertOnLogout() {
@@ -122,6 +138,24 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
             UserDefaults.standard.removeObject(forKey: "Notification_Hour")
             UserDefaults.standard.removeObject(forKey: "Notification_Minutes")
             UserDefaults.standard.removeObject(forKey: "Notification_Meridiem")
+            
+            
+            UserDefaults.standard.removeObject(forKey: "UID")
+            UserDefaults.standard.removeObject(forKey: "USER_NAME")
+            UserDefaults.standard.removeObject(forKey: "USER_EMAIL")
+
+            var pendingDataArray : [PendingData] = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+            pendingDataArray.removeAll()
+            savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
+            
+            var editPendingDataArray : [EditPendingData] = getEditPendingDataModelArray(forKey: "EDIT_PENDING_DATA_ARRAY") ?? []
+            editPendingDataArray.removeAll()
+            saveEditPendingDataModelArray(editPendingDataArray, forKey: "EDIT_PENDING_DATA_ARRAY")
+
+            var pendingDeleteDataArray : [DeletePendingData] = getDeletePendingDataModelArray(forKey: "DELETE_PENDING_DATA_ARRAY") ?? []
+            pendingDeleteDataArray.removeAll()
+            saveDeletePendingDataModelArray(pendingDeleteDataArray, forKey: "DELETE_PENDING_DATA_ARRAY")
+
 
             DatabaseManager.Shared.removeAllData()
             Loader.shared.stopAnimating()
@@ -213,6 +247,24 @@ extension MenuVC : DismissDeleteScreen {
             UserDefaults.standard.removeObject(forKey: "Notification_Hour")
             UserDefaults.standard.removeObject(forKey: "Notification_Minutes")
             UserDefaults.standard.removeObject(forKey: "Notification_Meridiem")
+            
+            UserDefaults.standard.removeObject(forKey: "UID")
+            UserDefaults.standard.removeObject(forKey: "USER_NAME")
+            UserDefaults.standard.removeObject(forKey: "USER_EMAIL")
+
+            var pendingDataArray : [PendingData] = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
+            pendingDataArray.removeAll()
+            savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
+            
+            var editPendingDataArray : [EditPendingData] = getEditPendingDataModelArray(forKey: "EDIT_PENDING_DATA_ARRAY") ?? []
+            editPendingDataArray.removeAll()
+            saveEditPendingDataModelArray(editPendingDataArray, forKey: "EDIT_PENDING_DATA_ARRAY")
+
+            var pendingDeleteDataArray : [DeletePendingData] = getDeletePendingDataModelArray(forKey: "DELETE_PENDING_DATA_ARRAY") ?? []
+            pendingDeleteDataArray.removeAll()
+            saveDeletePendingDataModelArray(pendingDeleteDataArray, forKey: "DELETE_PENDING_DATA_ARRAY")
+
+
             DatabaseManager.Shared.removeAllData()
             Loader.shared.stopAnimating()
             self.navigationController?.pushViewController(SPLASH_VC, animated: true)

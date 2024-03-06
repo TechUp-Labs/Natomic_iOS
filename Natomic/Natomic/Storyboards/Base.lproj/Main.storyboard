@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="height" constant="40" id="unC-OQ-k19"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newAppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="D0d-aX-w1O">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newAppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="D0d-aX-w1O">
                                 <rect key="frame" x="129" y="370" width="156" height="156"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="156" id="9dv-Lh-xPT"/>
@@ -545,14 +545,11 @@ and build a habit!</string>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="12"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                <color key="value" name="BodyColor"/>
-                                                            </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                <real key="value" value="3"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                <real key="value" value="3"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                                 <size key="value" width="0.0" height="0.0"/>
@@ -626,16 +623,13 @@ and build a habit!</string>
                                                                 <real key="value" value="12"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                <real key="value" value="3"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                <real key="value" value="3"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                                 <size key="value" width="0.0" height="0.0"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                <color key="value" name="BodyColor"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
@@ -1493,16 +1487,13 @@ and build a habit!</string>
                                                         <real key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                         <size key="value" width="0.0" height="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" name="BodyColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -1615,14 +1606,11 @@ and build a habit!</string>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                <color key="value" name="BodyColor"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                <real key="value" value="3"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                <real key="value" value="3"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                 <size key="value" width="0.0" height="0.0"/>
@@ -2258,14 +2246,11 @@ and build a habit!</string>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="12"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                <color key="value" name="BodyColor"/>
-                                                            </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                <real key="value" value="3"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                <real key="value" value="3"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                                 <size key="value" width="0.0" height="0.0"/>
@@ -2360,16 +2345,13 @@ and build a habit!</string>
                                                         <real key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                         <size key="value" width="0.0" height="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" name="BodyColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -2538,14 +2520,11 @@ and build a habit!</string>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="12"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                <color key="value" name="BodyColor"/>
-                                                            </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                                <real key="value" value="3"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                <real key="value" value="3"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                                 <size key="value" width="0.0" height="0.0"/>
@@ -2812,16 +2791,13 @@ and build a habit!</string>
                                                         <real key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                         <size key="value" width="0.0" height="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" name="BodyColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -3064,14 +3040,11 @@ and build a habit!</string>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                         <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" name="BodyColor"/>
-                                                    </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                         <size key="value" width="0.0" height="0.0"/>
@@ -3094,16 +3067,13 @@ and build a habit!</string>
                                                         <real key="value" value="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                        <real key="value" value="3"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                         <size key="value" width="0.0" height="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" name="BodyColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -3213,18 +3183,25 @@ and build a habit!</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GL3-EV-59P">
-                                        <rect key="frame" x="20" y="70" width="374" height="260"/>
+                                        <rect key="frame" x="20" y="70" width="374" height="285"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="theam_1" translatesAutoresizingMaskIntoConstraints="NO" id="FsN-Fe-FFC">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="260"/>
+                                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FsN-Fe-FFC">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="285"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Notes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOE-IP-muQ">
-                                                <rect key="frame" x="20" y="20" width="334" height="220"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Natomic_logo_black" translatesAutoresizingMaskIntoConstraints="NO" id="4hc-HG-REe">
+                                                <rect key="frame" x="330" y="241" width="34" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="ZUw-iG-RAi"/>
+                                                    <constraint firstAttribute="width" constant="34" id="ocL-JW-qQJ"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Notes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOE-IP-muQ">
+                                                <rect key="frame" x="20" y="130.5" width="334" height="24"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="20"/>
                                                 <color key="textColor" name="BodyColor"/>
                                                 <nil key="highlightedColor"/>
@@ -3232,17 +3209,16 @@ and build a habit!</string>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="QOE-IP-muQ" secondAttribute="bottom" constant="20" id="1Iy-Ox-8Ow"/>
+                                            <constraint firstAttribute="trailing" secondItem="4hc-HG-REe" secondAttribute="trailing" constant="10" id="0QJ-LC-d7e"/>
                                             <constraint firstAttribute="trailing" secondItem="FsN-Fe-FFC" secondAttribute="trailing" id="Js1-DP-dSU"/>
                                             <constraint firstAttribute="trailing" secondItem="QOE-IP-muQ" secondAttribute="trailing" constant="20" id="K8k-jF-pfD"/>
                                             <constraint firstItem="FsN-Fe-FFC" firstAttribute="leading" secondItem="GL3-EV-59P" secondAttribute="leading" id="QC7-47-S5c"/>
                                             <constraint firstItem="QOE-IP-muQ" firstAttribute="leading" secondItem="GL3-EV-59P" secondAttribute="leading" constant="20" id="cVq-PO-31B"/>
                                             <constraint firstItem="FsN-Fe-FFC" firstAttribute="top" secondItem="GL3-EV-59P" secondAttribute="top" id="fv3-7k-fWg"/>
+                                            <constraint firstAttribute="bottom" secondItem="4hc-HG-REe" secondAttribute="bottom" constant="10" id="hcc-co-Pfu"/>
                                             <constraint firstAttribute="bottom" secondItem="FsN-Fe-FFC" secondAttribute="bottom" id="l2f-NM-J58"/>
                                             <constraint firstItem="QOE-IP-muQ" firstAttribute="centerX" secondItem="GL3-EV-59P" secondAttribute="centerX" id="lRd-mW-D4r"/>
-                                            <constraint firstAttribute="height" constant="260" id="lzO-q3-hXC"/>
                                             <constraint firstItem="QOE-IP-muQ" firstAttribute="centerY" secondItem="GL3-EV-59P" secondAttribute="centerY" id="uaN-Yl-gfX"/>
-                                            <constraint firstItem="QOE-IP-muQ" firstAttribute="top" secondItem="GL3-EV-59P" secondAttribute="top" constant="20" id="zwV-uy-OZz"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -3266,49 +3242,44 @@ and build a habit!</string>
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                <real key="value" value="3"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                <real key="value" value="3"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                                 <size key="value" width="0.0" height="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                <color key="value" name="BodyColor"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="shareImgBTNTapped:" destination="4Si-Q7-ULa" eventType="touchUpInside" id="Y9t-y2-MYj"/>
                                         </connections>
                                     </button>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RnZ-aw-Uc0">
-                                        <rect key="frame" x="18" y="350" width="378" height="376"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KIu-gH-HIs">
+                                        <rect key="frame" x="20" y="375" width="374" height="351"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Xdy-9Y-csF">
-                                            <size key="itemSize" width="128" height="128"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells/>
-                                    </collectionView>
+                                        <connections>
+                                            <outlet property="dataSource" destination="4Si-Q7-ULa" id="qbq-8w-M9n"/>
+                                            <outlet property="delegate" destination="4Si-Q7-ULa" id="uSd-pp-uDf"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Iue-5d-97h" secondAttribute="bottom" constant="20" id="3y6-O3-mA1"/>
-                                    <constraint firstItem="Iue-5d-97h" firstAttribute="top" secondItem="RnZ-aw-Uc0" secondAttribute="bottom" constant="20" id="489-u4-x7D"/>
                                     <constraint firstItem="GL3-EV-59P" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" constant="20" id="4Wc-ay-eak"/>
                                     <constraint firstAttribute="trailing" secondItem="GL3-EV-59P" secondAttribute="trailing" constant="20" id="FlN-6Y-s2Z"/>
                                     <constraint firstItem="Iue-5d-97h" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" constant="20" id="Rfd-H9-mB0"/>
                                     <constraint firstAttribute="trailing" secondItem="Iue-5d-97h" secondAttribute="trailing" constant="20" id="Sea-ky-nOQ"/>
-                                    <constraint firstItem="RnZ-aw-Uc0" firstAttribute="top" secondItem="GL3-EV-59P" secondAttribute="bottom" constant="20" id="VX8-nO-J6n"/>
-                                    <constraint firstItem="RnZ-aw-Uc0" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" constant="18" id="VaN-j7-RKo"/>
                                     <constraint firstItem="GL3-EV-59P" firstAttribute="top" secondItem="Op5-7N-NkN" secondAttribute="bottom" constant="20" id="apw-lo-Kcc"/>
+                                    <constraint firstAttribute="trailing" secondItem="KIu-gH-HIs" secondAttribute="trailing" constant="20" id="b6Q-gN-pSY"/>
                                     <constraint firstItem="Op5-7N-NkN" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" id="bQM-cY-5aM"/>
+                                    <constraint firstItem="Iue-5d-97h" firstAttribute="top" secondItem="KIu-gH-HIs" secondAttribute="bottom" constant="20" id="eaa-HX-UBl"/>
+                                    <constraint firstItem="KIu-gH-HIs" firstAttribute="leading" secondItem="EhB-65-rG7" secondAttribute="leading" constant="20" id="gMW-Mp-KQb"/>
                                     <constraint firstAttribute="trailing" secondItem="Op5-7N-NkN" secondAttribute="trailing" id="hi5-uv-4G9"/>
+                                    <constraint firstItem="GL3-EV-59P" firstAttribute="height" secondItem="EhB-65-rG7" secondAttribute="height" multiplier="0.35" id="kHe-tF-G2O"/>
                                     <constraint firstItem="Op5-7N-NkN" firstAttribute="top" secondItem="EhB-65-rG7" secondAttribute="top" id="lQB-Ok-cOL"/>
-                                    <constraint firstAttribute="trailing" secondItem="RnZ-aw-Uc0" secondAttribute="trailing" constant="18" id="zUZ-nA-241"/>
+                                    <constraint firstItem="KIu-gH-HIs" firstAttribute="top" secondItem="GL3-EV-59P" secondAttribute="bottom" constant="20" id="zun-9f-p2W"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -3322,10 +3293,10 @@ and build a habit!</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageThemeCollectionView" destination="RnZ-aw-Uc0" id="4ID-HQ-DfW"/>
                         <outlet property="noteLBL" destination="QOE-IP-muQ" id="Huh-Qn-TB3"/>
                         <outlet property="shareImageView" destination="GL3-EV-59P" id="FNl-OV-c4c"/>
                         <outlet property="thameBGIMG" destination="FsN-Fe-FFC" id="nUi-Hk-Ldr"/>
+                        <outlet property="themeTableView" destination="KIu-gH-HIs" id="Y0P-8p-bd4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xba-Xn-RXn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3340,6 +3311,7 @@ and build a habit!</string>
     </designables>
     <resources>
         <image name="Google_Icon" width="30" height="30"/>
+        <image name="Natomic_logo_black" width="34" height="34"/>
         <image name="ProfileEnableIcon" width="32" height="32"/>
         <image name="ReminderAlertIMG" width="130.5" height="122.5"/>
         <image name="ReminderIMG" width="299" height="280"/>
@@ -3359,7 +3331,6 @@ and build a habit!</string>
         <image name="shareImage" width="135" height="135.5"/>
         <image name="sharefillicon" width="32" height="32"/>
         <image name="subscriptionImg" width="200" height="200"/>
-        <image name="theam_1" width="252" height="159"/>
         <image name="writingBGImage" width="351" height="376"/>
         <image name="writingImage" width="130.5" height="122.5"/>
         <image name="xmark" catalog="system" width="32" height="32"/>

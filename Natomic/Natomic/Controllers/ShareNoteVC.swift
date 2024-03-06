@@ -31,7 +31,6 @@ class ShareNoteVC: UIViewController {
         activityViewController.popoverPresentationController?.sourceView = self.view
         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook]
         self.present(activityViewController, animated: true, completion: nil)
-
     }
     
     @IBAction func shareIMGBTNtapped(_ sender: Any) {

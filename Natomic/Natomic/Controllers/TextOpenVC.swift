@@ -39,7 +39,7 @@ class TextOpenVC : UIViewController {
         view.addGestureRecognizer(swipeGesture)
         textLBL.text = selectedData?.userThoughts ?? ""
         dateLBL.text = DatabaseManager.Shared.convertDateFormat(selectedData?.date ?? "")
-        timeLBL.text = "-    " + DatabaseManager.Shared.convertTo12HourFormat(selectedData?.time ?? "")!
+        timeLBL.text = DatabaseManager.Shared.convertTo12HourFormat(selectedData?.time ?? "")!
     }
     
     @objc func handleSwipeGesture(_ gesture: UIPanGestureRecognizer) {
