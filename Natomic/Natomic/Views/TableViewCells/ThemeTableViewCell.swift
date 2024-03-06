@@ -28,6 +28,7 @@ class ThemeTableViewCell: UITableViewCell {
         imageThemeCollectionView.delegate = self
         imageThemeCollectionView.dataSource = self
         imageThemeCollectionView.registerCell(identifire: "ImageThemeCollectionViewCell")
+        imageThemeCollectionView.layoutIfNeeded()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -85,15 +86,13 @@ extension ThemeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (WIDTH-40) / 4
-        print("Cell Width And Height", width)
+        let width = imageThemeCollectionView.frame.width / 4
         return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedTheame = indexPath.row
         self.imageThemeCollectionView.reloadData()
-        
         if theameData[indexPath.row].imageName == "" {
             let backgroundColor : UIColor = hexStringToUIColor(hex: theameData[indexPath.row].backgroundColor)
             let themeImage: UIImage? = theameData[indexPath.row].imageName.isEmpty ? nil : UIImage(named: theameData[indexPath.row].imageName)

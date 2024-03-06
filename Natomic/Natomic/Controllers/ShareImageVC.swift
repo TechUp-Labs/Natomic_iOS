@@ -130,69 +130,6 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
             ImageTheameModel.init(imageName: "Image 59", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 60", textColor: .black, backgroundColor: "")
         ]))
-
-        
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#FFFFFF"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#F2EFE4"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#1C1C21"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#EED3C8"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#F9C780"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#CB9479"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#BDD3D0"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#F4D2B8"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#7DBEEE"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#C4ECD4"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#AB9274"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#7C6A91"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#D9B538"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#4E725B"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#FFE8C3"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#F9D15D"))
-//        theameData.append(ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#ED9A51"))
-        
-//        theameData.append(ImageTheameModel.init(imageName: "Image 18", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 19", textColor: .white, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 20", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 21", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 22", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 23", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 24", textColor: .white, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 25", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 26", textColor: .white, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 27", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 28", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 29", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 30", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 31", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 32", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 33", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 34", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 35", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 36", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 37", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 38", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 39", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 40", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 41", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 42", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 43", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 44", textColor: .white, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 45", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 46", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 47", textColor: .white, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 48", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 49", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 50", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 51", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 52", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 53", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 54", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 55", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 56", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 57", textColor: .white, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 58", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 59", textColor: .black, backgroundColor: ""))
-//        theameData.append(ImageTheameModel.init(imageName: "Image 60", textColor: .black, backgroundColor: ""))
         
         self.themeTableView.reloadData()
         self.view.layoutIfNeeded()
@@ -283,19 +220,6 @@ extension UIView {
         return nil
     }
 }
-
-
-
-//let items = self.themeTableData[indexPath.row].themes?.count ?? 0
-//let totalCellinRow = 4
-//let rowCount = (items + totalCellinRow - 1) / totalCellinRow // Round up
-//let cellWidth = cell.imageThemeCollectionView.bounds.width / CGFloat(totalCellinRow)
-//let collectionHeight = cellWidth * CGFloat(rowCount)
-//
-//// Set the height constraint of the collection view
-//cell.collectionHeight.constant = collectionHeight
-//print("Cell Height", collectionHeight)
-
 
 extension UITableView {
 
