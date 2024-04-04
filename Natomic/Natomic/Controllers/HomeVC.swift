@@ -26,6 +26,10 @@ class HomeVC: UIViewController {
     @IBOutlet weak var notificationBTN: UIButton!
     @IBOutlet weak var profileBTN: UIButton!
     @IBOutlet weak var blureView: UIView!
+    @IBOutlet weak var tableTopCon: NSLayoutConstraint!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBarHeight: NSLayoutConstraint!
+    @IBOutlet weak var searchBottomLine: UIView!
     
     // MARK: - Variable's :-
     
@@ -72,9 +76,11 @@ class HomeVC: UIViewController {
     
     func setUI(){
         writingDelegate = self
+        searchBar.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadUsersData(notification:)), name: .saveUserData, object: nil)
         homeVC = self
         historyTBV.registerCell(identifire: "HistoryTableCell")
+        self.searchBarHeight.constant = 0
         self.userData = DatabaseManager.Shared.getUserContext()
         
         let dateFormatter = DateFormatter()
@@ -92,6 +98,20 @@ class HomeVC: UIViewController {
         if IS_FROME_NOTIFICATION ?? false {
             let vc = WRITING_VC
             self.present(vc, animated: true, completion: nil)
+        }
+        
+        if IS_FROME_NOTE_NOTIFICATION ?? false {
+            var data = DatabaseManager.Shared.getUserContext(forNoteText: NOTIFICATION_DESCRIPTION ?? "")
+            
+            if data.isEmpty {
+                let vc = WRITING_VC
+                vc.writingDelegate = self
+                self.present(vc, animated: true, completion: nil)
+            }
+            
+            let vc = TEXT_OPEN_VC
+            vc.selectedData = data.first
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         if self.userData?.count == 0 {
@@ -121,7 +141,6 @@ class HomeVC: UIViewController {
 
         
         self.historyTBV.reloadData()
-        
     }
     
     func getUserData(){
@@ -215,6 +234,17 @@ class HomeVC: UIViewController {
                 self.navigationController?.pushViewController(SIGNUP_VC, animated: false)
             }
         }
+        
+        
+//        if IS_LOGIN {
+////            self.presentDetail(MENU_VC)
+//            self.navigationController?.pushViewController(MENU_VC, animated: true)
+//        } else {
+////            self.presentDetail(SIGNUP_VC)
+//            self.navigationController?.pushViewController(SIGNUP_VC, animated: true)
+//        }
+
+        
     }
     @IBAction func addNewLineBTNtapped(_ sender: Any) {
         let vc = WRITING_VC
@@ -232,7 +262,92 @@ class HomeVC: UIViewController {
     
 }
 
+extension HomeVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            self.userData = DatabaseManager.Shared.getUserContext()
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+
+            self.userData?.sort { (entity1, entity2) in
+                if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+                   let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                    return dateTime1 > dateTime2
+                }
+                return false // Return false as a fallback
+            }
+
+        } else {
+            self.userData = DatabaseManager.Shared.getUserContext()
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+
+            self.userData?.sort { (entity1, entity2) in
+                if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+                   let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                    return dateTime1 > dateTime2
+                }
+                return false // Return false as a fallback
+            }
+
+            userData = userData?.filter { userEntity in
+                userEntity.userThoughts?.lowercased().contains(searchText.lowercased()) ?? false
+            }
+        }
+        self.historyTBV.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // Dismiss the keyboard
+        searchBar.resignFirstResponder()
+        
+        // Optionally, you can also trigger the search here
+        // This is useful if you want to perform the search only when the search button is tapped,
+        // instead of filtering the results in real-time as the user types
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.resignFirstResponder() // Dismiss the keyboard
+
+        // Handle the case when cancel button is clicked, e.g., reset the data to original
+        // Load your original or unfiltered dataset to userData again
+
+        historyTBV.reloadData() // Reload tableView to show original/unfiltered data
+    }
+}
+
+
+
+
 extension HomeVC: SetTableViewDelegateAndDataSorce {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+      let offsetY = scrollView.contentOffset.y
+        print(offsetY)
+      if offsetY <= -80 {
+          UIView.animate(withDuration: 0.5) {
+              self.searchBar.isHidden = false
+              self.searchBottomLine.isHidden = false
+              self.searchBarHeight.constant = 56
+              self.tableTopCon.constant = 56
+              self.view.layoutIfNeeded()
+          }
+      }
+        
+//        if offsetY > 200{
+//            UIView.animate(withDuration: 0.5) {
+//                self.searchBarHeight.constant = 0
+//                self.tableTopCon.constant = 0
+//                self.view.layoutIfNeeded()
+//            }
+//        }
+
+    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userData?.count ?? 0
@@ -270,7 +385,11 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
 
         // Load custom view from XIB for editAction
         if let editCustomView = Bundle.main.loadNibNamed("EditDeleteTableView", owner: nil, options: nil)?.first as? EditDeleteTableView {
-            editCustomView.iconeIMGView.image = UIImage.init(named: "editTableIcon")
+            editCustomView.iconeIMGView.image = UIImage.init(named: "edit")
+            editCustomView.textLbl.text = "Edit"
+            editCustomView.textLbl.textColor = #colorLiteral(red: 0.06300000101, green: 0.05900000036, blue: 0.05099999905, alpha: 1)
+//            editCustomView.iconeIMGView.image = UIImage.init(systemName: "pencil")
+            editCustomView.BGViewforCell.backgroundColor = #colorLiteral(red: 0.8509803922, green: 0.8509803922, blue: 0.8509803922, alpha: 1) //pencil
 
             let desiredWidth: CGFloat = 80 // Set your desired width
             let desiredHeight: CGFloat = cellHeight // Set your desired height
@@ -291,7 +410,11 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
 
         // Load custom view from XIB for deleteAction
         if let deleteCustomView = Bundle.main.loadNibNamed("EditDeleteTableView", owner: nil, options: nil)?.first as? EditDeleteTableView {
-            deleteCustomView.iconeIMGView.image =  UIImage.init(named: "deleteTableIcon")
+            deleteCustomView.iconeIMGView.image =  UIImage.init(named: "delete") // trash
+            deleteCustomView.textLbl.text = "Delete"
+            deleteCustomView.textLbl.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//            deleteCustomView.iconeIMGView.image =  UIImage.init(systemName: "trash") // trash
+            deleteCustomView.BGViewforCell.backgroundColor = #colorLiteral(red: 0.06274509804, green: 0.05882352941, blue: 0.05098039216, alpha: 1)
             let desiredWidth: CGFloat = 80 // Set your desired width
             let desiredHeight: CGFloat = cellHeight // Set your desired height
 
@@ -473,3 +596,28 @@ extension UIImage {
 extension Notification.Name {
     static let saveUserData = Notification.Name("SaveUserData")
 }
+
+extension UIViewController {
+
+    func presentDetail(_ viewControllerToPresent: UIViewController) {
+        let transition = CATransition()
+        transition.duration = 0.30
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromLeft
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+        viewControllerToPresent.modalPresentationStyle = .overCurrentContext
+        present(viewControllerToPresent, animated: false)
+    }
+
+    func dismissDetail() {
+        let transition = CATransition()
+        transition.duration = 0.30
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+
+        dismiss(animated: false)
+    }
+}
+
+

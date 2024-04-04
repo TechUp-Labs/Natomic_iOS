@@ -101,15 +101,12 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
     // MARK: - Button Action's : -
     
     @IBAction func backBTNtapped(_ sender: Any) {
-        
-//        self.dismiss(animated: true)
         let transition = CATransition()
         transition.duration = 0.3
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromRight
         navigationController?.view.layer.add(transition, forKey: kCATransition)
         self.navigationController?.popViewController(animated: true)
-        
     }
     
     func showAlertOnLogout() {

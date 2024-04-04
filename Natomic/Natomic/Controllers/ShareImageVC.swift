@@ -21,8 +21,10 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
     var noreText = ""
     var selectedTheame = 0
     var selectedLableColor = 0
-    
-    
+    var fromTextOpenVC = false
+    var selectedImage = UIImage()
+    var textColor = UIColor()
+    var hexColor = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -42,10 +44,15 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
     func setUI(){
         
         noteLBL.text = noreText
-        self.thameBGIMG.image = nil
-        self.thameBGIMG.backgroundColor = hexStringToUIColor(hex: "#FFFFFF")
-        self.noteLBL.textColor = .black
-        
+        if fromTextOpenVC {
+            self.thameBGIMG.image = selectedImage
+            self.thameBGIMG.backgroundColor = hexStringToUIColor(hex: hexColor)
+            self.noteLBL.textColor = textColor
+        }else{
+            self.thameBGIMG.image = nil
+            self.thameBGIMG.backgroundColor = hexStringToUIColor(hex: "#FFFFFF")
+            self.noteLBL.textColor = .black
+        }
         
         themeTableView.registerCell(identifire: "ThemeTableViewCell")
         
@@ -66,7 +73,11 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
             ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#4E725B"),
             ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#FFE8C3"),
             ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#F9D15D"),
-            ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#ED9A51")
+            ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#ED9A51"),
+            ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#FAEEC4"),
+            ImageTheameModel.init(imageName: "", textColor: .white, backgroundColor: "#4141B3"),
+            ImageTheameModel.init(imageName: "", textColor: .black, backgroundColor: "#E890E4")
+
         ]))
         
         
@@ -84,6 +95,10 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
             ImageTheameModel.init(imageName: "Image 28", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 29", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 30", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 68", textColor: .white, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 67", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 69", textColor: .black, backgroundColor: "")
+
         ]))
         
         
@@ -94,23 +109,24 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
             ImageTheameModel.init(imageName: "Image 40", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 41", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 42", textColor: .black, backgroundColor: ""),
-            ImageTheameModel.init(imageName: "Image 43", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 31", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 32", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 33", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 34", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 35", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 36", textColor: .black, backgroundColor: "")
-
         ]))
 
         themeTableData.append(ThemeTableData.init(themeTitle: "Celebration",themes: [
             ImageTheameModel.init(imageName: "Image 49", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 50", textColor: .black, backgroundColor: ""),
-            ImageTheameModel.init(imageName: "Image 51", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 51", textColor: .white, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 52", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 53", textColor: .black, backgroundColor: ""),
-            ImageTheameModel.init(imageName: "Image 54", textColor: .black, backgroundColor: "")
+            ImageTheameModel.init(imageName: "Image 54", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 61", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 71", textColor: .black, backgroundColor: "")
+
         ]))
         
         themeTableData.append(ThemeTableData.init(themeTitle: "Zen",themes: [
@@ -121,7 +137,11 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
             ImageTheameModel.init(imageName: "Image 45", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 46", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 47", textColor: .white, backgroundColor: ""),
-            ImageTheameModel.init(imageName: "Image 48", textColor: .black, backgroundColor: "")
+            ImageTheameModel.init(imageName: "Image 48", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 62", textColor: .white, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 63", textColor: .white, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 70", textColor: .white, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 76", textColor: .black, backgroundColor: "")
         ]))
 
         themeTableData.append(ThemeTableData.init(themeTitle: "Travel",themes: [
@@ -130,6 +150,14 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
             ImageTheameModel.init(imageName: "Image 59", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 60", textColor: .black, backgroundColor: "")
         ]))
+        
+        themeTableData.append(ThemeTableData.init(themeTitle: "Notebook",themes: [
+            ImageTheameModel.init(imageName: "Image 75", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 74", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 73", textColor: .black, backgroundColor: ""),
+            ImageTheameModel.init(imageName: "Image 72", textColor: .black, backgroundColor: "")
+        ]))
+
         
         self.themeTableView.reloadData()
         self.view.layoutIfNeeded()
@@ -140,30 +168,6 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
         self.thameBGIMG.backgroundColor = backgroundColor
         self.noteLBL.textColor = textColor
     }
-
-    
-    func hexStringToUIColor(hex: String) -> UIColor {
-        var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        
-        if cString.hasPrefix("#") {
-            cString.remove(at: cString.startIndex)
-        }
-        
-        if (cString.count) != 6 {
-            return UIColor.gray
-        }
-        
-        var rgbValue: UInt64 = 0
-        Scanner(string: cString).scanHexInt64(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-
 
     
     @IBAction func backBTNtapped(_ sender: Any) {
@@ -228,5 +232,29 @@ extension UITableView {
         reloadData()
         layoutIfNeeded()
         setContentOffset(offset, animated: false)
+    }
+}
+
+extension UIViewController{
+    func hexStringToUIColor(hex: String) -> UIColor {
+        var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if cString.hasPrefix("#") {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if (cString.count) != 6 {
+            return UIColor.gray
+        }
+        
+        var rgbValue: UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 }

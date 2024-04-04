@@ -141,7 +141,7 @@ extension NotificationTimeVC {
         content.title = "It's time to write one line today!"
         content.body = "Writing improves your thinking & ultimately your Life"
         content.sound = UNNotificationSound.default
-        
+        content.userInfo = ["notificationType": "reminder"]
         // Create a date components object for the desired time
         var dateComponents = DateComponents()
         dateComponents.hour = Hour // Set the hour (in 24-hour format) for the notification

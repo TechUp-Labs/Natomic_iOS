@@ -19,7 +19,13 @@ class TextOpenVC : UIViewController {
     @IBOutlet weak var textLBL: UILabel!
     @IBOutlet weak var dateLBL: UILabel!
     @IBOutlet weak var timeLBL: UILabel!
+    @IBOutlet weak var noteLBL: UILabel!
+    @IBOutlet weak var thameBGIMG: UIImageView!
+    @IBOutlet weak var shareImageView: UIView!
+    @IBOutlet weak var botttomCollectionCon: NSLayoutConstraint!
+    @IBOutlet weak var secondThemeImageView: UIImageView!
     
+    @IBOutlet weak var userNoteLBL: UILabel!
     // MARK: - Variable's : -
     
     var selectedData : UserEntity?
@@ -40,6 +46,13 @@ class TextOpenVC : UIViewController {
         textLBL.text = selectedData?.userThoughts ?? ""
         dateLBL.text = DatabaseManager.Shared.convertDateFormat(selectedData?.date ?? "")
         timeLBL.text = DatabaseManager.Shared.convertTo12HourFormat(selectedData?.time ?? "")!
+        noteLBL.text = selectedData?.userThoughts ?? ""
+        userNoteLBL.text = selectedData?.userThoughts ?? ""
+        thameBGIMG.image = nil
+        thameBGIMG.backgroundColor = hexStringToUIColor(hex: "#F9C780")
+        noteLBL.textColor = .white
+        botttomCollectionCon.constant = (WIDTH/2)-50
+
     }
     
     @objc func handleSwipeGesture(_ gesture: UIPanGestureRecognizer) {
@@ -67,6 +80,34 @@ class TextOpenVC : UIViewController {
         self.present(vc, animated: false)
     }
     
+    @IBAction func viewMoreBTNtapped(_ sender: Any) {
+        let vc = SHARE_IMAGE_VC
+        vc.noreText = textLBL.text ?? ""
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true)
+    }
+    
+    @IBAction func firstThemeShareBTNtapped(_ sender: Any) {
+        let vc = SHARE_IMAGE_VC
+        vc.noreText = textLBL.text ?? ""
+        vc.fromTextOpenVC = true
+        vc.selectedImage = thameBGIMG.image ?? UIImage()
+        vc.textColor = .white
+        vc.hexColor = "#F9C780"
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true)
+    }
+    
+    @IBAction func secondThemeShareBTNtapped(_ sender: Any) {
+        let vc = SHARE_IMAGE_VC
+        vc.noreText = textLBL.text ?? ""
+        vc.fromTextOpenVC = true
+        vc.selectedImage = secondThemeImageView.image ?? UIImage()
+        vc.textColor = .black
+        vc.hexColor = ""
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true)
+    }
 }
 
 

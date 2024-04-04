@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import WidgetKit
 
 class WritingVC: UIViewController {
     
@@ -24,7 +25,18 @@ class WritingVC: UIViewController {
     let reachability = try! Reachability()
     var pendingDataArray = [PendingData]()
     let feedbackGenerator = UISelectionFeedbackGenerator()
-    
+    let sentences = [
+        "What is one thing you learned today, and how did it change your perspective?",
+        "Describe a moment from today that you would like to remember forever.",
+        "What is something you're looking forward to tomorrow, and why?",
+        "Reflect on a piece of advice you've received recently. How can you apply it to your life?",
+        "Think about a person who made a positive impact on your day. What did they do, and how did it make you feel?",
+        "Describe a challenge you faced today. How did it make you feel, and how did you overcome it?",
+        "What is one goal you have for the upcoming week, and what is one small step you can take towards achieving it?",
+        "Identify something in your life you're grateful for today. Why does it hold significance for you?",
+        "If you could change one thing about today, what would it be and why?",
+        "Describe a moment today when you felt truly at peace or happy. What triggered that feeling?"
+    ]
     
     // MARK: - ViewController Life Cycle:-
     
@@ -95,11 +107,17 @@ class WritingVC: UIViewController {
         
         //        addDoneButtonOnKeyboard()
         //        postBTN.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        
+        showRandomPlaceholder()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
             self.textView.becomeFirstResponder()
         }
     }
+    
+    func showRandomPlaceholder() {
+        let randomIndex = Int(arc4random_uniform(UInt32(sentences.count)))
+        placeholderLBL.text = sentences[randomIndex] // sentences
+    }
+
     
     @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
@@ -201,6 +219,10 @@ class WritingVC: UIViewController {
         generator.prepare()
         generator.notificationOccurred(.success)
         animateButtonTap()
+        sharedUserDefaults?.set(self.textView.text ?? "", forKey: SharedUserDefaults.Keys.userNote)
+        sharedUserDefaults?.set(CurrentTime, forKey: SharedUserDefaults.Keys.noteTime)
+        sharedUserDefaults?.set(CurrentDate, forKey: SharedUserDefaults.Keys.noteDate)
+        WidgetCenter.shared.reloadAllTimelines()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
                 self.textView.resignFirstResponder()
             DatabaseManager.Shared.addUserContext(userContext: User.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
@@ -285,42 +307,33 @@ class WritingVC: UIViewController {
 extension WritingVC: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
-        let trimmedText = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        // Count all characters including spaces and new lines
+        let characterCount = textView.text.count
         
-        // Count characters
-        let characterCount = trimmedText.count
+        self.textCountLBL.text = "\(characterCount)/250"
         
-        // Count blank spaces
-        let blankSpaceCount = textView.text.components(separatedBy: .whitespaces).count - 1
+        let isWithinLimit = characterCount <= 250
+        self.postBTN.layer.opacity = isWithinLimit && characterCount > 0 ? 1 : 0.5
+        self.placeholderLBL.isHidden = characterCount > 0
+        self.postBTN.isUserInteractionEnabled = isWithinLimit && characterCount > 0
         
-        self.textCountLBL.text = "\(characterCount+blankSpaceCount)/250"
-        
-        if characterCount+blankSpaceCount <= 250 {
-            self.postBTN.layer.opacity = characterCount > 0 ? 1 : 0.5
-            self.placeholderLBL.isHidden = characterCount > 0
-            self.postBTN.isUserInteractionEnabled = characterCount > 0
-        } else {
-            // Update the character count label for the first 250 characters
-            self.textCountLBL.text = "250/250"
-            self.placeholderLBL.isHidden = characterCount > 0
-            self.postBTN.isUserInteractionEnabled = characterCount > 0
-            self.postBTN.layer.opacity = characterCount > 0 ? 1 : 0.5
-
+        if !isWithinLimit {
             // Limit the text to 250 characters
-            textView.text = String(trimmedText.prefix(250))
+            textView.text = String(textView.text.prefix(250))
+            self.textCountLBL.text = "250/250"
         }
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // Calculate the new text after the replacement
-        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        let blankSpaceCount = textView.text.components(separatedBy: .whitespaces).count - 1
-
-        // Allow pasting text if the total length (current text + pasted text) is less than or equal to 250 characters
-        return newText.count+blankSpaceCount <= 250
+        // Predict the new text length
+        let currentText = textView.text as NSString
+        let newText = currentText.replacingCharacters(in: range, with: text)
+        
+        return newText.count <= 250
     }
     
 }
+
 //The               Only Thing That I.       Love.      💕 Love 💕 is my love 😍 Love 💕 to all the girls 👧 out in my world 🌍 that love 💕 and to everyone.     The world has a lot to do fort1
 // MARK: - Twitter share code :-
 

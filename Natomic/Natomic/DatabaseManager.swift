@@ -94,7 +94,59 @@ class DatabaseManager {
         
         return userData
     }
+    
+    // MARK: - Function For get User Data from Core Database based on specific date:-
 
+    func getUserContext(forDate dateString: String) -> [UserEntity] {
+        var userData: [UserEntity] = []
+        
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-M-d"
+
+        // Assuming date is stored as String in "yyyy-MM-dd" format
+        fetchRequest.predicate = NSPredicate(format: "date == %@", dateString)
+
+        do {
+            userData = try context.fetch(fetchRequest)
+        } catch {
+            print("Fetch Data for Date Error: 😞", error)
+        }
+        
+        return userData
+    }
+    
+    // MARK: - Function For get User Data from Core Database based on note text:-
+
+    func getUserContext(forNoteText noteText: String) -> [UserEntity] {
+        var userData: [UserEntity] = []
+        
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+
+        // Use CONTAINS[c] for a case insensitive and diacritic insensitive search, or use CONTAINS for case sensitive
+        fetchRequest.predicate = NSPredicate(format: "userThoughts CONTAINS[c] %@", noteText)
+
+        do {
+            userData = try context.fetch(fetchRequest)
+        } catch {
+            print("Fetch Data for Note Text Error: 😞", error)
+        }
+        
+        return userData
+    }
+
+
+    
+
+    // MARK: - Function For get User Data from Core Database based on 7 days ago:-
+
+    func getUserContextFor7DaysAgo() -> [UserEntity] {
+        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-M-d"
+        let sevenDaysAgoString = dateFormatter.string(from: sevenDaysAgo)
+        return getUserContext(forDate: sevenDaysAgoString)
+    }
 
     
     // MARK: - Function For Remove All User Data from Core Database:-

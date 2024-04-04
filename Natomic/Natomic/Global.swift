@@ -10,6 +10,10 @@ import UIKit
 
 var IS_FROME_NOTIFICATION : Bool?
 
+var IS_FROME_NOTE_NOTIFICATION : Bool?
+
+var NOTIFICATION_DESCRIPTION : String?
+
 var homeVC : UIViewController!
 
 // MARK: - Globale Functions.

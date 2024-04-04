@@ -13,6 +13,8 @@ import FirebaseCore
 import FirebaseAnalytics
 import GoogleSignIn
 import Foundation
+import BackgroundTasks
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
@@ -30,9 +32,77 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done"
         IQKeyboardManager.shared.toolbarTintColor = #colorLiteral(red: 0.06300000101, green: 0.05900000036, blue: 0.05099999905, alpha: 1)
         postDeletePendingData()
-        NotificationCenter.default.post(name: .setUserData, object: nil)
+//        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .setUserData, object: nil)
+//        }
+        scheduleNotificationForUserThoughts7DaysAgo()
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.natomic.refresh", using: nil) { task in
+            // This block is executed when the BGAppRefreshTask is triggered
+            self.handleAppRefresh(task: task as! BGAppRefreshTask)
+        }
+
         return true
     }
+    
+    func scheduleAppRefresh() {
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+
+        // Get the current date
+        let currentDate = Date()
+
+        // Get the date components for the current date
+        var components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+
+        // Set the hour to 24 (midnight of the next day)
+        components.hour = 24
+        components.minute = 0
+        components.second = 0
+
+        // Get the next midnight date
+        let nextMidnight = calendar.date(from: components)!
+
+        // Calculate the time interval from now until next midnight
+        let timeIntervalUntilNextMidnight = nextMidnight.timeIntervalSince(currentDate)
+
+        // Now set this time interval for the earliestBeginDate of your request
+//        request.earliestBeginDate = Date(timeIntervalSinceNow: timeIntervalUntilNextMidnight)
+
+        
+        let request = BGAppRefreshTaskRequest(identifier: "com.natomic.refresh")
+//        request.earliestBeginDate = Date(timeIntervalSinceNow: 1 * 60 * 60) // Schedule to start in one hour, adjust as needed
+        request.earliestBeginDate = Date(timeIntervalSinceNow: timeIntervalUntilNextMidnight)
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("Could not schedule app refresh: \(error)")
+        }
+    }
+    
+    func handleAppRefresh(task: BGAppRefreshTask) {
+        // Schedule a new refresh task
+        scheduleAppRefresh()
+
+        // Set an expiration handler for the task
+        task.expirationHandler = {
+            task.setTaskCompleted(success: false)
+        }
+
+        // Check the date and call your function here
+        scheduleNotificationForUserThoughts7DaysAgo()
+
+        // Inform the system that the task is completed
+        task.setTaskCompleted(success: true)
+    }
+
+
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // Check the date and call your function here.
+        // Be sure to call the completion handler when done.
+        completionHandler(.newData)
+    }
+
     
     func postDeletePendingData() {
         var deletePendingData = getDeletePendingDataModelArray(forKey: "DELETE_PENDING_DATA_ARRAY") ?? []
@@ -305,17 +375,101 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       return GIDSignIn.sharedInstance.handle(url)
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        guard let window = UIApplication.shared.keyWindow else {return}
-        IS_FROME_NOTIFICATION = true
-        let navController = UINavigationController(rootViewController: HOME_VC)
-        navController.isNavigationBarHidden = true
-        navController.modalPresentationStyle = .fullScreen
-        window.rootViewController = navController
-        window.makeKeyAndVisible()
+    
+    func scheduleNotificationForUserThoughts7DaysAgo() {
+        let userEntities = DatabaseManager.Shared.getUserContextFor7DaysAgo()
         
+        for userEntity in userEntities {
+            // Schedule a notification for each userEntity
+            let content = UNMutableNotificationContent()
+            content.title = NSString.localizedUserNotificationString(forKey: "Your thought 7 days ago", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: userEntity.userThoughts ?? "You didn't write anything!", arguments: nil)
+            content.sound = UNNotificationSound.default
+            content.userInfo = ["notificationType": "note"]
+
+            let time_string = userEntity.time ?? "12:00:00"
+
+            // Get individual characters for hour, minute, and second (if needed)
+            let hourString = String(time_string[time_string.startIndex..<time_string.index(time_string.startIndex, offsetBy: 2)])
+            let minuteString = String(time_string[time_string.index(time_string.startIndex, offsetBy: 3)...time_string.index(time_string.startIndex, offsetBy: 4)])
+
+            // Convert hour and minute to integers
+            guard var hour = Int(hourString), var minute = Int(minuteString) else {
+                print("Invalid time format")
+                return
+            }
+            
+            // Adjust time by subtracting 15 minutes
+            minute -= 15
+            if minute < 0 {
+                minute += 60 // Add 60 minutes to the minute value
+                hour -= 1 // Subtract one hour
+            }
+
+            // Adjust for when the hour is less than 0
+            if hour < 0 {
+                hour = 23 // Reset hour to 11 PM of the previous day
+            }
+
+            var dateComponents = DateComponents()
+            dateComponents.hour = hour // Set the hour (in 24-hour format) for the notification
+            dateComponents.minute = minute // Set the minute for the notification
+
+            // Deliver the notification in five seconds.
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            
+            // Create the request
+            let request = UNNotificationRequest(identifier: userEntity.noteID ?? UUID().uuidString, content: content, trigger: trigger)
+            
+            // Schedule the request with the system.
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.add(request) { (error) in
+                if error != nil {
+                    // Handle any errors.
+                    print("Error scheduling notification: \(String(describing: error))")
+                }
+            }
+        }
     }
     
+
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        guard let window = UIApplication.shared.keyWindow else { return }
+        let content = response.notification.request.content
+
+        // Determine the type of notification from the userInfo dictionary
+        let userInfo = response.notification.request.content.userInfo
+        if let notificationType = userInfo["notificationType"] as? String {
+            let navController = UINavigationController()
+            navController.isNavigationBarHidden = true
+            navController.modalPresentationStyle = .fullScreen
+
+            switch notificationType {
+            case "reminder":
+                // Navigate to the reminder screen
+                let reminderVC = // Initialize your reminder view controller here
+                navController.viewControllers = [HOME_VC] // Assuming HOME_VC is your home view controller
+                IS_FROME_NOTIFICATION = true
+            case "note":
+                // Navigate to the note detail screen
+                let noteDetailVC = // Initialize your note detail view controller here
+                navController.viewControllers = [HOME_VC] // Assuming HOME_VC is your home view controller
+                NOTIFICATION_DESCRIPTION = content.body
+                IS_FROME_NOTE_NOTIFICATION = true
+            default:
+                // Handle unknown notification types if needed
+                navController.viewControllers = [HOME_VC]
+            }
+
+            window.rootViewController = navController
+            window.makeKeyAndVisible()
+        }
+
+        completionHandler()
+    }
+
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
