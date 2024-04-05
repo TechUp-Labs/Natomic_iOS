@@ -101,7 +101,7 @@ class HomeVC: UIViewController {
         }
         
         if IS_FROME_NOTE_NOTIFICATION ?? false {
-            var data = DatabaseManager.Shared.getUserContext(forNoteText: NOTIFICATION_DESCRIPTION ?? "")
+            let data = DatabaseManager.Shared.getUserContext(forNoteText: NOTIFICATION_DESCRIPTION ?? "")
             
             if data.isEmpty {
                 let vc = WRITING_VC

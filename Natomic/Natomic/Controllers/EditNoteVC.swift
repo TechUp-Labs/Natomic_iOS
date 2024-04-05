@@ -20,7 +20,8 @@ class EditNoteVC: UIViewController {
     var userData : UserEntity?
     let reachability = try! Reachability()
     var editPendingDataArray = [EditPendingData]()
-
+    var isFromTextOpenScreen = false
+    var delegate: ShowShareImageScreen?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +107,9 @@ class EditNoteVC: UIViewController {
     }
     
     @IBAction func postBTNtapped(_ sender: Any) {
+        if isFromTextOpenScreen {
+            self.delegate?.updatedNote(noteText: self.textView.text)
+        }
         if IS_LOGIN {
             checkInternet()
         }

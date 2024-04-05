@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import SDWebImage
 
 protocol DismissFeedbackScreen {
     func dismissScreen()
@@ -20,7 +21,7 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
     
     // MARK: - Outlet's :-
     
-    @IBOutlet weak var qrCodeImageView: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var menuTableView: UITableView!
     @IBOutlet weak var usernameLBL: UILabel!
     @IBOutlet weak var userEmailLBL: UILabel!
@@ -51,6 +52,9 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
         menuArray.append(Menu(menuImage: "feedbackIcon", menuTitle: "Feedback"))
         menuArray.append(Menu(menuImage: "deleteIcone", menuTitle: "Delete Account"))
         menuArray.append(Menu(menuImage: "logoutIcon", menuTitle: "Log out"))
+        if !PHOTO_URL.isEmpty{
+            profileImage.sd_setImage(with: URL(string: PHOTO_URL))
+        }
         self.menuTableView.reloadData()
         if let navigationController = self.navigationController {
             let leftSwipeGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))

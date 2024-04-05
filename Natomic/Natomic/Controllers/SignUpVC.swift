@@ -98,6 +98,7 @@ class SignUpVC: UIViewController {
                 print(user.displayName as Any)
                 saveDataInUserDefault(value: user.displayName, key: "USER_NAME")
                 saveDataInUserDefault(value: user.email, key: "USER_EMAIL")
+                saveDataInUserDefault(value: user.photoURL?.absoluteString, key: "PHOTO_URL")
                 print(user.photoURL as Any)
                 saveDataInUserDefault(value:true, key: "IS_LOGIN")
                 Loader.shared.stopAnimating()
@@ -141,7 +142,6 @@ extension SignUpVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                     let uid = user.uid
                     let displayName = appleIDCredential.fullName?.givenName ?? "Natomic"
                     let email = appleIDCredential.email ?? "User"
-
                     print("Successfully signed in with Apple!")
                     print("UID: \(uid)")
                     print("Display Name: \(displayName)")
@@ -151,6 +151,7 @@ extension SignUpVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                     print(user.displayName as Any)
                     saveDataInUserDefault(value: displayName, key: "USER_NAME")
                     saveDataInUserDefault(value: email, key: "USER_EMAIL")
+                    saveDataInUserDefault(value: user.photoURL?.absoluteString, key: "PHOTO_URL")
                     print(user.photoURL as Any)
                     saveDataInUserDefault(value:true, key: "IS_LOGIN")
                     self.registerUser(uid: uid, name: displayName, email: email)

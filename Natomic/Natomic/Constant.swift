@@ -21,6 +21,11 @@ var USER_EMAIL: String {
     return getDataFromUserDefaults(forKey: "USER_EMAIL") as? String ?? "User"
 }
 
+var PHOTO_URL: String {
+    return getDataFromUserDefaults(forKey: "PHOTO_URL") as? String ?? ""
+}
+
+
 
 let CURRENT_DEVICE_NAME = UIDevice.current.name
 

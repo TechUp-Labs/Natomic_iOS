@@ -13,6 +13,7 @@ target 'Natomic' do
   pod 'GoogleSignIn'
   pod 'Alamofire'
   pod 'NVActivityIndicatorView'
+  pod 'SDWebImage'
   # Pods for Natomic
 
   # Set the deployment target for your target
