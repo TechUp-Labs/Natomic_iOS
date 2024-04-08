@@ -85,6 +85,8 @@
 		D0AEAB982A937469002D24A6 /* Rubik-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB8A2A9372AE002D24A6 /* Rubik-SemiBoldItalic.ttf */; };
 		D0D1339D2B71148500B780AF /* ShareNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1339C2B71148500B780AF /* ShareNoteVC.swift */; };
 		D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */; };
+		D0F0E5D42BBFCD7400A64780 /* NoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F0E5D32BBFCD7400A64780 /* NoteCollectionViewCell.xib */; };
+		D0F0E5D52BBFCD7400A64780 /* NoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F0E5D22BBFCD7400A64780 /* NoteCollectionViewCell.swift */; };
 		D0F843892AD7B8F400288F19 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F843882AD7B8F400288F19 /* DatabaseHelper.swift */; };
 		D0F8438B2AD7B9A300288F19 /* UserNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8438A2AD7B9A300288F19 /* UserNoteModel.swift */; };
 /* End PBXBuildFile section */
@@ -197,6 +199,8 @@
 		D0AEAB8A2A9372AE002D24A6 /* Rubik-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		D0D1339C2B71148500B780AF /* ShareNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNoteVC.swift; sourceTree = "<group>"; };
 		D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNoteVC.swift; sourceTree = "<group>"; };
+		D0F0E5D22BBFCD7400A64780 /* NoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewCell.swift; sourceTree = "<group>"; };
+		D0F0E5D32BBFCD7400A64780 /* NoteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCollectionViewCell.xib; sourceTree = "<group>"; };
 		D0F843882AD7B8F400288F19 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		D0F8438A2AD7B9A300288F19 /* UserNoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNoteModel.swift; sourceTree = "<group>"; };
 		FDAF64CC20DBDFA96CB7FCFF /* Pods_Natomic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Natomic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +412,8 @@
 				D0403D3F2B7216BD00C2DE67 /* ImageThemeCollectionViewCell.xib */,
 				D02F2EE52B91DF7C008036C8 /* ThemeHeaderCell.swift */,
 				D02F2EE62B91DF7C008036C8 /* ThemeHeaderCell.xib */,
+				D0F0E5D22BBFCD7400A64780 /* NoteCollectionViewCell.swift */,
+				D0F0E5D32BBFCD7400A64780 /* NoteCollectionViewCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -519,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0AEAB8B2A937469002D24A6 /* Rubik-Black.ttf in Resources */,
+				D0F0E5D42BBFCD7400A64780 /* NoteCollectionViewCell.xib in Resources */,
 				D0AEAB8C2A937469002D24A6 /* Rubik-BlackItalic.ttf in Resources */,
 				D0AEAB8D2A937469002D24A6 /* Rubik-Bold.ttf in Resources */,
 				D0AEAB8E2A937469002D24A6 /* Rubik-BoldItalic.ttf in Resources */,
@@ -614,6 +621,7 @@
 				04AE06A82A45798300FC4BA1 /* SplashVC.swift in Sources */,
 				D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */,
 				D03FAA112A989B5600615426 /* MenuTableViewCell.swift in Sources */,
+				D0F0E5D52BBFCD7400A64780 /* NoteCollectionViewCell.swift in Sources */,
 				043810172A7A3A5000102547 /* SpringAnimator.swift in Sources */,
 				04BEBAB72A67ECF00050A013 /* HomeVC.swift in Sources */,
 				D02F2EE72B91DF7C008036C8 /* ThemeHeaderCell.swift in Sources */,

@@ -30,6 +30,8 @@ class HomeVC: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchBarHeight: NSLayoutConstraint!
     @IBOutlet weak var searchBottomLine: UIView!
+    @IBOutlet weak var noteCollectionview: UICollectionView!
+    @IBOutlet weak var collectionTopCon: NSLayoutConstraint!
     
     // MARK: - Variable's :-
     
@@ -53,6 +55,8 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
         notificationBTN.setImage(NOTIFICATION_ENABLE ? UIImage(named: "notificationEnabledImage") : UIImage(named: "notificationDisabledImage"), for: .normal)
         profileBTN.setImage(IS_LOGIN ? UIImage(named: "ProfileDisableIcon") : UIImage(named: "ProfileEnableIcon"), for: .normal)
         
@@ -141,6 +145,12 @@ class HomeVC: UIViewController {
 
         
         self.historyTBV.reloadData()
+        
+        noteCollectionview.delegate = self
+        noteCollectionview.dataSource = self
+        noteCollectionview.registerCell(identifire: "NoteCollectionViewCell")
+        
+        self.noteCollectionview.reloadData()
     }
     
     func getUserData(){
@@ -298,6 +308,7 @@ extension HomeVC: UISearchBarDelegate {
             }
         }
         self.historyTBV.reloadData()
+        self.noteCollectionview.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -310,13 +321,15 @@ extension HomeVC: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("Cancel button clicked")
+
         searchBar.text = nil
         searchBar.resignFirstResponder() // Dismiss the keyboard
-
         // Handle the case when cancel button is clicked, e.g., reset the data to original
         // Load your original or unfiltered dataset to userData again
 
-        historyTBV.reloadData() // Reload tableView to show original/unfiltered data
+        self.historyTBV.reloadData() // Reload tableView to show original/unfiltered data
+        self.noteCollectionview.reloadData()
     }
 }
 
@@ -328,12 +341,13 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
       let offsetY = scrollView.contentOffset.y
         print(offsetY)
-      if offsetY <= -80 {
+      if offsetY <= -0 {
           UIView.animate(withDuration: 0.5) {
               self.searchBar.isHidden = false
               self.searchBottomLine.isHidden = false
               self.searchBarHeight.constant = 56
               self.tableTopCon.constant = 56
+              self.collectionTopCon.constant = 56
               self.view.layoutIfNeeded()
           }
       }
@@ -500,6 +514,46 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
     }
     
 }
+
+extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return userData?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NoteCollectionViewCell", for: indexPath) as! NoteCollectionViewCell
+        if selectedCell == indexPath.row {
+            cell.contentView.backgroundColor = #colorLiteral(red: 0.9137254902, green: 0.8941176471, blue: 0.8196078431, alpha: 1)
+        }else{
+            cell.contentView.backgroundColor = .clear
+        }
+        if let data = userData?[indexPath.row]{
+            cell.displayData(data: data)
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = noteCollectionview.frame.width / 2
+        return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+}
+
+
 
 extension HomeVC {
     func checkInternet(){
