@@ -27,6 +27,11 @@ class FeedbackVC: UIViewController {
         setUI()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+//        TrackEvent.shared.track(eventName: .feedbackBackButtonClick)
+    }
+    
     // MARK: - All Fuction's : -
     
     func setUI(){
@@ -36,7 +41,9 @@ class FeedbackVC: UIViewController {
     // MARK: - Button Action's : -
     
     @IBAction func backBTNtapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        TrackEvent.shared.track(eventName: .feedbackBackButtonClick)
+        self.dismiss(animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func submitBTNtapped(_ sender: Any) {
@@ -79,8 +86,9 @@ class FeedbackVC: UIViewController {
             case .success(let data):
                 // Handle success, e.g., parse the response data
                 print("Success: \(data)")
-                
-                self.navigationController?.popViewController(animated: false)
+                TrackEvent.shared.track(eventName: .feedbackSubmitButtonClick)
+//                self.navigationController?.popViewController(animated: false)
+                self.dismiss(animated: false)
                 self.dismissDelegate?.dismissScreen()
             case .failure(let error):
 

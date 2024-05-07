@@ -208,6 +208,12 @@ var SHARE_IMAGE_VC : ShareImageVC {
    }
 }
 
+var STREAK_VC : StreakVC {
+   get{
+       return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StreakVC") as! StreakVC
+   }
+}
+
 
 func saveDataInUserDefault(value:Any?, key: String){
     let Default = UserDefaults.standard

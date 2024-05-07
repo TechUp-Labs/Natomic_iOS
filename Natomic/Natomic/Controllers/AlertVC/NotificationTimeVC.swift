@@ -105,12 +105,12 @@ class NotificationTimeVC: UIViewController {
     // MARK: - Button Action's : -
     
     @IBAction func cancelBTNtapped(_ sender: Any) {
-//        dismiss()
-//        dismissAlert()
+        TrackEvent.shared.track(eventName: .closeRemiderButtonClick)
         self.dismiss(animated: false, completion: nil)
     }
     
     @IBAction func saveBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .setReminderNowButtonClick)
         saveDataInUserDefault(value: true, key: "NOTIFICATION_ENABLE")
         let selectedTime = timePicker.date
         let calendar = Calendar.current
@@ -120,6 +120,8 @@ class NotificationTimeVC: UIViewController {
         saveDataInUserDefault(value: minutes, key: "Notification_Minutes")
         saveDataInUserDefault(value: hour >= 12 ? "PM" : "AM", key: "Notification_Meridiem")
         setUpNotification(Hour: hour, Minute: minutes)
+        TrackEvent.shared.trackRemiderTime(reminderTime: DatabaseManager.Shared.convertTo12HourFormat("\(hour):\(minutes):00") ?? "Not Found")
+
         DispatchQueue.main.asyncAfter(wallDeadline: .now()+0.2) {
 //            self.dismiss()
 //            self.dismissAlert()

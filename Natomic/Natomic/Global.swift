@@ -16,6 +16,8 @@ var NOTIFICATION_DESCRIPTION : String?
 
 var homeVC : UIViewController!
 
+var SHARED_IMAGE = "#FFFFFF"
+
 // MARK: - Globale Functions.
 
 var CurrentDate:String{
@@ -36,6 +38,40 @@ var CurrentTime:String{
     print("Current time: \(formattedTime)")
     return formattedTime
 }
+
+enum TimeFormatError: Error {
+    case invalidHour
+    case invalidMinute
+    case invalidMeridiem
+}
+
+func convertTo24HourFormat(hour: Int, minute: Int, meridiem: String) throws -> (Int, Int) {
+    guard hour >= 1 && hour <= 12 else {
+        throw TimeFormatError.invalidHour
+    }
+    
+    guard minute >= 0 && minute <= 59 else {
+        throw TimeFormatError.invalidMinute
+    }
+    
+    guard meridiem == "AM" || meridiem == "PM" else {
+        throw TimeFormatError.invalidMeridiem
+    }
+    
+    var convertedHour = hour
+    if meridiem == "PM" {
+        if hour != 12 {
+            convertedHour += 12
+        }
+    } else if meridiem == "AM" {
+        if hour == 12 {
+            convertedHour = 0
+        }
+    }
+    
+    return (convertedHour, minute)
+}
+
 
 func flipDateString(_ dateString: String) -> String? {
     let components = dateString.components(separatedBy: "-")

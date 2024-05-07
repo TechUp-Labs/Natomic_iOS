@@ -25,19 +25,42 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
     @IBOutlet weak var menuTableView: UITableView!
     @IBOutlet weak var usernameLBL: UILabel!
     @IBOutlet weak var userEmailLBL: UILabel!
-    
+    let slideInTransition = SlideInTransition()
+
     // MARK: - Variable's : -
     
     var menuArray = [Menu]()
     var dismissDelegate : DismissFeedbackScreen?
     var dismissDeleteScreen : DismissDeleteScreen?
-    
+    var delegate : ReloadHomeScreenData?
+
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear")
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        slideInTransition.isPresenting = true
+        return slideInTransition
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        slideInTransition.isPresenting = false
+        return slideInTransition
+    }
+
     
     // MARK: - All Fuction's : -
     
@@ -49,14 +72,15 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
         menuTableView.registerCell(identifire: "MenuTableViewCell")
 //        menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Subscription"))
         menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Share"))
+//        menuArray.append(Menu(menuImage: "streackLargeIcon", menuTitle: "Streak"))
         menuArray.append(Menu(menuImage: "feedbackIcon", menuTitle: "Feedback"))
         menuArray.append(Menu(menuImage: "deleteIcone", menuTitle: "Delete Account"))
-        menuArray.append(Menu(menuImage: "logoutIcon", menuTitle: "Log out"))
-        if !PHOTO_URL.isEmpty{
-            profileImage.sd_setImage(with: URL(string: PHOTO_URL))
-        }
+//        menuArray.append(Menu(menuImage: "logoutIcon", menuTitle: "Log out"))
+//        if !PHOTO_URL.isEmpty{
+//            profileImage.sd_setImage(with: URL(string: PHOTO_URL))
+//        }
         self.menuTableView.reloadData()
-        if let navigationController = self.navigationController {
+        if let navigationController = self.presentedViewController {
             let leftSwipeGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
             leftSwipeGestureRecognizer.edges = .left
             leftSwipeGestureRecognizer.delegate = self
@@ -67,13 +91,20 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
             rightSwipeGestureRecognizer.delegate = self
             navigationController.view.addGestureRecognizer(rightSwipeGestureRecognizer)
         }
+        
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleLeftSwipe(_:)))
+        swipeRightGesture.direction = .left
+        view.addGestureRecognizer(swipeRightGesture)
 
     }
     
     // MARK: - Gesture Handlers
 
     @objc func handleLeftSwipe(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+        TrackEvent.shared.track(eventName: .profileBackButtonClick)
         if gestureRecognizer.state == .recognized {
+            self.dismiss(animated: true, completion: nil)
+
 //            let transition = CATransition()
 //            transition.duration = 0.3
 //            transition.type = CATransitionType.push
@@ -84,13 +115,16 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
     }
 
     @objc func handleRightSwipe(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+        TrackEvent.shared.track(eventName: .profileBackButtonClick)
         if gestureRecognizer.state == .recognized {
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = CATransitionType.push
-            transition.subtype = CATransitionSubtype.fromRight
-            navigationController?.view.layer.add(transition, forKey: kCATransition)
-            self.navigationController?.popViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
+
+//            let transition = CATransition()
+//            transition.duration = 0.3
+//            transition.type = CATransitionType.push
+//            transition.subtype = CATransitionSubtype.fromRight
+//            navigationController?.view.layer.add(transition, forKey: kCATransition)
+//            self.navigationController?.popViewController(animated: true)
         }
     }
 
@@ -105,22 +139,33 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
     // MARK: - Button Action's : -
     
     @IBAction func backBTNtapped(_ sender: Any) {
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromRight
-        navigationController?.view.layer.add(transition, forKey: kCATransition)
-        self.navigationController?.popViewController(animated: true)
+        TrackEvent.shared.track(eventName: .profileBackButtonClick)
+//        let transition = CATransition()
+//        transition.duration = 0.3
+//        transition.type = CATransitionType.push
+//        transition.subtype = CATransitionSubtype.fromRight
+//        navigationController?.view.layer.add(transition, forKey: kCATransition)
+//        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+
+    }
+    
+    @IBAction func logoutBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .logoutButtonClick)
+        showAlertOnLogout()
     }
     
     func showAlertOnLogout() {
         let alert = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .alert)
         
         let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
+            TrackEvent.shared.track(eventName: .logout)
             self.handleLogout()
         }
         
-        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        let noAction = UIAlertAction(title: "No", style: .cancel) { _ in
+            TrackEvent.shared.track(eventName: .logoutCancelButtonClick)
+        }
         
         alert.addAction(yesAction)
         alert.addAction(noAction)
@@ -156,11 +201,15 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
             var pendingDeleteDataArray : [DeletePendingData] = getDeletePendingDataModelArray(forKey: "DELETE_PENDING_DATA_ARRAY") ?? []
             pendingDeleteDataArray.removeAll()
             saveDeletePendingDataModelArray(pendingDeleteDataArray, forKey: "DELETE_PENDING_DATA_ARRAY")
-
+            TrackEvent.shared.resetUSer()
 
             DatabaseManager.Shared.removeAllData()
             Loader.shared.stopAnimating()
-            self.navigationController?.pushViewController(SPLASH_VC, animated: true)
+            self.dismiss(animated: true) {
+                self.delegate?.openSplashScreen()
+            }
+            self.dismiss(animated: true, completion: nil)
+
         } catch let signOutError as NSError {
             print("Error signing out: \(signOutError.localizedDescription)")
             Loader.shared.stopAnimating()
@@ -195,6 +244,11 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
         cell.menuImg.image = UIImage(named: menuArray[indexPath.row].menuImage)
         cell.menuLBL.text = menuArray[indexPath.row].menuTitle
+        if menuArray[indexPath.row].menuTitle == "Share" {
+            cell.arrowImg.isHidden = true
+        }else{
+            cell.arrowImg.isHidden = false
+        }
         return cell
     }
     
@@ -203,27 +257,39 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var action = menuArray[indexPath.row].menuTitle
+        let action = menuArray[indexPath.row].menuTitle
         switch action {
         case "Subscription":
             self.navigationController?.pushViewController(SUBSCRIPTION_VC, animated: true)
+        case "Streak":
+            TrackEvent.shared.track(eventName: .streakButtonClick)
+            let vc = STREAK_VC
+            vc.modalPresentationStyle = .overCurrentContext
+            self.present(vc, animated: true)
         case "Share":
+            TrackEvent.shared.track(eventName: .shareAppButtonClick)
             let url = URL(string: "https://apps.apple.com/us/app/natomic/id6474652222")
-            let textToShare = ["Unleash your creativity with Natomic! 🚀📚 Explore the art of writing and track your habits seamlessly. Elevate your writing experience with Natomic app – where ideas flow effortlessly! ✨🖋️ #Natomic #WritingJourney", url] as [Any]
+            let textToShare = ["Unleash your creativity with Natomic! 🚀📚 Explore the art of writing and track your habits seamlessly. Elevate your writing experience with Natomic app – where ideas flow effortlessly! ✨🖋️ \n#Natomic", url] as [Any]
             let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook]
             self.present(activityViewController, animated: true, completion: nil)
         case "Feedback":
+            TrackEvent.shared.track(eventName: .feedBackButtonClick)
             let vc = FEEDBACK_VC
             vc.dismissDelegate = self
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.modalPresentationStyle = .overCurrentContext
+            self.present(vc, animated: true)
+
+//            self.navigationController?.pushViewController(vc, animated: true)
         case "Delete Account":
+            TrackEvent.shared.track(eventName: .deleteAccountButtonClick)
             let vc = DELETE_ACCOUNT_ALERT_VC
             vc.dismissDeleteScreen = self
             vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: false)
         case "Log out":
+            TrackEvent.shared.track(eventName: .logoutButtonClick)
             showAlertOnLogout()
         default:
             break
@@ -233,7 +299,10 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
 
 extension MenuVC : DismissFeedbackScreen {
     func dismissScreen() {
-        self.navigationController?.pushViewController(SUCCESS_FEEDBACK_VC, animated: true)
+//        self.navigationController?.pushViewController(SUCCESS_FEEDBACK_VC, animated: true)
+        let vc = SUCCESS_FEEDBACK_VC
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: false)
     }
 }
 extension MenuVC : DismissDeleteScreen {
@@ -264,7 +333,7 @@ extension MenuVC : DismissDeleteScreen {
             var pendingDeleteDataArray : [DeletePendingData] = getDeletePendingDataModelArray(forKey: "DELETE_PENDING_DATA_ARRAY") ?? []
             pendingDeleteDataArray.removeAll()
             saveDeletePendingDataModelArray(pendingDeleteDataArray, forKey: "DELETE_PENDING_DATA_ARRAY")
-
+            TrackEvent.shared.resetUSer()
 
             DatabaseManager.Shared.removeAllData()
             Loader.shared.stopAnimating()

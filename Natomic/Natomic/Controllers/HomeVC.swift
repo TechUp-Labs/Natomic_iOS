@@ -9,6 +9,7 @@ import UIKit
 import UserNotifications
 import FittedSheets
 import Alamofire
+import AVFoundation
 
 protocol CheckWriting {
     func checkUserData()
@@ -17,8 +18,13 @@ protocol CheckWriting {
     func changeNotificationBTNicon()
 }
 
+protocol ReloadHomeScreenData {
+    func reloadUserData()
+    func openSplashScreen()
+}
 
-class HomeVC: UIViewController {
+
+class HomeVC: UIViewController, UIViewControllerTransitioningDelegate {
     
     // MARK: - Outlet's :-
     
@@ -46,6 +52,10 @@ class HomeVC: UIViewController {
     var blurView: UIVisualEffectView!
     var gradientLayer: CAGradientLayer!
     var deleteNoteID = "0"
+    let slideInTransition = SlideInTransition()
+    var delegate : ReloadHomeScreenData?
+    var menuViewController: MenuVC?  // Optional because it might not always be present
+    var isMenuOpen = false
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
@@ -61,28 +71,45 @@ class HomeVC: UIViewController {
         profileBTN.setImage(IS_LOGIN ? UIImage(named: "ProfileDisableIcon") : UIImage(named: "ProfileEnableIcon"), for: .normal)
         
         selectedCell = -1
-        self.userData = DatabaseManager.Shared.getUserContext()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+        
+        if ((searchBar.text?.isEmpty) == nil) {
+            self.userData = DatabaseManager.Shared.getUserContext()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
 
-        self.userData?.sort { (entity1, entity2) in
-            if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
-               let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
-                return dateTime1 > dateTime2
+            self.userData?.sort { (entity1, entity2) in
+                if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+                   let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                    return dateTime1 > dateTime2
+                }
+                return false // Return false as a fallback
             }
-            return false // Return false as a fallback
         }
-        self.historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
         self.historyTBV.reloadData()
+        self.historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
     }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        slideInTransition.isPresenting = true
+        return slideInTransition
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        slideInTransition.isPresenting = false
+        return slideInTransition
+    }
+
     
     // MARK: - All Fuction's : -
     
     func setUI(){
+        delegate = self
         writingDelegate = self
         searchBar.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadUsersData(notification:)), name: .saveUserData, object: nil)
         homeVC = self
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+//        self.view.addGestureRecognizer(panGesture)
         historyTBV.registerCell(identifire: "HistoryTableCell")
         self.searchBarHeight.constant = 0
         self.userData = DatabaseManager.Shared.getUserContext()
@@ -113,9 +140,9 @@ class HomeVC: UIViewController {
                 self.present(vc, animated: true, completion: nil)
             }
             
-            let vc = TEXT_OPEN_VC
-            vc.selectedData = data.first
-            self.navigationController?.pushViewController(vc, animated: true)
+//            let vc = TEXT_OPEN_VC
+//            vc.selectedData = data.first
+//            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         if self.userData?.count == 0 {
@@ -152,6 +179,75 @@ class HomeVC: UIViewController {
         
         self.noteCollectionview.reloadData()
     }
+    
+    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
+        switch gesture.state {
+        case .began:
+            if translation.x >= 0 && !isMenuOpen {
+                // Start presenting the menu view controller
+                if menuViewController == nil {
+                    
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
+                        menuViewController = MENU_VC
+                        menuViewController!.modalPresentationStyle = .overCurrentContext
+                        menuViewController!.transitioningDelegate = self
+                        present(menuViewController!, animated: false)
+                    }
+                }
+            }
+        case .changed:
+            // Drag to the right to open the menu
+            if let menuVC = menuViewController, translation.x > 0 && !isMenuOpen {
+                let xPosition = min(menuVC.view.frame.width, max(0, translation.x))
+                menuVC.view.frame = CGRect(x: -menuVC.view.frame.width + xPosition, y: 0, width: menuVC.view.frame.width, height: menuVC.view.frame.height)
+            }
+        case .ended, .cancelled:
+            // Determine if the menu should snap open or close
+            if let menuVC = menuViewController, !isMenuOpen {
+                if velocity.x > 500 || translation.x > menuVC.view.frame.width / 2 {
+                    // Open the menu completely
+                    UIView.animate(withDuration: 0.2, animations: {
+                        menuVC.view.frame = CGRect(x: 0, y: 0, width: menuVC.view.frame.width, height: menuVC.view.frame.height)
+                    }) { completed in
+//                        self.isMenuOpen = true
+                        self.menuViewController = nil
+                        self.isMenuOpen = false
+                    }
+                } else {
+                    // Close the menu
+                    UIView.animate(withDuration: 0.2, animations: {
+                        menuVC.view.frame = CGRect(x: -menuVC.view.frame.width, y: 0, width: menuVC.view.frame.width, height: menuVC.view.frame.height)
+                    }) { completed in
+                        menuVC.dismiss(animated: false, completion: nil)
+                        self.menuViewController = nil
+                        self.isMenuOpen = false
+                    }
+                }
+            }
+        default:
+            break
+        }
+    }
+
+
+    func finishOpeningMenu() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.menuViewController?.view.transform = .identity
+        })
+    }
+
+    func closeMenu() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.menuViewController?.view.transform = CGAffineTransform(translationX: -UIScreen.main.bounds.width, y: 0)
+        }) { _ in
+            self.menuViewController?.dismiss(animated: false, completion: nil)
+            self.menuViewController = nil
+        }
+    }
+
     
     func getUserData(){
         DatabaseHelper.shared.fetchUserData { result in
@@ -207,62 +303,49 @@ class HomeVC: UIViewController {
     
     @IBAction func profileBTNtapped(_ sender: Any) {
         
-//        let MENU_VC = MENU_VC // Replace ProfileViewController with your actual profile view controller class
-//             navigationController?.pushViewController(MENU_VC, animated: false)
-//
-//             // Animate the transition
-//             UIView.animate(withDuration: 0.3, animations: {
-//                 let transition = CATransition()
-//                 transition.duration = 0.3
-//                 transition.type = CATransitionType.push
-//                 transition.subtype = CATransitionSubtype.fromLeft
-//                 self.navigationController?.view.layer.add(transition, forKey: nil)
-//             })
-        
-        
-        
-        
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromLeft
-        
-        // Disable user interaction during the transition
-        navigationController?.view.isUserInteractionEnabled = false
-        
-        // Perform the transition animation within a UIView animation block
-        UIView.animate(withDuration: 0.3, animations: {
-            self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-        }) { (_) in
-            // Re-enable user interaction after the transition completes
-            self.navigationController?.view.isUserInteractionEnabled = true
-            
-            // Push the appropriate view controller
-            if IS_LOGIN {
-                self.navigationController?.pushViewController(MENU_VC, animated: false)
-            } else {
-                self.navigationController?.pushViewController(SIGNUP_VC, animated: false)
-            }
+        if IS_LOGIN {
+            TrackEvent.shared.track(eventName: .profileButtonClick)
+            let menuViewController = MENU_VC // Initialize your menu VC
+            menuViewController.delegate = self
+            menuViewController.modalPresentationStyle = .overFullScreen
+            menuViewController.transitioningDelegate = self
+            present(menuViewController, animated: true)
+        } else {
+            TrackEvent.shared.track(eventName: .profileButtonClick)
+            let menuViewController = SIGNUP_VC // Initialize your menu VC
+            menuViewController.delegate = self
+            menuViewController.modalPresentationStyle = .overFullScreen
+            menuViewController.transitioningDelegate = self
+            present(menuViewController, animated: true)
         }
-        
-        
-//        if IS_LOGIN {
-////            self.presentDetail(MENU_VC)
-//            self.navigationController?.pushViewController(MENU_VC, animated: true)
-//        } else {
-////            self.presentDetail(SIGNUP_VC)
-//            self.navigationController?.pushViewController(SIGNUP_VC, animated: true)
-//        }
-
-        
     }
+    
     @IBAction func addNewLineBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .writeNowButtonClick)
         let vc = WRITING_VC
         self.present(vc, animated: true, completion: nil)
     }
     
-    @IBAction func notificationBTNtapped(_ sender: Any) {
+    @IBAction func streakBTNtapped(_ sender: Any) {
+        // 1013 for notification
+//        let systemSoundID: SystemSoundID = 1051 // This is the SystemSoundID for the "New Mail" sound
+//
+//        AudioServicesPlaySystemSound(systemSoundID)
+        let vc = STREAK_VC
+//        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true)
         
+//        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+//            return
+//        }
+//
+//        if UIApplication.shared.canOpenURL(settingsUrl) {
+//            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+//        }
+    }
+    
+    @IBAction func notificationBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .setReminderHomeButtonClick)
         let vc = NOTIFICATION_TIME_VC
         vc.writingDelegate = self
         vc.modalPresentationStyle = .overCurrentContext
@@ -327,6 +410,18 @@ extension HomeVC: UISearchBarDelegate {
         searchBar.resignFirstResponder() // Dismiss the keyboard
         // Handle the case when cancel button is clicked, e.g., reset the data to original
         // Load your original or unfiltered dataset to userData again
+        self.userData = DatabaseManager.Shared.getUserContext()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+
+        self.userData?.sort { (entity1, entity2) in
+            if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+               let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                return dateTime1 > dateTime2
+            }
+            return false // Return false as a fallback
+        }
 
         self.historyTBV.reloadData() // Reload tableView to show original/unfiltered data
         self.noteCollectionview.reloadData()
@@ -339,18 +434,64 @@ extension HomeVC: UISearchBarDelegate {
 extension HomeVC: SetTableViewDelegateAndDataSorce {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-      let offsetY = scrollView.contentOffset.y
-        print(offsetY)
-      if offsetY <= -0 {
-          UIView.animate(withDuration: 0.5) {
-              self.searchBar.isHidden = false
-              self.searchBottomLine.isHidden = false
-              self.searchBarHeight.constant = 56
-              self.tableTopCon.constant = 56
-              self.collectionTopCon.constant = 56
-              self.view.layoutIfNeeded()
-          }
-      }
+
+        let offsetY = scrollView.contentOffset.y
+        let maxSearchBarHeight: CGFloat = 56  // Maximum search bar height
+
+        // When scrolling down, offsetY increases. When at the top (or pulling down to refresh),
+        // offsetY is negative or zero. Here, we calculate the desired height of the search bar.
+        let newSearchBarHeight = max(0, min(maxSearchBarHeight, maxSearchBarHeight - offsetY))
+
+        // Update the height constraint of the search bar
+        searchBarHeight.constant = newSearchBarHeight
+
+        // Calculate the alpha based on the height of the search bar relative to the max height
+        let alpha = newSearchBarHeight / maxSearchBarHeight
+        searchBar.alpha = alpha
+        searchBottomLine.alpha = alpha
+        // Adjust the top constraint of the table view to move it down as the search bar appears
+        tableTopCon.constant = newSearchBarHeight+2
+        collectionTopCon.constant = newSearchBarHeight+2
+        // Optionally animate the layout changes for a smoother transition
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+
+//        let offsetY = scrollView.contentOffset.y
+//        let maxSearchBarHeight: CGFloat = 56  // Maximum search bar height
+//
+//        // Calculate the search bar height based on the negative offset, clamping between 0 and max height
+//        let searchBarHeight = min(max(-offsetY, 0), maxSearchBarHeight)
+//        // Directly set the height constraint of the search bar
+//        self.searchBarHeight.constant = searchBarHeight
+//        // Update the alpha value of the search bar and bottom line based on the height
+//        // This creates a fade-in effect as the search bar grows
+//        let alpha = searchBarHeight / maxSearchBarHeight
+//        self.searchBar.alpha = alpha
+//        self.searchBottomLine.alpha = alpha
+//
+//        // Update the top constraints of the table and collection view to move them down as the search bar appears
+//        self.tableTopCon.constant = searchBarHeight
+//        self.collectionTopCon.constant = searchBarHeight
+//
+//        // Update the layout without an animation block for a smooth, responsive effect
+//        self.view.layoutIfNeeded()
+
+        
+        
+        
+//      let offsetY = scrollView.contentOffset.y
+//        print(offsetY)
+//      if offsetY <= -0 {
+//          UIView.animate(withDuration: 0.5) {
+//              self.searchBar.isHidden = false
+//              self.searchBottomLine.isHidden = false
+//              self.searchBarHeight.constant = 56
+//              self.tableTopCon.constant = 56
+//              self.collectionTopCon.constant = 56
+//              self.view.layoutIfNeeded()
+//          }
+//      }
         
 //        if offsetY > 200{
 //            UIView.animate(withDuration: 0.5) {
@@ -443,14 +584,14 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
     }
     
     func editItemAt(_ indexPath: IndexPath) {
+        TrackEvent.shared.track(eventName: .editNoteButtonClick)
         let vc = EDIT_NOTE_VC
         vc.userData = userData?[indexPath.row]
         self.present(vc, animated:true)
     }   
 
     func deleteItemAt(_ indexPath: IndexPath) {
-        
-        
+        TrackEvent.shared.track(eventName: .deleteNoteButtonClick)
             
             let alertController = UIAlertController(title: "Delete Note", message: "Are you sure you want to delete this note?", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -505,9 +646,9 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        TrackEvent.shared.track(eventName: .noteOpenButtonClick)
         selectedCell = indexPath.row
         self.historyTBV.reloadData()
-        
         let vc = TEXT_OPEN_VC
         vc.selectedData = userData?[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
@@ -636,6 +777,39 @@ extension HomeVC : CheckWriting {
     
 }
 
+extension HomeVC: ReloadHomeScreenData {
+    func reloadUserData() {
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        notificationBTN.setImage(NOTIFICATION_ENABLE ? UIImage(named: "notificationEnabledImage") : UIImage(named: "notificationDisabledImage"), for: .normal)
+        profileBTN.setImage(IS_LOGIN ? UIImage(named: "ProfileDisableIcon") : UIImage(named: "ProfileEnableIcon"), for: .normal)
+        
+        selectedCell = -1
+        
+//        if ((searchBar.text?.isEmpty) == nil) {
+            self.userData = DatabaseManager.Shared.getUserContext()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Combine date and time in a single format
+
+            self.userData?.sort { (entity1, entity2) in
+                if let dateTime1 = dateFormatter.date(from: "\(entity1.date ?? "") \(entity1.time ?? "")"),
+                   let dateTime2 = dateFormatter.date(from: "\(entity2.date ?? "") \(entity2.time ?? "")") {
+                    return dateTime1 > dateTime2
+                }
+                return false // Return false as a fallback
+            }
+//        }
+        self.historyTBV.reloadData()
+        self.historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+    }
+    
+    func openSplashScreen(){
+        self.navigationController?.pushViewController(SPLASH_VC, animated: false)
+    }
+    
+    
+}
+
 extension UIImage {
     static func imageWithView(view: UIView) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
@@ -674,4 +848,32 @@ extension UIViewController {
     }
 }
 
+class SlideInTransition: NSObject, UIViewControllerAnimatedTransitioning {
+    var isPresenting = true
 
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.3  // Duration of the transition
+    }
+
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let containerView = transitionContext.containerView
+        guard let fromView = isPresenting ? transitionContext.view(forKey: .to) : transitionContext.view(forKey: .from) else { return }
+
+        let width = containerView.frame.width
+        let transform = isPresenting ? CGAffineTransform(translationX: -width, y: 0) : CGAffineTransform(translationX: width, y: 0)
+
+        if isPresenting {
+            containerView.addSubview(fromView) // Add toView when presenting
+            fromView.transform = CGAffineTransform(translationX: -width, y: 0)
+        }
+
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+            fromView.transform = self.isPresenting ? .identity : CGAffineTransform(translationX: -width, y: 0)
+        }) { _ in
+            if !self.isPresenting {
+                fromView.removeFromSuperview()
+            }
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
+    }
+}

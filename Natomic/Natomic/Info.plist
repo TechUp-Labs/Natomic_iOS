@@ -27,6 +27,7 @@
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>App-prefs</string>
 		<string>instagram-stories</string>
 	</array>
 	<key>NSAppTransportSecurity</key>

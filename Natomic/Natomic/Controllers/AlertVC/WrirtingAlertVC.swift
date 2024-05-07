@@ -34,6 +34,7 @@ class WrirtingAlertVC: UIViewController {
     
     @IBAction func closeBTNtapped(_ sender: Any) {
         is_letsWrite = false
+        TrackEvent.shared.track(eventName: .writingAlertCloseButtonClick)
 //        dismiss()
         self.dismiss(animated: false, completion: nil)
 
@@ -41,6 +42,7 @@ class WrirtingAlertVC: UIViewController {
     
     @IBAction func letsWriteBTNtapped(_ sender: Any) {
         is_letsWrite = true
+        TrackEvent.shared.track(eventName: .letsWriteButtonClick)
 //        dismiss()
         self.dismiss(animated: false, completion: nil)
 

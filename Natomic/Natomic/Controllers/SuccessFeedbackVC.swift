@@ -28,7 +28,7 @@ class SuccessFeedbackVC: UIViewController {
     // MARK: - Button Action's : -
     
     @IBAction func backBTNtapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true )
     }
     
 

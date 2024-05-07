@@ -94,11 +94,15 @@ extension ThemeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
         selectedTheame = indexPath.row
         self.imageThemeCollectionView.reloadData()
         if theameData[indexPath.row].imageName == "" {
+            SHARED_IMAGE = theameData[indexPath.row].backgroundColor
+            TrackEvent.shared.trackSelectionOfImage(selectedImage: theameData[indexPath.row].backgroundColor)
             let backgroundColor : UIColor = hexStringToUIColor(hex: theameData[indexPath.row].backgroundColor)
             let themeImage: UIImage? = theameData[indexPath.row].imageName.isEmpty ? nil : UIImage(named: theameData[indexPath.row].imageName)
             delegate?.didSelectTheme(thameBGIMG: themeImage ?? UIImage(), backgroundColor: backgroundColor, textColor: theameData[indexPath.row].textColor)
         }else{
+            SHARED_IMAGE = theameData[indexPath.row].imageName
             let backgroundColor : UIColor = .clear
+            TrackEvent.shared.trackSelectionOfImage(selectedImage: theameData[indexPath.row].imageName)
             let themeImage: UIImage? = theameData[indexPath.row].imageName.isEmpty ? nil : UIImage(named: theameData[indexPath.row].imageName)
             delegate?.didSelectTheme(thameBGIMG: themeImage ?? UIImage(), backgroundColor: backgroundColor, textColor: theameData[indexPath.row].textColor)
         }

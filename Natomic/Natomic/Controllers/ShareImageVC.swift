@@ -25,6 +25,7 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
     var selectedImage = UIImage()
     var textColor = UIColor()
     var hexColor = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -40,10 +41,15 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
         self.themeTableView.reloadData()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TrackEvent.shared.track(eventName: .closeShareImageScreenButtonTapped)
+    }
     
     func setUI(){
         
         noteLBL.text = noreText
+        noteLBL.adjustFontSizeToFitRect(rect: noteLBL.bounds)
         if fromTextOpenVC {
             self.thameBGIMG.image = selectedImage
             self.thameBGIMG.backgroundColor = hexStringToUIColor(hex: hexColor)
@@ -51,6 +57,7 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
         }else{
             self.thameBGIMG.image = nil
             self.thameBGIMG.backgroundColor = hexStringToUIColor(hex: "#FFFFFF")
+            SHARED_IMAGE = "#FFFFFF"
             self.noteLBL.textColor = .black
         }
         
@@ -157,10 +164,35 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
             ImageTheameModel.init(imageName: "Image 73", textColor: .black, backgroundColor: ""),
             ImageTheameModel.init(imageName: "Image 72", textColor: .black, backgroundColor: "")
         ]))
-
+        
+//        noteLBL.translatesAutoresizingMaskIntoConstraints = false
+//        noteLBL.numberOfLines = 0  // Allow multiple lines
+//        noteLBL.lineBreakMode = .byWordWrapping
+//        adjustFontSizeToFitLabel()
         
         self.themeTableView.reloadData()
         self.view.layoutIfNeeded()
+    }
+    
+    func adjustFontSizeToFitLabel() {
+        guard let text = noteLBL.text else { return }
+        
+        let maxFontSize: CGFloat = 20  // Define maximum font size
+        let minFontSize: CGFloat = 5  // Define minimum font size
+        var currentFontSize: CGFloat = maxFontSize
+
+        // Iteratively find the right font size
+        while currentFontSize >= minFontSize {
+            let potentialFont = UIFont.systemFont(ofSize: currentFontSize)
+            let size = (text as NSString).size(withAttributes: [.font: potentialFont])
+            
+            if size.width <= noteLBL.bounds.width && size.height <= noteLBL.bounds.height {
+                noteLBL.font = potentialFont
+                break
+            }
+            
+            currentFontSize -= 1
+        }
     }
     
     func didSelectTheme(thameBGIMG: UIImage, backgroundColor: UIColor, textColor: UIColor) {
@@ -171,11 +203,13 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
 
     
     @IBAction func backBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .closeShareImageScreenButtonTapped)
         self.dismiss(animated: true)
     }
     
     @IBAction func shareImgBTNTapped(_ sender: Any) {
-        
+        TrackEvent.shared.track(eventName: .shareImageButtonClick)
+        TrackEvent.shared.trackSharedImage(selectedImage: SHARED_IMAGE)
         if let snapshotImage = shareImageView.snapshotWithTransparentRoundedCorners(cornerRadius: 0) {
             if let data = snapshotImage.pngData() {
                 let activityViewController = UIActivityViewController(activityItems: [data], applicationActivities: nil)
@@ -256,5 +290,27 @@ extension UIViewController{
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+}
+
+extension UILabel {
+    func adjustFontSizeToFitRect(rect : CGRect) {
+        if let unwrappedText = text {
+            let maxFontSize: CGFloat = 20.0
+            let minFontSize: CGFloat = 10.0  // You can adjust this minimum as needed
+            let constraintRect = CGSize(width: rect.width, height: .greatestFiniteMagnitude)
+            
+            var fittingFontSize = maxFontSize
+            for fontSize in stride(from: maxFontSize, through: minFontSize, by: -0.5) {
+                let font = UIFont(name: self.font.fontName, size: fontSize)!
+                let attributes = [NSAttributedString.Key.font: font]
+                let stringRect = unwrappedText.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+                if stringRect.height <= rect.height {
+                    fittingFontSize = fontSize
+                    break
+                }
+            }
+            self.font = UIFont(name: self.font.fontName, size: fittingFontSize)
+        }
     }
 }

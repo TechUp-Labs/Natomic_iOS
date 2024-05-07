@@ -22,10 +22,12 @@ class ShareNoteVC: UIViewController {
     }
     
     @IBAction func closeBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .shareNoteAlertCloseButtonClick)
         self.dismiss(animated: false)
     }
     
     @IBAction func shareTextBNTtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .shareNoteTextButtonClick)
         let textToShare = [noteText] as [Any]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
@@ -34,6 +36,7 @@ class ShareNoteVC: UIViewController {
     }
     
     @IBAction func shareIMGBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .shareNoteImageButtonClick)
         self.dismiss(animated: false) {
             self.delegate?.showShareImageScreen()
         }

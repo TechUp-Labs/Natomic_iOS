@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CalendarCell" id="gTV-IL-0wX" customClass="CalendarCell" customModule="Natomic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edh-1v-kpT">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7u-f1-y2m">
+                                <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAd-mM-73U">
+                                        <rect key="frame" x="6.6666666666666679" y="6.6666666666666679" width="16.666666666666668" height="16.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="SelectedCellColor"/>
+                                <constraints>
+                                    <constraint firstItem="xAd-mM-73U" firstAttribute="centerX" secondItem="V7u-f1-y2m" secondAttribute="centerX" id="0DF-1P-wZf"/>
+                                    <constraint firstAttribute="height" constant="30" id="bk8-3C-xvI"/>
+                                    <constraint firstAttribute="width" constant="30" id="c8a-vL-RgS"/>
+                                    <constraint firstItem="xAd-mM-73U" firstAttribute="centerY" secondItem="V7u-f1-y2m" secondAttribute="centerY" id="oBu-5F-iR8"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="streackSmallIcon" translatesAutoresizingMaskIntoConstraints="NO" id="9qs-Sx-GEa">
+                                <rect key="frame" x="17" y="14" width="16" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="2xB-bw-OdM"/>
+                                    <constraint firstAttribute="width" constant="16" id="FSa-WE-IdU"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9qs-Sx-GEa" firstAttribute="centerX" secondItem="Edh-1v-kpT" secondAttribute="centerX" id="OfA-8a-nLU"/>
+                            <constraint firstItem="9qs-Sx-GEa" firstAttribute="centerY" secondItem="Edh-1v-kpT" secondAttribute="centerY" id="d5y-gC-DME"/>
+                            <constraint firstItem="V7u-f1-y2m" firstAttribute="centerX" secondItem="Edh-1v-kpT" secondAttribute="centerX" id="p8K-ns-9k2"/>
+                            <constraint firstItem="V7u-f1-y2m" firstAttribute="centerY" secondItem="Edh-1v-kpT" secondAttribute="centerY" id="poH-fh-cSn"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Edh-1v-kpT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5TP-lm-0ZM"/>
+                <constraint firstItem="Edh-1v-kpT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7yn-IA-RHr"/>
+                <constraint firstAttribute="trailing" secondItem="Edh-1v-kpT" secondAttribute="trailing" id="Ifm-hy-XjI"/>
+                <constraint firstAttribute="bottom" secondItem="Edh-1v-kpT" secondAttribute="bottom" id="WNl-iG-Z71"/>
+            </constraints>
+            <connections>
+                <outlet property="dayBGView" destination="V7u-f1-y2m" id="j8q-ZB-Yhv"/>
+                <outlet property="dayOfMonthLbl" destination="xAd-mM-73U" id="p4b-GH-RyR"/>
+                <outlet property="streackImg" destination="9qs-Sx-GEa" id="aeQ-SB-stu"/>
+            </connections>
+            <point key="canvasLocation" x="131" y="-32"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="streackSmallIcon" width="16" height="21.333333969116211"/>
+        <namedColor name="SelectedCellColor">
+            <color red="0.91399997472763062" green="0.89399999380111694" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

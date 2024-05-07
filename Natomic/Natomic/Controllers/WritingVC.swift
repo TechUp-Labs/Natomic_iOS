@@ -197,24 +197,11 @@ class WritingVC: UIViewController {
     // MARK: - Button Action's : -
     
     @IBAction func closeBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .closeWritingScreeneButtonClick)
         self.dismiss(animated: true, completion: nil)
-//        let tweetText = "This is the text I want to share on Twitter!"
-//        let escapedTweetText = tweetText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-//        
-//        let urlString = "https://twitter.com/intent/tweet?text=\(escapedTweetText)"
-//        guard let url = URL(string: urlString) else { return }
-//        
-//        if UIApplication.shared.canOpenURL(url) {
-//            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//        } else {
-//            showAlert(title: "Error", message: "Twitter app is not installed")
-//        }
-        
-//        if let url = URL(string: "instagram://sharesheet?text=Hello%20DixitHello%20DixitHello%20DixitHello%20DixitHello%20Dixit") {
-//          UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//        }
     }
     @IBAction func postBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .postNoteButtonClick)
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()
         generator.notificationOccurred(.success)
@@ -227,13 +214,13 @@ class WritingVC: UIViewController {
                 self.textView.resignFirstResponder()
             DatabaseManager.Shared.addUserContext(userContext: User.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
                 NotificationCenter.default.post(name: .saveUserData, object: nil)
+            TrackEvent.shared.track(eventName: .noteAddedSuccessfullyButtonClick)
                 self.dismiss(animated: true, completion: nil)
         }
         if IS_LOGIN {
             checkInternet()
         }
         else{
-            
             self.pendingDataArray = getPendingDataModelArray(forKey: "PENDING_DATA_ARRAY") ?? []
             pendingDataArray.append(PendingData.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
             savePendingDataModelArray(pendingDataArray, forKey: "PENDING_DATA_ARRAY")
@@ -310,27 +297,27 @@ extension WritingVC: UITextViewDelegate {
         // Count all characters including spaces and new lines
         let characterCount = textView.text.count
         
-        self.textCountLBL.text = "\(characterCount)/250"
+        self.textCountLBL.text = "\(characterCount)"
         
         let isWithinLimit = characterCount <= 250
-        self.postBTN.layer.opacity = isWithinLimit && characterCount > 0 ? 1 : 0.5
+        self.postBTN.layer.opacity = characterCount > 0 ? 1 : 0.5
         self.placeholderLBL.isHidden = characterCount > 0
-        self.postBTN.isUserInteractionEnabled = isWithinLimit && characterCount > 0
+        self.postBTN.isUserInteractionEnabled = characterCount > 0
         
-        if !isWithinLimit {
-            // Limit the text to 250 characters
-            textView.text = String(textView.text.prefix(250))
-            self.textCountLBL.text = "250/250"
-        }
+//        if !isWithinLimit {
+//            // Limit the text to 250 characters
+//            textView.text = String(textView.text.prefix(250))
+//            self.textCountLBL.text = "250/250"
+//        }
     }
 
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // Predict the new text length
-        let currentText = textView.text as NSString
-        let newText = currentText.replacingCharacters(in: range, with: text)
-        
-        return newText.count <= 250
-    }
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        // Predict the new text length
+//        let currentText = textView.text as NSString
+//        let newText = currentText.replacingCharacters(in: range, with: text)
+//        
+//        return newText.count <= 250
+//    }
     
 }
 

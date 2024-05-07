@@ -19,6 +19,7 @@ class WelcomeVC: UIViewController {
     // MARK: - Button Action's : -
     
     @IBAction func startBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .goForItButtonClick)
         saveDataInUserDefault(value:true, key: "IS_STARTED")
         self.navigationController?.pushViewController(HOME_VC, animated: true)
     }

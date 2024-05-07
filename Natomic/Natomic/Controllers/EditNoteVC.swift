@@ -81,7 +81,7 @@ class EditNoteVC: UIViewController {
             self.textView.text = self.userData?.userThoughts ?? ""
             if !self.textView.text.isEmpty {
                 self.placeholderLBL.isHidden = true
-                self.textCountLBL.text = "\(self.textView.text.count)/250"
+                self.textCountLBL.text = "\(self.textView.text.count)"
                 self.postBTN.layer.opacity = 1
                 self.placeholderLBL.isHidden = true
                 self.postBTN.isUserInteractionEnabled = true
@@ -107,6 +107,7 @@ class EditNoteVC: UIViewController {
     }
     
     @IBAction func postBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .editNoteSuccessfullyButtonClick)
         if isFromTextOpenScreen {
             self.delegate?.updatedNote(noteText: self.textView.text)
         }
@@ -116,10 +117,10 @@ class EditNoteVC: UIViewController {
         DatabaseManager.Shared.editUserContext(oldUserContext: self.userData!, newUserContext: User.init(userThoughts: self.textView.text, date: self.userData?.date ?? "", time: self.userData?.time ?? "", day: self.userData?.day ?? "", noteID: self.userData?.noteID ?? ""))
         NotificationCenter.default.post(name: .saveUserData, object: nil)
         self.dismiss(animated: true, completion: nil)
-
     }
 
     @IBAction func closeBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .editNoteCloseButtonClick)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -184,6 +185,10 @@ extension EditNoteVC : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         
         let trimmedText = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let characterCount = textView.text.count
+        
+        self.textCountLBL.text = "\(characterCount)"
+
         if trimmedText.count != 0 {
             if textView.text.isEmpty {
                 self.postBTN.layer.opacity = 0.5
@@ -201,12 +206,12 @@ extension EditNoteVC : UITextViewDelegate {
         }
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // Calculate the new text after the replacement
-        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        self.textCountLBL.text = "\(newText.count)/250"
-        // Limit the text to 250 characters
-        return newText.count < 250
-    }
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        // Calculate the new text after the replacement
+//        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+//        self.textCountLBL.text = "\(newText.count)/250"
+//        // Limit the text to 250 characters
+//        return newText.count < 250
+//    }
     
 }

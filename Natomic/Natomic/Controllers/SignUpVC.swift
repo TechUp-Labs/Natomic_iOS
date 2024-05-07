@@ -9,6 +9,7 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
+import Mixpanel
 
 import AuthenticationServices
 
@@ -20,6 +21,8 @@ class SignUpVC: UIViewController {
     // MARK: - Variable's : -
     
     let reachability = try! Reachability()
+    let slideInTransition = SlideInTransition()
+    var delegate : ReloadHomeScreenData?
 
     
     override func viewDidLoad() {
@@ -27,28 +30,44 @@ class SignUpVC: UIViewController {
         
     }
     
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        slideInTransition.isPresenting = true
+        return slideInTransition
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        slideInTransition.isPresenting = false
+        return slideInTransition
+    }
+
     // MARK: - All Fuction's : -
 
     
     // MARK: - Button Action's : -
     
     @IBAction func googleLoginBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .googleSignupButtonClick)
         loginWithGoogle()
     }
     
     
     @IBAction func backBTNtapped(_ sender: Any) {
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromRight
-        navigationController?.view.layer.add(transition, forKey: kCATransition)
-        self.navigationController?.popViewController(animated: true)
+        TrackEvent.shared.track(eventName: .signupBackButtonClick)
+//        let transition = CATransition()
+//        transition.duration = 0.3
+//        transition.type = CATransitionType.push
+//        transition.subtype = CATransitionSubtype.fromRight
+//        navigationController?.view.layer.add(transition, forKey: kCATransition)
+        
+        self.dismiss(animated: true, completion: nil)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func appleLoginBTNtapped(_ sender: Any) {
 //        self.navigationController?.popViewController(animated: true)
-
+        TrackEvent.shared.track(eventName: .appleSignupButtonClick)
+        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -93,7 +112,8 @@ class SignUpVC: UIViewController {
                     return
                 }
                 print(user.uid)
-            
+                TrackEvent.shared.registerUser(userIID: user.uid)
+                TrackEvent.shared.track(eventName: .signUpWithGoogle)
                 saveDataInUserDefault(value: user.uid, key: "UID")
                 print(user.displayName as Any)
                 saveDataInUserDefault(value: user.displayName, key: "USER_NAME")
@@ -146,7 +166,8 @@ extension SignUpVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                     print("UID: \(uid)")
                     print("Display Name: \(displayName)")
                     print("Email: \(email)")
-                    
+                    TrackEvent.shared.registerUser(userIID: uid)
+                    TrackEvent.shared.track(eventName: .signUpWithApple)
                     saveDataInUserDefault(value: uid, key: "UID")
                     print(user.displayName as Any)
                     saveDataInUserDefault(value: displayName, key: "USER_NAME")
@@ -179,7 +200,8 @@ extension SignUpVC {
                     case .success(let NoteModel):
                         guard let data = NoteModel.response else {
                             NotificationCenter.default.post(name: .setUserData, object: nil)
-                            self.navigationController?.popViewController(animated: true)
+                            self.dismiss(animated: true, completion: nil)
+//                            self.navigationController?.popViewController(animated: true)
                             return
                         }
                         for i in data {
@@ -188,17 +210,27 @@ extension SignUpVC {
                             DatabaseManager.Shared.addUserContext(userContext: userContext)
                         }
                         NotificationCenter.default.post(name: .setUserData, object: nil)
-                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true) {
+                            self.delegate?.reloadUserData()
+                        }
+
+//                        self.navigationController?.popViewController(animated: true)
                     case .failure(let error):
                         print("Error: \(error.localizedDescription)")
-                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true) {
+                            self.delegate?.reloadUserData()
+                        }
+//                        self.navigationController?.popViewController(animated: true)
                     }
                 
                 }
             case .failure(let error):
                 // Registration failed, and you can handle the error
                 print("Error: \(error.localizedDescription)")
-                self.navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true) {
+                    self.delegate?.reloadUserData()
+                }
+//                self.navigationController?.popViewController(animated: true)
             }
         }
     }

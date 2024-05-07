@@ -14,6 +14,7 @@ target 'Natomic' do
   pod 'Alamofire'
   pod 'NVActivityIndicatorView'
   pod 'SDWebImage'
+  pod 'Mixpanel-swift'
   # Pods for Natomic
 
   # Set the deployment target for your target

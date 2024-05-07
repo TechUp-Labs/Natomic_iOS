@@ -31,12 +31,14 @@ class SetReminderAlertVC: UIViewController {
 //        dismiss {
 //            print("dismiss")
 //        }
+        TrackEvent.shared.track(eventName: .doItLaterButtonClick)
         self.dismiss(animated: false, completion: nil)
     }
     
     @IBAction func setNowBTNtapped(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
         self.dismiss(animated: false) {
+            TrackEvent.shared.track(eventName: .setNowButtonClickReminderAlertScreen)
             self.writingDelegate?.checkNotificationState()
 
         }

@@ -141,12 +141,143 @@ class DatabaseManager {
     // MARK: - Function For get User Data from Core Database based on 7 days ago:-
 
     func getUserContextFor7DaysAgo() -> [UserEntity] {
-        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())!
+        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -2, to: Date())!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-M-d"
         let sevenDaysAgoString = dateFormatter.string(from: sevenDaysAgo)
         return getUserContext(forDate: sevenDaysAgoString)
     }
+    
+    // MARK: - Function For Check If Date Exists in Core Database:-
+
+    func isDateExist(_ dateString: String) -> Bool {
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-M-d"
+
+        // Assuming date is stored as String in "yyyy-MM-dd" format
+        fetchRequest.predicate = NSPredicate(format: "date == %@", dateString)
+
+        do {
+            let count = try context.count(for: fetchRequest)
+            return count > 0
+        } catch {
+            print("Check Date Existence Error: 😞", error)
+        }
+        
+        return false
+    }
+
+    // MARK: - Function For Calculating Streak of Daily Entries
+    
+    func calculateStreak() -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-M-d"
+        
+        let today = Date()
+        var streak = 0
+        
+        // Check for today's entry first
+        let todayString = dateFormatter.string(from: today)
+        if isDateExist(todayString) {
+            streak += 1
+        }
+        
+        // Continue checking from yesterday
+        var yesterday = Calendar.current.date(byAdding: .day, value: -1, to: today)!
+        
+        while true {
+            let dateString = dateFormatter.string(from: yesterday)
+            if isDateExist(dateString) {
+                streak += 1
+                guard let newDate = Calendar.current.date(byAdding: .day, value: -1, to: yesterday) else {
+                    break
+                }
+                yesterday = newDate
+            } else {
+                break
+            }
+        }
+
+        return streak
+    }
+
+//    func calculateStreak() -> Int {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-M-d"
+//        
+//        var yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+////        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+//        var streak = 0
+//
+//        while true {
+//            let dateString = dateFormatter.string(from: yesterday)
+//            if isDateExist(dateString) {
+//                streak += 1
+//                guard let newDate = Calendar.current.date(byAdding: .day, value: -1, to: yesterday) else {
+//                    break
+//                }
+//                yesterday = newDate
+//            } else {
+//                break
+//            }
+//        }
+//
+//        return streak
+//    }
+
+    // MARK: - Function For Counting Notes in a Specific Month and Year
+
+    func countNotesInMonth(monthYear: String) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM yyyy"
+        
+        guard let monthDate = dateFormatter.date(from: monthYear) else {
+            print("Invalid date format provided.")
+            return 0
+        }
+
+        let calendar = Calendar.current
+        guard let range = calendar.range(of: .day, in: .month, for: monthDate) else {
+            print("Cannot find range of days in month.")
+            return 0
+        }
+        
+        let components = calendar.dateComponents([.year, .month], from: monthDate)
+        
+        // Generate all possible date strings for the month in "yyyy-M-d" format
+        var dateStrings: [String] = []
+        for day in range {
+            var dayComponents = DateComponents()
+            dayComponents.year = components.year
+            dayComponents.month = components.month
+            dayComponents.day = day
+            
+            if let date = calendar.date(from: dayComponents) {
+                let dayFormatter = DateFormatter()
+                dayFormatter.dateFormat = "yyyy-M-d"
+                let dateString = dayFormatter.string(from: date)
+                dateStrings.append(dateString)
+            }
+        }
+        
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        let datePredicate = NSPredicate(format: "date IN %@", dateStrings)
+        fetchRequest.predicate = datePredicate
+
+        do {
+            let count = try context.count(for: fetchRequest)
+            return count
+        } catch {
+            print("Error fetching data: \(error)")
+            return 0
+        }
+    }
+
+
+
+
+
 
     
     // MARK: - Function For Remove All User Data from Core Database:-

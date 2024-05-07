@@ -14,12 +14,15 @@ import FirebaseAnalytics
 import GoogleSignIn
 import Foundation
 import BackgroundTasks
+import Mixpanel
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        Mixpanel.initialize(token: "bd0e641c95349180b8efed198385047d", trackAutomaticEvents: false)
+        TrackEvent.shared.track(eventName: .openApp)
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in 
             if granted {
@@ -28,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 // User denied permission
             }
         }
+        
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done"
         IQKeyboardManager.shared.toolbarTintColor = #colorLiteral(red: 0.06300000101, green: 0.05900000036, blue: 0.05099999905, alpha: 1)
@@ -375,29 +379,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       return GIDSignIn.sharedInstance.handle(url)
     }
     
-    
     func scheduleNotificationForUserThoughts7DaysAgo() {
         let userEntities = DatabaseManager.Shared.getUserContextFor7DaysAgo()
         
+        
+        
+        // Concatenate all user thoughts into one body content
+        var combinedThoughts = ""
         for userEntity in userEntities {
-            // Schedule a notification for each userEntity
+            let thought = userEntity.userThoughts ?? "You didn't write anything!"
+            let time = userEntity.time ?? "Unknown time"
+            combinedThoughts += "\(thought)\n" // Format each thought with time
+        }
+        if !combinedThoughts.isEmpty{
+            // Schedule a notification for the combined thoughts
             let content = UNMutableNotificationContent()
-            content.title = NSString.localizedUserNotificationString(forKey: "Your thought 7 days ago", arguments: nil)
-            content.body = NSString.localizedUserNotificationString(forKey: userEntity.userThoughts ?? "You didn't write anything!", arguments: nil)
+            content.title = NSString.localizedUserNotificationString(forKey: "Your thoughts 7 days ago", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: combinedThoughts, arguments: nil)
             content.sound = UNNotificationSound.default
             content.userInfo = ["notificationType": "note"]
-
-            let time_string = userEntity.time ?? "12:00:00"
-
-            // Get individual characters for hour, minute, and second (if needed)
-            let hourString = String(time_string[time_string.startIndex..<time_string.index(time_string.startIndex, offsetBy: 2)])
-            let minuteString = String(time_string[time_string.index(time_string.startIndex, offsetBy: 3)...time_string.index(time_string.startIndex, offsetBy: 4)])
-
-            // Convert hour and minute to integers
-            guard var hour = Int(hourString), var minute = Int(minuteString) else {
-                print("Invalid time format")
-                return
-            }
+            
+            var hour = notificationHour
+            var minute = notificationMinutes
             
             // Adjust time by subtracting 15 minutes
             minute -= 15
@@ -411,27 +414,89 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 hour = 23 // Reset hour to 11 PM of the previous day
             }
 
-            var dateComponents = DateComponents()
-            dateComponents.hour = hour // Set the hour (in 24-hour format) for the notification
-            dateComponents.minute = minute // Set the minute for the notification
 
-            // Deliver the notification in five seconds.
+            // Set the notification to trigger at a specific time, 12:00:00
+            var dateComponents = DateComponents()
+            dateComponents.hour = hour
+            dateComponents.minute = minute
+
 //            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             
             // Create the request
-            let request = UNNotificationRequest(identifier: userEntity.noteID ?? UUID().uuidString, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             
-            // Schedule the request with the system.
+            // Schedule the request with the system
             let notificationCenter = UNUserNotificationCenter.current()
             notificationCenter.add(request) { (error) in
                 if error != nil {
-                    // Handle any errors.
+                    // Handle any errors
                     print("Error scheduling notification: \(String(describing: error))")
                 }
             }
         }
+        
     }
+
+    
+    
+//    func scheduleNotificationForUserThoughts7DaysAgo() {
+//        let userEntities = DatabaseManager.Shared.getUserContextFor7DaysAgo()
+//        
+//        for userEntity in userEntities {
+//            // Schedule a notification for each userEntity
+//            let content = UNMutableNotificationContent()
+//            content.title = NSString.localizedUserNotificationString(forKey: "Your thought 7 days ago", arguments: nil)
+//            content.body = NSString.localizedUserNotificationString(forKey: userEntity.userThoughts ?? "You didn't write anything!", arguments: nil)
+//            content.sound = UNNotificationSound.default
+//            content.userInfo = ["notificationType": "note"]
+//
+//            let time_string = userEntity.time ?? "12:00:00"
+//
+//            // Get individual characters for hour, minute, and second (if needed)
+//            let hourString = String(time_string[time_string.startIndex..<time_string.index(time_string.startIndex, offsetBy: 2)])
+//            let minuteString = String(time_string[time_string.index(time_string.startIndex, offsetBy: 3)...time_string.index(time_string.startIndex, offsetBy: 4)])
+//
+//            // Convert hour and minute to integers
+//            guard var hour = Int(hourString), var minute = Int(minuteString) else {
+//                print("Invalid time format")
+//                return
+//            }
+//            
+//            // Adjust time by subtracting 15 minutes
+//            minute -= 15
+//            if minute < 0 {
+//                minute += 60 // Add 60 minutes to the minute value
+//                hour -= 1 // Subtract one hour
+//            }
+//
+//            // Adjust for when the hour is less than 0
+//            if hour < 0 {
+//                hour = 23 // Reset hour to 11 PM of the previous day
+//            }
+//
+//            var dateComponents = DateComponents()
+//            dateComponents.hour = hour // Set the hour (in 24-hour format) for the notification
+//            dateComponents.minute = minute // Set the minute for the notification
+//
+//            // Deliver the notification in five seconds.
+////            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+//            
+//            // Create the request
+//            let request = UNNotificationRequest(identifier: userEntity.noteID ?? UUID().uuidString, content: content, trigger: trigger)
+//            
+//            // Schedule the request with the system.
+//            let notificationCenter = UNUserNotificationCenter.current()
+//            notificationCenter.add(request) { (error) in
+//                if error != nil {
+//                    // Handle any errors.
+//                    print("Error scheduling notification: \(String(describing: error))")
+//                }
+//            }
+//        }
+//    }
     
 
     
@@ -449,14 +514,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             switch notificationType {
             case "reminder":
                 // Navigate to the reminder screen
-                let reminderVC = // Initialize your reminder view controller here
+//                let reminderVC = // Initialize your reminder view controller here
                 navController.viewControllers = [HOME_VC] // Assuming HOME_VC is your home view controller
                 IS_FROME_NOTIFICATION = true
+                IS_FROME_NOTE_NOTIFICATION = false
             case "note":
                 // Navigate to the note detail screen
-                let noteDetailVC = // Initialize your note detail view controller here
+//                let noteDetailVC = // Initialize your note detail view controller here
                 navController.viewControllers = [HOME_VC] // Assuming HOME_VC is your home view controller
                 NOTIFICATION_DESCRIPTION = content.body
+                IS_FROME_NOTIFICATION = false
                 IS_FROME_NOTE_NOTIFICATION = true
             default:
                 // Handle unknown notification types if needed

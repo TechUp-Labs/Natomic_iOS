@@ -13,6 +13,7 @@ class MenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var menuImg: UIImageView!
     @IBOutlet weak var menuLBL: UILabel!
+    @IBOutlet weak var arrowImg: UIImageView!
     
     // MARK: - UITableViewCell Life Cycle:-
     

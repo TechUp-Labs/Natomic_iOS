@@ -61,6 +61,7 @@
 		D05D88402BA1847E00854FDB /* SharedUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D883F2BA1847E00854FDB /* SharedUserDefaults.swift */; };
 		D05D88412BA1848400854FDB /* SharedUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05D883F2BA1847E00854FDB /* SharedUserDefaults.swift */; };
 		D05DEBAE2AA071B100792DB6 /* TextOpenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */; };
+		D0622CD22BC5589F00A1973D /* TrackEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0622CD12BC5589F00A1973D /* TrackEvent.swift */; };
 		D06A938E2AE65EF900DF166F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06A938D2AE65EF900DF166F /* Reachability.swift */; };
 		D07F85862B51431200409130 /* ImageConvertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F85852B51431200409130 /* ImageConvertVC.swift */; };
 		D08548C22B5FEEBD00B5377D /* EditDeleteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08548C02B5FEEBC00B5377D /* EditDeleteTableView.swift */; };
@@ -83,6 +84,10 @@
 		D0AEAB962A937469002D24A6 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB842A9372AE002D24A6 /* Rubik-Regular.ttf */; };
 		D0AEAB972A937469002D24A6 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB882A9372AE002D24A6 /* Rubik-SemiBold.ttf */; };
 		D0AEAB982A937469002D24A6 /* Rubik-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0AEAB8A2A9372AE002D24A6 /* Rubik-SemiBoldItalic.ttf */; };
+		D0B3B6B72BCFE2990067FF21 /* StreakVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3B6B62BCFE2990067FF21 /* StreakVC.swift */; };
+		D0B3B6BA2BCFEB520067FF21 /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0B3B6B92BCFEB520067FF21 /* CalendarCell.xib */; };
+		D0B3B6BB2BCFEB520067FF21 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3B6B82BCFEB520067FF21 /* CalendarCell.swift */; };
+		D0B3B6BD2BCFEF7A0067FF21 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3B6BC2BCFEF7A0067FF21 /* CalendarHelper.swift */; };
 		D0D1339D2B71148500B780AF /* ShareNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1339C2B71148500B780AF /* ShareNoteVC.swift */; };
 		D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */; };
 		D0F0E5D42BBFCD7400A64780 /* NoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F0E5D32BBFCD7400A64780 /* NoteCollectionViewCell.xib */; };
@@ -175,6 +180,7 @@
 		D05D883E2BA1843900854FDB /* Natomic WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Natomic WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		D05D883F2BA1847E00854FDB /* SharedUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedUserDefaults.swift; sourceTree = "<group>"; };
 		D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOpenVC.swift; sourceTree = "<group>"; };
+		D0622CD12BC5589F00A1973D /* TrackEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEvent.swift; sourceTree = "<group>"; };
 		D06A938D2AE65EF900DF166F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D07F85852B51431200409130 /* ImageConvertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConvertVC.swift; sourceTree = "<group>"; };
 		D08548C02B5FEEBC00B5377D /* EditDeleteTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDeleteTableView.swift; sourceTree = "<group>"; };
@@ -197,6 +203,10 @@
 		D0AEAB882A9372AE002D24A6 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
 		D0AEAB892A9372AE002D24A6 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
 		D0AEAB8A2A9372AE002D24A6 /* Rubik-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		D0B3B6B62BCFE2990067FF21 /* StreakVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakVC.swift; sourceTree = "<group>"; };
+		D0B3B6B82BCFEB520067FF21 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		D0B3B6B92BCFEB520067FF21 /* CalendarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
+		D0B3B6BC2BCFEF7A0067FF21 /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		D0D1339C2B71148500B780AF /* ShareNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNoteVC.swift; sourceTree = "<group>"; };
 		D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNoteVC.swift; sourceTree = "<group>"; };
 		D0F0E5D22BBFCD7400A64780 /* NoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -303,6 +313,8 @@
 				D02003242B3A969F00A34693 /* Loader.swift */,
 				D06A938D2AE65EF900DF166F /* Reachability.swift */,
 				D05D883F2BA1847E00854FDB /* SharedUserDefaults.swift */,
+				D0622CD12BC5589F00A1973D /* TrackEvent.swift */,
+				D0B3B6BC2BCFEF7A0067FF21 /* CalendarHelper.swift */,
 			);
 			name = HelperFiles;
 			sourceTree = "<group>";
@@ -337,6 +349,7 @@
 				D05DEBAD2AA071B100792DB6 /* TextOpenVC.swift */,
 				D03FAA152A98A98E00615426 /* WelcomeVC.swift */,
 				04666A3B2A6E3C9C003BC9CB /* WritingVC.swift */,
+				D0B3B6B62BCFE2990067FF21 /* StreakVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -414,6 +427,8 @@
 				D02F2EE62B91DF7C008036C8 /* ThemeHeaderCell.xib */,
 				D0F0E5D22BBFCD7400A64780 /* NoteCollectionViewCell.swift */,
 				D0F0E5D32BBFCD7400A64780 /* NoteCollectionViewCell.xib */,
+				D0B3B6B82BCFEB520067FF21 /* CalendarCell.swift */,
+				D0B3B6B92BCFEB520067FF21 /* CalendarCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -527,6 +542,7 @@
 				D0AEAB8B2A937469002D24A6 /* Rubik-Black.ttf in Resources */,
 				D0F0E5D42BBFCD7400A64780 /* NoteCollectionViewCell.xib in Resources */,
 				D0AEAB8C2A937469002D24A6 /* Rubik-BlackItalic.ttf in Resources */,
+				D0B3B6BA2BCFEB520067FF21 /* CalendarCell.xib in Resources */,
 				D0AEAB8D2A937469002D24A6 /* Rubik-Bold.ttf in Resources */,
 				D0AEAB8E2A937469002D24A6 /* Rubik-BoldItalic.ttf in Resources */,
 				D02F2EE82B91DF7C008036C8 /* ThemeHeaderCell.xib in Resources */,
@@ -613,10 +629,12 @@
 			files = (
 				D07F85862B51431200409130 /* ImageConvertVC.swift in Sources */,
 				D08548C22B5FEEBD00B5377D /* EditDeleteTableView.swift in Sources */,
+				D0622CD22BC5589F00A1973D /* TrackEvent.swift in Sources */,
 				D0F843892AD7B8F400288F19 /* DatabaseHelper.swift in Sources */,
 				04666A3C2A6E3C9C003BC9CB /* WritingVC.swift in Sources */,
 				D0A06F022A98D25600DA36E8 /* SuccessFeedbackVC.swift in Sources */,
 				D0403D3C2B7213EC00C2DE67 /* ShareImageVC.swift in Sources */,
+				D0B3B6BD2BCFEF7A0067FF21 /* CalendarHelper.swift in Sources */,
 				D0403D432B721E2C00C2DE67 /* ImageTheameModel.swift in Sources */,
 				04AE06A82A45798300FC4BA1 /* SplashVC.swift in Sources */,
 				D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */,
@@ -635,9 +653,11 @@
 				04AE06A62A45798300FC4BA1 /* SceneDelegate.swift in Sources */,
 				D09F2C602B60DB8200F6073D /* EditNoteVC.swift in Sources */,
 				D01981782A98B20B003E45B8 /* WrirtingAlertVC.swift in Sources */,
+				D0B3B6B72BCFE2990067FF21 /* StreakVC.swift in Sources */,
 				04644FF22A69225B00ABC01F /* IntroVC.swift in Sources */,
 				04AFFCCE2A6935C100FCCCAD /* UIViewExtension.swift in Sources */,
 				043810152A7A369D00102547 /* TextDetailVC.swift in Sources */,
+				D0B3B6BB2BCFEB520067FF21 /* CalendarCell.swift in Sources */,
 				D03FAA142A989DF400615426 /* Menu.swift in Sources */,
 				04AE06BB2A457C2E00FC4BA1 /* DatabaseManager.swift in Sources */,
 				04666A402A6E6E92003BC9CB /* HistoryTableCell.swift in Sources */,

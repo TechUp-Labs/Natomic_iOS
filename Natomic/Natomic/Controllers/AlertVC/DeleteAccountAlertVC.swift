@@ -18,10 +18,12 @@ class DeleteAccountAlertVC: UIViewController {
     
     @IBAction func cancelBTNtapped(_ sender: Any) {
 //        dismiss()
+        TrackEvent.shared.track(eventName: .closeDeleteAlertButtonClick)
         self.dismiss(animated: false, completion: nil)
     }
     
     @IBAction func deleteBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .deleteAppDataButtonClick)
         deleteUserData()
     }
     
@@ -36,6 +38,7 @@ class DeleteAccountAlertVC: UIViewController {
                         let response = try decoder.decode(ResponseModel.self, from: responseData)
                         // Now you have your response object
                         print("Successfully Delete data:", response)
+                        TrackEvent.shared.track(eventName: .deleteAppDataSuccessfullyButtonClick)
                         Loader.shared.stopAnimating()
 //                        self.dismiss()
                         self.dismiss(animated: false, completion: nil)
@@ -53,5 +56,4 @@ class DeleteAccountAlertVC: UIViewController {
             }
         }
     }
-    
 }

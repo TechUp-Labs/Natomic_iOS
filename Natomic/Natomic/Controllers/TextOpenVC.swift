@@ -21,16 +21,11 @@ class TextOpenVC : UIViewController {
     @IBOutlet weak var textLBL: UILabel!
     @IBOutlet weak var dateLBL: UILabel!
     @IBOutlet weak var timeLBL: UILabel!
-    @IBOutlet weak var noteLBL: UILabel!
-    @IBOutlet weak var thameBGIMG: UIImageView!
-    @IBOutlet weak var shareImageView: UIView!
-    @IBOutlet weak var botttomCollectionCon: NSLayoutConstraint!
     @IBOutlet weak var secondThemeImageView: UIImageView!
     @IBOutlet weak var moreAlertHeight: NSLayoutConstraint!
     @IBOutlet weak var moreAlertWidth: NSLayoutConstraint!
     @IBOutlet weak var moreOptionView: UIView!
     
-    @IBOutlet weak var userNoteLBL: UILabel!
     // MARK: - Variable's : -
     
     var selectedData : UserEntity?
@@ -58,12 +53,6 @@ class TextOpenVC : UIViewController {
         textLBL.text = selectedData?.userThoughts ?? ""
         dateLBL.text = DatabaseManager.Shared.convertDateFormat(selectedData?.date ?? "")
         timeLBL.text = DatabaseManager.Shared.convertTo12HourFormat(selectedData?.time ?? "")!
-        noteLBL.text = selectedData?.userThoughts ?? ""
-        userNoteLBL.text = selectedData?.userThoughts ?? ""
-        thameBGIMG.image = nil
-        thameBGIMG.backgroundColor = hexStringToUIColor(hex: "#F9C780")
-        noteLBL.textColor = .white
-        botttomCollectionCon.constant = (WIDTH/2)-50
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOutsideMoreOption(_:)))
         // Add the gesture recognizer to your main view
         view.addGestureRecognizer(tapGesture)
@@ -97,7 +86,8 @@ class TextOpenVC : UIViewController {
             // Check if the user swiped from left to right (positive x-translation)
             if translation.x > 50 {
                 // Perform the pop action if the swipe was significant enough
-                navigationController?.popViewController(animated: true)
+                TrackEvent.shared.track(eventName: .backButtonClickNoteDeatilScreen)
+                navigationController?.popViewController (animated: true)
             }
         }
     }
@@ -182,11 +172,14 @@ class TextOpenVC : UIViewController {
     // MARK: - Button Action's : -
     
     @IBAction func backBTNtapped(_ sender: Any) {
+        TrackEvent.shared.track(eventName: .backButtonClickNoteDeatilScreen)
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func moreBTNtapped(_ sender: Any) {
-        moreOptionView.isHidden.toggle()
+        TrackEvent.shared.track(eventName: .shareNoteButtonClickNoteDeatilScreen)
+        showShareImageScreen()
+//        moreOptionView.isHidden.toggle()
     }
     
     @IBAction func shareBTNtapped(_ sender: Any) {
@@ -224,7 +217,6 @@ class TextOpenVC : UIViewController {
         let vc = SHARE_IMAGE_VC
         vc.noreText = textLBL.text ?? ""
         vc.fromTextOpenVC = true
-        vc.selectedImage = thameBGIMG.image ?? UIImage()
         vc.textColor = .white
         vc.hexColor = "#F9C780"
         vc.modalPresentationStyle = .overCurrentContext
@@ -249,15 +241,13 @@ class TextOpenVC : UIViewController {
 extension TextOpenVC : ShowShareImageScreen{
     func updatedNote(noteText:String) {
         self.textLBL.text = noteText
-        self.noteLBL.text = noteText
-        self.userNoteLBL.text = noteText
 
     }
     
     func showShareImageScreen() {
         let vc = SHARE_IMAGE_VC
         vc.noreText = textLBL.text ?? ""
-        vc.modalPresentationStyle = .overCurrentContext
+//        vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: true)
     }
 }
