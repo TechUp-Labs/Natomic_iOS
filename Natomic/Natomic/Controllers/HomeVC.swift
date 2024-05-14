@@ -20,6 +20,7 @@ protocol CheckWriting {
 
 protocol ReloadHomeScreenData {
     func reloadUserData()
+    func reloadProfileIcon()
     func openSplashScreen()
 }
 
@@ -128,6 +129,7 @@ class HomeVC: UIViewController, UIViewControllerTransitioningDelegate {
         
         if IS_FROME_NOTIFICATION ?? false {
             let vc = WRITING_VC
+            vc.shared_text = SHARED_Text
             self.present(vc, animated: true, completion: nil)
         }
         
@@ -540,7 +542,7 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
 
         // Load custom view from XIB for editAction
         if let editCustomView = Bundle.main.loadNibNamed("EditDeleteTableView", owner: nil, options: nil)?.first as? EditDeleteTableView {
-            editCustomView.iconeIMGView.image = UIImage.init(named: "edit")
+            editCustomView.iconeIMGView.image = UIImage.init(named: "Edit_icon")
             editCustomView.textLbl.text = "Edit"
             editCustomView.textLbl.textColor = #colorLiteral(red: 0.06300000101, green: 0.05900000036, blue: 0.05099999905, alpha: 1)
 //            editCustomView.iconeIMGView.image = UIImage.init(systemName: "pencil")
@@ -565,7 +567,8 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
 
         // Load custom view from XIB for deleteAction
         if let deleteCustomView = Bundle.main.loadNibNamed("EditDeleteTableView", owner: nil, options: nil)?.first as? EditDeleteTableView {
-            deleteCustomView.iconeIMGView.image =  UIImage.init(named: "delete") // trash
+            deleteCustomView.iconeIMGView.image =  UIImage.init(named: "Delete_icon") // trash
+            deleteCustomView.iconeIMGView.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             deleteCustomView.textLbl.text = "Delete"
             deleteCustomView.textLbl.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 //            deleteCustomView.iconeIMGView.image =  UIImage.init(systemName: "trash") // trash
@@ -801,6 +804,10 @@ extension HomeVC: ReloadHomeScreenData {
 //        }
         self.historyTBV.reloadData()
         self.historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+    }
+    func reloadProfileIcon() {
+        notificationBTN.setImage(NOTIFICATION_ENABLE ? UIImage(named: "notificationEnabledImage") : UIImage(named: "notificationDisabledImage"), for: .normal)
+        profileBTN.setImage(IS_LOGIN ? UIImage(named: "ProfileDisableIcon") : UIImage(named: "ProfileEnableIcon"), for: .normal)
     }
     
     func openSplashScreen(){

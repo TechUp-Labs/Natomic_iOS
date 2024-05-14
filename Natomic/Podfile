@@ -13,7 +13,6 @@ target 'Natomic' do
   pod 'GoogleSignIn'
   pod 'Alamofire'
   pod 'NVActivityIndicatorView'
-  pod 'SDWebImage'
   pod 'Mixpanel-swift'
   # Pods for Natomic
 

@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if url.absoluteString == "natomic://openSpecificView" {
             IS_FROME_NOTIFICATION = true
+            SHARED_Text = UserDefaults(suiteName: "group.natomic.share")?.string(forKey: "sharedText") ?? ""
             showHomeViewController()
         }
     }
@@ -45,7 +46,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         completionHandler(true)
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.scheme == "natomic" {
+            if let sharedText = UserDefaults(suiteName: "group.natomic.share")?.string(forKey: "sharedText") {
+                print(sharedText)
+                IS_FROME_NOTIFICATION = true
+                showHomeViewController()
+            }
+        }
+        return true
+    }
+
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+//        if let sharedText = UserDefaults(suiteName: "group.natomic.share")?.string(forKey: "sharedText") {
+//            // Assuming you have a method to handle the routing to your specific screen
+//            if let windowScene = scene as? UIWindowScene {
+//                let window = UIWindow(windowScene: windowScene)
+//                window.rootViewController = configureMainViewController(with: sharedText)
+//                self.window = window
+//                window.makeKeyAndVisible()
+//            }
+//        }
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         if let urlContext = connectionOptions.urlContexts.first {
@@ -66,10 +90,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func handleURL(_ url: URL) {
         if url.absoluteString == "natomic://openSpecificView" {
             IS_FROME_NOTIFICATION = true
+            SHARED_Text = UserDefaults(suiteName: "group.natomic.share")?.string(forKey: "sharedText") ?? ""
             showHomeViewController()
         }
     }
     
+    func configureMainViewController(with text: String) -> UIViewController {
+        // Create and return your specific view controller initialized with the text
+        let homeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+        let navController = UINavigationController(rootViewController: homeVC)
+        navController.navigationBar.isHidden = true
+        navController.modalPresentationStyle = .fullScreen
+        SHARED_Text = text
+        return navController
+    }
+
     
     private func showHomeViewController() {
         print("showHomeViewController called")

@@ -46,8 +46,21 @@ class StreakVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        configureCellSize() // Ensures that the layout is updated based on the current view size
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            configureCellSize() // Ensures that the layout is updated based on the current view size
+        }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            coordinator.animate(alongsideTransition: { _ in
+                self.configureCellSize()
+                self.calendarCollectionView.reloadData()
+            }, completion: nil)
+        }
+    }
+
 
     
     func setUserData(){
@@ -64,9 +77,20 @@ class StreakVC: UIViewController {
             return false // Return false as a fallback
         }
     }
-    
+    func cellsPerRow() -> CGFloat {
+        // Check the device type and orientation
+        let deviceIsTablet = UIDevice.current.userInterfaceIdiom == .pad
+        let orientationIsLandscape = UIDevice.current.orientation.isLandscape
+        
+        if deviceIsTablet {
+            return orientationIsLandscape ? 4 : 4  // More cells in landscape
+        } else {
+            return orientationIsLandscape ? 7 : 7  // Same number for simplicity, adjust as needed
+        }
+    }
+
     func configureCellSize() {
-        let numberOfCellsPerRow: CGFloat = 7
+        let numberOfCellsPerRow = cellsPerRow()
         let flowLayout = calendarCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
 
         let totalSpacing = flowLayout.sectionInset.left + // left margin
@@ -74,12 +98,13 @@ class StreakVC: UIViewController {
                            flowLayout.minimumInteritemSpacing * (numberOfCellsPerRow - 1) // space between cells
 
         let width = (calendarCollectionView.bounds.width - totalSpacing) / numberOfCellsPerRow
-        let height = width // to make the cells square, adjust here if different height is needed.
+        let height = width  // Adjust if a different height is needed
 
         flowLayout.itemSize = CGSize(width: width, height: height)
-        calendarCollectionView.collectionViewLayout = flowLayout // Reassign layout to collection view
+        calendarCollectionView.collectionViewLayout = flowLayout
         calendarHeight.constant = calendarCollectionView.collectionViewLayout.collectionViewContentSize.height + 50
     }
+
 
     
 //    func setCellsView(){

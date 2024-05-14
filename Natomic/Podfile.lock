@@ -830,9 +830,6 @@ PODS:
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (2.3.1)
-  - SDWebImage (5.18.1):
-    - SDWebImage/Core (= 5.18.1)
-  - SDWebImage/Core (5.18.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -845,7 +842,6 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Mixpanel-swift
   - NVActivityIndicatorView
-  - SDWebImage
 
 SPEC REPOS:
   trunk:
@@ -875,7 +871,6 @@ SPEC REPOS:
     - nanopb
     - NVActivityIndicatorView
     - PromisesObjC
-    - SDWebImage
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
@@ -904,8 +899,7 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  SDWebImage: ebdbcebc7933a45226d9313bd0118bc052ad458b
 
-PODFILE CHECKSUM: e013c30d0e4884b1f170b7fb53c7a5cfece1a775
+PODFILE CHECKSUM: daece46b6112b1f5808f34da5e53493254fcb99f
 
 COCOAPODS: 1.12.1

@@ -1031,7 +1031,7 @@ build like a boss</string>
                                         <color key="textColor" name="TitlesColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sq-Me-FO0">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sq-Me-FO0">
                                         <rect key="frame" x="325" y="5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="77a-iH-mvF"/>
@@ -2532,10 +2532,9 @@ and build a habit!</string>
                                                 <color key="textColor" name="BodyColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Feb, 2023" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZS4-7L-G1l">
-                                                <rect key="frame" x="78" y="89" width="75" height="12"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Feb, 2023" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZS4-7L-G1l">
+                                                <rect key="frame" x="80" y="89" width="314" height="12"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="75" id="gZa-pr-e3g"/>
                                                     <constraint firstAttribute="height" constant="12" id="prk-ex-POD"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
@@ -2543,7 +2542,10 @@ and build a habit!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.01 PM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCy-AE-CJJ">
-                                                <rect key="frame" x="20" y="87.5" width="48" height="14.5"/>
+                                                <rect key="frame" x="20" y="87.5" width="55" height="14.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="55" id="Tko-tV-jkI"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                 <color key="textColor" red="0.063000001010000001" green="0.059000000359999999" blue="0.050999999050000001" alpha="0.50426343019999997" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2556,8 +2558,9 @@ and build a habit!</string>
                                             <constraint firstAttribute="trailing" secondItem="K7u-of-oDm" secondAttribute="trailing" constant="20" id="EYG-oa-LSW"/>
                                             <constraint firstItem="K7u-of-oDm" firstAttribute="top" secondItem="Je2-ME-kma" secondAttribute="top" constant="20" id="Hpb-4w-qYz"/>
                                             <constraint firstItem="K7u-of-oDm" firstAttribute="leading" secondItem="Je2-ME-kma" secondAttribute="leading" constant="20" id="WOA-lF-ejC"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZS4-7L-G1l" secondAttribute="trailing" constant="20" id="rsY-r7-x07"/>
                                             <constraint firstItem="dCy-AE-CJJ" firstAttribute="leading" secondItem="Je2-ME-kma" secondAttribute="leading" constant="20" id="tWJ-Px-x8L"/>
-                                            <constraint firstItem="ZS4-7L-G1l" firstAttribute="leading" secondItem="dCy-AE-CJJ" secondAttribute="trailing" constant="10" id="uJ0-nj-pUu"/>
+                                            <constraint firstItem="ZS4-7L-G1l" firstAttribute="leading" secondItem="dCy-AE-CJJ" secondAttribute="trailing" constant="5" id="uJ0-nj-pUu"/>
                                             <constraint firstItem="dCy-AE-CJJ" firstAttribute="top" secondItem="K7u-of-oDm" secondAttribute="bottom" constant="20" id="zgK-nb-8db"/>
                                         </constraints>
                                     </view>
@@ -3088,8 +3091,9 @@ and build a habit!</string>
                                                     <constraint firstAttribute="width" constant="40" id="cD8-kf-jWn"/>
                                                     <constraint firstAttribute="height" constant="40" id="wBy-ZY-Dxd"/>
                                                 </constraints>
+                                                <color key="tintColor" name="TitlesColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" image="back_icon"/>
+                                                <state key="normal" image="xmark" catalog="system"/>
                                                 <connections>
                                                     <action selector="backBTNtapped:" destination="yIv-Ge-PDm" eventType="touchUpInside" id="aEo-4L-im1"/>
                                                 </connections>
@@ -3274,8 +3278,9 @@ and build a habit!</string>
                                                     <constraint firstAttribute="height" constant="40" id="W3K-qt-T6h"/>
                                                     <constraint firstAttribute="width" constant="40" id="n1c-4h-BtA"/>
                                                 </constraints>
+                                                <color key="tintColor" name="TitlesColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" image="back_icon"/>
+                                                <state key="normal" image="xmark" catalog="system"/>
                                                 <connections>
                                                     <action selector="backBTNtapped:" destination="dcT-ta-udd" eventType="touchUpInside" id="k76-Df-05w"/>
                                                 </connections>
@@ -3817,10 +3822,25 @@ and build a habit!</string>
                                                     <constraint firstAttribute="height" constant="2" id="RGn-uQ-nZc"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWA-2W-Fz5">
+                                                <rect key="frame" x="366" y="5" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="298-fz-VNk"/>
+                                                    <constraint firstAttribute="height" constant="40" id="Mpu-MR-xnQ"/>
+                                                </constraints>
+                                                <color key="tintColor" name="TitlesColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="arrow.down.circle" catalog="system"/>
+                                                <connections>
+                                                    <action selector="downloadImageBTNTapped:" destination="4Si-Q7-ULa" eventType="touchUpInside" id="xhJ-6t-GkQ"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="iim-aJ-6GF" firstAttribute="leading" secondItem="Op5-7N-NkN" secondAttribute="leading" id="67H-uB-cs9"/>
+                                            <constraint firstAttribute="trailing" secondItem="oWA-2W-Fz5" secondAttribute="trailing" constant="8" id="7JT-di-gu0"/>
+                                            <constraint firstItem="oWA-2W-Fz5" firstAttribute="centerY" secondItem="Op5-7N-NkN" secondAttribute="centerY" id="89Y-Is-y3H"/>
                                             <constraint firstItem="QRa-dS-95z" firstAttribute="centerY" secondItem="Op5-7N-NkN" secondAttribute="centerY" id="Lgo-8D-rwF"/>
                                             <constraint firstAttribute="height" constant="50" id="Srl-YV-KTy"/>
                                             <constraint firstAttribute="bottom" secondItem="iim-aJ-6GF" secondAttribute="bottom" id="TkQ-RB-QTr"/>
@@ -3969,6 +3989,7 @@ and build a habit!</string>
         <image name="WritingIMG" width="299" height="280"/>
         <image name="addIconplus" width="32" height="32"/>
         <image name="appleLogo" width="24" height="24"/>
+        <image name="arrow.down.circle" catalog="system" width="128" height="123"/>
         <image name="arrow_left" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>
         <image name="back_icon" width="24" height="24"/>

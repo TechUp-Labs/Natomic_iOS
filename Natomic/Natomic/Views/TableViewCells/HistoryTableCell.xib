@@ -35,11 +35,8 @@
                                         <color key="textColor" name="BodyColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Feb, 2023" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="558-1Q-1hF">
-                                        <rect key="frame" x="55" y="36.5" width="75" height="14.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="Ecr-9q-SGe"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 Feb, 2023" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="558-1Q-1hF">
+                                        <rect key="frame" x="55" y="36.5" width="207" height="14.5"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                         <color key="textColor" red="0.063000001013278961" green="0.059000000357627869" blue="0.050999999046325684" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -62,6 +59,7 @@
                                     <constraint firstItem="v7h-PK-9oo" firstAttribute="top" secondItem="neI-ss-aPA" secondAttribute="bottom" constant="5" id="IT5-RB-4Ca"/>
                                     <constraint firstItem="558-1Q-1hF" firstAttribute="leading" secondItem="v7h-PK-9oo" secondAttribute="trailing" id="JgF-mT-bfb"/>
                                     <constraint firstItem="neI-ss-aPA" firstAttribute="top" secondItem="0ca-fA-M8l" secondAttribute="top" constant="10" id="OwV-wA-wc2"/>
+                                    <constraint firstAttribute="trailing" secondItem="558-1Q-1hF" secondAttribute="trailing" constant="10" id="P0v-iz-FeV"/>
                                     <constraint firstAttribute="trailing" secondItem="neI-ss-aPA" secondAttribute="trailing" id="nrq-6P-d7h"/>
                                     <constraint firstItem="neI-ss-aPA" firstAttribute="leading" secondItem="0ca-fA-M8l" secondAttribute="leading" id="y2i-Iv-RYG"/>
                                 </constraints>

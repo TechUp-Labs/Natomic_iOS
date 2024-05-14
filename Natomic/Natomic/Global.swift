@@ -18,6 +18,8 @@ var homeVC : UIViewController!
 
 var SHARED_IMAGE = "#FFFFFF"
 
+var SHARED_Text = ""
+
 // MARK: - Globale Functions.
 
 var CurrentDate:String{

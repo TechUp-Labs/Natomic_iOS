@@ -218,6 +218,8 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
         }
     }
     
+    @IBAction func downloadImageBTNTapped(_ sender: Any) {
+    }
 }
 
 extension ShareImageVC: UITableViewDelegate, UITableViewDataSource {

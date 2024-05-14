@@ -90,6 +90,9 @@
 		D0B3B6BD2BCFEF7A0067FF21 /* CalendarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B3B6BC2BCFEF7A0067FF21 /* CalendarHelper.swift */; };
 		D0D1339D2B71148500B780AF /* ShareNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1339C2B71148500B780AF /* ShareNoteVC.swift */; };
 		D0EA83B12B49D2C600C4BE4C /* FriendsNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */; };
+		D0EEC2A82BF1E1BE00698373 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EEC2A72BF1E1BE00698373 /* ShareViewController.swift */; };
+		D0EEC2AB2BF1E1BE00698373 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D0EEC2AA2BF1E1BE00698373 /* Base */; };
+		D0EEC2AF2BF1E1BE00698373 /* Natomic Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D0EEC2A52BF1E1BE00698373 /* Natomic Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D0F0E5D42BBFCD7400A64780 /* NoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F0E5D32BBFCD7400A64780 /* NoteCollectionViewCell.xib */; };
 		D0F0E5D52BBFCD7400A64780 /* NoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F0E5D22BBFCD7400A64780 /* NoteCollectionViewCell.swift */; };
 		D0F843892AD7B8F400288F19 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F843882AD7B8F400288F19 /* DatabaseHelper.swift */; };
@@ -104,6 +107,13 @@
 			remoteGlobalIDString = D05D88292BA183E700854FDB;
 			remoteInfo = "Natomic WidgetExtension";
 		};
+		D0EEC2AD2BF1E1BE00698373 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04AE06982A45798300FC4BA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0EEC2A42BF1E1BE00698373;
+			remoteInfo = "Natomic Share";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +124,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				D05D88392BA183E900854FDB /* Natomic WidgetExtension.appex in Embed Foundation Extensions */,
+				D0EEC2AF2BF1E1BE00698373 /* Natomic Share.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +220,11 @@
 		D0B3B6BC2BCFEF7A0067FF21 /* CalendarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelper.swift; sourceTree = "<group>"; };
 		D0D1339C2B71148500B780AF /* ShareNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareNoteVC.swift; sourceTree = "<group>"; };
 		D0EA83B02B49D2C600C4BE4C /* FriendsNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNoteVC.swift; sourceTree = "<group>"; };
+		D0EEC2A52BF1E1BE00698373 /* Natomic Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Natomic Share.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0EEC2A72BF1E1BE00698373 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		D0EEC2AA2BF1E1BE00698373 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		D0EEC2AC2BF1E1BE00698373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0EEC2B32BF1F45D00698373 /* Natomic Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Natomic Share.entitlements"; sourceTree = "<group>"; };
 		D0F0E5D22BBFCD7400A64780 /* NoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		D0F0E5D32BBFCD7400A64780 /* NoteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCollectionViewCell.xib; sourceTree = "<group>"; };
 		D0F843882AD7B8F400288F19 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
@@ -234,6 +250,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D0EEC2A22BF1E1BE00698373 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -256,6 +279,7 @@
 				D05D883E2BA1843900854FDB /* Natomic WidgetExtension.entitlements */,
 				04AE06A22A45798300FC4BA1 /* Natomic */,
 				D05D882F2BA183E700854FDB /* Natomic Widget */,
+				D0EEC2A62BF1E1BE00698373 /* Natomic Share */,
 				04AE06A12A45798300FC4BA1 /* Products */,
 				608B2EE5B055CD9D622C26E6 /* Pods */,
 				6CC237C3DE3A2D618805ACB8 /* Frameworks */,
@@ -267,6 +291,7 @@
 			children = (
 				04AE06A02A45798300FC4BA1 /* Natomic.app */,
 				D05D882A2BA183E700854FDB /* Natomic WidgetExtension.appex */,
+				D0EEC2A52BF1E1BE00698373 /* Natomic Share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -456,6 +481,17 @@
 			path = AlertVC;
 			sourceTree = "<group>";
 		};
+		D0EEC2A62BF1E1BE00698373 /* Natomic Share */ = {
+			isa = PBXGroup;
+			children = (
+				D0EEC2B32BF1F45D00698373 /* Natomic Share.entitlements */,
+				D0EEC2A72BF1E1BE00698373 /* ShareViewController.swift */,
+				D0EEC2A92BF1E1BE00698373 /* MainInterface.storyboard */,
+				D0EEC2AC2BF1E1BE00698373 /* Info.plist */,
+			);
+			path = "Natomic Share";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -474,6 +510,7 @@
 			);
 			dependencies = (
 				D05D88382BA183E900854FDB /* PBXTargetDependency */,
+				D0EEC2AE2BF1E1BE00698373 /* PBXTargetDependency */,
 			);
 			name = Natomic;
 			productName = Natomic;
@@ -497,6 +534,23 @@
 			productReference = D05D882A2BA183E700854FDB /* Natomic WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		D0EEC2A42BF1E1BE00698373 /* Natomic Share */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0EEC2B22BF1E1BF00698373 /* Build configuration list for PBXNativeTarget "Natomic Share" */;
+			buildPhases = (
+				D0EEC2A12BF1E1BE00698373 /* Sources */,
+				D0EEC2A22BF1E1BE00698373 /* Frameworks */,
+				D0EEC2A32BF1E1BE00698373 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Natomic Share";
+			productName = "Natomic Share";
+			productReference = D0EEC2A52BF1E1BE00698373 /* Natomic Share.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -511,6 +565,9 @@
 						CreatedOnToolsVersion = 13.2.1;
 					};
 					D05D88292BA183E700854FDB = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					D0EEC2A42BF1E1BE00698373 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 				};
@@ -530,6 +587,7 @@
 			targets = (
 				04AE069F2A45798300FC4BA1 /* Natomic */,
 				D05D88292BA183E700854FDB /* Natomic WidgetExtension */,
+				D0EEC2A42BF1E1BE00698373 /* Natomic Share */,
 			);
 		};
 /* End PBXProject section */
@@ -575,6 +633,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D05D88352BA183E900854FDB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0EEC2A32BF1E1BE00698373 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0EEC2AB2BF1E1BE00698373 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +757,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D0EEC2A12BF1E1BE00698373 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0EEC2A82BF1E1BE00698373 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -698,6 +772,11 @@
 			isa = PBXTargetDependency;
 			target = D05D88292BA183E700854FDB /* Natomic WidgetExtension */;
 			targetProxy = D05D88372BA183E900854FDB /* PBXContainerItemProxy */;
+		};
+		D0EEC2AE2BF1E1BE00698373 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0EEC2A42BF1E1BE00698373 /* Natomic Share */;
+			targetProxy = D0EEC2AD2BF1E1BE00698373 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -716,6 +795,14 @@
 				04AE06B22A45798300FC4BA1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D0EEC2A92BF1E1BE00698373 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0EEC2AA2BF1E1BE00698373 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -868,7 +955,7 @@
 					/usr/lib/swift,
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 2.6;
+				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = natomic.com.techuplabs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -912,7 +999,7 @@
 					/usr/lib/swift,
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 2.6;
+				MARKETING_VERSION = 2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = natomic.com.techuplabs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1004,6 +1091,79 @@
 			};
 			name = Release;
 		};
+		D0EEC2B02BF1E1BF00698373 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "Natomic Share/Natomic Share.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 63ND4Y3UZ8;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Natomic Share/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Natomic Share";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "natomic.com.techuplabs.Natomic-Share";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D0EEC2B12BF1E1BF00698373 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "Natomic Share/Natomic Share.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 63ND4Y3UZ8;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Natomic Share/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Natomic Share";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "natomic.com.techuplabs.Natomic-Share";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1030,6 +1190,15 @@
 			buildConfigurations = (
 				D05D883B2BA183E900854FDB /* Debug */,
 				D05D883C2BA183E900854FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0EEC2B22BF1E1BF00698373 /* Build configuration list for PBXNativeTarget "Natomic Share" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0EEC2B02BF1E1BF00698373 /* Debug */,
+				D0EEC2B12BF1E1BF00698373 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

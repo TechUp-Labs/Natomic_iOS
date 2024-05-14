@@ -12,5 +12,6 @@ import SwiftUI
 struct Natomic_WidgetBundle: WidgetBundle {
     var body: some Widget {
         Natomic_Widget()
+//        Natomic_Widget2()
     }
 }

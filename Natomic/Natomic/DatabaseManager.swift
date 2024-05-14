@@ -141,7 +141,7 @@ class DatabaseManager {
     // MARK: - Function For get User Data from Core Database based on 7 days ago:-
 
     func getUserContextFor7DaysAgo() -> [UserEntity] {
-        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -2, to: Date())!
+        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-M-d"
         let sevenDaysAgoString = dateFormatter.string(from: sevenDaysAgo)

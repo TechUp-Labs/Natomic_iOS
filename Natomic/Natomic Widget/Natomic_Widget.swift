@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 
 let sharedUserDefaults = UserDefaults(suiteName: SharedUserDefaults.suiteName)
-let slightlyLargerFontSize: CGFloat = 20 // Adjust as needed
+let slightlyLargerFontSize: CGFloat = 18 // Adjust as needed
 
 
 struct Provider: TimelineProvider {
@@ -77,33 +77,6 @@ struct Natomic_WidgetEntryView: View {
             
             VStack(alignment: .leading, spacing: 8) { // Content stack
                 
-                // Date View positioned at the top left
-                HStack {
-                    ZStack(alignment: .leading) { // Stack icon and text with spacing
-                        Image(systemName: "calendar")
-                            .font(.caption2)
-                            .foregroundColor(.gray)
-                        Text(entry.noteDate) // Assuming entry.noteDate is formatted appropriately
-                            .font(getFontSizeBasedOnWidgetFamily())
-                            .foregroundColor(.gray)
-                            .minimumScaleFactor(0.7) // Adjust minimum scale factor for better scaling on smaller screens
-                            .lineLimit(1) // Limit to one line to prevent text overflow
-                            .truncationMode(.tail) // Add ellipsis for long text
-                            .padding(.leading, 16) // Adjust for desired spacing (3-4 units)
-                    }
-                    Spacer() // This pushes the date to the left
-                }
-                .padding(.bottom, 5) // Optional: adjust space between the date and the note
-                
-                // User Note Text View
-                Text(entry.userNotes)
-                    .font(.system(size: slightlyLargerFontSize)) // Define `slightlyLargerFontSize` appropriately
-                    .lineLimit(2)
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.leading)
-                    .frame(minHeight: entry.userNotes.lineCount > 1 ? 70 : 70) // Make sure `lineCount` is computed correctly
-                    .truncationMode(.tail)
-                    .padding(.top, -15)
                 
                 HStack(alignment: .center) { // Center content vertically
                     Image("Natomic_logo")  // Replace with your image name
@@ -130,6 +103,38 @@ struct Natomic_WidgetEntryView: View {
                     .opacity(0.7) // Slightly transparent for visual indication
                 }
                 .padding(.top, 5) // Add horizontal padding
+                .padding(.bottom, 10)
+
+                
+                // User Note Text View
+                Text(entry.userNotes)
+                    .font(.system(size: slightlyLargerFontSize)) // Define `slightlyLargerFontSize` appropriately
+                    .lineLimit(2)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.leading)
+                    .frame(minHeight: entry.userNotes.lineCount > 1 ? 70 : 70) // Make sure `lineCount` is computed correctly
+                    .truncationMode(.tail)
+                    .padding(.top, -15)
+                
+                
+                // Date View positioned at the top left
+                HStack {
+                    ZStack(alignment: .leading) { // Stack icon and text with spacing
+                        Image(systemName: "calendar")
+                            .font(.caption2)
+                            .foregroundColor(.gray)
+                        Text(entry.noteDate) // Assuming entry.noteDate is formatted appropriately
+                            .font(getFontSizeBasedOnWidgetFamily())
+                            .foregroundColor(.gray)
+                            .minimumScaleFactor(0.7) // Adjust minimum scale factor for better scaling on smaller screens
+                            .lineLimit(1) // Limit to one line to prevent text overflow
+                            .truncationMode(.tail) // Add ellipsis for long text
+                            .padding(.leading, 16) // Adjust for desired spacing (3-4 units)
+                    }
+                    Spacer() // This pushes the date to the left
+                }
+                .padding(.bottom, 5) // Optional: adjust space between the date and the note
+
 
             }
             .padding(.horizontal, 10) // Add horizontal padding
@@ -147,6 +152,34 @@ struct Natomic_WidgetEntryView: View {
       default:
         return .system(size: 16) // Default for other sizes
       }
+    }
+}
+
+struct Test : View {
+    
+    var entry: Provider.Entry
+    
+    @Environment(\.widgetFamily) var family: WidgetFamily
+
+    var body: some View {
+        ZStack(alignment: .topLeading){
+            Image("test")
+                .scaledToFill()
+                .ignoresSafeArea(.all)
+            VStack(){
+                HStack{
+                    Image("streackSmallIcon")
+                    Text("80")
+                        .foregroundColor(.white)
+                    Spacer()
+                }
+            }
+            .padding(.top, 10)
+            .padding(.leading, 10)
+            .frame(width: 100, height: 28)
+        }
+        .ignoresSafeArea(.all)
+        .padding(-18)
     }
 }
 
@@ -171,10 +204,38 @@ struct Natomic_Widget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .supportedFamilies([.systemSmall, .systemMedium])
+        .configurationDisplayName("Natomic")
+        .description("This is an natomic widget.")
     }
 }
+
+struct Natomic_Widget2: Widget {
+    static var sharedUserDefaults: UserDefaults? {
+        // Ensure App Group is enabled in Capabilities and properly configured
+        UserDefaults(suiteName: SharedUserDefaults.suiteName)
+    }
+    
+    let kind: String = "Natomic_Widget2"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            
+            if #available(iOS 17.0, *) {
+                Test(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                Test(entry: entry)
+                    .padding()
+                    .background()
+            }
+        }
+        .supportedFamilies([.systemMedium])
+        .configurationDisplayName("Test")
+        .description("This is an natomic widget.")
+    }
+}
+
 
 extension Date {
     

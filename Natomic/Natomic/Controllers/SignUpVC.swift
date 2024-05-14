@@ -194,7 +194,8 @@ extension SignUpVC {
             case .success(let message):
                 // Registration was successful, and you can handle the success message
                 print("Success: \(message)")
-                
+                self.delegate?.reloadProfileIcon()
+
                 DatabaseHelper.shared.fetchUserData { result in
                     switch result {
                     case .success(let NoteModel):

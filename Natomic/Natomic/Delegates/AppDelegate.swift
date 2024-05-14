@@ -392,6 +392,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             combinedThoughts += "\(thought)\n" // Format each thought with time
         }
         if !combinedThoughts.isEmpty{
+            
+            let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())!
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-M-d"
+            let identifier = "userThoughts-\(dateFormatter.string(from: sevenDaysAgo))"
+            
             // Schedule a notification for the combined thoughts
             let content = UNMutableNotificationContent()
             content.title = NSString.localizedUserNotificationString(forKey: "Your thoughts 7 days ago", arguments: nil)
@@ -425,7 +431,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             
             // Create the request
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
             
             // Schedule the request with the system
             let notificationCenter = UNUserNotificationCenter.current()

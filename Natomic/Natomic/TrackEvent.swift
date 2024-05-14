@@ -14,19 +14,19 @@ class TrackEvent {
     static let shared = TrackEvent()
     
     func track(eventName: EventName.Event) {
-//        Mixpanel.mainInstance().track(event: eventName.rawValue, properties: [
-//            "User Name": USER_NAME,
-//            "Email": USER_EMAIL,
-//            "User ID": UID
-//        ])
+        Mixpanel.mainInstance().track(event: eventName.rawValue, properties: [
+            "User Name": USER_NAME,
+            "Email": USER_EMAIL,
+            "User ID": UID
+        ])
     }
     
     func resetUSer(){
-//        Mixpanel.mainInstance().reset()
+        Mixpanel.mainInstance().reset()
     }
     
     func registerUser(userIID: String){
-//        Mixpanel.mainInstance().identify(distinctId: userIID)
+        Mixpanel.mainInstance().identify(distinctId: userIID)
     }
     
     func trackRemiderTime(reminderTime: String){
@@ -39,21 +39,21 @@ class TrackEvent {
     }
     
     func trackSelectionOfImage(selectedImage: String){
-//        Mixpanel.mainInstance().track(event: "Selection Of Images", properties: [
-//            "Selected Image": selectedImage,
-//            "User Name": USER_NAME,
-//            "Email": USER_EMAIL,
-//            "User ID": UID
-//        ])
+        Mixpanel.mainInstance().track(event: "Selection Of Images", properties: [
+            "Selected Image": selectedImage,
+            "User Name": USER_NAME,
+            "Email": USER_EMAIL,
+            "User ID": UID
+        ])
     }
     
     func trackSharedImage(selectedImage: String){
-//        Mixpanel.mainInstance().track(event: "Shared Image", properties: [
-//            "Selected Image": selectedImage,
-//            "User Name": USER_NAME,
-//            "Email": USER_EMAIL,
-//            "User ID": UID
-//        ])
+        Mixpanel.mainInstance().track(event: "Shared Image", properties: [
+            "Selected Image": selectedImage,
+            "User Name": USER_NAME,
+            "Email": USER_EMAIL,
+            "User ID": UID
+        ])
     }
     
 }

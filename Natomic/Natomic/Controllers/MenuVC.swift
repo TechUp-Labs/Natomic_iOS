@@ -7,7 +7,6 @@
 
 import UIKit
 import FirebaseAuth
-import SDWebImage
 
 protocol DismissFeedbackScreen {
     func dismissScreen()
@@ -71,8 +70,8 @@ class MenuVC: UIViewController,UIGestureRecognizerDelegate {
         userEmailLBL.text = USER_EMAIL
         menuTableView.registerCell(identifire: "MenuTableViewCell")
 //        menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Subscription"))
+        menuArray.append(Menu(menuImage: "streak", menuTitle: "Streak"))
         menuArray.append(Menu(menuImage: "ShareIcon", menuTitle: "Share"))
-//        menuArray.append(Menu(menuImage: "streackLargeIcon", menuTitle: "Streak"))
         menuArray.append(Menu(menuImage: "feedbackIcon", menuTitle: "Feedback"))
         menuArray.append(Menu(menuImage: "deleteIcone", menuTitle: "Delete Account"))
 //        menuArray.append(Menu(menuImage: "logoutIcon", menuTitle: "Log out"))
@@ -244,11 +243,6 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath) as! MenuTableViewCell
         cell.menuImg.image = UIImage(named: menuArray[indexPath.row].menuImage)
         cell.menuLBL.text = menuArray[indexPath.row].menuTitle
-        if menuArray[indexPath.row].menuTitle == "Share" {
-            cell.arrowImg.isHidden = true
-        }else{
-            cell.arrowImg.isHidden = false
-        }
         return cell
     }
     
@@ -264,7 +258,6 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
         case "Streak":
             TrackEvent.shared.track(eventName: .streakButtonClick)
             let vc = STREAK_VC
-            vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: true)
         case "Share":
             TrackEvent.shared.track(eventName: .shareAppButtonClick)
@@ -278,7 +271,7 @@ extension MenuVC: SetTableViewDelegateAndDataSorce{
             TrackEvent.shared.track(eventName: .feedBackButtonClick)
             let vc = FEEDBACK_VC
             vc.dismissDelegate = self
-            vc.modalPresentationStyle = .overCurrentContext
+//            vc.modalPresentationStyle = .overCurrentContext
             self.present(vc, animated: true)
 
 //            self.navigationController?.pushViewController(vc, animated: true)
@@ -301,7 +294,7 @@ extension MenuVC : DismissFeedbackScreen {
     func dismissScreen() {
 //        self.navigationController?.pushViewController(SUCCESS_FEEDBACK_VC, animated: true)
         let vc = SUCCESS_FEEDBACK_VC
-        vc.modalPresentationStyle = .overCurrentContext
+//        vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false)
     }
 }
@@ -337,7 +330,10 @@ extension MenuVC : DismissDeleteScreen {
 
             DatabaseManager.Shared.removeAllData()
             Loader.shared.stopAnimating()
-            self.navigationController?.pushViewController(SPLASH_VC, animated: true)
+            self.dismiss(animated: true) {
+                self.delegate?.openSplashScreen()
+            }
+            self.dismiss(animated: true, completion: nil)
         } catch let signOutError as NSError {
             print("Error signing out: \(signOutError.localizedDescription)")
             Loader.shared.stopAnimating()

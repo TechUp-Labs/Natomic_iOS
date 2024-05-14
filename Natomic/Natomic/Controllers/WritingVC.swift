@@ -37,7 +37,7 @@ class WritingVC: UIViewController {
         "If you could change one thing about today, what would it be and why?",
         "Describe a moment today when you felt truly at peace or happy. What triggered that feeling?"
     ]
-    
+    var shared_text = ""
     // MARK: - ViewController Life Cycle:-
     
     override func viewDidLoad() {
@@ -90,21 +90,28 @@ class WritingVC: UIViewController {
         self.writingDelegate?.checkNotificationState()
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.enable = true
+        UserDefaults(suiteName: "group.natomic.share")?.removeObject(forKey: "sharedText")
     }
     
     // MARK: - All Fuction's : -
     
     func setUI(){
+        textView.delegate = self
+        self.postBTN.layer.opacity = 0.5
+        self.postBTN.isUserInteractionEnabled = false
+        if !shared_text.isEmpty{
+            textView.text = shared_text
+            let characterCount = textView.text.count
+            self.textCountLBL.text = "\(characterCount)"
+            self.postBTN.layer.opacity = characterCount > 0 ? 1 : 0.5
+            self.placeholderLBL.isHidden = characterCount > 0
+            self.postBTN.isUserInteractionEnabled = characterCount > 0
+        }
         feedbackGenerator.prepare()
         
         // Add long press gesture recognizer to the button
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         postBTN.addGestureRecognizer(longPressGesture)
-
-        textView.delegate = self
-        self.postBTN.layer.opacity = 0.5
-        self.postBTN.isUserInteractionEnabled = false
-        
         //        addDoneButtonOnKeyboard()
         //        postBTN.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         showRandomPlaceholder()
