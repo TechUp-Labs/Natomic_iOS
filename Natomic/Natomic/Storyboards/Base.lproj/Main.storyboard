@@ -1026,7 +1026,7 @@ build like a boss</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Natomic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiE-LG-EvZ">
-                                        <rect key="frame" x="162.5" y="7" width="89" height="26"/>
+                                        <rect key="frame" x="165.5" y="7" width="83" height="26"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="22"/>
                                         <color key="textColor" name="TitlesColor"/>
                                         <nil key="highlightedColor"/>
@@ -3992,7 +3992,7 @@ and build a habit!</string>
         <image name="checkMarkImg" width="22" height="22"/>
         <image name="check_icon" width="12" height="12"/>
         <image name="closeIcone" width="36.5" height="36.5"/>
-        <image name="collectionIcon" width="32" height="32"/>
+        <image name="collectionIcon" width="26" height="26"/>
         <image name="deleteIcone" width="24" height="24"/>
         <image name="delete_Image" width="135" height="135.5"/>
         <image name="edit" width="11" height="11"/>

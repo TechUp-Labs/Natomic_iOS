@@ -22,7 +22,7 @@ class NoteCollectionViewCell: UICollectionViewCell {
     func displayData(data:UserEntity){
         usersTextLBL.text = data.userThoughts ?? ""
         dateLBL.text = DatabaseManager.Shared.convertDateFormat(data.date ?? "")
-        timeLBL.text = DatabaseManager.Shared.convertTo12HourFormat(data.time ?? "")
+        timeLBL.text = "\(DatabaseManager.Shared.convertTo12HourFormat(data.time ?? "") ?? "")"
     }
 
 }

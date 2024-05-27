@@ -291,3 +291,10 @@ extension UITableView {
    }
 }
 
+extension Array {
+    mutating func remove(atOffsets offsets: IndexSet) {
+        for offset in offsets.sorted(by: >) {
+            self.remove(at: offset)
+        }
+    }
+}
