@@ -213,14 +213,25 @@ class WritingVC: UIViewController {
         generator.prepare()
         generator.notificationOccurred(.success)
         animateButtonTap()
+        
         sharedUserDefaults?.set(self.textView.text ?? "", forKey: SharedUserDefaults.Keys.userNote)
         sharedUserDefaults?.set(CurrentTime, forKey: SharedUserDefaults.Keys.noteTime)
         sharedUserDefaults?.set(CurrentDate, forKey: SharedUserDefaults.Keys.noteDate)
-        WidgetCenter.shared.reloadAllTimelines()
+        sharedUserDefaults?.set("\(DatabaseManager.Shared.calculateStreak())", forKey: SharedUserDefaults.Keys.streak)
+        
+        let weekData = DatabaseManager.Shared.getCurrentWeekData()
+        saveWeekDataToUserDefaults(weekData: weekData)
+
+        sharedUserDefaults?.synchronize()
+        
+        DispatchQueue.main.async {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
                 self.textView.resignFirstResponder()
             DatabaseManager.Shared.addUserContext(userContext: User.init(userThoughts: self.textView.text, date: CurrentDate, time: CurrentTime, day: "\(DatabaseManager.Shared.getUserContext().count+1)"))
                 NotificationCenter.default.post(name: .saveUserData, object: nil)
+            sharedUserDefaults?.set("\(DatabaseManager.Shared.calculateStreak())", forKey: SharedUserDefaults.Keys.streak)
             TrackEvent.shared.track(eventName: .noteAddedSuccessfullyButtonClick)
                 self.dismiss(animated: true, completion: nil)
         }

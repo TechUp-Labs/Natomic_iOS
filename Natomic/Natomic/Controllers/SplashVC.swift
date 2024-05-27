@@ -41,11 +41,15 @@ class SplashVC: UIViewController {
             return false // Return false as a fallback
         }
         
-        sharedUserDefaults?.set(self.userData?.first?.userThoughts ?? "It's time to write one line today!", forKey: SharedUserDefaults.Keys.userNote)
-        sharedUserDefaults?.set(self.userData?.first?.time ?? "", forKey: SharedUserDefaults.Keys.noteTime)
-        sharedUserDefaults?.set(self.userData?.first?.date ?? "", forKey: SharedUserDefaults.Keys.noteDate)
-        WidgetCenter.shared.reloadAllTimelines()
-
+        saveUserData()
+        
+        if let loadedWeekData = retrieveWeekDataFromUserDefaults() {
+            for dayData in loadedWeekData {
+                print("Date: \(dayData.date), Day: \(dayData.dayName), Has Note: \(dayData.hasNote)")
+            }
+        } else {
+            print("No week data found in UserDefaults")
+        }
         
         if IS_STARTED {
             self.navigationController?.pushViewController(HOME_VC, animated: true)
@@ -60,6 +64,28 @@ class SplashVC: UIViewController {
         //        }
         
     }
+    
+    // MARK: - Save Widget to UserDefaults
+
+    
+    func saveUserData() {
+        sharedUserDefaults?.set(self.userData?.first?.userThoughts ?? "It's time to write one line today!", forKey: SharedUserDefaults.Keys.userNote)
+        sharedUserDefaults?.set(self.userData?.first?.time ?? "", forKey: SharedUserDefaults.Keys.noteTime)
+        sharedUserDefaults?.set(self.userData?.first?.date ?? "", forKey: SharedUserDefaults.Keys.noteDate)
+        sharedUserDefaults?.set("\(DatabaseManager.Shared.calculateStreak())", forKey: SharedUserDefaults.Keys.streak)
+        
+        let weekData = DatabaseManager.Shared.getCurrentWeekData()
+        saveWeekDataToUserDefaults(weekData: weekData)
+        
+        // Synchronize the UserDefaults
+        sharedUserDefaults?.synchronize()
+        
+        DispatchQueue.main.async {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+    }
+    
+
     
     // MARK: - All Fuction's : -
     

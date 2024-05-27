@@ -56,6 +56,26 @@ class TrackEvent {
         ])
     }
     
+    func trackSearchedText(SearchedText: String){
+        Mixpanel.mainInstance().track(event: "Searched Text", properties: [
+            "Searched Text": SearchedText,
+            "User Name": USER_NAME,
+            "Email": USER_EMAIL,
+            "User ID": UID
+        ])
+    }
+    
+    func trackSearchBarCancelButtonClick(SearchedText: String){
+        Mixpanel.mainInstance().track(event: "Search Bar Cancel Button Click", properties: [
+            "Searched Text": SearchedText,
+            "User Name": USER_NAME,
+            "Email": USER_EMAIL,
+            "User ID": UID
+        ])
+    }
+
+
+    
 }
 
 struct EventName {

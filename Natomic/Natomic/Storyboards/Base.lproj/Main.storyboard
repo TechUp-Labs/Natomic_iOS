@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1031,16 +1031,16 @@ build like a boss</string>
                                         <color key="textColor" name="TitlesColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sq-Me-FO0">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sq-Me-FO0">
                                         <rect key="frame" x="325" y="5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="77a-iH-mvF"/>
                                             <constraint firstAttribute="width" constant="30" id="uG3-XM-Y8m"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="streakBlackIcon"/>
+                                        <state key="normal" image="collectionIcon"/>
                                         <connections>
-                                            <action selector="streakBTNtapped:" destination="IdB-lQ-ynC" eventType="touchUpInside" id="bzM-cI-d5t"/>
+                                            <action selector="layoutChangeBTNtapped:" destination="IdB-lQ-ynC" eventType="touchUpInside" id="JZ2-Jb-clM"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1240,6 +1240,7 @@ build like a boss</string>
                         <outlet property="blureView" destination="sdE-ix-Gz5" id="ItZ-XZ-JUA"/>
                         <outlet property="collectionTopCon" destination="FBg-Xc-1JB" id="E3A-jS-Z4n"/>
                         <outlet property="historyTBV" destination="g33-A3-VPl" id="oLx-GO-28Q"/>
+                        <outlet property="layoutChange" destination="7Sq-Me-FO0" id="C0J-dk-GBJ"/>
                         <outlet property="noteCollectionview" destination="rag-CU-gaF" id="fzT-Tf-sed"/>
                         <outlet property="notificationBTN" destination="9ZS-wb-84A" id="yR2-CX-S7b"/>
                         <outlet property="profileBTN" destination="3mi-gD-gWf" id="Je4-U2-ECg"/>
@@ -1887,7 +1888,7 @@ and build a habit!</string>
                                 <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <color key="backgroundColor" name="WhiteColor"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kNt-ax-IuC">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNt-ax-IuC">
                                 <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CiT-6d-y2k">
@@ -3822,7 +3823,7 @@ and build a habit!</string>
                                                     <constraint firstAttribute="height" constant="2" id="RGn-uQ-nZc"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWA-2W-Fz5">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWA-2W-Fz5">
                                                 <rect key="frame" x="366" y="5" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="298-fz-VNk"/>
@@ -3974,11 +3975,6 @@ and build a habit!</string>
             <point key="canvasLocation" x="8799" y="751"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="iYg-yY-iR2">
-            <size key="intrinsicContentSize" width="46" height="12"/>
-        </designable>
-    </designables>
     <resources>
         <image name="Google_Icon" width="30" height="30"/>
         <image name="Natomic_logo_black" width="34" height="34"/>
@@ -3996,6 +3992,7 @@ and build a habit!</string>
         <image name="checkMarkImg" width="22" height="22"/>
         <image name="check_icon" width="12" height="12"/>
         <image name="closeIcone" width="36.5" height="36.5"/>
+        <image name="collectionIcon" width="32" height="32"/>
         <image name="deleteIcone" width="24" height="24"/>
         <image name="delete_Image" width="135" height="135.5"/>
         <image name="edit" width="11" height="11"/>
@@ -4006,7 +4003,6 @@ and build a habit!</string>
         <image name="shareImage" width="135" height="135.5"/>
         <image name="sharefillicon" width="32" height="32"/>
         <image name="streackLargeIcon" width="80.5" height="106"/>
-        <image name="streakBlackIcon" width="16" height="21.5"/>
         <image name="subscriptionImg" width="200" height="200"/>
         <image name="trash" catalog="system" width="117" height="128"/>
         <image name="writingBGImage" width="351" height="376"/>

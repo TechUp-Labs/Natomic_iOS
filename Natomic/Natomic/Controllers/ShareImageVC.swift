@@ -219,7 +219,22 @@ class ShareImageVC: UIViewController, ThemeCollectionViewCellDelegate {
     }
     
     @IBAction func downloadImageBTNTapped(_ sender: Any) {
+        let cornerRadius: CGFloat = 10 // Set the corner radius you need
+        if let image = shareImageView.snapshotWithTransparentRoundedCorners(cornerRadius: cornerRadius) {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
     }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // Handle the error here
+            print("Error saving image: \(error.localizedDescription)")
+        } else {
+            // Image was saved successfully
+            print("Image saved successfully")
+        }
+    }
+
 }
 
 extension ShareImageVC: UITableViewDelegate, UITableViewDataSource {

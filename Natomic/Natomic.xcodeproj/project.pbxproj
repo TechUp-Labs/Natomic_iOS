@@ -36,6 +36,7 @@
 		04BEBAB92A67F1B30050A013 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BEBAB82A67F1B30050A013 /* MenuVC.swift */; };
 		04F4B5FC2A497E910085D4A8 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4B5FB2A497E910085D4A8 /* Global.swift */; };
 		CA717955E9CF1D20D102798A /* Pods_Natomic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAF64CC20DBDFA96CB7FCFF /* Pods_Natomic.framework */; };
+		D018C58C2BFC688B00A77C07 /* WeekDayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018C58B2BFC688B00A77C07 /* WeekDayData.swift */; };
 		D01981782A98B20B003E45B8 /* WrirtingAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01981772A98B20B003E45B8 /* WrirtingAlertVC.swift */; };
 		D01ED9FB2B401C5E00CD7A11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D01ED9FA2B401C5E00CD7A11 /* GoogleService-Info.plist */; };
 		D02003252B3A969F00A34693 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02003242B3A969F00A34693 /* Loader.swift */; };
@@ -164,6 +165,7 @@
 		04F4B5FB2A497E910085D4A8 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		2C41AB70777013A44E6E6A0E /* Pods-Natomic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Natomic.release.xcconfig"; path = "Target Support Files/Pods-Natomic/Pods-Natomic.release.xcconfig"; sourceTree = "<group>"; };
 		CF7360E94DC07D62C491D7A5 /* Pods-Natomic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Natomic.debug.xcconfig"; path = "Target Support Files/Pods-Natomic/Pods-Natomic.debug.xcconfig"; sourceTree = "<group>"; };
+		D018C58B2BFC688B00A77C07 /* WeekDayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayData.swift; sourceTree = "<group>"; };
 		D01981772A98B20B003E45B8 /* WrirtingAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrirtingAlertVC.swift; sourceTree = "<group>"; };
 		D01ED9F92B4016D500CD7A11 /* Natomic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Natomic.entitlements; sourceTree = "<group>"; };
 		D01ED9FA2B401C5E00CD7A11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				D05D883F2BA1847E00854FDB /* SharedUserDefaults.swift */,
 				D0622CD12BC5589F00A1973D /* TrackEvent.swift */,
 				D0B3B6BC2BCFEF7A0067FF21 /* CalendarHelper.swift */,
+				D018C58B2BFC688B00A77C07 /* WeekDayData.swift */,
 			);
 			name = HelperFiles;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				04644FF42A69240500ABC01F /* Constant.swift in Sources */,
 				D0403D402B7216BD00C2DE67 /* ImageThemeCollectionViewCell.swift in Sources */,
 				04AE06AE2A45798300FC4BA1 /* Natomic.xcdatamodeld in Sources */,
+				D018C58C2BFC688B00A77C07 /* WeekDayData.swift in Sources */,
 				D0D1339D2B71148500B780AF /* ShareNoteVC.swift in Sources */,
 				043810192A7A3C0500102547 /* AlertBase.swift in Sources */,
 				0436AEDA2A6FBE3B00459DD8 /* TimePickerView.swift in Sources */,

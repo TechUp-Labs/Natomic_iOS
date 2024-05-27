@@ -14,12 +14,14 @@ let slightlyLargerFontSize: CGFloat = 18 // Adjust as needed
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: .now, userNotes: "Please write", noteDate: "", noteTime: "")
+        
+        SimpleEntry(date: .now, userNotes: "Please write", noteDate: "", noteTime: "", streak: "0", weekData: [])
     }
     
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let userNotes = sharedUserDefaults?.string(forKey: SharedUserDefaults.Keys.userNote) as? String ?? "Not fetched"
-        let entry = SimpleEntry(date: .now, userNotes: userNotes, noteDate: "", noteTime: "")
+        let weekData = retrieveWeekDataFromUserDefaults() ?? []
+        let entry = SimpleEntry(date: .now, userNotes: userNotes, noteDate: "", noteTime: "", streak: "0", weekData: weekData)
         completion(entry)
     }
     
@@ -27,20 +29,23 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
         let currentDate = Date().zeroSeconds!
+        let weekData = retrieveWeekDataFromUserDefaults() ?? []
+        
         for hourOffset in 0 ..< 60 {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
-            let userNotes = sharedUserDefaults?.string(forKey: SharedUserDefaults.Keys.userNote) as? String ?? "It's time to write one line today!"
-            let noteTime = sharedUserDefaults?.string(forKey: SharedUserDefaults.Keys.noteTime) as? String ?? ""
-            let noteDate = sharedUserDefaults?.string(forKey: SharedUserDefaults.Keys.noteDate) as? String ?? ""
-            
-            let entry = SimpleEntry(date: entryDate, userNotes: userNotes, noteDate: formattedDate(from: noteDate), noteTime: noteTime)
+            let userNotes = sharedUserDefaults?.string(forKey: SharedUserDefaults.Keys.userNote) ?? "It's time to write one line today!"
+            let noteTime = sharedUserDefaults?.string(forKey: SharedUserDefaults.Keys.noteTime) ?? ""
+            let noteDate = sharedUserDefaults?.string(forKey: SharedUserDefaults.Keys.noteDate) ?? ""
+            let streak = sharedUserDefaults?.string(forKey: SharedUserDefaults.Keys.streak) ?? ""
+
+            let entry = SimpleEntry(date: entryDate, userNotes: userNotes, noteDate: formattedDate(from: noteDate), noteTime: noteTime, streak: streak, weekData: weekData)
             entries.append(entry)
         }
         
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
-    
+
     func formattedDate(from dateString: String) -> String {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-d"
@@ -53,6 +58,18 @@ struct Provider: TimelineProvider {
         return outputFormatter.string(from: date)
     }
     
+    func retrieveWeekDataFromUserDefaults() -> [WeekDayData]? {
+        if let savedWeekData = sharedUserDefaults?.data(forKey: SharedUserDefaults.Keys.weekData) {
+            let decoder = JSONDecoder()
+            if let loadedWeekData = try? decoder.decode([WeekDayData].self, from: savedWeekData) {
+                return loadedWeekData
+            } else {
+                print("Failed to decode week data")
+            }
+        }
+        return nil
+    }
+
 }
 
 struct SimpleEntry: TimelineEntry {
@@ -60,6 +77,8 @@ struct SimpleEntry: TimelineEntry {
     let userNotes: String
     let noteDate: String
     let noteTime: String
+    let streak: String
+    let weekData: [WeekDayData]
 }
 
 struct Natomic_WidgetEntryView: View {
@@ -155,31 +174,108 @@ struct Natomic_WidgetEntryView: View {
     }
 }
 
-struct Test : View {
+struct StreakSmallViewEntryView : View {
     
     var entry: Provider.Entry
     
     @Environment(\.widgetFamily) var family: WidgetFamily
 
     var body: some View {
-        ZStack(alignment: .topLeading){
-            Image("test")
-                .scaledToFill()
+        ZStack{
+            Color(red: 0.949, green: 0.937, blue: 0.894)
                 .ignoresSafeArea(.all)
-            VStack(){
-                HStack{
-                    Image("streackSmallIcon")
-                    Text("80")
-                        .foregroundColor(.white)
-                    Spacer()
+                .padding(-18)
+            
+            VStack{
+                Image("streackLargeIcon")
+                    .resizable()  // Allow image to resize
+                    .aspectRatio(contentMode: .fit) // Maintain aspect ratio
+                    .frame(width: 80, height: 80) // Adjust image size as needed
+//                Divider()
+                if #available(iOSApplicationExtension 16.0, *) {
+                    Text("\(entry.streak) day streak!")
+                        .multilineTextAlignment(.center) // Center align the text
+                        .font(.system(size: 16))
+                        .bold()
+                        .lineLimit(2) // Allow two lines of text
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    Text("10 day streak!")
+                        .multilineTextAlignment(.center) // Center align the text
+                        .font(.system(size: 16))
+                        .lineLimit(2) // Allow two lines of text
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
+                
+                Rectangle()
+                    .frame(height: 1) // Set the height of the line
+                    .frame(maxWidth: .infinity) // Make the line full width
+                    .foregroundColor(.gray) // Set the color of the line
+                Text("Time to write")
+                    .foregroundColor(Color(red: 0.474, green:0.447, blue: 0.375))
+                    .multilineTextAlignment(.center) // Center align the text
+                    .font(.system(size: 14))
+                    .lineLimit(2) // Allow two lines of text
             }
-            .padding(.top, 10)
-            .padding(.leading, 10)
-            .frame(width: 100, height: 28)
         }
-        .ignoresSafeArea(.all)
-        .padding(-18)
+        .widgetURL(URL(string: "natomic://openSpecificView"))
+
+    }
+}
+
+struct Streak_MediumViewEntryView : View {
+    
+    var entry: Provider.Entry
+    let width = (UIScreen.main.bounds.width/8)-12
+
+    @Environment(\.widgetFamily) var family: WidgetFamily
+
+    var body: some View {
+        ZStack{
+            Color(red: 0.949, green: 0.937, blue: 0.894)
+                .ignoresSafeArea(.all)
+                .padding(-18)
+            
+            VStack{
+                HStack{
+                    Text("Sun").foregroundColor(.black).font(.subheadline).frame(width: width, height: 30).font(.system(size: 14))
+                    Text("Mon").foregroundColor(.black).font(.subheadline).frame(width: width, height: 30).font(.system(size: 14))
+                    Text("Tue").foregroundColor(.black).font(.subheadline).frame(width: width, height: 30).font(.system(size: 14))
+                    Text("Wed").foregroundColor(.black).font(.subheadline).frame(width: width, height: 30).font(.system(size: 14))
+                    Text("Thu").foregroundColor(.black).font(.subheadline).frame(width: width, height: 30).font(.system(size: 14))
+                    Text("Fri").foregroundColor(.black).font(.subheadline).frame(width: width, height: 30).font(.system(size: 14))
+                    Text("Sat").foregroundColor(.black).font(.subheadline).frame(width: width, height: 30).font(.system(size: 14))
+                }
+                
+                HStack {
+                    ForEach(entry.weekData) { day in
+                        Group {
+                            if day.hasNote {
+                                Image("streackSmallIcon")
+                                    .frame(width: width, height: 30)
+                            } else {
+                                Image("streakFillIcon")
+                                    .frame(width: width, height: 30)
+                            }
+                        }
+                    }
+                }
+                
+                Rectangle()
+                    .frame(height: 1) // Set the height of the line
+                    .frame(maxWidth: .infinity) // Make the line full width
+                    .foregroundColor(Color(red: 0.474, green:0.447, blue: 0.375)) // Set the color of the line
+
+                Text("Your streak will reset to zero if you miss tomorrow's write-up")
+                    .multilineTextAlignment(.center) // Center align the text
+                    .font(.system(size: 14))
+                    .lineLimit(2) // Allow two lines of text
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            }
+        }
+        .widgetURL(URL(string: "natomic://openSpecificView"))
+
     }
 }
 
@@ -210,32 +306,41 @@ struct Natomic_Widget: Widget {
     }
 }
 
-struct Natomic_Widget2: Widget {
+struct Streak_SmallView: Widget {
     static var sharedUserDefaults: UserDefaults? {
         // Ensure App Group is enabled in Capabilities and properly configured
         UserDefaults(suiteName: SharedUserDefaults.suiteName)
     }
     
-    let kind: String = "Natomic_Widget2"
+    let kind: String = "Streak_SmallView"
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            
-            if #available(iOS 17.0, *) {
-                Test(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
-            } else {
-                Test(entry: entry)
-                    .padding()
-                    .background()
-            }
+            StreakSmallViewEntryView(entry: entry)
         }
-        .supportedFamilies([.systemMedium])
+        .supportedFamilies([.systemSmall])
         .configurationDisplayName("Test")
         .description("This is an natomic widget.")
     }
 }
 
+struct Streak_MediumView: Widget {
+    static var sharedUserDefaults: UserDefaults? {
+        // Ensure App Group is enabled in Capabilities and properly configured
+        UserDefaults(suiteName: SharedUserDefaults.suiteName)
+    }
+    
+    let kind: String = "Streak_SmallView"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            Streak_MediumViewEntryView(entry: entry)
+        }
+        .supportedFamilies([.systemMedium])
+        .configurationDisplayName("Streak_MediumView")
+        .description("Streak MediumView.")
+    }
+}
 
 extension Date {
     
@@ -250,4 +355,11 @@ extension String {
     var lineCount: Int {
         return components(separatedBy: .newlines).count
     }
+}
+
+struct WeekDayData: Codable, Identifiable {
+    let id = UUID()
+    let date: String
+    let dayName: String
+    let hasNote: Bool
 }

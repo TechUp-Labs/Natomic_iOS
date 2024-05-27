@@ -141,7 +141,7 @@ class DatabaseManager {
     // MARK: - Function For get User Data from Core Database based on 7 days ago:-
 
     func getUserContextFor7DaysAgo() -> [UserEntity] {
-        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date())!
+        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-M-d"
         let sevenDaysAgoString = dateFormatter.string(from: sevenDaysAgo)
@@ -273,6 +273,40 @@ class DatabaseManager {
             return 0
         }
     }
+
+    // MARK: - Function For Get Current Week Data and Check Missing Days
+
+    func getCurrentWeekData() -> [WeekDayData] {
+        let calendar = Calendar.current
+        let today = Date()
+        let weekday = calendar.component(.weekday, from: today)
+        
+        // Calculate the start of the week (assuming week starts on Sunday)
+        let startOfWeek = calendar.date(byAdding: .day, value: -((weekday - calendar.firstWeekday) % 7), to: today)!
+        
+        var weekData: [WeekDayData] = []
+        var currentDate = startOfWeek
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-M-d"
+        
+        let dayNameFormatter = DateFormatter()
+        dayNameFormatter.dateFormat = "EEEE" // Full day name
+        
+        for _ in 0..<7 {
+            let dateString = dateFormatter.string(from: currentDate)
+            let dayName = dayNameFormatter.string(from: currentDate)
+            let hasNote = isDateExist(dateString)
+            
+            weekData.append(WeekDayData(date: dateString, dayName: dayName, hasNote: hasNote))
+            
+            // Move to the next day
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+        
+        return weekData
+    }
+
 
 
 
