@@ -395,67 +395,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
     }
-
-    
-    
-//    func scheduleNotificationForUserThoughts7DaysAgo() {
-//        let userEntities = DatabaseManager.Shared.getUserContextFor7DaysAgo()
-//        
-//        for userEntity in userEntities {
-//            // Schedule a notification for each userEntity
-//            let content = UNMutableNotificationContent()
-//            content.title = NSString.localizedUserNotificationString(forKey: "Your thought 7 days ago", arguments: nil)
-//            content.body = NSString.localizedUserNotificationString(forKey: userEntity.userThoughts ?? "You didn't write anything!", arguments: nil)
-//            content.sound = UNNotificationSound.default
-//            content.userInfo = ["notificationType": "note"]
-//
-//            let time_string = userEntity.time ?? "12:00:00"
-//
-//            // Get individual characters for hour, minute, and second (if needed)
-//            let hourString = String(time_string[time_string.startIndex..<time_string.index(time_string.startIndex, offsetBy: 2)])
-//            let minuteString = String(time_string[time_string.index(time_string.startIndex, offsetBy: 3)...time_string.index(time_string.startIndex, offsetBy: 4)])
-//
-//            // Convert hour and minute to integers
-//            guard var hour = Int(hourString), var minute = Int(minuteString) else {
-//                print("Invalid time format")
-//                return
-//            }
-//            
-//            // Adjust time by subtracting 15 minutes
-//            minute -= 15
-//            if minute < 0 {
-//                minute += 60 // Add 60 minutes to the minute value
-//                hour -= 1 // Subtract one hour
-//            }
-//
-//            // Adjust for when the hour is less than 0
-//            if hour < 0 {
-//                hour = 23 // Reset hour to 11 PM of the previous day
-//            }
-//
-//            var dateComponents = DateComponents()
-//            dateComponents.hour = hour // Set the hour (in 24-hour format) for the notification
-//            dateComponents.minute = minute // Set the minute for the notification
-//
-//            // Deliver the notification in five seconds.
-////            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-//            
-//            // Create the request
-//            let request = UNNotificationRequest(identifier: userEntity.noteID ?? UUID().uuidString, content: content, trigger: trigger)
-//            
-//            // Schedule the request with the system.
-//            let notificationCenter = UNUserNotificationCenter.current()
-//            notificationCenter.add(request) { (error) in
-//                if error != nil {
-//                    // Handle any errors.
-//                    print("Error scheduling notification: \(String(describing: error))")
-//                }
-//            }
-//        }
-//    }
-    
-
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         guard let window = UIApplication.shared.keyWindow else { return }
@@ -470,12 +409,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
             switch notificationType {
             case "reminder":
+                TrackEvent.shared.track(eventName: .reminderNotification)
                 // Navigate to the reminder screen
 //                let reminderVC = // Initialize your reminder view controller here
                 navController.viewControllers = [HOME_VC] // Assuming HOME_VC is your home view controller
                 IS_FROME_NOTIFICATION = true
                 IS_FROME_NOTE_NOTIFICATION = false
             case "note":
+                TrackEvent.shared.track(eventName: .sevenDayNotification)
                 // Navigate to the note detail screen
 //                let noteDetailVC = // Initialize your note detail view controller here
                 navController.viewControllers = [HOME_VC] // Assuming HOME_VC is your home view controller

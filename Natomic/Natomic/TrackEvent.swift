@@ -219,6 +219,19 @@ struct EventName {
         case nextMonthButtonTapped = "Streak Screen Next Month Button Click"
         
         case dateSelection = "Streak Screen Date Selection"
+        
+        // MARK: - Notifications and Widgets Events:-
+
+        case reminderNotification = "reminder Notification Click"
+        
+        case sevenDayNotification = "Seven Day Notification Click"
+        
+        case widgetClick = "Widget Click"
+
+//        case noteWidget = "Note Widget Click"
+//        
+//        case streakWidget = "Streak Widget Click"
+
     }
     
 }

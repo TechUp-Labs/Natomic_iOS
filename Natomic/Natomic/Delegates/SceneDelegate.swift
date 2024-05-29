@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         if url.absoluteString == "natomic://openSpecificView" {
+            TrackEvent.shared.track(eventName: .widgetClick)
             IS_FROME_NOTIFICATION = true
             SHARED_Text = UserDefaults(suiteName: "group.natomic.share")?.string(forKey: "sharedText") ?? ""
             showHomeViewController()
@@ -42,7 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             break
         }
         
-        // Call the completion handler to indicate that you've handled the action
+        // Call the completion handler to indicate that you've handled theaction
         completionHandler(true)
     }
     

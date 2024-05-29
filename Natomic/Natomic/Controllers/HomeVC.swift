@@ -88,12 +88,44 @@ class HomeVC: UIViewController, UIViewControllerTransitioningDelegate {
                 return false // Return false as a fallback
             }
         }
+        // Register for keyboard notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
         self.historyTBV.reloadData()
         self.noteCollectionview.reloadData()
         self.historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
         self.noteCollectionview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
     }
     
+    deinit {
+        // Unregister from keyboard notifications
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = notification.userInfo,
+           let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            
+            let keyboardHeight = keyboardFrame.height
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            
+            historyTBV.contentInset = insets
+            noteCollectionview.contentInset = insets
+            historyTBV.scrollIndicatorInsets = insets
+            noteCollectionview.scrollIndicatorInsets = insets
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        historyTBV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+        historyTBV.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+        noteCollectionview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+        noteCollectionview.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+    }
+
+
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         slideInTransition.isPresenting = true
         return slideInTransition
@@ -618,28 +650,30 @@ extension HomeVC: SetTableViewDelegateAndDataSorce {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        let offsetY = scrollView.contentOffset.y
-        let maxSearchBarHeight: CGFloat = 56  // Maximum search bar height
+        if searchBar.text!.isEmpty && !searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+            let offsetY = scrollView.contentOffset.y
+            let maxSearchBarHeight: CGFloat = 56  // Maximum search bar height
 
-        // When scrolling down, offsetY increases. When at the top (or pulling down to refresh),
-        // offsetY is negative or zero. Here, we calculate the desired height of the search bar.
-        let newSearchBarHeight = max(0, min(maxSearchBarHeight, maxSearchBarHeight - offsetY))
+            // When scrolling down, offsetY increases. When at the top (or pulling down to refresh),
+            // offsetY is negative or zero. Here, we calculate the desired height of the search bar.
+            let newSearchBarHeight = max(0, min(maxSearchBarHeight, maxSearchBarHeight - offsetY))
 
-        // Update the height constraint of the search bar
-        searchBarHeight.constant = newSearchBarHeight
+            // Update the height constraint of the search bar
+            searchBarHeight.constant = newSearchBarHeight
 
-        // Calculate the alpha based on the height of the search bar relative to the max height
-        let alpha = newSearchBarHeight / maxSearchBarHeight
-        searchBar.alpha = alpha
-        searchBottomLine.alpha = alpha
-        // Adjust the top constraint of the table view to move it down as the search bar appears
-        tableTopCon.constant = newSearchBarHeight+2
-        collectionTopCon.constant = newSearchBarHeight+2
-        // Optionally animate the layout changes for a smoother transition
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+            // Calculate the alpha based on the height of the search bar relative to the max height
+            let alpha = newSearchBarHeight / maxSearchBarHeight
+            searchBar.alpha = alpha
+            searchBottomLine.alpha = alpha
+            // Adjust the top constraint of the table view to move it down as the search bar appears
+            tableTopCon.constant = newSearchBarHeight+2
+            collectionTopCon.constant = newSearchBarHeight+2
+            // Optionally animate the layout changes for a smoother transition
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
         }
-
 //        let offsetY = scrollView.contentOffset.y
 //        let maxSearchBarHeight: CGFloat = 56  // Maximum search bar height
 //
